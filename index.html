@@ -1,0 +1,1876 @@
+ 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Navigator</title>
+  
+  <!-- Import ag-Grid Resources -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/styles/ag-grid.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/styles/ag-theme-alpine.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/ag-grid-community.min.js"></script>
+  
+  <!-- Import Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --professional-orange: #F97316;  /* Professional orange color */
+  --professional-orange-hover: #EA580C; /* Slightly darker for hover */
+      --secondary-color: #f9fafb;
+      --border-color: #e5e7eb;
+      --header-bg: #1e293b;
+      --sidebar-bg: #f1f5f9;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --easy-color: #22c55e;
+      --medium-color: #f59e0b;
+      --hard-color: #ef4444;
+      --text-muted: #64748b;
+      --text-color: #0f172a;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+    }
+    
+    /* Add rotation animation */
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .compass-icon {
+      display: inline-block;
+      margin: 0 8px;
+      animation: rotate 4s linear infinite;
+    }
+
+    .app-logo h1 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    /* Compass animation and color */
+.compass-icon svg {
+  stroke: var(--professional-orange);
+  animation: rotate 4s linear infinite;
+}
+
+/* Update primary colors to match */
+:root {
+  --primary-color: var(--professional-orange);
+  --primary-hover: var(--professional-orange-hover);
+}
+
+/* Add to existing dark mode */
+body.dark-mode .compass-icon svg {
+  stroke: var(--professional-orange);
+  opacity: 0.9;
+}
+    /* Dark Mode Colors */
+    body.dark-mode {
+      --secondary-color: #1e293b;
+      --border-color: #334155;
+      --sidebar-bg: #0f172a;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+      --text-muted: #94a3b8;
+      --text-color: #f1f5f9;
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+    }
+      body.dark-mode .circle-bg {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .circle-progress-bar {
+  stroke: var(--primary-color);
+}
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    /* Layout */
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Header */
+    .app-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background-color: var(--header-bg);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .app-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-color);
+    }
+    
+    .app-header h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 9999px;
+      padding: 0.25rem;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: 1rem;
+    }
+    
+    .theme-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      padding: 0.25rem;
+      transition: background-color 0.2s;
+    }
+    
+    .theme-icon.active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .header-stats {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .progress-pill {
+      background-color: #334155;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .circle-progress {
+      width: 24px;
+      height: 24px;
+      position: relative;
+    }
+    
+    .circle-progress svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    
+    .circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 3;
+    }
+    
+    .circle-progress-bar {
+      fill: none;
+      stroke: var(--primary-color);
+      stroke-width: 3;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.3s;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      position: fixed;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+      padding: 1rem 0;
+      z-index: 40;
+    }
+    
+    .sidebar-nav {
+      list-style-type: none;
+    }
+    
+    .sidebar-nav-item {
+      margin-bottom: 0.25rem;
+    }
+    
+    .sidebar-nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-left: 3px solid transparent;
+      transition: background-color 0.2s, border-left-color 0.2s, color 0.2s;
+      cursor: pointer;
+      justify-content: space-between;
+    }
+    
+    .sidebar-nav-link:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+    
+    .sidebar-nav-link.active {
+      border-left-color: var(--primary-color);
+      background-color: rgba(37, 99, 235, 0.08);
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .nav-progress {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    
+    /* Main Content */
+    .main-content {
+      margin-left: 240px;
+      margin-top: 64px;
+      padding: 1.5rem;
+      width: calc(100% - 240px);
+    }
+    
+    .content-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    
+    .content-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    
+    .filter-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(249, 115, 22, 0.1);
+  }
+  
+  .filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+  }
+  
+  /* Orange theme for problem grid */
+  .filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .filter-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+  
+  .filter-select {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-size: 0.875rem;
+    min-width: 160px;
+  }
+  
+  /* Paginator styling */
+  .ag-paging-panel {
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .ag-paging-button {
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--primary-color);
+  }
+
+  .ag-paging-button:hover {
+    background-color: rgba(249, 115, 22, 0.1);
+  }
+
+  .ag-disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .ag-paging-page-summary-panel {
+    margin: 0 8px;
+  }
+  
+  .content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  
+  .content-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  
+  .status-counter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  } {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background-color: var(--card-bg);
+      border-radius: 0.5rem;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .filters {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    .filter-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    
+    .filter-select {
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      border: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      font-size: 0.875rem;
+      min-width: 160px;
+    }
+    
+    .status-counter {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    
+    /* Problem Grid */
+    .problem-grid {
+      background-color: var(--card-bg);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      height: 600px;
+    }
+    
+    /* ag-Grid customization */
+    .ag-theme-alpine {
+      --ag-header-height: 38px;
+      --ag-row-height: 42px;
+      --ag-font-size: 14px;
+      --ag-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --ag-header-background-color: var(--card-bg);
+      --ag-header-foreground-color: var(--text-color);
+      --ag-header-cell-hover-background-color: var(--sidebar-bg);
+      --ag-row-border-color: var(--border-color);
+      --ag-row-hover-color: var(--sidebar-bg);
+      --ag-cell-horizontal-padding: 1rem;
+      --ag-selected-row-background-color: rgba(37, 99, 235, 0.08);
+      --ag-background-color: var(--card-bg);
+      --ag-foreground-color: var(--text-color);
+      --ag-odd-row-background-color: var(--card-bg);
+    }
+    
+    .ag-header-cell-label {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    
+    /* Difficulty Tags */
+    .difficulty-tag {
+      display: inline-flex;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .difficulty-tag.easy {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--easy-color);
+    }
+    
+    .difficulty-tag.medium {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--medium-color);
+    }
+    
+    .difficulty-tag.hard {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--hard-color);
+    }
+    
+    /* Action Buttons */
+    .problem-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.375rem 0.75rem;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+    
+    .problem-link:hover {
+      background-color: var(--primary-hover);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 200px;
+      }
+      .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .app-container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 64px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 0;
+      }
+      .main-content {
+        margin-left: 0;
+        margin-top: 0;
+        width: 100%;
+      }
+      .filters {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+      /* Add to existing styles */
+.app-logo h1 {
+  gap: 4px; /* Reduce gap between text and compass */
+}
+
+.compass-icon {
+  margin: 0 4px; /* Reduce compass margins */
+  transform-origin: center;
+}
+
+.content-title {
+  color: var(--primary-color) !important; /* Orange color for main title */
+}
+
+/* New progress graphic style */
+.graphic-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mini-progress-circle {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.mini-progress-circle svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.mini-progress-bg {
+  fill: none;
+  stroke: var(--border-color);
+  stroke-width: 3;
+}
+
+.mini-progress-bar {
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s;
+}
+      /* Add to existing CSS */
+.status-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.circle-progress {
+  width: 28px;
+  height: 28px;
+  position: relative;
+}
+
+.circle-progress svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+      /* Add these styles */
+.content-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.status-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--card-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  box-shadow: var(--card-shadow);
+}
+
+.progress-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.progress-count {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.progress-percent {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.circle-progress {
+  width: 32px;
+  height: 32px;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .status-counter {
+  background: var(--header-bg);
+}
+      /* Add/Update these styles */
+.title-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.progress-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #334155;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  color: white;
+}
+
+.circle-progress {
+  width: 24px;
+  height: 24px;
+}
+
+.progress-count {
+  font-weight: 500;
+}
+
+/* Dark mode adjustment */
+body.dark-mode .progress-pill {
+  background: #1e293b;
+}
+      .problem-count {
+  font-weight: 400;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.title-progress-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.progress-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--header-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  color: white;
+  font-size: 0.875rem;
+}
+
+#category-percentage {
+  font-weight: 500;
+}
+
+/* Dark mode adjustment */
+body.dark-mode .progress-pill {
+  background: #1e293b;
+}
+      /* Add these styles */
+.problem-count {
+  font-weight: 400;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.circle-progress-bar {
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: var(--border-color);
+  stroke-width: 3;
+}
+
+.circle-progress {
+  width: 24px;
+  height: 24px;
+}
+
+/* Dark mode fixes */
+body.dark-mode .circle-bg {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .circle-progress-bar {
+  stroke: var(--primary-color);
+}
+      .problem-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.problem-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Remove any existing button styling from ag-grid */
+.ag-theme-alpine .problem-link {
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+      /* Problem Status Info */
+    .problem-status-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: var(--card-bg);
+      border-radius: 0.5rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 1rem;
+    }
+    
+    .status-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .status-dot.easy {
+      background-color: var(--easy-color);
+    }
+    
+    .status-dot.medium {
+      background-color: var(--medium-color);
+    }
+    
+    .status-dot.hard {
+      background-color: var(--hard-color);
+    }
+    
+    .status-count {
+      font-size: 0.875rem;
+      color: var(--text-color);
+    }
+    
+    .status-counter {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+  </style>
+    <script>
+function actionCellRenderer(params) {
+  const wrapper = document.createElement('div');
+  wrapper.style.display = 'flex';
+  wrapper.style.justifyContent = 'center';
+  wrapper.style.alignItems = 'center';
+  wrapper.style.height = '100%';
+  
+  const link = document.createElement('a');
+  link.href = params.value;
+  link.className = 'problem-link';
+  link.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <polyline points="15 3 21 3 21 9"></polyline>
+      <line x1="10" y1="14" x2="21" y2="3"></line>
+    </svg>
+    Solve
+  `;
+  link.target = '_blank';
+  
+  wrapper.appendChild(link);
+  return wrapper;
+}
+</script>
+</head>
+
+<body>
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-logo">
+    <h1>
+      <span>Tech</span>
+      <div class="compass-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" 
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/>
+        </svg>
+      </div>
+      <span>Navigator</span>
+    </h1>
+  </div>
+      
+      <div class="theme-toggle" id="theme-toggle">
+        <div class="theme-icon" id="light-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </div>
+        <div class="theme-icon" id="dark-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="header-stats">
+        <div class="progress-pill">
+          <div class="circle-progress">
+            <svg viewBox="0 0 36 36">
+              <circle class="circle-bg" cx="18" cy="18" r="15"></circle>
+              <circle id="overall-progress" class="circle-progress-bar" cx="18" cy="18" r="15" 
+                stroke-dasharray="94.2" stroke-dashoffset="89.5"></circle>
+            </svg>
+          </div>
+          <span id="overall-progress-text">5% Completed</span>
+        </div>
+      </div>
+    </header>
+  
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="all-link">
+            All Problems
+            <span class="nav-progress" id="all-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="all-progress-bar" style="width:0%"></div></div>
+              0/350
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link active" id="arrays-link">
+            Arrays
+            <span class="nav-progress" id="arrays-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="arrays-progress-bar" style="width:0%"></div></div>
+              0/85
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="strings-link">
+            Strings
+            <span class="nav-progress" id="strings-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="strings-progress-bar" style="width:0%"></div></div>
+              0/42
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="hash-map-link">
+            Hash Map / Hash Set
+            <span class="nav-progress" id="hash-map-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="hash-map-progress-bar" style="width:0%"></div></div>
+              0/28
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="stack-link">
+            Stack
+            <span class="nav-progress" id="stack-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="stack-progress-bar" style="width:0%"></div></div>
+              0/22
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="queue-link">
+            Queue
+            <span class="nav-progress" id="queue-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="queue-progress-bar" style="width:0%"></div></div>
+              0/5
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="heap-link">
+            Heap / Priority Queue
+            <span class="nav-progress" id="heap-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="heap-progress-bar" style="width:0%"></div></div>
+              0/18
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="linked-list-link">
+            Linked List
+            <span class="nav-progress" id="linked-list-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="linked-list-progress-bar" style="width:0%"></div></div>
+              0/26
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="trees-link">
+            Trees
+            <span class="nav-progress" id="trees-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="trees-progress-bar" style="width:0%"></div></div>
+              0/54
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="tries-link">
+            Tries
+            <span class="nav-progress" id="tries-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="tries-progress-bar" style="width:0%"></div></div>
+              0/6
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="graphs-link">
+            Graphs
+            <span class="nav-progress" id="graphs-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="graphs-progress-bar" style="width:0%"></div></div>
+              0/42
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="dp-link">
+            Dynamic Programming
+            <span class="nav-progress" id="dp-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="dp-progress-bar" style="width:0%"></div></div>
+              0/85
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="greedy-link">
+            Greedy
+            <span class="nav-progress" id="greedy-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="greedy-progress-bar" style="width:0%"></div></div>
+              0/22
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="bit-link">
+            Bit Manipulation
+            <span class="nav-progress" id="bit-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="bit-progress-bar" style="width:0%"></div></div>
+              0/10
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="javascript:void(0);" class="sidebar-nav-link" id="math-link">
+            Math & Geometry
+            <span class="nav-progress" id="math-nav-progress">
+              <div class="progress-mini"><div class="progress-mini-bar" id="math-progress-bar" style="width:0%"></div></div>
+              0/13
+            </span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Update the content-header section -->
+    <div class="content-header">
+      <div class="title-progress-wrapper">
+        <h2 class="content-title" id="category-title">
+          <span class="category-name">Arrays</span>
+          <span class="problem-count" id="problem-count">(0/85)</span>
+        </h2>
+        <div class="progress-pill" id="category-counter">
+          <div class="circle-progress">
+            <svg viewBox="0 0 36 36">
+              <circle class="circle-bg" cx="18" cy="18" r="15"></circle>
+              <circle class="circle-progress-bar" cx="18" cy="18" r="15" 
+                     stroke-dasharray="94.2" stroke-dashoffset="94.2"></circle>
+            </svg>
+          </div>
+          <span id="category-percentage">0% Completed</span>
+        </div>
+      </div>
+    </div>
+      
+      <!-- Filter Section -->
+      <div class="filter-section">
+        <div class="filters">
+          <div class="filter-group">
+            <label class="filter-label" for="status-filter">Status</label>
+            <select id="status-filter" class="filter-select">
+              <option value="all">All Status</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label class="filter-label" for="subcategory-filter">Subcategory</label>
+            <select id="subcategory-filter" class="filter-select">
+              <option value="all">All Subcategories</option>
+              <!-- Options will be populated by JavaScript based on selected topic -->
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label class="filter-label" for="difficulty-filter">Difficulty</label>
+            <select id="difficulty-filter" class="filter-select">
+              <option value="all">All Difficulties</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label class="filter-label" for="frequency-filter">Frequency</label>
+            <select id="frequency-filter" class="filter-select">
+              <option value="all">All Frequencies</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label class="filter-label" for="company-filter">Company</label>
+            <select id="company-filter" class="filter-select">
+              <option value="all">All Companies</option>
+              <option value="Google">Google</option>
+              <option value="Amazon">Amazon</option>
+              <option value="Microsoft">Microsoft</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Apple">Apple</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Problem Grid -->
+    <div class="problem-status-info">
+    <div class="status-group">
+      <span class="status-dot easy"></span>
+      <span class="status-count" id="easy-count">Easy: 0/12</span>
+    </div>
+    <div class="status-group">
+      <span class="status-dot medium"></span>
+      <span class="status-count" id="medium-count">Medium: 0/16</span>
+    </div>
+    <div class="status-group">
+      <span class="status-dot hard"></span>
+      <span class="status-count" id="hard-count">Hard: 0/3</span>
+    </div>
+    <div class="status-group">
+      <span class="status-count" id="completion-time">Est. completion time: 28 hrs</span>
+    </div>
+  </div>
+      <div id="problem-grid" class="problem-grid ag-theme-alpine"></div>
+    </main>
+  </div>
+
+  <script>
+    // Data store
+    const problemData = {
+      arrays: [
+        {
+          id: 'two-sum-ii',
+          status: false,
+          subcategory: 'String Search & Matching Algorithms',
+          problem: 'Implement strStr()',
+          difficulty: 'Easy',
+          frequency: 'High',
+          companies: ['Google', 'Facebook', 'Microsoft'],
+          leetcode: 'https://leetcode.com/problems/implement-strstr/'
+        }
+      ],
+      'hash-map': [
+        {
+          id: 'contains-duplicate',
+          status: false,
+          subcategory: 'Hash Map Applications',
+          problem: 'Contains Duplicate',
+          difficulty: 'Easy',
+          frequency: 'High',
+          companies: ['Google', 'Amazon', 'Facebook'],
+          leetcode: 'https://leetcode.com/problems/contains-duplicate/'
+        },
+        {
+          id: 'valid-anagram',
+          status: false,
+          subcategory: 'Hash Map Applications',
+          problem: 'Valid Anagram',
+          difficulty: 'Easy',
+          frequency: 'High',
+          companies: ['Facebook', 'Amazon', 'Microsoft'],
+          leetcode: 'https://leetcode.com/problems/valid-anagram/'
+        },
+        {
+          id: 'two-sum',
+          status: false,
+          subcategory: 'Hash Map Applications',
+          problem: 'Two Sum',
+          difficulty: 'Easy',
+          frequency: 'High',
+          companies: ['Google', 'Amazon', 'Facebook', 'Apple', 'Microsoft'],
+          leetcode: 'https://leetcode.com/problems/two-sum/'
+        },
+        {
+          id: 'group-anagrams',
+          status: false,
+          subcategory: 'Hash Map Applications',
+          problem: 'Group Anagrams',
+          difficulty: 'Medium',
+          frequency: 'High',
+          companies: ['Amazon', 'Microsoft', 'Facebook', 'Uber'],
+          leetcode: 'https://leetcode.com/problems/group-anagrams/'
+        },
+        {
+          id: 'design-hashset',
+          status: false,
+          subcategory: 'Advanced Hashing Techniques',
+          problem: 'Design HashSet',
+          difficulty: 'Easy',
+          frequency: 'High',
+          companies: ['Amazon', 'Microsoft', 'Facebook'],
+          leetcode: 'https://leetcode.com/problems/design-hashset/'
+        },
+        {
+          id: 'design-hashmap',
+          status: false,
+          subcategory: 'Advanced Hashing Techniques',
+          problem: 'Design HashMap',
+          difficulty: 'Easy',
+          frequency: 'High',
+          companies: ['Amazon', 'Microsoft', 'Google'],
+          leetcode: 'https://leetcode.com/problems/design-hashmap/'
+        }
+      ],
+      'stack': [
+        {
+          id: 'valid-parentheses',
+          status: false,
+          subcategory: 'Parentheses Matching',
+          problem: 'Valid Parentheses',
+          difficulty: 'Easy',
+          frequency: 'High',
+          companies: ['Google', 'Amazon', 'Microsoft', 'Facebook'],
+          leetcode: 'https://leetcode.com/problems/valid-parentheses/'
+        },
+        {
+          id: 'min-stack',
+          status: false,
+          subcategory: 'Stack Implementation',
+          problem: 'Min Stack',
+          difficulty: 'Medium',
+          frequency: 'High',
+          companies: ['Amazon', 'Microsoft', 'Google'],
+          leetcode: 'https://leetcode.com/problems/min-stack/'
+        }
+      ]
+    };
+    
+    // Subcategory data
+    const subcategories = {
+      'arrays': [
+        'Two Pointers',
+        'Fast & Slow Pointers',
+        'Sliding Window',
+        'Prefix Sums',
+        'Kadane\'s Algorithm',
+        'Binary Search',
+        'Cyclic Sort',
+        'Boyer-Moore Voting Algorithm',
+        'Merge Intervals',
+        'Sorting',
+        'Matrix Traversal',
+        'Basic Array Operations',
+        'Matrix Operations'
+      ],
+      'strings': [
+        'String Manipulation',
+        'String Encoding & Decoding',
+        'Advanced String Patterns',
+        'String Search & Matching Algorithms'
+      ],
+      'hash-map': [
+        'Hash Map Applications',
+        'Advanced Hashing Techniques'
+      ],
+      'stack': [
+        'Monotonic Stack',
+        'Parentheses Matching',
+        'Stack Implementation'
+      ],
+      'queue': [
+        'Basic Queue Operations',
+        'Advanced Queue Applications'
+      ],
+      'queue': [
+        'Top-K Elements',
+        'Scheduling & Design Problems',
+        'Heap Implementation & Optimization'
+      ],
+      'queue': [
+        'In-Place Reversal',
+        'Two Pointers',
+        'Linked List Manipulation',
+        'Advanced Linked List Structures'
+      ],
+      'queue': [
+        'Breadth First Search (BFS)',
+        'Binary Search Tree (BST)',
+        'Tree Construction & Comparison',
+        'Advanced Tree Techniques',
+        'Advanced Tree Data Structures'
+      ],
+      'queue': [
+        'Combination & Permutation',
+        'Matrix Backtracking',
+        'String Backtracking',
+        'Advanced Backtracking'
+      ],
+      'queue': [
+        'Implementation & Applications'
+      ],
+      'queue': [
+        'Implementation & Applications'
+      ]
+      // Other categories would be added here
+    };
+    
+    // Current state
+    let currentCategory = 'arrays';
+    let gridApi = null;
+    let columnApi = null;
+    let problemStatuses = {};
+    
+    // Load problem statuses from localStorage
+    function loadProblemStatuses() {
+      Object.keys(problemData).forEach(category => {
+        problemStatuses[category] = JSON.parse(localStorage.getItem(`tech-navigator-${category}-progress`)) || {};
+        
+        // Apply loaded statuses to problem data
+        problemData[category].forEach(problem => {
+          problem.status = problemStatuses[category][problem.id] || false;
+        });
+      });
+    }
+    
+    // Save problem status to localStorage
+    function saveProblemStatus(category, problemId, status) {
+      if (!problemStatuses[category]) {
+        problemStatuses[category] = {};
+      }
+      
+      problemStatuses[category][problemId] = status;
+      localStorage.setItem(`tech-navigator-${category}-progress`, JSON.stringify(problemStatuses[category]));
+    }
+    
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load problem statuses
+      loadProblemStatuses();
+      
+      // Set up event listeners for sidebar links
+      document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+        const id = link.id;
+        const category = id.replace('-link', '');
+        
+        link.addEventListener('click', function() {
+          changeCategory(category);
+        });
+      });
+      
+      // Set up filter event listeners
+      document.getElementById('subcategory-filter').addEventListener('change', applyFilters);
+      document.getElementById('difficulty-filter').addEventListener('change', applyFilters);
+      document.getElementById('frequency-filter').addEventListener('change', applyFilters);
+      document.getElementById('company-filter').addEventListener('change', applyFilters);
+      
+      // Set up theme toggle
+      setupThemeToggle();
+      
+      <!-- Initialize with arrays category -->
+      setupThemeToggle();
+      changeCategory('arrays');
+    });
+    
+    // Set up theme toggle
+    function setupThemeToggle() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const lightIcon = document.getElementById('light-icon');
+      const darkIcon = document.getElementById('dark-icon');
+      
+      // Set dark mode as default
+      document.body.classList.add('dark-mode');
+      lightIcon.classList.remove('active');
+      darkIcon.classList.add('active');
+      localStorage.setItem('tech-navigator-theme', 'dark');
+      
+      // Theme toggle click handler
+      themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        lightIcon.classList.toggle('active');
+        darkIcon.classList.toggle('active');
+        
+        // Save preference
+        if (document.body.classList.contains('dark-mode')) {
+          localStorage.setItem('tech-navigator-theme', 'dark');
+        } else {
+          localStorage.setItem('tech-navigator-theme', 'light');
+        }
+        
+        // Refresh grid to update colors
+        if (gridApi) {
+          gridApi.refreshCells();
+        }
+      });
+    }
+    
+    // Change category
+    function changeCategory(category) {
+      console.log('Changing category to:', category);
+      
+      // Skip if it's already the current category
+      if (category === currentCategory && gridApi) {
+        return;
+      }
+      
+      // Update active sidebar link
+      document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      document.getElementById(`${category}-link`).classList.add('active');
+      
+      // Update current category
+      currentCategory = category;
+      
+      // Update page title
+      document.getElementById('category-title').textContent = getCategoryTitle(category);
+      
+      // Update subcategory dropdown
+      updateSubcategoryDropdown(category);
+      
+      // Reset filters
+      document.getElementById('status-filter').value = 'all';
+      document.getElementById('subcategory-filter').value = 'all';
+      document.getElementById('difficulty-filter').value = 'all';
+      document.getElementById('frequency-filter').value = 'all';
+      document.getElementById('company-filter').value = 'all';
+      
+      // Initialize or update grid
+      initializeGrid(category);
+      
+      // Update category counter
+      updateCategoryCounter(category);
+    }
+    
+    // Get category title
+    function getCategoryTitle(category) {
+      const titles = {
+        'all': 'All Problems',
+        'arrays': 'Arrays',
+        'strings': 'Strings',
+        'hash-map': 'Hash Map / Hash Set',
+        'stack': 'Stack',
+        'queue': 'Queue',
+        'heap': 'Heap / Priority Queue',
+        'linked-list': 'Linked List',
+        'trees': 'Trees',
+        'backtracking': 'Backtracking',
+        'tries': 'Tries',
+        'graphs': 'Graphs',
+        'dp': 'Dynamic Programming',
+        'greedy': 'Greedy Algorithym',
+        'bit': 'Bit Manipulation',
+        'math': 'Math'
+      };
+      return titles[category] || category;
+    }
+    
+    // Update subcategory dropdown
+    function updateSubcategoryDropdown(category) {
+      console.log('Updating subcategory dropdown for:', category);
+      
+      const dropdown = document.getElementById('subcategory-filter');
+      dropdown.innerHTML = '<option value="all">All Subcategories</option>';
+      
+      // Skip if category doesn't exist in subcategories
+      if (!subcategories[category]) {
+        console.log('No subcategories found for:', category);
+        return;
+      }
+      
+      // Add options to dropdown
+      subcategories[category].forEach(subcategory => {
+        const option = document.createElement('option');
+        option.value = subcategory;
+        option.textContent = subcategory;
+        dropdown.appendChild(option);
+      });
+      
+      console.log('Updated subcategory dropdown with options:', subcategories[category]);
+    }
+    
+    // Initialize the ag-Grid
+    function initializeGrid(category) {
+      console.log('Initializing grid for category:', category);
+      
+      // Skip if category doesn't exist
+      if (!problemData[category]) {
+        console.log('No problem data found for category:', category);
+        return;
+      }
+      
+      // Column definitions
+      const columnDefs = [
+        {
+          headerName: 'Status',
+          field: 'status',
+          width: 80,
+          cellRenderer: statusCellRenderer,
+          sortable: false,
+          filter: false,
+          suppressSizeToFit: true,
+          headerClass: 'ag-center-header',
+          headerComponentParams: {
+            template: '<div class="ag-cell-label-container" role="presentation"><span ref="eText" class="ag-header-cell-text" role="columnheader"></span></div>'
+          }
+        },
+        {
+          headerName: 'Problem',
+          field: 'problem',
+          flex: 1,
+          filter: true,
+          sortable: true,
+          minWidth: 250
+        },
+        {
+          headerName: 'Difficulty',
+          field: 'difficulty',
+          width: 120,
+          cellRenderer: difficultyCellRenderer,
+          filter: true,
+          sortable: true,
+          suppressSizeToFit: true,
+          headerClass: 'ag-center-header',
+          headerComponentParams: {
+            template: '<div class="ag-cell-label-container" role="presentation"><span ref="eText" class="ag-header-cell-text" role="columnheader"></span></div>'
+          }
+        },
+        {
+          headerName: 'Frequency',
+          field: 'frequency',
+          width: 110,
+          filter: true,
+          sortable: true,
+          suppressSizeToFit: true,
+          cellRenderer: frequencyCellRenderer,
+          headerClass: 'ag-center-header',
+          headerComponentParams: {
+            template: '<div class="ag-cell-label-container" role="presentation"><span ref="eText" class="ag-header-cell-text" role="columnheader"></span></div>'
+          }
+        },
+        {
+          headerName: 'Action',
+          field: 'leetcode',
+          width: 100,
+          cellRenderer: actionCellRenderer,
+          sortable: false,
+          filter: false,
+          suppressSizeToFit: true,
+          headerClass: 'ag-center-header',
+          headerComponentParams: {
+            template: '<div class="ag-cell-label-container" role="presentation"><span ref="eText" class="ag-header-cell-text" role="columnheader"></span></div>'
+          }
+        }
+      ];
+      
+      // Grid options
+      const gridOptions = {
+        columnDefs: columnDefs,
+        rowData: problemData[category],
+        pagination: true,
+        paginationPageSize: 15,
+        animateRows: true,
+        paginationPageSize: 15,
+        animateRows: true,
+        defaultColDef: {
+          resizable: true,
+          suppressMenu: true,
+          sortable: true,
+          filter: true
+        },
+        onGridReady: function(params) {
+          gridApi = params.api;
+          columnApi = params.columnApi;
+          gridApi.sizeColumnsToFit();
+          
+          // Add window resize handler
+          window.addEventListener('resize', function() {
+            setTimeout(function() {
+              gridApi.sizeColumnsToFit();
+            }, 100);
+          });
+        }
+      };
+      
+      // Create or update grid
+      if (gridApi) {
+        gridApi.setColumnDefs(columnDefs);
+        gridApi.setRowData(problemData[category]);
+      } else {
+        new agGrid.Grid(document.getElementById('problem-grid'), gridOptions);
+      }
+    }
+    
+    // Cell renderers for ag-Grid
+    function statusCellRenderer(params) {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.justifyContent = 'center';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.height = '100%';
+      
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = params.value;
+      checkbox.style.cursor = 'pointer';
+      checkbox.style.width = '18px';
+      checkbox.style.height = '18px';
+      checkbox.style.accentColor = '#f97316';
+      checkbox.addEventListener('change', function() {
+        // Update problem status
+        const data = params.node.data;
+        data.status = this.checked;
+        
+        // Save to localStorage
+        saveProblemStatus(currentCategory, data.id, this.checked);
+        
+        // Update counters
+        updateCategoryCounter(currentCategory);
+        updateOverallProgress();
+      });
+      
+      wrapper.appendChild(checkbox);
+      return wrapper;
+    }
+    
+    function difficultyCellRenderer(params) {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.justifyContent = 'center';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.height = '100%';
+      
+      const difficultyTag = document.createElement('span');
+      difficultyTag.className = `difficulty-tag ${params.value.toLowerCase()}`;
+      difficultyTag.textContent = params.value;
+      
+      wrapper.appendChild(difficultyTag);
+      return wrapper;
+    }
+    
+    function frequencyCellRenderer(params) {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.justifyContent = 'center';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.height = '100%';
+      
+      const frequencyText = document.createElement('span');
+      frequencyText.textContent = params.value;
+      
+      wrapper.appendChild(frequencyText);
+      return wrapper;
+    }
+    
+    function actionCellRenderer(params) {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.justifyContent = 'center';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.height = '100%';
+      
+      const link = document.createElement('a');
+      link.href = params.value;
+      link.className = 'problem-link';
+      link.textContent = 'Solve';
+      link.target = '_blank';
+      
+      wrapper.appendChild(link);
+      return wrapper;
+    }
+    
+    // Apply filters
+    function applyFilters() {
+      console.log('Applying filters');
+      
+      const status = document.getElementById('status-filter').value;
+      const subcategory = document.getElementById('subcategory-filter').value;
+      const difficulty = document.getElementById('difficulty-filter').value;
+      const frequency = document.getElementById('frequency-filter').value;
+      const company = document.getElementById('company-filter').value;
+      
+      console.log('Filter values:', { status, subcategory, difficulty, frequency, company });
+      
+      if (!gridApi) return;
+      
+      // Clear previous filters
+      gridApi.setFilterModel({});
+      
+      // Apply status filter
+      if (status !== 'all') {
+        const filterValue = status === 'completed' ? true : false;
+        gridApi.setFilterModel({
+          ...gridApi.getFilterModel(),
+          status: {
+            type: 'equals',
+            filter: filterValue
+          }
+        });
+      }
+      
+      // Apply subcategory filter
+      if (subcategory !== 'all') {
+        gridApi.setFilterModel({
+          ...gridApi.getFilterModel(),
+          subcategory: {
+            type: 'equals',
+            filter: subcategory
+          }
+        });
+      }
+      
+      // Apply difficulty filter
+      if (difficulty !== 'all') {
+        gridApi.setFilterModel({
+          ...gridApi.getFilterModel(),
+          difficulty: {
+            type: 'equals',
+            filter: difficulty
+          }
+        });
+      }
+      
+      // Apply frequency filter
+      if (frequency !== 'all') {
+        gridApi.setFilterModel({
+          ...gridApi.getFilterModel(),
+          frequency: {
+            type: 'equals',
+            filter: frequency
+          }
+        });
+      }
+      
+      // Apply company filter
+      if (company !== 'all') {
+        gridApi.setFilterModel({
+          ...gridApi.getFilterModel(),
+          companies: {
+            type: 'contains',
+            filter: company
+          }
+        });
+      }
+    }
+    
+    // Update category counter
+   function updateCategoryCounter(category) {
+  if (!problemData[category]) return;
+
+  const totalProblems = problemData[category].length;
+  const solvedProblems = problemData[category].filter(p => p.status).length;
+  const percentage = totalProblems > 0 ? Math.round((solvedProblems / totalProblems) * 100) : 0;
+
+  // Update problem count display
+  const problemCountElement = document.getElementById('problem-count');
+  if (problemCountElement) {
+    problemCountElement.textContent = `(${solvedProblems}/${totalProblems})`;
+  }
+
+  // Update progress circle
+  const progressCircle = document.querySelector('#category-counter .circle-progress-bar');
+  if (progressCircle) {
+    const circumference = 2 * Math.PI * 15;
+    const offset = circumference - (percentage / 100) * circumference;
+    progressCircle.style.strokeDasharray = circumference;
+    progressCircle.style.strokeDashoffset = offset;
+  }
+
+  // Update percentage text
+  const percentageElement = document.getElementById('category-percentage');
+  if (percentageElement) {
+    percentageElement.textContent = `${percentage}% Completed`;
+  }
+
+  // Update category name
+  const categoryElement = document.querySelector('.category-name');
+  if (categoryElement) {
+    categoryElement.textContent = getCategoryTitle(category);
+  }
+
+  // Update sidebar progress
+  const navProgress = document.getElementById(`${category}-nav-progress`);
+  if (navProgress) {
+    navProgress.innerHTML = `
+      <div class="progress-mini">
+        <div class="progress-mini-bar" style="width:${percentage}%"></div>
+      </div>
+      ${solvedProblems}/${totalProblems}
+    `;
+  }
+       
+  updateDifficultyCounts(category);
+
+  updateOverallProgress();
+}
+       // Update difficulty counts for the current category
+    function updateDifficultyCounts(category) {
+      if (!problemData[category]) return;
+      
+      const problems = problemData[category];
+      
+      // Count by difficulty
+      const easyCounts = countByDifficulty(problems, 'Easy');
+      const mediumCounts = countByDifficulty(problems, 'Medium');
+      const hardCounts = countByDifficulty(problems, 'Hard');
+      
+      // Update the UI
+      document.getElementById('easy-count').textContent = `Easy: ${easyCounts.solved}/${easyCounts.total}`;
+      document.getElementById('medium-count').textContent = `Medium: ${mediumCounts.solved}/${mediumCounts.total}`;
+      document.getElementById('hard-count').textContent = `Hard: ${hardCounts.solved}/${hardCounts.total}`;
+      
+      // Estimate completion time (rough estimate based on difficulty)
+      const remainingEasy = Math.max(0, easyCounts.total - easyCounts.solved) * 0.5; // 30 mins per problem
+      const remainingMedium = Math.max(0, mediumCounts.total - mediumCounts.solved) * 1; // 1 hour per problem
+      const remainingHard = Math.max(0, hardCounts.total - hardCounts.solved) * 2; // 2 hours per problem
+      
+      const totalHours = Math.round(remainingEasy + remainingMedium + remainingHard);
+      document.getElementById('completion-time').textContent = `Est. completion time: ${totalHours} hrs`;
+    }
+    
+    // Helper function to count problems by difficulty
+    function countByDifficulty(problems, difficulty) {
+      const total = problems.filter(p => p.difficulty === difficulty).length;
+      const solved = problems.filter(p => p.difficulty === difficulty && p.status).length;
+      return { total, solved };
+    }
+    // Update overall progress
+    function updateOverallProgress() {
+      let totalProblems = 0;
+      let solvedProblems = 0;
+      
+      // Count all problems and solved problems
+      Object.keys(problemData).forEach(category => {
+        const problems = problemData[category];
+        totalProblems += problems.length;
+        solvedProblems += problems.filter(p => p.status).length;
+      });
+      
+      // Calculate percentage
+      const percentage = totalProblems > 0 ? Math.round((solvedProblems / totalProblems) * 100) : 0;
+      
+      // Update progress circle
+      const circumference = 2 * Math.PI * 15; // r = 15
+      const offset = circumference - (percentage / 100) * circumference;
+      const progressCircle = document.getElementById('overall-progress');
+      progressCircle.style.strokeDasharray = circumference;
+      progressCircle.style.strokeDashoffset = offset;
+      
+      // Update progress text
+      document.getElementById('overall-progress-text').textContent = `${percentage}% Completed`;
+      
+      // Update All Problems counter in sidebar
+      document.getElementById('all-nav-progress').innerHTML = `
+        <div class="progress-mini">
+          <div class="progress-mini-bar" style="width:${percentage}%"></div>
+        </div>
+        ${solvedProblems}/${totalProblems}
+      `;
+      
+      // Update all progress bar
+      const allProgressBar = document.getElementById('all-progress-bar');
+      if (allProgressBar) {
+        allProgressBar.style.width = `${percentage}%`;
+      }
+    }
+  </script>
+</body>
+</html>
