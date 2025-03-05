@@ -3,14 +3,14 @@
  ***********************/
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDTioF7UgHizDV4DOLM-mpeCD63hbklKJQ",
-  authDomain: "tech-navigator-app.firebaseapp.com",
-  projectId: "tech-navigator-app",
-  storageBucket: "tech-navigator-app.firebasestorage.app",
-  messagingSenderId: "850327601551",
-  appId: "1:850327601551:web:84e2f076e45fea325c4bfa",
-  measurementId: "G-CJQB7L5948"
-};
+  apiKey: "AIzaSyDrGGDDax_OpD6NSP6R5SznVy9ThAIohBo",
+  authDomain: "technavigator-226d0.firebaseapp.com",
+  projectId: "technavigator-226d0",
+  storageBucket: "technavigator-226d0.firebasestorage.app",
+  messagingSenderId: "1057850023813",
+  appId: "1:1057850023813:web:bfcf67f80bc27fe22b2eec",
+  measurementId: "G-FSXMH7L0ES"
+}
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
