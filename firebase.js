@@ -9056,6 +9056,10 @@ let problemStatuses = {};
 
 // Load statuses from localStorage for each category
 function loadProblemStatuses() {
+  if (!currentUser) {
+    // Do nothing or leave in-memory defaults when not logged in.
+    return;
+  }
   Object.keys(problemDataByCategory).forEach(category => {
     if (category === 'all') return; // Skip "all" category
     
@@ -9077,6 +9081,11 @@ function getFilteredProblems() {
 // Save a problem's status - updated to use LeetCode ID across all categories
 // Save a problem's status - updated to ensure consistent global and category-level updates
 function saveProblemStatus(category, problemId, status) {
+  if (!currentUser) {
+    // If not logged in, do not store anything.
+    return;
+  }
+  
   // Update status in ALL categories
   Object.keys(problemDataByCategory).forEach(cat => {
     // Find the problem in this category
@@ -9294,17 +9303,25 @@ function initializeGrid(category) {
     return;
   }
 
+  const statusColumn = currentUser
+    ? [{
+        headerName: 'Status',
+        field: 'status',
+        width: 80,
+        cellRenderer: statusCellRenderer,
+        sortable: true,
+        filter: 'agSetColumnFilter',
+        filterParams: {
+          values: [true, false],
+          cellRenderer: (params) => (params.value ? 'Completed' : 'Pending')
+        },
+        suppressSizeToFit: true,
+        headerClass: 'ag-center-header'
+      }]
+    : []; // Omit column if not logged in
+
   const columnDefs = [
-    {
-      headerName: 'Status',
-      field: 'status',
-      width: 80,
-      cellRenderer: statusCellRenderer,
-      sortable: true,
-      filter: true,
-      suppressSizeToFit: true,
-      headerClass: 'ag-center-header'
-    },
+    ...statusColumn,
     {
       headerName: 'Problem',
       field: 'problem',
