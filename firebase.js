@@ -9257,7 +9257,6 @@ function changeCategory(category) {
   updateCategoryTip(category);
   
   // Reset filters explicitly
-  document.getElementById('status-filter').value = 'all';
   document.getElementById('difficulty-filter').value = 'all';
   document.getElementById('frequency-filter').value = 'all';
 
@@ -9472,7 +9471,6 @@ function changeCategory(category) {
   updateCategoryTip(category);
   
   // Reset filters explicitly
-  document.getElementById('status-filter').value = 'all';
   document.getElementById('difficulty-filter').value = 'all';
   document.getElementById('frequency-filter').value = 'all';
 
@@ -9610,7 +9608,6 @@ function applyFilters() {
   if (!gridApi) return;
   
   // Get filter values
-  const status = document.getElementById('status-filter').value;
   const difficulty = document.getElementById('difficulty-filter').value;
   const frequency = document.getElementById('frequency-filter').value;
   
@@ -9749,7 +9746,6 @@ document.addEventListener('DOMContentLoaded', function() {
   updateOverallProgress();
   
   // Set up filters
-  document.getElementById('status-filter').addEventListener('change', applyFilters);
   document.getElementById('difficulty-filter').addEventListener('change', applyFilters);
   document.getElementById('frequency-filter').addEventListener('change', applyFilters);
   
