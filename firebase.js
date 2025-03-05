@@ -3,12 +3,13 @@
  ***********************/
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBfqvO9QjkPOBVzKZpI1FYs5QaB4D8U9Ls",
+  apiKey: "AIzaSyDTioF7UgHizDV4DOLM-mpeCD63hbklKJQ",
   authDomain: "tech-navigator-app.firebaseapp.com",
   projectId: "tech-navigator-app",
-  storageBucket: "tech-navigator-app.appspot.com",
-  messagingSenderId: "432187977548",
-  appId: "1:432187977548:web:42b05c26f9bcf5f6da9830"
+  storageBucket: "tech-navigator-app.firebasestorage.app",
+  messagingSenderId: "850327601551",
+  appId: "1:850327601551:web:84e2f076e45fea325c4bfa",
+  measurementId: "G-CJQB7L5948"
 };
 
 // Initialize Firebase
@@ -78,77 +79,102 @@ function signOut() {
     });
 }
 
-// Load progress from Firebase
 async function loadProgressFromFirebase() {
   if (!currentUser) return;
   
   try {
-    // Clear existing problem statuses
-    problemStatuses = {};
-    
-    // For simplicity, we'll start with just 'Arrays' category
-    const categoryToSync = 'Arrays';  // Limited to just one category for now
-    
+    // Get the user's progress document
     const progressDoc = await db.collection('user_progress')
       .doc(currentUser.uid)
-      .collection('categories')
-      .doc(categoryToSync)
       .get();
     
     if (progressDoc.exists) {
       const data = progressDoc.data();
-      problemStatuses[categoryToSync] = data.problems || {};
+      const problems = data.problems || {};
       
-      // Update problem status in the data model
-      if (problemDataByCategory[categoryToSync]) {
-        problemDataByCategory[categoryToSync].forEach(problem => {
-          problem.status = problemStatuses[categoryToSync][problem.leetcode_id] || false;
+      // Update all problem instances across all categories
+      Object.keys(problemDataByCategory).forEach(category => {
+        if (!problemStatuses[category]) {
+          problemStatuses[category] = {};
+        }
+        
+        problemDataByCategory[category].forEach(problem => {
+          // Update problem status if we have it
+          if (problems.hasOwnProperty(problem.leetcode_id)) {
+            problem.status = problems[problem.leetcode_id];
+            
+            // Also update in our tracking object
+            problemStatuses[category][problem.leetcode_id] = problems[problem.leetcode_id];
+          }
         });
-      }
+      });
       
-      // If we're on the synced category or 'all', update grid
-      if (currentCategory === categoryToSync || currentCategory === 'all') {
-        updateGrid();
-      }
+      // Update grid if needed
+      updateGrid();
       
-      updateCategoryCounter(categoryToSync);
+      // Update progress counters
+      Object.keys(problemDataByCategory).forEach(cat => {
+        if (cat !== 'all') {
+          updateCategoryCounter(cat);
+        }
+      });
       updateOverallProgress();
       
-      console.log(`Loaded progress for ${categoryToSync} from Firebase`);
+      console.log(`Loaded progress from Firebase for ${Object.keys(problems).length} problems`);
     } else {
-      console.log(`No existing progress for ${categoryToSync}, creating new document`);
-      // Initialize with local storage data if available
-      const localData = localStorage.getItem(`tech-navigator-${categoryToSync}-progress`);
-      if (localData) {
-        problemStatuses[categoryToSync] = JSON.parse(localData);
-        // Save to Firebase
-        await saveProgressToFirebase(categoryToSync);
+      console.log(`No existing progress, creating new document`);
+      // Initialize with local storage data
+      const allProblems = {};
+      let hasLocalData = false;
+      
+      // We'll gather status from localStorage, but in a leetcode_id-centric way
+      const processedIds = new Set();
+      
+      Object.keys(problemDataByCategory).forEach(category => {
+        if (category === 'all') return;
+        
+        const localData = localStorage.getItem(`tech-navigator-${category}-progress`);
+        if (localData) {
+          const categoryProblems = JSON.parse(localData);
+          
+          Object.keys(categoryProblems).forEach(problemId => {
+            // Only process each leetcode_id once
+            if (!processedIds.has(problemId)) {
+              allProblems[problemId] = categoryProblems[problemId];
+              processedIds.add(problemId);
+              hasLocalData = true;
+            }
+          });
+        }
+      });
+      
+      // If we found any local data, save it to Firebase
+      if (hasLocalData) {
+        await saveProgressToFirebase(allProblems);
       }
     }
   } catch (error) {
     console.error("Error loading progress from Firebase:", error);
   }
 }
-
 // Save progress to Firebase
-async function saveProgressToFirebase(category) {
-  if (!currentUser || !problemStatuses[category]) return;
+async function saveProgressToFirebase(problems) {
+  if (!currentUser) return;
   
   try {
     await db.collection('user_progress')
       .doc(currentUser.uid)
-      .collection('categories')
-      .doc(category)
       .set({
-        problems: problemStatuses[category],
+        problems: problems,
         lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
       });
     
-    console.log(`Progress for ${category} saved to Firebase`);
+    console.log(`Progress saved to Firebase`);
   } catch (error) {
     console.error("Error saving progress to Firebase:", error);
   }
 }
+
 
 /***********************
  * TRANSFORM JSON DATA INTO CATEGORIES
@@ -287,19 +313,61 @@ function getFilteredProblems() {
   return problemDataByCategory[currentCategory] || [];
 }
 
-// Save a problem's status to localStorage and Firebase if signed in
+// Save a problem's status - updated to use LeetCode ID across all categories
 function saveProblemStatus(category, problemId, status) {
+  // Update status in the current category
   if (!problemStatuses[category]) {
     problemStatuses[category] = {};
   }
   problemStatuses[category][problemId] = status;
   
-  // Save to localStorage as backup
+  // Save to localStorage for this category as before
   localStorage.setItem(`tech-navigator-${category}-progress`, JSON.stringify(problemStatuses[category]));
   
-  // Save to Firebase if user is signed in and it's our tracked category
-  if (currentUser && category === 'Arrays') {
-    saveProgressToFirebase(category);
+  // Important: Update the same LeetCode ID in ALL categories
+  Object.keys(problemDataByCategory).forEach(cat => {
+    if (cat !== 'all' && cat !== category) {
+      problemDataByCategory[cat].forEach(problem => {
+        if (problem.leetcode_id === problemId) {
+          problem.status = status;
+          
+          // Also update in tracking object
+          if (!problemStatuses[cat]) {
+            problemStatuses[cat] = {};
+          }
+          problemStatuses[cat][problemId] = status;
+          
+          // Update localStorage for this category too
+          localStorage.setItem(`tech-navigator-${cat}-progress`, JSON.stringify(problemStatuses[cat]));
+        }
+      });
+    }
+  });
+  
+  // Update the "all" category too
+  problemDataByCategory['all'].forEach(problem => {
+    if (problem.leetcode_id === problemId) {
+      problem.status = status;
+    }
+  });
+  
+  // If signed in, collect all problem statuses and save to Firebase
+  if (currentUser) {
+    const allProblems = {};
+    const processedIds = new Set();
+    
+    Object.keys(problemDataByCategory).forEach(cat => {
+      if (cat === 'all') return;
+      
+      Object.keys(problemStatuses[cat] || {}).forEach(probId => {
+        if (!processedIds.has(probId)) {
+          allProblems[probId] = problemStatuses[cat][probId];
+          processedIds.add(probId);
+        }
+      });
+    });
+    
+    saveProgressToFirebase(allProblems);
   }
 }
 
