@@ -8,6 +8,8 @@
   <!-- Import ag-Grid Resources -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/styles/ag-grid.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/styles/ag-theme-alpine.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/ag-grid-community.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -16,7 +18,7 @@
   <!-- Import Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -53,7 +55,6 @@
     
     .compass-icon svg {
       stroke: var(--professional-orange);
-      display: block;
     }
     
     .app-logo h1 {
@@ -668,9 +669,63 @@
 .dark-mode .auth-btn:hover {
   background-color: #444;
 }
+.app-logo h1 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+}
+
+
+.app-logo h1 {
+  display: flex;
+  align-items: center;
+  gap: 0px; /* Adjust spacing as needed */
+  margin: 0;
+  font-size: 1.2rem; /* Smaller, compact font size */
+  font-family: 'Roboto Mono', monospace; /* Use a technical, monospaced font */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+}
+
+/* Rotate the container (or you could apply both animations to the SVG) */
+.compass-icon {
+  animation: rotate 4s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+/* Animate the stroke color on the SVG element */
+.compass-icon svg {
+  animation: colorChange 4s linear infinite;
+  display: block;
+}
+
+/* Rotation keyframes */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Color change keyframes - cycle through several colors */
+@keyframes colorChange {
+  0% { stroke: #f97316; }    /* Orange */
+  25% { stroke: #22c55e; }   /* Green */
+  50% { stroke: #3b82f6; }   /* Blue */
+  75% { stroke: #facc15; }   /* Yellow */
+  100% { stroke: #f97316; }  /* Back to Orange */
+}
+
+
   </style>
   
-    <script src="firebase.js"></script>
+
    
 </head>
 
@@ -692,26 +747,6 @@
         </h1>
       </div>
       
-      <div class="theme-toggle" id="theme-toggle">
-        <div class="theme-icon" id="light-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </div>
-        <div class="theme-icon" id="dark-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </div>
-      </div>
       <div id="auth-container" class="auth-container">
       <button id="login-btn" class="btn auth-btn">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 8px;">
