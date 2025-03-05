@@ -9287,7 +9287,13 @@ function getCategoryTitle(category) {
 
 // Initialize the ag-Grid with column definitions and row data
 function initializeGrid(category) {
-  if (!problemDataByCategory[category]) return;
+  console.log(`Initializing grid for category: ${category}`);
+  
+  if (!problemDataByCategory[category]) {
+    console.error(`No data found for category: ${category}`);
+    return;
+  }
+
   const columnDefs = [
     {
       headerName: 'Status',
@@ -9300,13 +9306,13 @@ function initializeGrid(category) {
       headerClass: 'ag-center-header'
     },
     {
-        headerName: 'Problem',
-        field: 'problem',
-        flex: 1,
-        filter: true,
-        sortable: true,
-        minWidth: 250,
-        cellRenderer: problemCellRenderer
+      headerName: 'Problem',
+      field: 'problem',
+      flex: 1,
+      filter: true,
+      sortable: true,
+      minWidth: 250,
+      cellRenderer: problemCellRenderer
     },
     {
       headerName: 'LeetCode ID',
@@ -9327,12 +9333,12 @@ function initializeGrid(category) {
       sortable: true,
       suppressSizeToFit: true,
       headerClass: 'ag-center-header',
-      sort: 'asc', // Secondary sort
-     sortingOrder: ['asc', 'desc', null],
-     comparator: (valueA, valueB) => {
-      const difficultyOrder = { Easy: 1, Medium: 2, Hard: 3 };
-      return difficultyOrder[valueA] - difficultyOrder[valueB];
-     }
+      sort: 'asc',
+      sortingOrder: ['asc', 'desc', null],
+      comparator: (valueA, valueB) => {
+        const difficultyOrder = { Easy: 1, Medium: 2, Hard: 3 };
+        return difficultyOrder[valueA] - difficultyOrder[valueB];
+      }
     },
     {
       headerName: 'Frequency',
@@ -9343,12 +9349,12 @@ function initializeGrid(category) {
       sortable: true,
       suppressSizeToFit: true,
       headerClass: 'ag-center-header',
-     sort: 'desc', // Initial sort direction
-     sortingOrder: ['desc', 'asc', null], // Allowed sorting orders
-     comparator: (valueA, valueB) => {
-      const frequencyOrder = { High: 1, Medium: 2, Low: 3 };
-      return frequencyOrder[valueB] - frequencyOrder[valueA];
-     }
+      sort: 'desc',
+      sortingOrder: ['desc', 'asc', null],
+      comparator: (valueA, valueB) => {
+        const frequencyOrder = { High: 1, Medium: 2, Low: 3 };
+        return frequencyOrder[valueB] - frequencyOrder[valueA];
+      }
     }
   ];
   
@@ -9364,9 +9370,17 @@ function initializeGrid(category) {
     });
   }
   
+  // Get the row data for the specific category
+  const rowData = problemDataByCategory[category] || [];
+  
+  console.log(`Grid data for ${category}:`, {
+    rowCount: rowData.length,
+    firstRowSample: rowData[0]
+  });
+
   const gridOptions = {
     columnDefs: columnDefs,
-    rowData: problemDataByCategory[category],
+    rowData: rowData,
     pagination: true,
     paginationPageSize: 15,
     animateRows: true,
@@ -9380,7 +9394,8 @@ function initializeGrid(category) {
     onGridReady: function(params) {
       gridApi = params.api;
       columnApi = params.columnApi;
-        // Set initial sorting
+      
+      // Set initial sorting
       params.columnApi.applyColumnState({
         state: [
           { colId: 'frequency', sort: 'desc', sortIndex: 0 },
@@ -9388,19 +9403,68 @@ function initializeGrid(category) {
         ],
         applyOrder: false
       });
+      
       gridApi.sizeColumnsToFit();
       window.addEventListener('resize', () => setTimeout(() => gridApi.sizeColumnsToFit(), 100));
-      updateDifficultyCounts(category);
-    },
       
+      updateDifficultyCounts(category);
+    }
   };
   
-  if (gridApi) {
-    gridApi.setColumnDefs(columnDefs);
-    gridApi.setRowData(problemDataByCategory[category]);
-  } else {
-    new agGrid.Grid(document.getElementById('problem-grid'), gridOptions);
+  // Destroy existing grid if it exists
+  const gridDiv = document.getElementById('problem-grid');
+  if (gridDiv) {
+    gridDiv.innerHTML = ''; // Clear existing grid
   }
+  
+  // Create new grid
+  new agGrid.Grid(gridDiv, gridOptions);
+  
+  console.log(`Grid initialized for ${category}`);
+}
+
+// Modify changeCategory to ensure grid is updated
+function changeCategory(category) {
+  console.log(`Changing category to: ${category}`);
+  
+  // Reset UI filters
+  resetFilters();
+  
+  // Clear grid filter model
+  if (gridApi) {
+    gridApi.setFilterModel(null);
+  }
+
+  // Update current category
+  currentCategory = category;
+
+  // Update active sidebar link
+  document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+  const activeLink = document.getElementById(`${category}-link`);
+  if (activeLink) activeLink.classList.add('active');
+
+  // Update title and problem count
+  document.querySelector('.category-name').textContent = getCategoryTitle(category);
+  const totalProblems = problemDataByCategory[category] ? problemDataByCategory[category].length : 0;
+  const solvedProblems = problemDataByCategory[category] ? problemDataByCategory[category].filter(p => p.status).length : 0;
+  document.getElementById('problem-count').textContent = `(${solvedProblems}/${totalProblems})`;
+
+  // Show category tip if available
+  updateCategoryTip(category);
+  
+  // Reset filters explicitly
+  document.getElementById('status-filter').value = 'all';
+  document.getElementById('difficulty-filter').value = 'all';
+  document.getElementById('frequency-filter').value = 'all';
+
+  // Reinitialize grid for the category
+  initializeGrid(category);
+
+  // Update counters
+  updateCategoryCounter(category);
+  updateDifficultyCounts(category);
 }
 
 // Cell renderer for the status column (with checkbox)
@@ -9672,6 +9736,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('difficulty-filter').addEventListener('change', applyFilters);
   document.getElementById('frequency-filter').addEventListener('change', applyFilters);
   
+  initializeGrid('all');
   changeCategory('all');
 });
 
