@@ -9635,7 +9635,9 @@ function updateOverallProgress() {
     `;
   }
 }
+let currentCategory = 'all';
 document.addEventListener('DOMContentLoaded', function() {
+  changeCategory('all');
   // Generate sidebar links dynamically
   const sidebarNav = document.querySelector('.sidebar-nav');
   sidebarNav.innerHTML = ''; // Clear existing static content
@@ -9665,7 +9667,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Load statuses and initialize
   loadProblemStatuses();
-  setupThemeToggle();
   
   // Initialize all category counters
   Object.keys(problemDataByCategory).forEach(cat => {
