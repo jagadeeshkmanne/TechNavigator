@@ -9,7 +9,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/styles/ag-grid.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/styles/ag-theme-alpine.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/ag-grid-community.min.js"></script>
-  
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
   <!-- Import Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -599,9 +602,74 @@
   background-color: rgba(239, 68, 68, 0.1);
   color: var(--hard-color);
 }
+      /* Auth Container */
+.auth-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.auth-container .user-info {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-container.signed-in .user-info {
+  display: flex;
+}
+
+.auth-container.signed-in #login-btn {
+  display: none;
+}
+
+.auth-btn {
+  background-color: #fff;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.auth-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.auth-btn.logout {
+  background-color: #555;
+  color: white;
+  border: none;
+}
+
+.auth-btn.logout:hover {
+  background-color: #333;
+}
+
+.user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Dark Mode Adjustments */
+.dark-mode .auth-btn {
+  background-color: #333;
+  color: #ddd;
+  border-color: #555;
+}
+
+.dark-mode .auth-btn:hover {
+  background-color: #444;
+}
   </style>
   
-    <script src="main.js"></script>
+    <script src="firebase.js"></script>
    
 </head>
 
@@ -643,7 +711,17 @@
           </svg>
         </div>
       </div>
-      
+      <div id="auth-container" class="auth-container">
+      <button id="login-btn" class="btn auth-btn">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 8px;">
+        Sign in with Google
+      </button>
+      <div class="user-info">
+        <img id="user-img" class="user-avatar" alt="Profile" style="display: none;">
+        <span id="user-name"></span>
+        <button id="logout-btn" class="btn auth-btn logout">Sign Out</button>
+      </div>
+    </div>
       <div class="header-stats">
         <div class="progress-pill" id="overall-progress-pill">
           <div class="circle-progress">
