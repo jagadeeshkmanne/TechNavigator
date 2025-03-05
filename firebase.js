@@ -9298,10 +9298,6 @@ function initializeGrid(category) {
       cellRenderer: statusCellRenderer,
       sortable: true,
       filter: true,
-      filterParams: {
-        values: [true, false],
-        cellRenderer: (params) => params.value ? 'Completed' : 'Pending'
-      },
       suppressSizeToFit: true,
       headerClass: 'ag-center-header'
     },
