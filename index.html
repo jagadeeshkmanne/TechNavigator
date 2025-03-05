@@ -605,7 +605,7 @@
     /***********************
      * NEW DATA STRUCTURE
      ***********************/
-    const CATEGORIES_DATA = {
+   const CATEGORIES_DATA = {
   "Arrays": {
     "tip": "Arrays are the most fundamental data structure. Focus on understanding basic operations like traversal, insertion, deletion, and in-place manipulation. Look for problems involving direct array access, traversal, and simple transformations without specialized algorithms.",
     "problems": [
@@ -6937,7 +6937,7 @@
       }
     ]
   },
-  "Shortest Path Algorithms": {
+  "Shortest Path": {
     "tip": "Shortest Path Algorithms find the optimal path between nodes in a graph, minimizing the total path cost. Common algorithms include Dijkstra's (for non-negative weights), Bellman-Ford (handles negative weights), Floyd-Warshall (all pairs shortest paths), and A* (with heuristics for faster searching). These are ideal for problems involving route planning, network routing, or any scenario requiring minimum cost traversal between points. Look for problems mentioning 'minimum distance', 'cheapest path', 'fastest route', or those involving weighted graphs where optimization is required. Consider the constraints on edge weights (positive/negative) and whether you need a single source or all pairs shortest paths to choose the right algorithm.",
     "problems": [
       {
@@ -7212,7 +7212,7 @@
       }
     ]
   },
-  "Greedy Algorithms": {
+  "Greedy": {
     "tip": "Greedy Algorithms make locally optimal choices at each step with the hope of finding a global optimum. They're efficient but don't always guarantee the best solution for all problems. Greedy approaches work well when the problem has 'optimal substructure' (optimal solution contains optimal solutions to subproblems) and a 'greedy choice property' (locally optimal choices lead to globally optimal solution). Look for problems involving optimization, scheduling, resource allocation, or minimizing/maximizing values. Key indicators include terms like 'maximum profit', 'minimum cost', 'optimal arrangement', or scenarios where you need to make sequential decisions. Greedy solutions are typically implemented by sorting input based on a heuristic and then processing elements in that order, making the best choice at each step.",
     "problems": [
       {
@@ -8037,7 +8037,7 @@
       }
     ]
   },
-  "1D Dynamic Programming": {
+  "1D DP": {
     "tip": "1D Dynamic Programming is a specialized form of dynamic programming where the state can be represented using a single dimension (typically an array). It's used when the subproblem solution depends on a single parameter that changes linearly. Look for problems involving sequences, chains, or series where decisions at each step affect future possibilities, and the problem can be broken down based on one changing variable (like position, size, or time). Common patterns include: linear state transitions where dp[i] depends on some previous states like dp[i-1], dp[i-2], etc.; optimization over subarrays or subsequences; and problems requiring consideration of taking or skipping elements. Unlike general tabulation, 1D DP specifically emphasizes the linear relationship between states and often requires more complex state transitions or optimizations.",
     "problems": [
       {
@@ -8312,7 +8312,7 @@
       }
     ]
   },
-  "2D Dynamic Programming": {
+  "2D DP": {
     "tip": "2D Dynamic Programming involves creating and filling a two-dimensional table where each cell (i,j) represents the solution to a subproblem defined by two changing parameters. This pattern is essential for problems involving pairs of sequences (like strings or arrays), grid traversal with constraints, or situations where tracking two independent variables is necessary. Look for problems involving string comparisons, matrix paths, matching or alignment, or optimization scenarios with two varying dimensions. The recurrence relation typically depends on previously computed values in the table, often accessing dp[i-1][j], dp[i][j-1], dp[i-1][j-1], or other nearby cells. Visualizing the 2D table and carefully defining the meaning of each cell is crucial for solving these problems successfully.",
     "problems": [
       {
@@ -9417,8 +9417,6 @@
       }
     ]
   }
-
-
 }
     /***********************
      * TRANSFORM JSON DATA INTO CATEGORIES
@@ -9724,7 +9722,8 @@
           filter: true,
           sortable: true,
           suppressSizeToFit: true,
-          headerClass: 'ag-center-header'
+          headerClass: 'ag-center-header',
+          hide: 'true   '
         },
         {
           headerName: 'Difficulty',
@@ -9734,7 +9733,13 @@
           filter: true,
           sortable: true,
           suppressSizeToFit: true,
-          headerClass: 'ag-center-header'
+          headerClass: 'ag-center-header',
+          sort: 'asc', // Secondary sort
+         sortingOrder: ['asc', 'desc', null],
+         comparator: (valueA, valueB) => {
+          const difficultyOrder = { Easy: 1, Medium: 2, Hard: 3 };
+          return difficultyOrder[valueA] - difficultyOrder[valueB];
+         }
         },
         {
           headerName: 'Frequency',
@@ -9744,7 +9749,13 @@
           filter: true,
           sortable: true,
           suppressSizeToFit: true,
-          headerClass: 'ag-center-header'
+          headerClass: 'ag-center-header',
+         sort: 'desc', // Initial sort direction
+         sortingOrder: ['desc', 'asc', null], // Allowed sorting orders
+         comparator: (valueA, valueB) => {
+          const frequencyOrder = { High: 1, Medium: 2, Low: 3 };
+          return frequencyOrder[valueB] - frequencyOrder[valueA];
+         }
         }
       ];
       
@@ -9766,6 +9777,7 @@
         pagination: true,
         paginationPageSize: 15,
         animateRows: true,
+        multiSortKey: 'ctrl', 
         defaultColDef: {
           resizable: true,
           suppressMenu: true,
@@ -9775,10 +9787,19 @@
         onGridReady: function(params) {
           gridApi = params.api;
           columnApi = params.columnApi;
+            // Set initial sorting
+        params.columnApi.applyColumnState({
+          state: [
+            { colId: 'frequency', sort: 'desc', sortIndex: 0 },
+            { colId: 'difficulty', sort: 'asc', sortIndex: 1 }
+          ],
+          applyOrder: false
+        });
           gridApi.sizeColumnsToFit();
           window.addEventListener('resize', () => setTimeout(() => gridApi.sizeColumnsToFit(), 100));
           updateDifficultyCounts(category);
-        }
+        },
+          
       };
       
       if (gridApi) {
@@ -10020,6 +10041,7 @@
      ***********************/
     // Modify the DOMContentLoaded event listener
     document.addEventListener('DOMContentLoaded', function() {
+     
       // Generate sidebar links dynamically
       const sidebarNav = document.querySelector('.sidebar-nav');
       sidebarNav.innerHTML = ''; // Clear existing static content
