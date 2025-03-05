@@ -9635,7 +9635,6 @@ function updateOverallProgress() {
     `;
   }
 }
-let currentCategory = 'all';
 document.addEventListener('DOMContentLoaded', function() {
   changeCategory('all');
   // Generate sidebar links dynamically
