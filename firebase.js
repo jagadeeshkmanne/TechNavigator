@@ -9075,43 +9075,41 @@ function getFilteredProblems() {
 }
 
 // Save a problem's status - updated to use LeetCode ID across all categories
+// Save a problem's status - updated to ensure consistent global and category-level updates
 function saveProblemStatus(category, problemId, status) {
-  // Update status in the current category
-  if (!problemStatuses[category]) {
-    problemStatuses[category] = {};
-  }
-  problemStatuses[category][problemId] = status;
-  
-  // Save to localStorage for this category as before
-  localStorage.setItem(`tech-navigator-${category}-progress`, JSON.stringify(problemStatuses[category]));
-  
-  // Important: Update the same LeetCode ID in ALL categories
+  // Update status in ALL categories
   Object.keys(problemDataByCategory).forEach(cat => {
-    if (cat !== 'all' && cat !== category) {
-      problemDataByCategory[cat].forEach(problem => {
-        if (problem.leetcode_id === problemId) {
-          problem.status = status;
-          
-          // Also update in tracking object
-          if (!problemStatuses[cat]) {
-            problemStatuses[cat] = {};
-          }
-          problemStatuses[cat][problemId] = status;
-          
-          // Update localStorage for this category too
-          localStorage.setItem(`tech-navigator-${cat}-progress`, JSON.stringify(problemStatuses[cat]));
+    // Find the problem in this category
+    const problemsInCategory = problemDataByCategory[cat];
+    problemsInCategory.forEach(problem => {
+      if (problem.leetcode_id === problemId) {
+        // Update the status for this specific problem
+        problem.status = status;
+
+        // Ensure category-specific tracking
+        if (!problemStatuses[cat]) {
+          problemStatuses[cat] = {};
         }
-      });
-    }
+        problemStatuses[cat][problemId] = status;
+
+        // Update localStorage for this category
+        localStorage.setItem(`tech-navigator-${cat}-progress`, JSON.stringify(problemStatuses[cat]));
+      }
+    });
   });
-  
-  // Update the "all" category too
-  problemDataByCategory['all'].forEach(problem => {
-    if (problem.leetcode_id === problemId) {
-      problem.status = status;
-    }
-  });
-  
+
+  // Trigger grid update to reflect changes
+  if (gridApi) {
+    gridApi.refreshCells();
+  }
+
+  // Update grid data for the current category
+  updateGrid();
+
+  // Update category and overall progress counters
+  updateCategoryCounter(currentCategory);
+  updateOverallProgress();
+
   // If signed in, collect all problem statuses and save to Firebase
   if (currentUser) {
     const allProblems = {};
