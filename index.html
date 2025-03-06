@@ -692,7 +692,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: var(--primary-color);
+  color: #ffffff;
 }
 
 /* Rotate the container (or you could apply both animations to the SVG) */
@@ -749,9 +749,16 @@
       </div>
       
       <div id="auth-container" class="auth-container">
+      <a class='practice-link' href='https://blog.technavigator.io/'>
+        <svg fill='none' height='18' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/>
+          <polyline points='9 22 9 12 15 12 15 22'/>
+        </svg>
+        <span>Blog</span>
+      </a>
       <button id="login-btn" class="btn auth-btn">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 8px;">
-        Sign in with Google
+        Sign in
       </button>
       <div class="user-info">
         <img id="user-img" class="user-avatar" alt="Profile" style="display: none;">
