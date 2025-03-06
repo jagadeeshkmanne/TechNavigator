@@ -6861,7 +6861,6 @@ for (const category in CATEGORIES_DATA) {
       problem: problem.problem,
       difficulty: problem.difficulty,
       leetcode: problem.leetcode,
-      frequency: problem.frequency,
       leetcode_id: problem.leetcode_id,
       requirements: problem.requirements,
       categories: categories
@@ -6994,12 +6993,7 @@ function saveProblemStatus(category, problemId, status) {
  * HELPER FUNCTIONS
  ***********************/
 // Resets all filter controls
-function resetFilters() {
-  const filterElements = document.querySelectorAll('.filter-select');
-  filterElements.forEach(filter => {
-    filter.value = 'all'; // Assumes 'all' is the default value
-  });
-}
+
 
 // Updates/reinitializes the grid with filtered problems.
 function updateGrid() {
@@ -7079,7 +7073,6 @@ function setupThemeToggle() {
 // Change category, update grid and counters. Fixed parameter name usage.
 function changeCategory(category) {
   // Reset UI filters
-  resetFilters();
   
   // Clear grid filter model
   if (gridApi) {
@@ -7295,7 +7288,6 @@ function changeCategory(category) {
   console.log(`Changing category to: ${category}`);
   
   // Reset UI filters
-  resetFilters();
   
   // Clear grid filter model
   if (gridApi) {
@@ -7458,22 +7450,7 @@ function problemCellRenderer(params) {
 function applyFilters() {
   if (!gridApi) return;
   
-  // Get filter values
-  const difficulty = document.getElementById('difficulty-filter').value;
-  const frequency = document.getElementById('frequency-filter').value;
   
-  // Build filter model
-  const filterModel = {};
-  if (status !== 'all') {
-    filterModel.status = { type: 'equals', filter: status === 'completed' };
-  }
-  if (difficulty !== 'all') {
-    filterModel.difficulty = { type: 'equals', filter: difficulty };
-  }
-  if (frequency !== 'all') {
-    filterModel.frequency = { type: 'equals', filter: frequency };
-  }
-
   // Apply filters and force immediate refresh
   gridApi.setFilterModel(filterModel);
   gridApi.onFilterChanged();
