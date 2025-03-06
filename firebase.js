@@ -179,7 +179,7 @@ async function saveProgressToFirebase(problems) {
 /***********************
  * TRANSFORM JSON DATA INTO CATEGORIES
  ***********************/
- const CATEGORIES_DATA = {
+const CATEGORIES_DATA = {
   "Arrays": {
     "tip": "Arrays are the most fundamental data structure. Focus on understanding basic operations like traversal, insertion, deletion, and in-place manipulation. Look for problems involving direct array access, traversal, and simple transformations without specialized algorithms.",
     "problems": [
@@ -2238,1377 +2238,659 @@ async function saveProgressToFirebase(problems) {
   "Tree DFS": {
     "tip": "Tree DFS (Depth-First Search) involves exploring a tree as far as possible along each branch before backtracking. The three main DFS traversals are preorder (root, left, right), inorder (left, root, right), and postorder (left, right, root). This pattern is excellent for problems involving path finding, tree structure validation, and node relationship analysis. Look for problems where you need to exhaust all paths, find specific paths, or make decisions based on parent-child relationships.",
     "problems": [
-      {
-        "id": 383,
+    {
+        "id": 1,
         "leetcode_id": 94,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Binary Tree Inorder Traversal",
         "leetcode": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
-        "requirements": "Implement inorder traversal (left, root, right)"
-      },
-      {
-        "id": 384,
+        "requirements": "Implement inorder traversal (Left, Root, Right)"
+    },
+    {
+        "id": 2,
         "leetcode_id": 144,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Binary Tree Preorder Traversal",
         "leetcode": "https://leetcode.com/problems/binary-tree-preorder-traversal/",
-        "requirements": "Implement preorder traversal (root, left, right)"
-      },
-      {
-        "id": 385,
+        "requirements": "Implement preorder traversal (Root, Left, Right)"
+    },
+    {
+        "id": 3,
         "leetcode_id": 145,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Binary Tree Postorder Traversal",
         "leetcode": "https://leetcode.com/problems/binary-tree-postorder-traversal/",
-        "requirements": "Implement postorder traversal (left, right, root)"
-      },
-      {
-        "id": 386,
+        "requirements": "Implement postorder traversal (Left, Right, Root)"
+    },
+    {
+        "id": 4,
         "leetcode_id": 98,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Validate Binary Search Tree",
         "leetcode": "https://leetcode.com/problems/validate-binary-search-tree/",
-        "requirements": "Check if tree is a valid BST using DFS with constraints"
-      },
-      {
-        "id": 387,
+        "requirements": "Check if a binary tree is a valid BST using DFS"
+    },
+    {
+        "id": 5,
         "leetcode_id": 112,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Path Sum",
         "leetcode": "https://leetcode.com/problems/path-sum/",
-        "requirements": "Check if root-to-leaf path with given sum exists"
-      },
-      {
-        "id": 388,
+        "requirements": "Check if a root-to-leaf path with a given sum exists"
+    },
+    {
+        "id": 6,
         "leetcode_id": 113,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Path Sum II",
         "leetcode": "https://leetcode.com/problems/path-sum-ii/",
-        "requirements": "Find all root-to-leaf paths with given sum"
-      },
-      {
-        "id": 389,
+        "requirements": "Find all root-to-leaf paths with a given sum"
+    },
+    {
+        "id": 7,
         "leetcode_id": 257,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Binary Tree Paths",
         "leetcode": "https://leetcode.com/problems/binary-tree-paths/",
         "requirements": "Find all root-to-leaf paths"
-      },
-      {
-        "id": 390,
-        "leetcode_id": 129,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Sum Root to Leaf Numbers",
-        "leetcode": "https://leetcode.com/problems/sum-root-to-leaf-numbers/",
-        "requirements": "Sum all numbers formed by root-to-leaf paths"
-      },
-      {
-        "id": 391,
+    },
+    {
+        "id": 8,
         "leetcode_id": 236,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Lowest Common Ancestor of a Binary Tree",
         "leetcode": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
-        "requirements": "Find lowest common ancestor using DFS"
-      },
-      {
-        "id": 392,
+        "requirements": "Find the lowest common ancestor using DFS"
+    },
+    {
+        "id": 9,
         "leetcode_id": 124,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Binary Tree Maximum Path Sum",
         "leetcode": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
-        "requirements": "Find path with maximum sum using DFS"
-      },
-      {
-        "id": 393,
+        "requirements": "Find the path with the maximum sum using DFS"
+    },
+    {
+        "id": 10,
         "leetcode_id": 543,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Diameter of Binary Tree",
         "leetcode": "https://leetcode.com/problems/diameter-of-binary-tree/",
-        "requirements": "Find longest path between any two nodes"
-      },
-      {
-        "id": 394,
-        "leetcode_id": 437,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Path Sum III",
-        "leetcode": "https://leetcode.com/problems/path-sum-iii/",
-        "requirements": "Count paths with given sum (not necessarily root-to-leaf)"
-      },
-      {
-        "id": 395,
+        "requirements": "Find the longest path between any two nodes"
+    },
+    {
+        "id": 11,
         "leetcode_id": 110,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Balanced Binary Tree",
         "leetcode": "https://leetcode.com/problems/balanced-binary-tree/",
-        "requirements": "Check if tree is height-balanced using DFS"
-      },
-      {
-        "id": 396,
-        "leetcode_id": 114,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Flatten Binary Tree to Linked List",
-        "leetcode": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/",
-        "requirements": "Flatten tree to linked list using DFS"
-      },
-      {
-        "id": 397,
-        "leetcode_id": 199,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Binary Tree Right Side View",
-        "leetcode": "https://leetcode.com/problems/binary-tree-right-side-view/",
-        "requirements": "View tree from right side using DFS"
-      },
-      {
-        "id": 398,
-        "leetcode_id": 1448,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Count Good Nodes in Binary Tree",
-        "leetcode": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/",
-        "requirements": "Count nodes where path has no greater value"
-      },
-      {
-        "id": 399,
+        "requirements": "Check if a tree is height-balanced using DFS"
+    },
+    {
+        "id": 12,
         "leetcode_id": 105,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Construct Binary Tree from Preorder and Inorder Traversal",
         "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
-        "requirements": "Build tree from traversal sequences using recursion"
-      },
-      {
-        "id": 400,
-        "leetcode_id": 106,
+        "requirements": "Build a binary tree from given traversal sequences"
+    },
+    {
+        "id": 13,
+        "leetcode_id": 114,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Construct Binary Tree from Inorder and Postorder Traversal",
-        "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/",
-        "requirements": "Build tree from traversal sequences using recursion"
-      },
-      {
-        "id": 401,
-        "leetcode_id": 951,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Flip Equivalent Binary Trees",
-        "leetcode": "https://leetcode.com/problems/flip-equivalent-binary-trees/",
-        "requirements": "Check if trees are equivalent after flips"
-      },
-      {
-        "id": 402,
-        "leetcode_id": 863,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "All Nodes Distance K in Binary Tree",
-        "leetcode": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/",
-        "requirements": "Find all nodes at distance K using DFS"
-      },
-      {
-        "id": 403,
-        "leetcode_id": 1026,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Difference Between Node and Ancestor",
-        "leetcode": "https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/",
-        "requirements": "Find max difference between ancestor and descendant"
-      },
-      {
-        "id": 404,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Pseudo-Palindromic Paths in a Binary Tree",
-        "leetcode": "https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/",
-        "leetcode_id": 1457,
-        "requirements": "Count paths where digit frequencies form palindrome"
-      },
-      {
-        "id": 405,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Binary Tree Pruning",
-        "leetcode": "https://leetcode.com/problems/binary-tree-pruning/",
-        "leetcode_id": 814,
-        "requirements": "Remove subtrees with only zeros"
-      },
-      {
-        "id": 406,
+        "problem": "Flatten Binary Tree to Linked List",
+        "leetcode": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/",
+        "requirements": "Transform a tree into a linked list using DFS"
+    },
+    {
+        "id": 14,
+        "leetcode_id": 99,
         "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Binary Tree Cameras",
-        "leetcode": "https://leetcode.com/problems/binary-tree-cameras/",
-        "leetcode_id": 968,
-        "requirements": "Place minimum cameras to monitor tree using DFS"
-      },
-      {
-        "id": 407,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Delete Nodes And Return Forest",
-        "leetcode": "https://leetcode.com/problems/delete-nodes-and-return-forest/",
-        "leetcode_id": 1110,
-        "requirements": "Delete nodes and return resulting forest"
-      },
-      {
-        "id": 408,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find Duplicate Subtrees",
-        "leetcode": "https://leetcode.com/problems/find-duplicate-subtrees/",
-        "leetcode_id": 652,
-        "requirements": "Find all duplicate subtrees using DFS serialization"
-      },
-      {
-        "id": 409,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Serialize and Deserialize Binary Tree",
-        "leetcode": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
-        "leetcode_id": 297,
-        "requirements": "Convert tree to string and back"
-      },
-      {
-        "id": 410,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Most Frequent Subtree Sum",
-        "leetcode": "https://leetcode.com/problems/most-frequent-subtree-sum/",
-        "leetcode_id": 508,
-        "requirements": "Find most frequent subtree sum using DFS"
-      },
-      {
-        "id": 411,
-        "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Recover Binary Search Tree",
         "leetcode": "https://leetcode.com/problems/recover-binary-search-tree/",
-        "leetcode_id": 99,
-        "requirements": "Fix BST with two swapped nodes using inorder traversal"
-      },
-      {
-        "id": 412,
+        "requirements": "Fix a BST where two nodes are swapped using inorder traversal"
+    },
+    {
+        "id": 15,
+        "leetcode_id": 863,
+        "difficulty": "Medium",
+        "problem": "All Nodes Distance K in Binary Tree",
+        "leetcode": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/",
+        "requirements": "Find all nodes at distance K from a target node"
+    },
+    {
+        "id": 16,
+        "leetcode_id": 297,
         "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Sum of Distances in Tree",
-        "leetcode": "https://leetcode.com/problems/sum-of-distances-in-tree/",
-        "leetcode_id": 834,
-        "requirements": "Calculate sum of distances for each node"
-      }
-    ]
+        "problem": "Serialize and Deserialize Binary Tree",
+        "leetcode": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+        "requirements": "Convert a tree to a string and back"
+    }
+]
   },
   "Tree BFS": {
     "tip": "Tree BFS (Breadth-First Search) involves exploring a tree level by level using a queue. This pattern is excellent for problems that require level-order traversal, finding the shortest path, or working with the tree in a level-by-level manner. Look for problems involving level ordering, nearest neighbors, or when you need to process nodes based on their distance from the root.",
     "problems": [
-      {
-        "id": 413,
+    {
+        "id": 1,
         "leetcode_id": 102,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Binary Tree Level Order Traversal",
         "leetcode": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
         "requirements": "Return nodes level by level from top to bottom"
-      },
-      {
-        "id": 414,
+    },
+    {
+        "id": 2,
         "leetcode_id": 107,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Binary Tree Level Order Traversal II",
         "leetcode": "https://leetcode.com/problems/binary-tree-level-order-traversal-ii/",
         "requirements": "Return nodes level by level from bottom to top"
-      },
-      {
-        "id": 415,
+    },
+    {
+        "id": 3,
         "leetcode_id": 103,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Binary Tree Zigzag Level Order Traversal",
         "leetcode": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",
         "requirements": "Zigzag level order traversal (alternating directions)"
-      },
-      {
-        "id": 416,
+    },
+    {
+        "id": 4,
         "leetcode_id": 199,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Binary Tree Right Side View",
         "leetcode": "https://leetcode.com/problems/binary-tree-right-side-view/",
         "requirements": "Return rightmost node at each level"
-      },
-      {
-        "id": 417,
-        "leetcode_id": 515,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find Largest Value in Each Tree Row",
-        "leetcode": "https://leetcode.com/problems/find-largest-value-in-each-tree-row/",
-        "requirements": "Find maximum value in each level"
-      },
-      {
-        "id": 418,
-        "leetcode_id": 111,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Minimum Depth of Binary Tree",
-        "leetcode": "https://leetcode.com/problems/minimum-depth-of-binary-tree/",
-        "requirements": "Find shortest path from root to leaf"
-      },
-      {
-        "id": 419,
+    },
+    {
+        "id": 5,
         "leetcode_id": 104,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Maximum Depth of Binary Tree",
         "leetcode": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
         "requirements": "Find depth of tree using BFS"
-      },
-      {
-        "id": 420,
-        "leetcode_id": 662,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Width of Binary Tree",
-        "leetcode": "https://leetcode.com/problems/maximum-width-of-binary-tree/",
-        "requirements": "Find maximum width using level-order traversal"
-      },
-      {
-        "id": 421,
+    },
+    {
+        "id": 6,
+        "leetcode_id": 111,
+        "difficulty": "Easy",
+        "problem": "Minimum Depth of Binary Tree",
+        "leetcode": "https://leetcode.com/problems/minimum-depth-of-binary-tree/",
+        "requirements": "Find shortest path from root to leaf"
+    },
+    {
+        "id": 7,
         "leetcode_id": 637,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Average of Levels in Binary Tree",
         "leetcode": "https://leetcode.com/problems/average-of-levels-in-binary-tree/",
         "requirements": "Calculate average of each level"
-      },
-      {
-        "id": 422,
-        "leetcode_id": 429,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "N-ary Tree Level Order Traversal",
-        "leetcode": "https://leetcode.com/problems/n-ary-tree-level-order-traversal/",
-        "requirements": "Level order traversal for N-ary tree"
-      },
-      {
-        "id": 423,
+    },
+    {
+        "id": 8,
         "leetcode_id": 116,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Populating Next Right Pointers in Each Node",
         "leetcode": "https://leetcode.com/problems/populating-next-right-pointers-in-each-node/",
         "requirements": "Connect nodes at same level (perfect binary tree)"
-      },
-      {
-        "id": 424,
+    },
+    {
+        "id": 9,
         "leetcode_id": 117,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Populating Next Right Pointers in Each Node II",
         "leetcode": "https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/",
         "requirements": "Connect nodes at same level (any binary tree)"
-      },
-      {
-        "id": 425,
+    },
+    {
+        "id": 10,
         "leetcode_id": 513,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Find Bottom Left Tree Value",
         "leetcode": "https://leetcode.com/problems/find-bottom-left-tree-value/",
         "requirements": "Find leftmost value in bottom level"
-      },
-      {
-        "id": 426,
+    },
+    {
+        "id": 11,
         "leetcode_id": 958,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Check Completeness of a Binary Tree",
         "leetcode": "https://leetcode.com/problems/check-completeness-of-a-binary-tree/",
         "requirements": "Check if tree is complete using BFS"
-      },
-      {
-        "id": 427,
-        "leetcode_id": 987,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Vertical Order Traversal of a Binary Tree",
-        "leetcode": "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/",
-        "requirements": "Traversal by vertical order with coordinates"
-      },
-      {
-        "id": 428,
-        "leetcode_id": 314,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Binary Tree Vertical Order Traversal",
-        "leetcode": "https://leetcode.com/problems/binary-tree-vertical-order-traversal/",
-        "requirements": "Vertical order traversal with level priority"
-      },
-      {
-        "id": 429,
+    },
+    {
+        "id": 12,
         "leetcode_id": 993,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Cousins in Binary Tree",
         "leetcode": "https://leetcode.com/problems/cousins-in-binary-tree/",
         "requirements": "Check if nodes are at same level but different parents"
-      },
-      {
-        "id": 430,
+    },
+    {
+        "id": 13,
         "leetcode_id": 1161,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Maximum Level Sum of a Binary Tree",
         "leetcode": "https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/",
         "requirements": "Find level with maximum sum"
-      },
-      {
-        "id": 431,
-        "leetcode_id": 965,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Univalued Binary Tree",
-        "leetcode": "https://leetcode.com/problems/univalued-binary-tree/",
-        "requirements": "Check if all nodes have same value using BFS"
-      },
-      {
-        "id": 432,
+    },
+    {
+        "id": 14,
         "leetcode_id": 662,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Width of Binary Tree - Alternative",
+        "problem": "Maximum Width of Binary Tree",
         "leetcode": "https://leetcode.com/problems/maximum-width-of-binary-tree/",
-        "requirements": "Different approach to calculate maximum width using BFS with indexing"
-      },
-      {
-        "id": 433,
-        "leetcode_id": 107,
+        "requirements": "Find maximum width using level-order traversal"
+    },
+    {
+        "id": 15,
+        "leetcode_id": 429,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Binary Tree Level Order Traversal II - Alternative",
-        "leetcode": "https://leetcode.com/problems/binary-tree-level-order-traversal-ii/",
-        "requirements": "Level order from bottom up with queue-based approach"
-      },
-      {
-        "id": 434,
-        "leetcode_id": 559,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Maximum Depth of N-ary Tree",
-        "leetcode": "https://leetcode.com/problems/maximum-depth-of-n-ary-tree/",
-        "requirements": "Find maximum depth of n-ary tree using BFS"
-      },
-      {
-        "id": 435,
-        "leetcode_id": 919,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Complete Binary Tree Inserter",
-        "leetcode": "https://leetcode.com/problems/complete-binary-tree-inserter/",
-        "requirements": "Design data structure for complete binary tree"
-      },
-      {
-        "id": 436,
-        "leetcode_id": 783,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Minimum Distance Between BST Nodes",
-        "leetcode": "https://leetcode.com/problems/minimum-distance-between-bst-nodes/",
-        "requirements": "Find minimum difference (can use BFS approach)"
-      },
-      {
-        "id": 437,
-        "leetcode_id": 671,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Second Minimum Node In a Binary Tree",
-        "leetcode": "https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/",
-        "requirements": "Find second smallest value"
-      },
-      {
-        "id": 438,
-        "leetcode_id": 1609,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Even Odd Tree",
-        "leetcode": "https://leetcode.com/problems/even-odd-tree/",
-        "requirements": "Check level-based even/odd conditions"
-      },
-      {
-        "id": 439,
-        "leetcode_id": 2641,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Cousins in Binary Tree II",
-        "leetcode": "https://leetcode.com/problems/cousins-in-binary-tree-ii/",
-        "requirements": "Replace each node with sum of cousins"
-      },
-      {
-        "id": 440,
-        "leetcode_id": 1161,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Level Sum of a Binary Tree - Alternative",
-        "leetcode": "https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/",
-        "requirements": "Different implementation for finding level with maximum sum"
-      },
-      {
-        "id": 441,
-        "leetcode_id": 1602,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find Nearest Right Node in Binary Tree",
-        "leetcode": "https://leetcode.com/problems/find-nearest-right-node-in-binary-tree/",
-        "requirements": "Find node at same level to the right"
-      },
-      {
-        "id": 442,
-        "leetcode_id": 1469,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find All The Lonely Nodes",
-        "leetcode": "https://leetcode.com/problems/find-all-the-lonely-nodes/",
-        "requirements": "Find nodes that are only children"
-      }
-    ]
+        "problem": "N-ary Tree Level Order Traversal",
+        "leetcode": "https://leetcode.com/problems/n-ary-tree-level-order-traversal/",
+        "requirements": "Level order traversal for N-ary tree"
+    },
+    {
+        "id": 16,
+        "leetcode_id": 987,
+        "difficulty": "Hard",
+        "problem": "Vertical Order Traversal of a Binary Tree",
+        "leetcode": "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/",
+        "requirements": "Traverse tree vertically with sorting by column and level"
+    }
+]
   },
   "Divide and Conquer": {
     "tip": "Divide and Conquer is an algorithmic paradigm where a problem is broken into smaller subproblems, solved independently, and then combined to form the solution to the original problem. This approach is most effective for problems that can be naturally split into similar subproblems, such as searching, sorting, and computational geometry. Look for problems where dividing the input and solving smaller parts independently leads to an efficient solution.",
     "problems": [
-      {
-        "id": 443,
+    {
+        "id": 1,
         "leetcode_id": 169,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Majority Element",
         "leetcode": "https://leetcode.com/problems/majority-element/",
         "requirements": "Find element appearing more than n/2 times"
-      },
-      {
-        "id": 444,
+    },
+    {
+        "id": 2,
         "leetcode_id": 53,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Maximum Subarray",
         "leetcode": "https://leetcode.com/problems/maximum-subarray/",
         "requirements": "Find contiguous subarray with largest sum"
-      },
-      {
-        "id": 445,
+    },
+    {
+        "id": 3,
         "leetcode_id": 215,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Kth Largest Element in an Array",
         "leetcode": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
         "requirements": "Find kth largest element using quickselect"
-      },
-      {
-        "id": 446,
+    },
+    {
+        "id": 4,
         "leetcode_id": 912,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Sort an Array",
         "leetcode": "https://leetcode.com/problems/sort-an-array/",
         "requirements": "Implement sorting algorithm like merge sort"
-      },
-      {
-        "id": 447,
+    },
+    {
+        "id": 5,
         "leetcode_id": 4,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Median of Two Sorted Arrays",
         "leetcode": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
         "requirements": "Find median efficiently without merging"
-      },
-      {
-        "id": 448,
+    },
+    {
+        "id": 6,
         "leetcode_id": 33,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Search in Rotated Sorted Array",
         "leetcode": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
         "requirements": "Find target in rotated array using modified binary search"
-      },
-      {
-        "id": 449,
+    },
+    {
+        "id": 7,
         "leetcode_id": 148,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Sort List",
         "leetcode": "https://leetcode.com/problems/sort-list/",
         "requirements": "Sort linked list using merge sort"
-      },
-      {
-        "id": 450,
+    },
+    {
+        "id": 8,
         "leetcode_id": 23,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Merge k Sorted Lists",
         "leetcode": "https://leetcode.com/problems/merge-k-sorted-lists/",
         "requirements": "Merge k sorted linked lists efficiently"
-      },
-      {
-        "id": 451,
-        "leetcode_id": 315,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count of Smaller Numbers After Self",
-        "leetcode": "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
-        "requirements": "Count smaller elements to the right"
-      },
-      {
-        "id": 452,
-        "leetcode_id": 493,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Reverse Pairs",
-        "leetcode": "https://leetcode.com/problems/reverse-pairs/",
-        "requirements": "Count pairs where i < j and nums[i] > 2*nums[j]"
-      },
-      {
-        "id": 453,
+    },
+    {
+        "id": 9,
         "leetcode_id": 50,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Pow(x, n)",
         "leetcode": "https://leetcode.com/problems/powx-n/",
         "requirements": "Implement power function efficiently"
-      },
-      {
-        "id": 454,
-        "leetcode_id": 241,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Different Ways to Add Parentheses",
-        "leetcode": "https://leetcode.com/problems/different-ways-to-add-parentheses/",
-        "requirements": "Compute all possible results from different parenthesizations"
-      },
-      {
-        "id": 455,
-        "leetcode_id": 973,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "K Closest Points to Origin",
-        "leetcode": "https://leetcode.com/problems/k-closest-points-to-origin/",
-        "requirements": "Find k closest points using quickselect"
-      },
-      {
-        "id": 456,
-        "leetcode_id": 395,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Longest Substring with At Least K Repeating Characters",
-        "leetcode": "https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/",
-        "requirements": "Find longest substring where each char appears at least k times"
-      },
-      {
-        "id": 457,
+    },
+    {
+        "id": 10,
         "leetcode_id": 105,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Construct Binary Tree from Preorder and Inorder Traversal",
         "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
         "requirements": "Build tree from traversal sequences"
-      },
-      {
-        "id": 458,
-        "leetcode_id": 106,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Construct Binary Tree from Inorder and Postorder Traversal",
-        "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/",
-        "requirements": "Build tree from traversal sequences"
-      },
-      {
-        "id": 459,
-        "leetcode_id": 95,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Unique Binary Search Trees II",
-        "leetcode": "https://leetcode.com/problems/unique-binary-search-trees-ii/",
-        "requirements": "Generate all structurally unique BSTs"
-      },
-      {
-        "id": 460,
-        "leetcode_id": 109,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Convert Sorted List to Binary Search Tree",
-        "leetcode": "https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/",
-        "requirements": "Convert sorted linked list to height-balanced BST"
-      },
-      {
-        "id": 461,
+    },
+    {
+        "id": 11,
         "leetcode_id": 108,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Convert Sorted Array to Binary Search Tree",
         "leetcode": "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/",
         "requirements": "Convert sorted array to height-balanced BST"
-      },
-      {
-        "id": 462,
-        "leetcode_id": 932,
+    },
+    {
+        "id": 12,
+        "leetcode_id": 109,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Beautiful Array",
-        "leetcode": "https://leetcode.com/problems/beautiful-array/",
-        "requirements": "Construct beautiful array using divide and conquer"
-      },
-      {
-        "id": 463,
+        "problem": "Convert Sorted List to Binary Search Tree",
+        "leetcode": "https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/",
+        "requirements": "Convert sorted linked list to height-balanced BST"
+    },
+    {
+        "id": 13,
         "leetcode_id": 654,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Maximum Binary Tree",
         "leetcode": "https://leetcode.com/problems/maximum-binary-tree/",
         "requirements": "Build tree by recursively finding maximum"
-      },
-      {
-        "id": 464,
-        "leetcode_id": 998,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Binary Tree II",
-        "leetcode": "https://leetcode.com/problems/maximum-binary-tree-ii/",
-        "requirements": "Insert value into existing maximum binary tree"
-      },
-      {
-        "id": 465,
+    },
+    {
+        "id": 14,
         "leetcode_id": 218,
         "difficulty": "Hard",
-        "frequency": "Hard",
         "problem": "The Skyline Problem",
         "leetcode": "https://leetcode.com/problems/the-skyline-problem/",
         "requirements": "Find skyline formed by buildings"
-      },
-      {
-        "id": 466,
-        "leetcode_id": 327,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count of Range Sum",
-        "leetcode": "https://leetcode.com/problems/count-of-range-sum/",
-        "requirements": "Count range sums in specific range"
-      },
-      {
-        "id": 467,
+    },
+    {
+        "id": 15,
         "leetcode_id": 427,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Construct Quad Tree",
         "leetcode": "https://leetcode.com/problems/construct-quad-tree/",
         "requirements": "Build quad tree by recursively dividing grid"
-      },
-      {
-        "id": 468,
-        "leetcode_id": 312,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Burst Balloons",
-        "leetcode": "https://leetcode.com/problems/burst-balloons/",
-        "requirements": "Find maximum coins by bursting balloons"
-      },
-      {
-        "id": 469,
-        "leetcode_id": 215,
+    },
+    {
+        "id": 16,
+        "leetcode_id": 973,
         "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Kth Largest Element - Alternative Approach",
-        "leetcode": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
-        "requirements": "Find kth largest using divide and conquer selection algorithm"
-      },
-      {
-        "id": 470,
-        "leetcode_id": 53,
-        "difficulty": "Easy",
-        "frequency": "High",
-        "problem": "Maximum Subarray - Alternative Solution",
-        "leetcode": "https://leetcode.com/problems/maximum-subarray/",
-        "requirements": "Find maximum subarray using pure divide and conquer"
-      },
-      {
-        "id": 471,
-        "leetcode_id": 889,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Construct Binary Tree from Preorder and Postorder Traversal",
-        "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/",
-        "requirements": "Build tree from preorder and postorder traversals"
-      },
-      {
-        "id": 472,
-        "leetcode_id": 514,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Freedom Trail",
-        "leetcode": "https://leetcode.com/problems/freedom-trail/",
-        "requirements": "Find minimum steps to spell word using divide and conquer"
-      }
-    ]
+        "problem": "K Closest Points to Origin",
+        "leetcode": "https://leetcode.com/problems/k-closest-points-to-origin/",
+        "requirements": "Find k closest points using quickselect"
+    }
+]
   },
   "Backtracking": {
     "tip": "Backtracking is an algorithmic technique for solving problems recursively by trying to build a solution incrementally, abandoning a solution ('backtracking') as soon as it determines that the candidate cannot possibly be completed to a valid solution. This pattern is particularly useful for problems involving permutations, combinations, partitioning, and constraint satisfaction. Look for problems where you need to explore all possible configurations and can eliminate invalid candidates early.",
     "problems": [
-      {
-        "id": 473,
+    {
+        "id": 1,
         "leetcode_id": 46,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Permutations",
         "leetcode": "https://leetcode.com/problems/permutations/",
         "requirements": "Generate all possible permutations of an array"
-      },
-      {
-        "id": 474,
+    },
+    {
+        "id": 2,
         "leetcode_id": 78,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Subsets",
         "leetcode": "https://leetcode.com/problems/subsets/",
         "requirements": "Generate all possible subsets of an array"
-      },
-      {
-        "id": 475,
+    },
+    {
+        "id": 3,
         "leetcode_id": 39,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Combination Sum",
         "leetcode": "https://leetcode.com/problems/combination-sum/",
         "requirements": "Find all unique combinations that sum to target"
-      },
-      {
-        "id": 476,
+    },
+    {
+        "id": 4,
         "leetcode_id": 17,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Letter Combinations of a Phone Number",
         "leetcode": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
         "requirements": "Generate all letter combinations from phone digits"
-      },
-      {
-        "id": 477,
+    },
+    {
+        "id": 5,
         "leetcode_id": 22,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Generate Parentheses",
         "leetcode": "https://leetcode.com/problems/generate-parentheses/",
         "requirements": "Generate all valid parentheses combinations"
-      },
-      {
-        "id": 478,
-        "leetcode_id": 40,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Combination Sum II",
-        "leetcode": "https://leetcode.com/problems/combination-sum-ii/",
-        "requirements": "Find combinations that sum to target with no repeated elements"
-      },
-      {
-        "id": 479,
-        "leetcode_id": 90,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Subsets II",
-        "leetcode": "https://leetcode.com/problems/subsets-ii/",
-        "requirements": "Generate all subsets of array with duplicates"
-      },
-      {
-        "id": 480,
-        "leetcode_id": 47,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Permutations II",
-        "leetcode": "https://leetcode.com/problems/permutations-ii/",
-        "requirements": "Generate all permutations with duplicates"
-      },
-      {
-        "id": 481,
+    },
+    {
+        "id": 6,
         "leetcode_id": 79,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Word Search",
         "leetcode": "https://leetcode.com/problems/word-search/",
         "requirements": "Search for word in 2D board of characters"
-      },
-      {
-        "id": 482,
-        "leetcode_id": 77,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Combinations",
-        "leetcode": "https://leetcode.com/problems/combinations/",
-        "requirements": "Return all possible combinations of k numbers from 1 to n"
-      },
-      {
-        "id": 483,
+    },
+    {
+        "id": 7,
         "leetcode_id": 51,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "N-Queens",
         "leetcode": "https://leetcode.com/problems/n-queens/",
         "requirements": "Place N queens on NxN chessboard without attacking"
-      },
-      {
-        "id": 484,
+    },
+    {
+        "id": 8,
         "leetcode_id": 37,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Sudoku Solver",
         "leetcode": "https://leetcode.com/problems/sudoku-solver/",
         "requirements": "Solve 9x9 Sudoku puzzle"
-      },
-      {
-        "id": 485,
+    },
+    {
+        "id": 9,
         "leetcode_id": 131,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Palindrome Partitioning",
         "leetcode": "https://leetcode.com/problems/palindrome-partitioning/",
         "requirements": "Partition string into palindrome substrings"
-      },
-      {
-        "id": 486,
+    },
+    {
+        "id": 10,
         "leetcode_id": 93,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Restore IP Addresses",
         "leetcode": "https://leetcode.com/problems/restore-ip-addresses/",
         "requirements": "Restore all valid IP addresses from string"
-      },
-      {
-        "id": 487,
+    },
+    {
+        "id": 11,
+        "leetcode_id": 40,
+        "difficulty": "Medium",
+        "problem": "Combination Sum II",
+        "leetcode": "https://leetcode.com/problems/combination-sum-ii/",
+        "requirements": "Find combinations that sum to target with no repeated elements"
+    },
+    {
+        "id": 12,
+        "leetcode_id": 47,
+        "difficulty": "Medium",
+        "problem": "Permutations II",
+        "leetcode": "https://leetcode.com/problems/permutations-ii/",
+        "requirements": "Generate all permutations with duplicates"
+    },
+    {
+        "id": 13,
+        "leetcode_id": 90,
+        "difficulty": "Medium",
+        "problem": "Subsets II",
+        "leetcode": "https://leetcode.com/problems/subsets-ii/",
+        "requirements": "Generate all subsets of array with duplicates"
+    },
+    {
+        "id": 14,
+        "leetcode_id": 473,
+        "difficulty": "Medium",
+        "problem": "Matchsticks to Square",
+        "leetcode": "https://leetcode.com/problems/matchsticks-to-square/",
+        "requirements": "Form a square with given matchsticks"
+    },
+    {
+        "id": 15,
+        "leetcode_id": 698,
+        "difficulty": "Medium",
+        "problem": "Partition to K Equal Sum Subsets",
+        "leetcode": "https://leetcode.com/problems/partition-to-k-equal-sum-subsets/",
+        "requirements": "Partition array into k equal sum subsets"
+    },
+    {
+        "id": 16,
         "leetcode_id": 784,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Letter Case Permutation",
         "leetcode": "https://leetcode.com/problems/letter-case-permutation/",
         "requirements": "Generate all possible case variations"
-      },
-      {
-        "id": 488,
-        "leetcode_id": 980,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Unique Paths III",
-        "leetcode": "https://leetcode.com/problems/unique-paths-iii/",
-        "requirements": "Find paths visiting all empty cells exactly once"
-      },
-      {
-        "id": 489,
-        "leetcode_id": 212,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Word Search II",
-        "leetcode": "https://leetcode.com/problems/word-search-ii/",
-        "requirements": "Find all words from dictionary in board"
-      },
-      {
-        "id": 490,
-        "leetcode_id": 52,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "N-Queens II",
-        "leetcode": "https://leetcode.com/problems/n-queens-ii/",
-        "requirements": "Count solutions to N-Queens problem"
-      },
-      {
-        "id": 491,
-        "leetcode_id": 10,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Regular Expression Matching",
-        "leetcode": "https://leetcode.com/problems/regular-expression-matching/",
-        "requirements": "Implement regex pattern matching"
-      },
-      {
-        "id": 492,
-        "leetcode_id": 140,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Word Break II",
-        "leetcode": "https://leetcode.com/problems/word-break-ii/",
-        "requirements": "Find all possible word break results"
-      },
-      {
-        "id": 493,
-        "leetcode_id": 44,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Wildcard Matching",
-        "leetcode": "https://leetcode.com/problems/wildcard-matching/",
-        "requirements": "Implement wildcard pattern matching"
-      },
-      {
-        "id": 494,
-        "leetcode_id": 301,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Remove Invalid Parentheses",
-        "leetcode": "https://leetcode.com/problems/remove-invalid-parentheses/",
-        "requirements": "Remove minimum number of parentheses for validity"
-      },
-      {
-        "id": 495,
-        "leetcode_id": 60,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Permutation Sequence",
-        "leetcode": "https://leetcode.com/problems/permutation-sequence/",
-        "requirements": "Find kth permutation"
-      },
-      {
-        "id": 496,
-        "leetcode_id": 216,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Combination Sum III",
-        "leetcode": "https://leetcode.com/problems/combination-sum-iii/",
-        "requirements": "Find k numbers that add up to n"
-      },
-      {
-        "id": 497,
-        "leetcode_id": 842,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Split Array into Fibonacci Sequence",
-        "leetcode": "https://leetcode.com/problems/split-array-into-fibonacci-sequence/",
-        "requirements": "Split string into Fibonacci sequence"
-      },
-      {
-        "id": 498,
-        "leetcode_id": 1219,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Path with Maximum Gold",
-        "leetcode": "https://leetcode.com/problems/path-with-maximum-gold/",
-        "requirements": "Collect maximum gold with path constraints"
-      },
-      {
-        "id": 499,
-        "leetcode_id": 306,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Additive Number",
-        "leetcode": "https://leetcode.com/problems/additive-number/",
-        "requirements": "Check if string can form additive sequence"
-      },
-      {
-        "id": 500,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Beautiful Arrangement",
-        "leetcode": "https://leetcode.com/problems/beautiful-arrangement/",
-        "leetcode_id": 526,
-        "requirements": "Count ways to arrange numbers with constraints"
-      },
-      {
-        "id": 501,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Matchsticks to Square",
-        "leetcode": "https://leetcode.com/problems/matchsticks-to-square/",
-        "leetcode_id": 473,
-        "requirements": "Form square with matchsticks"
-      },
-      {
-        "id": 502,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Partition to K Equal Sum Subsets",
-        "leetcode": "https://leetcode.com/problems/partition-to-k-equal-sum-subsets/",
-        "leetcode_id": 698,
-        "requirements": "Partition array into k equal sum subsets"
-      }
-    ]
+    }
+]
   },
   "Heap/Priority Queue": {
     "tip": "Heaps and priority queues are data structures that provide efficient access to the minimum or maximum element. They excel at problems involving finding the kth smallest/largest element, merging sorted lists, or scheduling tasks by priority. Look for problems involving 'top k elements', dynamic ordering, or where you need to repeatedly find and remove the minimum/maximum element.",
     "problems": [
-      {
-        "id": 503,
+    {
+        "id": 1,
         "leetcode_id": 215,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Kth Largest Element in an Array",
         "leetcode": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
         "requirements": "Find kth largest element using min heap"
-      },
-      {
-        "id": 504,
+    },
+    {
+        "id": 2,
         "leetcode_id": 347,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Top K Frequent Elements",
         "leetcode": "https://leetcode.com/problems/top-k-frequent-elements/",
         "requirements": "Find k most frequent elements using heap"
-      },
-      {
-        "id": 505,
+    },
+    {
+        "id": 3,
         "leetcode_id": 23,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Merge k Sorted Lists",
         "leetcode": "https://leetcode.com/problems/merge-k-sorted-lists/",
         "requirements": "Merge k sorted linked lists using priority queue"
-      },
-      {
-        "id": 506,
+    },
+    {
+        "id": 4,
         "leetcode_id": 295,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Find Median from Data Stream",
         "leetcode": "https://leetcode.com/problems/find-median-from-data-stream/",
         "requirements": "Design data structure for median with heaps"
-      },
-      {
-        "id": 507,
+    },
+    {
+        "id": 5,
         "leetcode_id": 973,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "K Closest Points to Origin",
         "leetcode": "https://leetcode.com/problems/k-closest-points-to-origin/",
         "requirements": "Find k closest points using max heap"
-      },
-      {
-        "id": 508,
+    },
+    {
+        "id": 6,
         "leetcode_id": 703,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Kth Largest Element in a Stream",
         "leetcode": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
         "requirements": "Design class to find kth largest element"
-      },
-      {
-        "id": 509,
-        "leetcode_id": 451,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Sort Characters By Frequency",
-        "leetcode": "https://leetcode.com/problems/sort-characters-by-frequency/",
-        "requirements": "Sort characters by decreasing frequency"
-      },
-      {
-        "id": 510,
+    },
+    {
+        "id": 7,
         "leetcode_id": 253,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Meeting Rooms II",
         "leetcode": "https://leetcode.com/problems/meeting-rooms-ii/",
         "requirements": "Find minimum meeting rooms required"
-      },
-      {
-        "id": 511,
-        "leetcode_id": 355,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Design Twitter",
-        "leetcode": "https://leetcode.com/problems/design-twitter/",
-        "requirements": "Design Twitter with news feed functionality"
-      },
-      {
-        "id": 512,
-        "leetcode_id": 373,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find K Pairs with Smallest Sums",
-        "leetcode": "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/",
-        "requirements": "Find k pairs with smallest sums"
-      },
-      {
-        "id": 513,
-        "leetcode_id": 378,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Kth Smallest Element in a Sorted Matrix",
-        "leetcode": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/",
-        "requirements": "Find kth smallest element in matrix"
-      },
-      {
-        "id": 514,
-        "leetcode_id": 264,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Ugly Number II",
-        "leetcode": "https://leetcode.com/problems/ugly-number-ii/",
-        "requirements": "Find nth ugly number using priority queue"
-      },
-      {
-        "id": 515,
+    },
+    {
+        "id": 8,
         "leetcode_id": 218,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "The Skyline Problem",
         "leetcode": "https://leetcode.com/problems/the-skyline-problem/",
         "requirements": "Find skyline formed by buildings"
-      },
-      {
-        "id": 516,
+    },
+    {
+        "id": 9,
         "leetcode_id": 621,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Task Scheduler",
         "leetcode": "https://leetcode.com/problems/task-scheduler/",
         "requirements": "Schedule tasks with cooling periods"
-      },
-      {
-        "id": 517,
-        "leetcode_id": 767,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Reorganize String",
-        "leetcode": "https://leetcode.com/problems/reorganize-string/",
-        "requirements": "Reorganize string so no adjacent chars are same"
-      },
-      {
-        "id": 518,
-        "leetcode_id": 692,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Top K Frequent Words",
-        "leetcode": "https://leetcode.com/problems/top-k-frequent-words/",
-        "requirements": "Find k most frequent words"
-      },
-      {
-        "id": 519,
-        "leetcode_id": 1046,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Last Stone Weight",
-        "leetcode": "https://leetcode.com/problems/last-stone-weight/",
-        "requirements": "Simulate stone smashing with max heap"
-      },
-      {
-        "id": 520,
-        "leetcode_id": 1642,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Furthest Building You Can Reach",
-        "leetcode": "https://leetcode.com/problems/furthest-building-you-can-reach/",
-        "requirements": "Maximize distance with ladders and bricks"
-      },
-      {
-        "id": 521,
-        "leetcode_id": 1675,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimize Deviation in Array",
-        "leetcode": "https://leetcode.com/problems/minimize-deviation-in-array/",
-        "requirements": "Minimize max-min difference with operations"
-      },
-      {
-        "id": 522,
-        "leetcode_id": 1753,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Score From Removing Stones",
-        "leetcode": "https://leetcode.com/problems/maximum-score-from-removing-stones/",
-        "requirements": "Maximize score by removing pairs of stones"
-      },
-      {
-        "id": 523,
-        "leetcode_id": 407,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Trapping Rain Water II",
-        "leetcode": "https://leetcode.com/problems/trapping-rain-water-ii/",
-        "requirements": "Find water trapped in 3D elevation map"
-      },
-      {
-        "id": 524,
-        "leetcode_id": 630,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Course Schedule III",
-        "leetcode": "https://leetcode.com/problems/course-schedule-iii/",
-        "requirements": "Maximum courses to take with deadlines"
-      },
-      {
-        "id": 525,
-        "leetcode_id": 857,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimum Cost to Hire K Workers",
-        "leetcode": "https://leetcode.com/problems/minimum-cost-to-hire-k-workers/",
-        "requirements": "Minimize cost while hiring k workers"
-      },
-      {
-        "id": 526,
+    },
+    {
+        "id": 10,
         "leetcode_id": 239,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Sliding Window Maximum",
         "leetcode": "https://leetcode.com/problems/sliding-window-maximum/",
         "requirements": "Find maximum in sliding window"
-      },
-      {
-        "id": 527,
-        "leetcode_id": 1792,
+    },
+    {
+        "id": 11,
+        "leetcode_id": 373,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Average Pass Ratio",
-        "leetcode": "https://leetcode.com/problems/maximum-average-pass-ratio/",
-        "requirements": "Maximize average pass ratio by assigning students"
-      },
-      {
-        "id": 528,
-        "leetcode_id": 1705,
+        "problem": "Find K Pairs with Smallest Sums",
+        "leetcode": "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/",
+        "requirements": "Find k pairs with smallest sums"
+    },
+    {
+        "id": 12,
+        "leetcode_id": 378,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Number of Eaten Apples",
-        "leetcode": "https://leetcode.com/problems/maximum-number-of-eaten-apples/",
-        "requirements": "Maximize apples eaten with expiration dates"
-      },
-      {
-        "id": 529,
-        "leetcode_id": 659,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Split Array into Consecutive Subsequences",
-        "leetcode": "https://leetcode.com/problems/split-array-into-consecutive-subsequences/",
-        "requirements": "Split array into consecutive subsequences of length >= 3"
-      },
-      {
-        "id": 530,
+        "problem": "Kth Smallest Element in a Sorted Matrix",
+        "leetcode": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/",
+        "requirements": "Find kth smallest element in matrix"
+    },
+    {
+        "id": 13,
         "leetcode_id": 871,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Minimum Number of Refueling Stops",
         "leetcode": "https://leetcode.com/problems/minimum-number-of-refueling-stops/",
         "requirements": "Minimize stops to reach destination"
-      },
-      {
-        "id": 531,
-        "leetcode_id": 1054,
+    },
+    {
+        "id": 14,
+        "leetcode_id": 1642,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Distant Barcodes",
-        "leetcode": "https://leetcode.com/problems/distant-barcodes/",
-        "requirements": "Rearrange barcodes so no two adjacent are same"
-      },
-      {
-        "id": 532,
-        "leetcode_id": 1882,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Process Tasks Using Servers",
-        "leetcode": "https://leetcode.com/problems/process-tasks-using-servers/",
-        "requirements": "Assign tasks to servers with priorities"
-      }
-    ]
+        "problem": "Furthest Building You Can Reach",
+        "leetcode": "https://leetcode.com/problems/furthest-building-you-can-reach/",
+        "requirements": "Maximize distance with ladders and bricks"
+    },
+    {
+        "id": 15,
+        "leetcode_id": 1675,
+        "difficulty": "Hard",
+        "problem": "Minimize Deviation in Array",
+        "leetcode": "https://leetcode.com/problems/minimize-deviation-in-array/",
+        "requirements": "Minimize max-min difference with operations"
+    }
+]
   },
   "Tries": {
     "tip": "Tries (prefix trees) are specialized tree structures optimized for retrieval operations on a dynamic set of strings. They excel at problems involving prefix matching, auto-completion, spell checking, and word dictionaries. Look for problems involving string searches, prefix operations, or when you need to efficiently store and query a large set of strings.",
