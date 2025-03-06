@@ -5032,6 +5032,7 @@ jsonData.problems.forEach(problem => {
 });
 
 // Create an "all" category that combines every problem (excluding "all" itself)
+// Create an "all" category that combines every problem (excluding "all" itself)
 problemDataByCategory.all = [];
 Object.keys(problemDataByCategory).forEach(cat => {
   if (cat !== 'all') {
@@ -5630,13 +5631,24 @@ function countByDifficulty(problems, difficulty) {
 
 // Update overall progress across categories (excluding "all")
 function updateOverallProgress() {
-  let total = 0, solved = 0;
+  const uniqueProblems = new Map();
+  let solved = 0;
+  
   Object.keys(problemDataByCategory).forEach(cat => {
     if (cat !== 'all') {
-      total += problemDataByCategory[cat].length;
-      solved += problemDataByCategory[cat].filter(p => p.status).length;
+      problemDataByCategory[cat].forEach(problem => {
+        // Only count each unique problem once
+        if (!uniqueProblems.has(problem.leetcode_id)) {
+          uniqueProblems.set(problem.leetcode_id, problem);
+          if (problem.status) {
+            solved++;
+          }
+        }
+      });
     }
   });
+  
+  const total = uniqueProblems.size;
   const percentage = total > 0 ? Math.round((solved / total) * 100) : 0;
   const circumference = 2 * Math.PI * 15;
   const offset = circumference - (percentage / 100) * circumference;
@@ -5656,6 +5668,7 @@ function updateOverallProgress() {
     `;
   }
 }
+
 document.addEventListener('DOMContentLoaded', function() {
   changeCategory('all');
   // Generate sidebar links dynamically
