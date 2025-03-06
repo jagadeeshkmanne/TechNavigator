@@ -45,16 +45,28 @@ auth.onAuthStateChanged((user) => {
     document.getElementById('auth-container').classList.add('signed-in');
     
     // Load user progress from Firebase
-    loadProgressFromFirebase();
+    loadProgressFromFirebase().then(() => {
+      // Reinitialize the grid after loading progress to ensure checkboxes appear
+      if (currentCategory) {
+        initializeGrid(currentCategory);
+        updateCategoryCounter(currentCategory);
+      }
+      updateOverallProgress();
+    });
   } else {
     // User signed out
     currentUser = null;
     document.getElementById('auth-container').classList.remove('signed-in');
     // Fallback to localStorage when logged out
     loadProblemStatuses();
-    changeCategory(currentCategory);
+    // Reinitialize grid without checkboxes
+    if (currentCategory) {
+      initializeGrid(currentCategory);
+      changeCategory(currentCategory);
+    }
   }
 });
+
 
 // Sign in with Google
 function signInWithGoogle() {
@@ -80,7 +92,7 @@ function signOut() {
 }
 
 async function loadProgressFromFirebase() {
-  if (!currentUser) return;
+  if (!currentUser) return Promise.resolve();
   
   try {
     // Get the user's progress document
@@ -153,10 +165,14 @@ async function loadProgressFromFirebase() {
         await saveProgressToFirebase(allProblems);
       }
     }
+    
+    return Promise.resolve();
   } catch (error) {
     console.error("Error loading progress from Firebase:", error);
+    return Promise.reject(error);
   }
 }
+
 // Save progress to Firebase
 async function saveProgressToFirebase(problems) {
   if (!currentUser) return;
@@ -5090,7 +5106,6 @@ function getFilteredProblems() {
 }
 
 // Save a problem's status - updated to use LeetCode ID across all categories
-// Save a problem's status - updated to ensure consistent global and category-level updates
 function saveProblemStatus(category, problemId, status) {
   if (!currentUser) {
     // If not logged in, do not store anything.
@@ -5114,6 +5129,9 @@ function saveProblemStatus(category, problemId, status) {
 
         // Update localStorage for this category
         localStorage.setItem(`tech-navigator-${cat}-progress`, JSON.stringify(problemStatuses[cat]));
+        
+        // Update category counter immediately for this category
+        updateCategoryCounter(cat);
       }
     });
   });
@@ -5123,11 +5141,7 @@ function saveProblemStatus(category, problemId, status) {
     gridApi.refreshCells();
   }
 
-  // Update grid data for the current category
-  updateGrid();
-
-  // Update category and overall progress counters
-  updateCategoryCounter(currentCategory);
+  // Update overall progress counter
   updateOverallProgress();
 
   // If signed in, collect all problem statuses and save to Firebase
