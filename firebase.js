@@ -7196,22 +7196,6 @@ function initializeGrid(category) {
         const difficultyOrder = { Easy: 1, Medium: 2, Hard: 3 };
         return difficultyOrder[valueA] - difficultyOrder[valueB];
       }
-    },
-    {
-      headerName: 'Frequency',
-      field: 'frequency',
-      width: 120,
-      cellRenderer: frequencyCellRenderer,
-      filter: true,
-      sortable: true,
-      suppressSizeToFit: true,
-      headerClass: 'ag-center-header',
-      sort: 'desc',
-      sortingOrder: ['desc', 'asc', null],
-      comparator: (valueA, valueB) => {
-        const frequencyOrder = { High: 1, Medium: 2, Low: 3 };
-        return frequencyOrder[valueB] - frequencyOrder[valueA];
-      }
     }
   ];
   
