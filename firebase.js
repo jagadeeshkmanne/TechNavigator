@@ -5034,9 +5034,26 @@ jsonData.problems.forEach(problem => {
 // Create an "all" category that combines every problem (excluding "all" itself)
 // Create an "all" category that combines every problem (excluding "all" itself)
 problemDataByCategory.all = [];
+const seenLeetCodeIds = new Set();
+
 Object.keys(problemDataByCategory).forEach(cat => {
   if (cat !== 'all') {
-    problemDataByCategory.all = problemDataByCategory.all.concat(problemDataByCategory[cat]);
+    problemDataByCategory[cat].forEach(problem => {
+      if (!seenLeetCodeIds.has(problem.leetcode_id)) {
+        seenLeetCodeIds.add(problem.leetcode_id);
+        // Create a copy of the problem to avoid reference issues
+        const problemCopy = { ...problem };
+        // We'll track which categories this problem belongs to for filtering purposes
+        problemCopy.categories_list = [cat];
+        problemDataByCategory.all.push(problemCopy);
+      } else {
+        // If we've seen this problem before, add this category to its categories list
+        const existingProblem = problemDataByCategory.all.find(p => p.leetcode_id === problem.leetcode_id);
+        if (existingProblem && existingProblem.categories_list && !existingProblem.categories_list.includes(cat)) {
+          existingProblem.categories_list.push(cat);
+        }
+      }
+    });
   }
 });
 
@@ -5118,7 +5135,7 @@ function saveProblemStatus(category, problemId, status) {
     const allProblems = {};
     const processedIds = new Set();
     
-    Object.keys(problemDataByCategory).forEach(cat => {
+    Object.keys(problemStatuses).forEach(cat => {
       if (cat === 'all') return;
       
       Object.keys(problemStatuses[cat] || {}).forEach(probId => {
@@ -5160,8 +5177,9 @@ function getStatusForCategory(category) {
 function updateCategoryCounter(category) {
   if (!problemDataByCategory[category]) return;
   
-  const total = problemDataByCategory[category].length;
-  const solved = problemDataByCategory[category].filter(p => p.status).length;
+  const problems = problemDataByCategory[category];
+  const total = problems.length;
+  const solved = problems.filter(p => p.status).length;
   const percentage = total > 0 ? Math.round((solved / total) * 100) : 0;
 
   // Find the corresponding nav progress element
@@ -5631,33 +5649,24 @@ function countByDifficulty(problems, difficulty) {
 
 // Update overall progress across categories (excluding "all")
 function updateOverallProgress() {
-  const uniqueProblems = new Map();
-  let solved = 0;
+  // Since we've already ensured uniqueness in the "all" category,
+  // we can simply use that for our counts
+  const total = problemDataByCategory.all.length;
+  const solved = problemDataByCategory.all.filter(p => p.status).length;
   
-  Object.keys(problemDataByCategory).forEach(cat => {
-    if (cat !== 'all') {
-      problemDataByCategory[cat].forEach(problem => {
-        // Only count each unique problem once
-        if (!uniqueProblems.has(problem.leetcode_id)) {
-          uniqueProblems.set(problem.leetcode_id, problem);
-          if (problem.status) {
-            solved++;
-          }
-        }
-      });
-    }
-  });
-  
-  const total = uniqueProblems.size;
   const percentage = total > 0 ? Math.round((solved / total) * 100) : 0;
   const circumference = 2 * Math.PI * 15;
   const offset = circumference - (percentage / 100) * circumference;
+  
   const progressCircle = document.getElementById('overall-progress');
   if (progressCircle) {
     progressCircle.style.strokeDasharray = circumference;
     progressCircle.style.strokeDashoffset = offset;
   }
+  
   document.getElementById('overall-progress-text').textContent = `${percentage}% Completed`;
+  
+  // Update the nav progress for "all" category separately
   const allNavProgress = document.getElementById('all-nav-progress');
   if (allNavProgress) {
     allNavProgress.innerHTML = `
