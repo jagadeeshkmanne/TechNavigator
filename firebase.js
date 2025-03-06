@@ -7100,9 +7100,6 @@ function changeCategory(category) {
   // Show category tip if available
   updateCategoryTip(category);
   
-  // Reset filters explicitly
-  document.getElementById('difficulty-filter').value = 'all';
-  document.getElementById('frequency-filter').value = 'all';
 
   // Initialize grid for the category
   initializeGrid(category);
@@ -7313,9 +7310,6 @@ function changeCategory(category) {
   // Show category tip if available
   updateCategoryTip(category);
   
-  // Reset filters explicitly
-  document.getElementById('difficulty-filter').value = 'all';
-  document.getElementById('frequency-filter').value = 'all';
 
   // Reinitialize grid for the category
   initializeGrid(category);
@@ -7573,9 +7567,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   updateOverallProgress();
   
-  // Set up filters
-  document.getElementById('difficulty-filter').addEventListener('change', applyFilters);
-  document.getElementById('frequency-filter').addEventListener('change', applyFilters);
   
   initializeGrid('all');
   changeCategory('all');
