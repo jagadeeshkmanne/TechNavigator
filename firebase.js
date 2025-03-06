@@ -2895,3678 +2895,1821 @@ const CATEGORIES_DATA = {
   "Tries": {
     "tip": "Tries (prefix trees) are specialized tree structures optimized for retrieval operations on a dynamic set of strings. They excel at problems involving prefix matching, auto-completion, spell checking, and word dictionaries. Look for problems involving string searches, prefix operations, or when you need to efficiently store and query a large set of strings.",
     "problems": [
-      {
-        "id": 533,
+    {
+        "id": 1,
         "leetcode_id": 208,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Implement Trie (Prefix Tree)",
         "leetcode": "https://leetcode.com/problems/implement-trie-prefix-tree/",
         "requirements": "Implement a basic trie with insert, search, and startsWith operations"
-      },
-      {
-        "id": 534,
+    },
+    {
+        "id": 2,
         "leetcode_id": 211,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Design Add and Search Words Data Structure",
         "leetcode": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
         "requirements": "Design trie supporting wildcard search"
-      },
-      {
-        "id": 535,
+    },
+    {
+        "id": 3,
         "leetcode_id": 212,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Word Search II",
         "leetcode": "https://leetcode.com/problems/word-search-ii/",
         "requirements": "Find words from dictionary in a board using trie"
-      },
-      {
-        "id": 536,
+    },
+    {
+        "id": 4,
         "leetcode_id": 1023,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Camelcase Matching",
         "leetcode": "https://leetcode.com/problems/camelcase-matching/",
         "requirements": "Check if query matches pattern with additional lowercase letters"
-      },
-      {
-        "id": 537,
+    },
+    {
+        "id": 5,
         "leetcode_id": 648,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Replace Words",
         "leetcode": "https://leetcode.com/problems/replace-words/",
         "requirements": "Replace words with their root in a sentence"
-      },
-      {
-        "id": 538,
+    },
+    {
+        "id": 6,
         "leetcode_id": 677,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Map Sum Pairs",
         "leetcode": "https://leetcode.com/problems/map-sum-pairs/",
         "requirements": "Get sum of values with given prefix"
-      },
-      {
-        "id": 539,
+    },
+    {
+        "id": 7,
         "leetcode_id": 720,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Longest Word in Dictionary",
         "leetcode": "https://leetcode.com/problems/longest-word-in-dictionary/",
         "requirements": "Find longest word built one character at a time"
-      },
-      {
-        "id": 540,
+    },
+    {
+        "id": 8,
         "leetcode_id": 1268,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Search Suggestions System",
         "leetcode": "https://leetcode.com/problems/search-suggestions-system/",
         "requirements": "Implement search autocomplete system"
-      },
-      {
-        "id": 541,
+    },
+    {
+        "id": 9,
         "leetcode_id": 745,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Prefix and Suffix Search",
         "leetcode": "https://leetcode.com/problems/prefix-and-suffix-search/",
         "requirements": "Design structure for prefix and suffix search"
-      },
-      {
-        "id": 542,
+    },
+    {
+        "id": 10,
         "leetcode_id": 676,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Implement Magic Dictionary",
         "leetcode": "https://leetcode.com/problems/implement-magic-dictionary/",
         "requirements": "Search words with exactly one character replaced"
-      },
-      {
-        "id": 543,
+    },
+    {
+        "id": 11,
         "leetcode_id": 1032,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Stream of Characters",
         "leetcode": "https://leetcode.com/problems/stream-of-characters/",
         "requirements": "Query if stream suffix is in word list"
-      },
-      {
-        "id": 544,
+    },
+    {
+        "id": 12,
         "leetcode_id": 692,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Top K Frequent Words",
         "leetcode": "https://leetcode.com/problems/top-k-frequent-words/",
         "requirements": "Find k most frequent words using trie and heap"
-      },
-      {
-        "id": 545,
+    },
+    {
+        "id": 13,
         "leetcode_id": 1065,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Index Pairs of a String",
         "leetcode": "https://leetcode.com/problems/index-pairs-of-a-string/",
         "requirements": "Find start/end indices of all words from dictionary in text"
-      },
-      {
-        "id": 546,
+    },
+    {
+        "id": 14,
         "leetcode_id": 642,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Design Search Autocomplete System",
         "leetcode": "https://leetcode.com/problems/design-search-autocomplete-system/",
         "requirements": "Design system showing top searches as you type"
-      },
-      {
-        "id": 547,
-        "leetcode_id": 588,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Design In-Memory File System",
-        "leetcode": "https://leetcode.com/problems/design-in-memory-file-system/",
-        "requirements": "Design file system with directories and files"
-      },
-      {
-        "id": 548,
-        "leetcode_id": 425,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Word Squares",
-        "leetcode": "https://leetcode.com/problems/word-squares/",
-        "requirements": "Form word squares from given words"
-      },
-      {
-        "id": 549,
+    },
+    {
+        "id": 15,
         "leetcode_id": 472,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Concatenated Words",
         "leetcode": "https://leetcode.com/problems/concatenated-words/",
         "requirements": "Find words that can be formed by concatenating other words"
-      },
-      {
-        "id": 550,
-        "leetcode_id": 820,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Short Encoding of Words",
-        "leetcode": "https://leetcode.com/problems/short-encoding-of-words/",
-        "requirements": "Find shortest string that can encode all words"
-      },
-      {
-        "id": 551,
+    },
+    {
+        "id": 16,
         "leetcode_id": 336,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Palindrome Pairs",
         "leetcode": "https://leetcode.com/problems/palindrome-pairs/",
         "requirements": "Find pairs of words that form palindromes"
-      },
-      {
-        "id": 552,
-        "leetcode_id": 1233,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Remove Sub-Folders from the Filesystem",
-        "leetcode": "https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/",
-        "requirements": "Remove all sub-folders from file system"
-      },
-      {
-        "id": 553,
-        "leetcode_id": 1166,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Design File System",
-        "leetcode": "https://leetcode.com/problems/design-file-system/",
-        "requirements": "Create new paths and retrieve file values"
-      },
-      {
-        "id": 554,
-        "leetcode_id": 1804,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Implement Trie II (Prefix Tree)",
-        "leetcode": "https://leetcode.com/problems/implement-trie-ii-prefix-tree/",
-        "requirements": "Implement trie with count operations"
-      },
-      {
-        "id": 555,
-        "leetcode_id": 1948,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Delete Duplicate Folders in System",
-        "leetcode": "https://leetcode.com/problems/delete-duplicate-folders-in-system/",
-        "requirements": "Delete folders with identical structures"
-      },
-      {
-        "id": 556,
-        "leetcode_id": 2135,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Count Words Obtained After Adding a Letter",
-        "leetcode": "https://leetcode.com/problems/count-words-obtained-after-adding-a-letter/",
-        "requirements": "Count target words formable by adding one letter to starter words"
-      },
-      {
-        "id": 557,
-        "leetcode_id": 527,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Word Abbreviation",
-        "leetcode": "https://leetcode.com/problems/word-abbreviation/",
-        "requirements": "Generate unique abbreviations for words"
-      },
-      {
-        "id": 558,
-        "leetcode_id": 1938,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Maximum Genetic Difference Query",
-        "leetcode": "https://leetcode.com/problems/maximum-genetic-difference-query/",
-        "requirements": "Find maximum XOR difference for each query using bit trie"
-      },
-      {
-        "id": 559,
-        "leetcode_id": 440,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "K-th Smallest in Lexicographical Order",
-        "leetcode": "https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/",
-        "requirements": "Find kth number in lexicographical order"
-      },
-      {
-        "id": 560,
-        "leetcode_id": 1707,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Maximum XOR With an Element From Array",
-        "leetcode": "https://leetcode.com/problems/maximum-xor-with-an-element-from-array/",
-        "requirements": "Find maximum XOR for queries with constraints"
-      },
-      {
-        "id": 561,
-        "leetcode_id": 2416,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Sum of Prefix Scores of Strings",
-        "leetcode": "https://leetcode.com/problems/sum-of-prefix-scores-of-strings/",
-        "requirements": "Calculate sum of counts of prefixes"
-      },
-      {
-        "id": 562,
-        "leetcode_id": 1803,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count Pairs With XOR in a Range",
-        "leetcode": "https://leetcode.com/problems/count-pairs-with-xor-in-a-range/",
-        "requirements": "Count pairs with XOR in given range using bit trie"
-      }
-    ]
+    }
+]
   },
   "Graphs": {
     "tip": "Graphs represent connections between objects and are used to model networks, relationships, and systems. This section focuses on basic graph traversal (DFS/BFS) and fundamental operations on graph structures. Look for problems involving connected components, simple path finding, and basic graph properties.",
     "problems": [
-      {
-        "id": 563,
-        "leetcode_id": 200,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Number of Islands",
-        "leetcode": "https://leetcode.com/problems/number-of-islands/",
-        "requirements": "Count connected land cells in grid using DFS/BFS"
-      },
-      {
-        "id": 564,
+    {
+        "id": 1,
         "leetcode_id": 133,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Clone Graph",
         "leetcode": "https://leetcode.com/problems/clone-graph/",
         "requirements": "Create deep copy of graph using DFS/BFS"
-      },
-      {
-        "id": 565,
+    },
+    {
+        "id": 2,
         "leetcode_id": 695,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Max Area of Island",
         "leetcode": "https://leetcode.com/problems/max-area-of-island/",
         "requirements": "Find largest connected component in grid"
-      },
-      {
-        "id": 566,
+    },
+    {
+        "id": 3,
         "leetcode_id": 733,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Flood Fill",
         "leetcode": "https://leetcode.com/problems/flood-fill/",
         "requirements": "Fill connected component with new color"
-      },
-      {
-        "id": 567,
+    },
+    {
+        "id": 4,
         "leetcode_id": 797,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "All Paths From Source to Target",
         "leetcode": "https://leetcode.com/problems/all-paths-from-source-to-target/",
         "requirements": "Find all paths from node 0 to node n-1 in DAG"
-      },
-      {
-        "id": 568,
+    },
+    {
+        "id": 5,
         "leetcode_id": 841,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Keys and Rooms",
         "leetcode": "https://leetcode.com/problems/keys-and-rooms/",
         "requirements": "Check if all rooms can be visited"
-      },
-      {
-        "id": 569,
+    },
+    {
+        "id": 6,
         "leetcode_id": 997,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Find the Town Judge",
         "leetcode": "https://leetcode.com/problems/find-the-town-judge/",
         "requirements": "Find node with in-degree n-1 and out-degree 0"
-      },
-      {
-        "id": 570,
-        "leetcode_id": 1059,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "All Paths from Source Lead to Destination",
-        "leetcode": "https://leetcode.com/problems/all-paths-from-source-lead-to-destination/",
-        "requirements": "Check if all paths lead to destination"
-      },
-      {
-        "id": 571,
+    },
+    {
+        "id": 7,
         "leetcode_id": 1971,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Find if Path Exists in Graph",
         "leetcode": "https://leetcode.com/problems/find-if-path-exists-in-graph/",
         "requirements": "Check if path exists between two nodes"
-      },
-      {
-        "id": 572,
+    },
+    {
+        "id": 8,
         "leetcode_id": 1466,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Reorder Routes to Make All Paths Lead to the City Zero",
         "leetcode": "https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/",
         "requirements": "Count edges to reorient in a tree"
-      },
-      {
-        "id": 573,
-        "leetcode_id": 1791,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Find Center of Star Graph",
-        "leetcode": "https://leetcode.com/problems/find-center-of-star-graph/",
-        "requirements": "Find node connected to all others"
-      },
-      {
-        "id": 574,
+    },
+    {
+        "id": 9,
         "leetcode_id": 1306,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Jump Game III",
         "leetcode": "https://leetcode.com/problems/jump-game-iii/",
         "requirements": "Check if zero can be reached by jumping"
-      },
-      {
-        "id": 575,
+    },
+    {
+        "id": 10,
         "leetcode_id": 690,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Employee Importance",
         "leetcode": "https://leetcode.com/problems/employee-importance/",
         "requirements": "Calculate total importance of employees"
-      },
-      {
-        "id": 576,
+    },
+    {
+        "id": 11,
         "leetcode_id": 1267,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Count Servers that Communicate",
         "leetcode": "https://leetcode.com/problems/count-servers-that-communicate/",
         "requirements": "Count servers that connect to others"
-      },
-      {
-        "id": 577,
+    },
+    {
+        "id": 12,
         "leetcode_id": 1557,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Minimum Number of Vertices to Reach All Nodes",
         "leetcode": "https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/",
         "requirements": "Find nodes with zero in-degree in DAG"
-      },
-      {
-        "id": 578,
+    },
+    {
+        "id": 13,
         "leetcode_id": 2192,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "All Ancestors of a Node in a Directed Acyclic Graph",
         "leetcode": "https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/",
         "requirements": "Find all ancestors of each node in DAG"
-      },
-      {
-        "id": 579,
+    },
+    {
+        "id": 14,
         "leetcode_id": 1436,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Destination City",
         "leetcode": "https://leetcode.com/problems/destination-city/",
         "requirements": "Find city with no outgoing path"
-      },
-      {
-        "id": 580,
-        "leetcode_id": 1391,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Check if There is a Valid Path in a Grid",
-        "leetcode": "https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/",
-        "requirements": "Check if there is a path from top-left to bottom-right following street directions"
-      },
-      {
-        "id": 581,
-        "leetcode_id": 2115,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find All Possible Recipes from Given Supplies",
-        "leetcode": "https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/",
-        "requirements": "Find feasible recipes based on ingredients"
-      },
-      {
-        "id": 582,
+    },
+    {
+        "id": 15,
         "leetcode_id": 1202,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Smallest String With Swaps",
         "leetcode": "https://leetcode.com/problems/smallest-string-with-swaps/",
         "requirements": "Find lexicographically smallest string after swaps using basic graph traversal"
-      }
-    ]
+    }
+]
   },
   "Graph DFS": {
     "tip": "Graph DFS (Depth-First Search) explores a graph by going as deep as possible along each branch before backtracking. It's particularly useful for problems involving path finding, cycle detection, connected components, and topological sorting. Look for problems where you need to thoroughly explore each branch, find all possible paths, or analyze graph structures recursively.",
     "problems": [
-      {
-        "id": 583,
+    {
+        "id": 1,
         "leetcode_id": 200,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Number of Islands",
         "leetcode": "https://leetcode.com/problems/number-of-islands/",
         "requirements": "Count connected land cells in grid using DFS"
-      },
-      {
-        "id": 584,
+    },
+    {
+        "id": 2,
         "leetcode_id": 133,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Clone Graph",
         "leetcode": "https://leetcode.com/problems/clone-graph/",
         "requirements": "Create deep copy of graph using DFS"
-      },
-      {
-        "id": 585,
+    },
+    {
+        "id": 3,
         "leetcode_id": 695,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Max Area of Island",
         "leetcode": "https://leetcode.com/problems/max-area-of-island/",
         "requirements": "Find largest connected component in grid using DFS"
-      },
-      {
-        "id": 586,
+    },
+    {
+        "id": 4,
         "leetcode_id": 733,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Flood Fill",
         "leetcode": "https://leetcode.com/problems/flood-fill/",
         "requirements": "Fill connected component with new color using DFS"
-      },
-      {
-        "id": 587,
+    },
+    {
+        "id": 5,
         "leetcode_id": 797,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "All Paths From Source to Target",
         "leetcode": "https://leetcode.com/problems/all-paths-from-source-to-target/",
         "requirements": "Find all paths from node 0 to node n-1 in DAG using DFS"
-      },
-      {
-        "id": 588,
+    },
+    {
+        "id": 6,
         "leetcode_id": 841,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Keys and Rooms",
         "leetcode": "https://leetcode.com/problems/keys-and-rooms/",
         "requirements": "Check if all rooms can be visited using DFS"
-      },
-      {
-        "id": 589,
+    },
+    {
+        "id": 7,
         "leetcode_id": 1254,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Number of Closed Islands",
         "leetcode": "https://leetcode.com/problems/number-of-closed-islands/",
         "requirements": "Count islands not touching boundary using DFS"
-      },
-      {
-        "id": 590,
+    },
+    {
+        "id": 8,
         "leetcode_id": 1020,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Number of Enclaves",
         "leetcode": "https://leetcode.com/problems/number-of-enclaves/",
         "requirements": "Count land cells not connected to boundary using DFS"
-      },
-      {
-        "id": 591,
+    },
+    {
+        "id": 9,
         "leetcode_id": 79,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Word Search",
         "leetcode": "https://leetcode.com/problems/word-search/",
         "requirements": "Search for word in grid using DFS"
-      },
-      {
-        "id": 592,
+    },
+    {
+        "id": 10,
         "leetcode_id": 130,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Surrounded Regions",
         "leetcode": "https://leetcode.com/problems/surrounded-regions/",
         "requirements": "Capture regions surrounded by X using DFS"
-      },
-      {
-        "id": 593,
+    },
+    {
+        "id": 11,
         "leetcode_id": 417,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Pacific Atlantic Water Flow",
         "leetcode": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
         "requirements": "Find cells with paths to both oceans using DFS"
-      },
-      {
-        "id": 594,
+    },
+    {
+        "id": 12,
         "leetcode_id": 1559,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Detect Cycles in 2D Grid",
         "leetcode": "https://leetcode.com/problems/detect-cycles-in-2d-grid/",
         "requirements": "Check if grid contains cycle using DFS"
-      },
-      {
-        "id": 595,
+    },
+    {
+        "id": 13,
         "leetcode_id": 547,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Number of Provinces",
         "leetcode": "https://leetcode.com/problems/number-of-provinces/",
         "requirements": "Count connected components in graph using DFS"
-      },
-      {
-        "id": 596,
-        "leetcode_id": 1992,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find All Groups of Farmland",
-        "leetcode": "https://leetcode.com/problems/find-all-groups-of-farmland/",
-        "requirements": "Find all rectangular farmlands using DFS"
-      },
-      {
-        "id": 597,
+    },
+    {
+        "id": 14,
         "leetcode_id": 1376,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Time Needed to Inform All Employees",
         "leetcode": "https://leetcode.com/problems/time-needed-to-inform-all-employees/",
         "requirements": "Find maximum time to inform all employees using DFS"
-      },
-      {
-        "id": 598,
-        "leetcode_id": 1391,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Check if There is a Valid Path in a Grid",
-        "leetcode": "https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/",
-        "requirements": "Check if there is a path from top-left to bottom-right using DFS"
-      },
-      {
-        "id": 599,
+    },
+    {
+        "id": 15,
         "leetcode_id": 529,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Minesweeper",
         "leetcode": "https://leetcode.com/problems/minesweeper/",
         "requirements": "Implement Minesweeper game using DFS"
-      },
-      {
-        "id": 600,
-        "leetcode_id": 1034,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Coloring A Border",
-        "leetcode": "https://leetcode.com/problems/coloring-a-border/",
-        "requirements": "Color border of connected component using DFS"
-      },
-      {
-        "id": 601,
-        "leetcode_id": 1466,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Reorder Routes to Make All Paths Lead to the City Zero",
-        "leetcode": "https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/",
-        "requirements": "Count edges to reorient in a tree using DFS"
-      },
-      {
-        "id": 602,
-        "leetcode_id": 1905,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Count Sub Islands",
-        "leetcode": "https://leetcode.com/problems/count-sub-islands/",
-        "requirements": "Count islands that are subsets of another grid using DFS"
-      },
-      {
-        "id": 603,
-        "leetcode_id": 1239,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Length of a Concatenated String with Unique Characters",
-        "leetcode": "https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/",
-        "requirements": "Find maximum length string with unique characters using DFS"
-      },
-      {
-        "id": 604,
-        "leetcode_id": 721,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Accounts Merge",
-        "leetcode": "https://leetcode.com/problems/accounts-merge/",
-        "requirements": "Merge accounts with common emails using DFS"
-      },
-      {
-        "id": 605,
+    },
+    {
+        "id": 16,
         "leetcode_id": 1306,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Jump Game III",
         "leetcode": "https://leetcode.com/problems/jump-game-iii/",
         "requirements": "Check if zero can be reached using DFS"
-      },
-      {
-        "id": 606,
-        "leetcode_id": 694,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Number of Distinct Islands",
-        "leetcode": "https://leetcode.com/problems/number-of-distinct-islands/",
-        "requirements": "Count distinct island shapes using DFS and hashing"
-      },
-      {
-        "id": 607,
-        "leetcode_id": 1102,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Path With Maximum Minimum Value",
-        "leetcode": "https://leetcode.com/problems/path-with-maximum-minimum-value/",
-        "requirements": "Find path with maximum minimum value using DFS and binary search"
-      },
-      {
-        "id": 608,
-        "leetcode_id": 339,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Nested List Weight Sum",
-        "leetcode": "https://leetcode.com/problems/nested-list-weight-sum/",
-        "requirements": "Calculate weighted sum of nested integers using DFS"
-      },
-      {
-        "id": 609,
-        "leetcode_id": 1315,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Sum of Nodes with Even-Valued Grandparent",
-        "leetcode": "https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/",
-        "requirements": "Sum nodes with even-valued grandparents using DFS"
-      },
-      {
-        "id": 610,
-        "leetcode_id": 1319,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Number of Operations to Make Network Connected",
-        "leetcode": "https://leetcode.com/problems/number-of-operations-to-make-network-connected/",
-        "requirements": "Find minimum edges to connect all components using DFS"
-      },
-      {
-        "id": 611,
-        "leetcode_id": 1706,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Where Will the Ball Fall",
-        "leetcode": "https://leetcode.com/problems/where-will-the-ball-fall/",
-        "requirements": "Determine where balls will fall in a grid using DFS"
-      },
-      {
-        "id": 612,
-        "leetcode_id": 690,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Employee Importance",
-        "leetcode": "https://leetcode.com/problems/employee-importance/",
-        "requirements": "Calculate total importance of employees using DFS"
-      }
-    ]
+    }
+]
   },     
   "Graph BFS": {
     "tip": "Graph BFS (Breadth-First Search) explores a graph level by level, visiting all neighbors of a node before moving to the next level. It's ideal for finding the shortest path in unweighted graphs and solving problems where distance or levels from a source are important. Look for problems requiring the minimum number of steps or level-by-level processing.",
     "problems": [
-      {
-        "id": 613,
-        "leetcode_id": 200,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Number of Islands",
-        "leetcode": "https://leetcode.com/problems/number-of-islands/",
-        "requirements": "Count connected land cells in grid using BFS"
-      },
-      {
-        "id": 614,
+    {
+        "id": 1,
         "leetcode_id": 133,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Clone Graph",
         "leetcode": "https://leetcode.com/problems/clone-graph/",
         "requirements": "Create deep copy of graph using BFS"
-      },
-      {
-        "id": 615,
+    },
+    {
+        "id": 2,
         "leetcode_id": 994,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Rotting Oranges",
         "leetcode": "https://leetcode.com/problems/rotting-oranges/",
         "requirements": "Find minimum time for all oranges to rot using BFS"
-      },
-      {
-        "id": 616,
+    },
+    {
+        "id": 3,
         "leetcode_id": 733,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Flood Fill",
         "leetcode": "https://leetcode.com/problems/flood-fill/",
         "requirements": "Fill connected component with new color using BFS"
-      },
-      {
-        "id": 617,
+    },
+    {
+        "id": 4,
         "leetcode_id": 1091,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Shortest Path in Binary Matrix",
         "leetcode": "https://leetcode.com/problems/shortest-path-in-binary-matrix/",
         "requirements": "Find shortest path from top-left to bottom-right using BFS"
-      },
-      {
-        "id": 618,
+    },
+    {
+        "id": 5,
         "leetcode_id": 934,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Shortest Bridge",
         "leetcode": "https://leetcode.com/problems/shortest-bridge/",
         "requirements": "Find shortest bridge connecting two islands using BFS"
-      },
-      {
-        "id": 619,
+    },
+    {
+        "id": 6,
         "leetcode_id": 127,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Word Ladder",
         "leetcode": "https://leetcode.com/problems/word-ladder/",
         "requirements": "Find shortest transformation sequence using BFS"
-      },
-      {
-        "id": 620,
+    },
+    {
+        "id": 7,
         "leetcode_id": 752,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Open the Lock",
         "leetcode": "https://leetcode.com/problems/open-the-lock/",
         "requirements": "Find minimum rotations to unlock using BFS"
-      },
-      {
-        "id": 621,
+    },
+    {
+        "id": 8,
         "leetcode_id": 542,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "01 Matrix",
         "leetcode": "https://leetcode.com/problems/01-matrix/",
         "requirements": "Find distance of each cell to nearest 0 using BFS"
-      },
-      {
-        "id": 622,
+    },
+    {
+        "id": 9,
         "leetcode_id": 1162,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "As Far from Land as Possible",
         "leetcode": "https://leetcode.com/problems/as-far-from-land-as-possible/",
         "requirements": "Find maximum distance from land using BFS"
-      },
-      {
-        "id": 623,
+    },
+    {
+        "id": 10,
         "leetcode_id": 909,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Snakes and Ladders",
         "leetcode": "https://leetcode.com/problems/snakes-and-ladders/",
         "requirements": "Find minimum moves to reach end using BFS"
-      },
-      {
-        "id": 624,
+    },
+    {
+        "id": 11,
         "leetcode_id": 1926,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Nearest Exit from Entrance in Maze",
         "leetcode": "https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/",
         "requirements": "Find nearest exit from maze using BFS"
-      },
-      {
-        "id": 625,
+    },
+    {
+        "id": 12,
         "leetcode_id": 286,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Walls and Gates",
         "leetcode": "https://leetcode.com/problems/walls-and-gates/",
         "requirements": "Fill rooms with distance to nearest gate using BFS"
-      },
-      {
-        "id": 626,
+    },
+    {
+        "id": 13,
         "leetcode_id": 1306,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Jump Game III",
         "leetcode": "https://leetcode.com/problems/jump-game-iii/",
         "requirements": "Check if zero can be reached using BFS"
-      },
-      {
-        "id": 627,
-        "leetcode_id": 1730,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Shortest Path to Get Food",
-        "leetcode": "https://leetcode.com/problems/shortest-path-to-get-food/",
-        "requirements": "Find shortest path to food using BFS"
-      },
-      {
-        "id": 628,
+    },
+    {
+        "id": 14,
         "leetcode_id": 841,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Keys and Rooms",
         "leetcode": "https://leetcode.com/problems/keys-and-rooms/",
         "requirements": "Check if all rooms can be visited using BFS"
-      },
-      {
-        "id": 629,
-        "leetcode_id": 1992,
+    },
+    {
+        "id": 15,
+        "leetcode_id": 1730,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find All Groups of Farmland",
-        "leetcode": "https://leetcode.com/problems/find-all-groups-of-farmland/",
-        "requirements": "Find all rectangular farmlands using BFS"
-      },
-      {
-        "id": 630,
+        "problem": "Shortest Path to Get Food",
+        "leetcode": "https://leetcode.com/problems/shortest-path-to-get-food/",
+        "requirements": "Find shortest path to food using BFS"
+    },
+    {
+        "id": 16,
         "leetcode_id": 433,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Minimum Genetic Mutation",
         "leetcode": "https://leetcode.com/problems/minimum-genetic-mutation/",
         "requirements": "Find minimum mutations to reach target gene using BFS"
-      },
-      {
-        "id": 631,
-        "leetcode_id": 1654,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Jumps to Reach Home",
-        "leetcode": "https://leetcode.com/problems/minimum-jumps-to-reach-home/",
-        "requirements": "Find minimum jumps to reach target position using BFS"
-      },
-      {
-        "id": 632,
-        "leetcode_id": 1740,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find Distance in a Binary Tree",
-        "leetcode": "https://leetcode.com/problems/find-distance-in-a-binary-tree/",
-        "requirements": "Find distance between two nodes in binary tree using BFS"
-      }
-    ]
+    }
+]
   },
   "Union Find": {
     "tip": "Union Find (also known as Disjoint Set) is a data structure for efficiently tracking a partition of elements into disjoint subsets. It's ideal for problems involving grouping elements, finding connected components, detecting cycles in undirected graphs, or dynamically tracking element relationships. Look for problems that involve merging elements into sets, determining if two elements belong to the same group, or situations where relationships between elements can be represented as an equivalence relation (reflexive, symmetric, transitive).",
     "problems": [
-      {
-        "id": 582,
+    {
+        "id": 1,
         "leetcode_id": 547,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Number of Provinces",
         "leetcode": "https://leetcode.com/problems/number-of-provinces/",
         "requirements": "Finding connected components in a graph using Union Find"
-      },
-      {
-        "id": 583,
+    },
+    {
+        "id": 2,
         "leetcode_id": 200,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Number of Islands",
         "leetcode": "https://leetcode.com/problems/number-of-islands/",
         "requirements": "Finding connected land cells in grid using Union Find"
-      },
-      {
-        "id": 584,
+    },
+    {
+        "id": 3,
         "leetcode_id": 684,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Redundant Connection",
         "leetcode": "https://leetcode.com/problems/redundant-connection/",
         "requirements": "Finding edges that form cycles in undirected graph"
-      },
-      {
-        "id": 585,
+    },
+    {
+        "id": 4,
         "leetcode_id": 323,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Number of Connected Components in an Undirected Graph",
         "leetcode": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
         "requirements": "Counting distinct connected components in a graph"
-      },
-      {
-        "id": 586,
+    },
+    {
+        "id": 5,
         "leetcode_id": 128,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Longest Consecutive Sequence",
         "leetcode": "https://leetcode.com/problems/longest-consecutive-sequence/",
         "requirements": "Finding longest consecutive elements sequence with Union Find"
-      },
-      {
-        "id": 587,
+    },
+    {
+        "id": 6,
         "leetcode_id": 721,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Accounts Merge",
         "leetcode": "https://leetcode.com/problems/accounts-merge/",
         "requirements": "Merging accounts based on common emails using Union Find"
-      },
-      {
-        "id": 588,
+    },
+    {
+        "id": 7,
         "leetcode_id": 1319,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Number of Operations to Make Network Connected",
         "leetcode": "https://leetcode.com/problems/number-of-operations-to-make-network-connected/",
         "requirements": "Finding minimum connections needed to connect all components"
-      },
-      {
-        "id": 589,
+    },
+    {
+        "id": 8,
         "leetcode_id": 990,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Satisfiability of Equality Equations",
         "leetcode": "https://leetcode.com/problems/satisfiability-of-equality-equations/",
         "requirements": "Checking if equality and inequality equations can be satisfied"
-      },
-      {
-        "id": 590,
+    },
+    {
+        "id": 9,
         "leetcode_id": 305,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Number of Islands II",
         "leetcode": "https://leetcode.com/problems/number-of-islands-ii/",
         "requirements": "Tracking connected components as new land appears"
-      },
-      {
-        "id": 591,
+    },
+    {
+        "id": 10,
         "leetcode_id": 839,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Similar String Groups",
         "leetcode": "https://leetcode.com/problems/similar-string-groups/",
         "requirements": "Grouping strings based on similarity rules"
-      },
-      {
-        "id": 592,
+    },
+    {
+        "id": 11,
         "leetcode_id": 695,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Max Area of Island",
         "leetcode": "https://leetcode.com/problems/max-area-of-island/",
         "requirements": "Finding largest connected component in grid using Union Find"
-      },
-      {
-        "id": 593,
+    },
+    {
+        "id": 12,
         "leetcode_id": 1202,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Smallest String With Swaps",
         "leetcode": "https://leetcode.com/problems/smallest-string-with-swaps/",
         "requirements": "Finding lexicographically smallest string after swaps using Union Find"
-      },
-      {
-        "id": 594,
-        "leetcode_id": 399,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Evaluate Division",
-        "leetcode": "https://leetcode.com/problems/evaluate-division/",
-        "requirements": "Computing division results based on equation paths"
-      },
-      {
-        "id": 595,
-        "leetcode_id": 685,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Redundant Connection II",
-        "leetcode": "https://leetcode.com/problems/redundant-connection-ii/",
-        "requirements": "Finding redundant edges in directed graphs"
-      },
-      {
-        "id": 596,
-        "leetcode_id": 1168,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Optimize Water Distribution in a Village",
-        "leetcode": "https://leetcode.com/problems/optimize-water-distribution-in-a-village/",
-        "requirements": "Minimum Spanning Tree with well-building option"
-      },
-      {
-        "id": 597,
-        "leetcode_id": 959,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Regions Cut By Slashes",
-        "leetcode": "https://leetcode.com/problems/regions-cut-by-slashes/",
-        "requirements": "Counting regions formed by slash characters"
-      },
-      {
-        "id": 598,
-        "leetcode_id": 952,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Largest Component Size by Common Factor",
-        "leetcode": "https://leetcode.com/problems/largest-component-size-by-common-factor/",
-        "requirements": "Grouping numbers by their prime factors using Union Find"
-      },
-      {
-        "id": 599,
-        "leetcode_id": 1579,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Remove Max Number of Edges to Keep Graph Fully Traversable",
-        "leetcode": "https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/",
-        "requirements": "Maintaining connectivity with two types of edges"
-      },
-      {
-        "id": 600,
-        "leetcode_id": 765,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Couples Holding Hands",
-        "leetcode": "https://leetcode.com/problems/couples-holding-hands/",
-        "requirements": "Minimum swaps to reunite couples using Union Find"
-      },
-      {
-        "id": 601,
-        "leetcode_id": 803,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Bricks Falling When Hit",
-        "leetcode": "https://leetcode.com/problems/bricks-falling-when-hit/",
-        "requirements": "Tracking connected components in reverse time"
-      },
-      {
-        "id": 602,
-        "leetcode_id": 1101,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "The Earliest Moment When Everyone Become Friends",
-        "leetcode": "https://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/",
-        "requirements": "Finding when all nodes become connected in a time series"
-      },
-      {
-        "id": 603,
-        "leetcode_id": 1632,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Rank Transform of a Matrix",
-        "leetcode": "https://leetcode.com/problems/rank-transform-of-a-matrix/",
-        "requirements": "Ranking elements while preserving order in rows/columns"
-      },
-      {
-        "id": 604,
-        "leetcode_id": 924,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimize Malware Spread",
-        "leetcode": "https://leetcode.com/problems/minimize-malware-spread/",
-        "requirements": "Finding node that minimizes infection spread"
-      },
-      {
-        "id": 605,
-        "leetcode_id": 928,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimize Malware Spread II",
-        "leetcode": "https://leetcode.com/problems/minimize-malware-spread-ii/",
-        "requirements": "Finding optimal node to remove to minimize infections"
-      },
-      {
-        "id": 606,
-        "leetcode_id": 1697,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Checking Existence of Edge Length Limited Paths",
-        "leetcode": "https://leetcode.com/problems/checking-existence-of-edge-length-limited-paths/",
-        "requirements": "Checking path existence with weight constraints"
-      },
-      {
-        "id": 607,
-        "leetcode_id": 1722,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimize Hamming Distance After Swap Operations",
-        "leetcode": "https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/",
-        "requirements": "Minimizing difference between arrays using allowed swaps"
-      },
-      {
-        "id": 608,
-        "leetcode_id": 1627,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Graph Connectivity With Threshold",
-        "leetcode": "https://leetcode.com/problems/graph-connectivity-with-threshold/",
-        "requirements": "Connecting cities with divisibility relationships"
-      },
-      {
-        "id": 609,
+    },
+    {
+        "id": 13,
         "leetcode_id": 261,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Graph Valid Tree",
         "leetcode": "https://leetcode.com/problems/graph-valid-tree/",
         "requirements": "Checking if a graph forms a valid tree"
-      },
-      {
-        "id": 610,
+    },
+    {
+        "id": 14,
         "leetcode_id": 886,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Possible Bipartition",
         "leetcode": "https://leetcode.com/problems/possible-bipartition/",
         "requirements": "Dividing people into two groups without dislikes using Union Find"
-      },
-      {
-        "id": 611,
+    },
+    {
+        "id": 15,
         "leetcode_id": 1135,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Connecting Cities With Minimum Cost",
         "leetcode": "https://leetcode.com/problems/connecting-cities-with-minimum-cost/",
         "requirements": "Finding minimum spanning tree cost using Kruskal's algorithm"
-      }
-    ]
+    },
+    {
+        "id": 16,
+        "leetcode_id": 1202,
+        "difficulty": "Medium",
+        "problem": "Smallest String With Swaps",
+        "leetcode": "https://leetcode.com/problems/smallest-string-with-swaps/",
+        "requirements": "Finding lexicographically smallest string after swaps using Union Find"
+    }
+]
   },
   "Topological Sort": {
     "tip": "Topological Sort is an algorithm for ordering the vertices of a directed acyclic graph (DAG) such that for every directed edge (u, v), vertex u comes before vertex v in the ordering. It's ideal for problems involving dependencies, scheduling, or any situation where tasks need to be completed in a specific order. Look for problems mentioning 'prerequisites', 'dependencies', 'build order', or 'scheduling'. Topological Sort is only applicable to DAGs - if the graph contains a cycle, no valid topological ordering exists.",
     "problems": [
-      {
-        "id": 612,
+    {
+        "id": 1,
         "leetcode_id": 207,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Course Schedule",
         "leetcode": "https://leetcode.com/problems/course-schedule/",
         "requirements": "Determine if it's possible to finish all courses given prerequisites"
-      },
-      {
-        "id": 613,
+    },
+    {
+        "id": 2,
         "leetcode_id": 210,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Course Schedule II",
         "leetcode": "https://leetcode.com/problems/course-schedule-ii/",
         "requirements": "Return the ordering of courses to take to finish all courses"
-      },
-      {
-        "id": 614,
+    },
+    {
+        "id": 3,
         "leetcode_id": 269,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Alien Dictionary",
         "leetcode": "https://leetcode.com/problems/alien-dictionary/",
         "requirements": "Determine the order of characters in an alien language"
-      },
-      {
-        "id": 615,
+    },
+    {
+        "id": 4,
         "leetcode_id": 329,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Longest Increasing Path in a Matrix",
         "leetcode": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
         "requirements": "Find the length of the longest increasing path in a matrix"
-      },
-      {
-        "id": 616,
+    },
+    {
+        "id": 5,
         "leetcode_id": 444,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Sequence Reconstruction",
         "leetcode": "https://leetcode.com/problems/sequence-reconstruction/",
         "requirements": "Check if a sequence can be uniquely reconstructed from subsequences"
-      },
-      {
-        "id": 617,
+    },
+    {
+        "id": 6,
         "leetcode_id": 310,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Minimum Height Trees",
         "leetcode": "https://leetcode.com/problems/minimum-height-trees/",
         "requirements": "Find the roots that give minimum height trees with topological pruning"
-      },
-      {
-        "id": 618,
+    },
+    {
+        "id": 7,
         "leetcode_id": 802,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Find Eventual Safe States",
         "leetcode": "https://leetcode.com/problems/find-eventual-safe-states/",
         "requirements": "Find all nodes that eventually lead to terminal nodes"
-      },
-      {
-        "id": 619,
+    },
+    {
+        "id": 8,
         "leetcode_id": 1203,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Sort Items by Groups Respecting Dependencies",
         "leetcode": "https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/",
         "requirements": "Sort items respecting both group and item dependencies"
-      },
-      {
-        "id": 620,
-        "leetcode_id": 2115,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find All Possible Recipes from Given Supplies",
-        "leetcode": "https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/",
-        "requirements": "Find all possible recipes that can be created from supplies"
-      },
-      {
-        "id": 621,
+    },
+    {
+        "id": 9,
         "leetcode_id": 2050,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Parallel Courses III",
         "leetcode": "https://leetcode.com/problems/parallel-courses-iii/",
         "requirements": "Find minimum time to complete all courses with prerequisites and durations"
-      },
-      {
-        "id": 622,
+    },
+    {
+        "id": 10,
         "leetcode_id": 1136,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Parallel Courses",
         "leetcode": "https://leetcode.com/problems/parallel-courses/",
         "requirements": "Find minimum semesters to complete all courses with prerequisites"
-      },
-      {
-        "id": 623,
+    },
+    {
+        "id": 11,
         "leetcode_id": 2192,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "All Ancestors of a Node in a Directed Acyclic Graph",
         "leetcode": "https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/",
         "requirements": "Find all ancestors of each node in a DAG"
-      },
-      {
-        "id": 624,
+    },
+    {
+        "id": 12,
         "leetcode_id": 1462,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Course Schedule IV",
         "leetcode": "https://leetcode.com/problems/course-schedule-iv/",
         "requirements": "Determine if a course is a prerequisite of another course"
-      },
-      {
-        "id": 625,
-        "leetcode_id": 2127,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Maximum Employees to Be Invited to a Meeting",
-        "leetcode": "https://leetcode.com/problems/maximum-employees-to-be-invited-to-a-meeting/",
-        "requirements": "Find maximum employees in circular or paired arrangements"
-      },
-      {
-        "id": 626,
+    },
+    {
+        "id": 13,
         "leetcode_id": 1857,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Largest Color Value in a Directed Graph",
         "leetcode": "https://leetcode.com/problems/largest-color-value-in-a-directed-graph/",
         "requirements": "Find largest color value in any valid path in a directed graph"
-      },
-      {
-        "id": 627,
-        "leetcode_id": 1059,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "All Paths from Source Lead to Destination",
-        "leetcode": "https://leetcode.com/problems/all-paths-from-source-lead-to-destination/",
-        "requirements": "Check if all paths from source lead to destination"
-      },
-      {
-        "id": 628,
-        "leetcode_id": 2360,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Longest Cycle in a Graph",
-        "leetcode": "https://leetcode.com/problems/longest-cycle-in-a-graph/",
-        "requirements": "Find the longest cycle in a directed graph"
-      },
-      {
-        "id": 629,
-        "leetcode_id": 851,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Loud and Rich",
-        "leetcode": "https://leetcode.com/problems/loud-and-rich/",
-        "requirements": "Find the least quiet person among richer people"
-      },
-      {
-        "id": 630,
-        "leetcode_id": 2603,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Collect Coins in a Tree",
-        "leetcode": "https://leetcode.com/problems/collect-coins-in-a-tree/",
-        "requirements": "Find minimum number of moves to collect all coins"
-      },
-      {
-        "id": 631,
-        "leetcode_id": 2392,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Build a Matrix With Conditions",
-        "leetcode": "https://leetcode.com/problems/build-a-matrix-with-conditions/",
-        "requirements": "Build a matrix with row and column conditions"
-      },
-      {
-        "id": 632,
-        "leetcode_id": 2371,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimize Maximum Value in a Grid",
-        "leetcode": "https://leetcode.com/problems/minimize-maximum-value-in-a-grid/",
-        "requirements": "Assign values respecting row and column constraints"
-      },
-      {
-        "id": 633,
-        "leetcode_id": 2204,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Distance to a Cycle in Undirected Graph",
-        "leetcode": "https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/",
-        "requirements": "Find shortest distance from each node to a cycle"
-      },
-      {
-        "id": 634,
-        "leetcode_id": 1591,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Strange Printer II",
-        "leetcode": "https://leetcode.com/problems/strange-printer-ii/",
-        "requirements": "Determine if grid was printed with rectangles of unique colors"
-      },
-      {
-        "id": 635,
+    },
+    {
+        "id": 14,
         "leetcode_id": 1557,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Minimum Number of Vertices to Reach All Nodes",
         "leetcode": "https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/",
         "requirements": "Find minimum vertices to reach all nodes in a DAG"
-      },
-      {
-        "id": 636,
-        "leetcode_id": 2642,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Design Graph With Shortest Path Calculator",
-        "leetcode": "https://leetcode.com/problems/design-graph-with-shortest-path-calculator/",
-        "requirements": "Design a graph class with shortest path calculation"
-      },
-      {
-        "id": 637,
-        "leetcode_id": 1719,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Number Of Ways To Reconstruct A Tree",
-        "leetcode": "https://leetcode.com/problems/number-of-ways-to-reconstruct-a-tree/",
-        "requirements": "Count ways to build a tree from ancestor pairs"
-      },
-      {
-        "id": 638,
-        "leetcode_id": 2440,
+    },
+    {
+        "id": 15,
+        "leetcode_id": 1059,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Create Components With Same Value",
-        "leetcode": "https://leetcode.com/problems/create-components-with-same-value/",
-        "requirements": "Find minimum edge removals to create equal-sum components"
-      },
-      {
-        "id": 639,
-        "leetcode_id": 2246,
+        "problem": "All Paths from Source Lead to Destination",
+        "leetcode": "https://leetcode.com/problems/all-paths-from-source-lead-to-destination/",
+        "requirements": "Check if all paths from source lead to destination"
+    },
+    {
+        "id": 16,
+        "leetcode_id": 2392,
         "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Longest Path With Different Adjacent Characters",
-        "leetcode": "https://leetcode.com/problems/longest-path-with-different-adjacent-characters/",
-        "requirements": "Find longest path where adjacent nodes have different characters"
-      },
-      {
-        "id": 640,
-        "leetcode_id": 2328,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Number of Increasing Paths in a Grid",
-        "leetcode": "https://leetcode.com/problems/number-of-increasing-paths-in-a-grid/",
-        "requirements": "Count strictly increasing paths in a grid"
-      },
-      {
-        "id": 641,
-        "leetcode_id": 2653,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Sliding Subarray Beauty",
-        "leetcode": "https://leetcode.com/problems/sliding-subarray-beauty/",
-        "requirements": "Find the xth smallest number in each sliding window"
-      }
-    ]
+        "problem": "Build a Matrix With Conditions",
+        "leetcode": "https://leetcode.com/problems/build-a-matrix-with-conditions/",
+        "requirements": "Build a matrix with row and column conditions"
+    }
+]
   },
   "Shortest Path": {
     "tip": "Shortest Path Algorithms find the optimal path between nodes in a graph, minimizing the total path cost. Common algorithms include Dijkstra's (for non-negative weights), Bellman-Ford (handles negative weights), Floyd-Warshall (all pairs shortest paths), and A* (with heuristics for faster searching). These are ideal for problems involving route planning, network routing, or any scenario requiring minimum cost traversal between points. Look for problems mentioning 'minimum distance', 'cheapest path', 'fastest route', or those involving weighted graphs where optimization is required. Consider the constraints on edge weights (positive/negative) and whether you need a single source or all pairs shortest paths to choose the right algorithm.",
     "problems": [
-      {
-        "id": 642,
+    {
+        "id": 1,
         "leetcode_id": 743,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Network Delay Time",
         "leetcode": "https://leetcode.com/problems/network-delay-time/",
         "requirements": "Find time for all nodes to receive a signal using Dijkstra's algorithm"
-      },
-      {
-        "id": 643,
+    },
+    {
+        "id": 2,
         "leetcode_id": 1631,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Path With Minimum Effort",
         "leetcode": "https://leetcode.com/problems/path-with-minimum-effort/",
         "requirements": "Find path with minimum maximum absolute difference"
-      },
-      {
-        "id": 644,
+    },
+    {
+        "id": 3,
         "leetcode_id": 787,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Cheapest Flights Within K Stops",
         "leetcode": "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
         "requirements": "Find cheapest price from source to destination with at most k stops"
-      },
-      {
-        "id": 645,
+    },
+    {
+        "id": 4,
         "leetcode_id": 1514,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Path with Maximum Probability",
         "leetcode": "https://leetcode.com/problems/path-with-maximum-probability/",
         "requirements": "Find path with maximum success probability"
-      },
-      {
-        "id": 646,
+    },
+    {
+        "id": 5,
         "leetcode_id": 1334,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
         "leetcode": "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
         "requirements": "Find city with fewest reachable cities within threshold distance"
-      },
-      {
-        "id": 647,
+    },
+    {
+        "id": 6,
         "leetcode_id": 1976,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Number of Ways to Arrive at Destination",
         "leetcode": "https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/",
         "requirements": "Count ways to reach destination in minimum time"
-      },
-      {
-        "id": 648,
+    },
+    {
+        "id": 7,
         "leetcode_id": 1368,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Minimum Cost to Make at Least One Valid Path in a Grid",
         "leetcode": "https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
         "requirements": "Find minimum cost to create valid path from top-left to bottom-right"
-      },
-      {
-        "id": 649,
+    },
+    {
+        "id": 8,
         "leetcode_id": 399,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Evaluate Division",
         "leetcode": "https://leetcode.com/problems/evaluate-division/",
         "requirements": "Calculate division results using shortest path on weighted graph"
-      },
-      {
-        "id": 650,
+    },
+    {
+        "id": 9,
         "leetcode_id": 505,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "The Maze II",
         "leetcode": "https://leetcode.com/problems/the-maze-ii/",
         "requirements": "Find shortest path through maze with rolling ball"
-      },
-      {
-        "id": 651,
+    },
+    {
+        "id": 10,
         "leetcode_id": 1786,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Number of Restricted Paths From First to Last Node",
         "leetcode": "https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/",
         "requirements": "Count paths where distances decrease along the path"
-      },
-      {
-        "id": 652,
+    },
+    {
+        "id": 11,
         "leetcode_id": 1091,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Shortest Path in Binary Matrix",
         "leetcode": "https://leetcode.com/problems/shortest-path-in-binary-matrix/",
         "requirements": "Find shortest clear path in binary matrix"
-      },
-      {
-        "id": 653,
+    },
+    {
+        "id": 12,
         "leetcode_id": 2290,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Minimum Obstacle Removal to Reach Corner",
         "leetcode": "https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner/",
         "requirements": "Find minimum obstacles to remove to create path"
-      },
-      {
-        "id": 654,
-        "leetcode_id": 2473,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimum Cost to Buy Apples",
-        "leetcode": "https://leetcode.com/problems/minimum-cost-to-buy-apples/",
-        "requirements": "Find minimum cost to buy specific number of apples"
-      },
-      {
-        "id": 655,
+    },
+    {
+        "id": 13,
         "leetcode_id": 1928,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Minimum Cost to Reach Destination in Time",
         "leetcode": "https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/",
         "requirements": "Find minimum cost path within time constraint"
-      },
-      {
-        "id": 656,
-        "leetcode_id": 2577,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Time to Visit a Cell In a Grid",
-        "leetcode": "https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/",
-        "requirements": "Find minimum time to reach bottom-right cell with time constraint"
-      },
-      {
-        "id": 657,
+    },
+    {
+        "id": 14,
         "leetcode_id": 1293,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Shortest Path in a Grid with Obstacles Elimination",
         "leetcode": "https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/",
         "requirements": "Find shortest path with ability to remove limited obstacles"
-      },
-      {
-        "id": 658,
-        "leetcode_id": 1102,
+    },
+    {
+        "id": 15,
+        "leetcode_id": 2577,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Path With Maximum Minimum Value",
-        "leetcode": "https://leetcode.com/problems/path-with-maximum-minimum-value/",
-        "requirements": "Find path maximizing the minimum value along the path"
-      },
-      {
-        "id": 659,
-        "leetcode_id": 778,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Swim in Rising Water",
-        "leetcode": "https://leetcode.com/problems/swim-in-rising-water/",
-        "requirements": "Find minimum time to swim from top-left to bottom-right"
-      },
-      {
-        "id": 660,
-        "leetcode_id": 499,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "The Maze III",
-        "leetcode": "https://leetcode.com/problems/the-maze-iii/",
-        "requirements": "Find shortest path with lexicographically smallest string"
-      },
-      {
-        "id": 661,
+        "problem": "Minimum Time to Visit a Cell In a Grid",
+        "leetcode": "https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/",
+        "requirements": "Find minimum time to reach bottom-right cell with time constraint"
+    },
+    {
+        "id": 16,
         "leetcode_id": 1129,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Shortest Path with Alternating Colors",
         "leetcode": "https://leetcode.com/problems/shortest-path-with-alternating-colors/",
         "requirements": "Find shortest paths with alternating red and blue edges"
-      },
-      {
-        "id": 662,
-        "leetcode_id": 2045,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Second Minimum Time to Reach Destination",
-        "leetcode": "https://leetcode.com/problems/second-minimum-time-to-reach-destination/",
-        "requirements": "Find second shortest time to reach destination"
-      },
-      {
-        "id": 663,
-        "leetcode_id": 2093,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Cost to Reach City With Discounts",
-        "leetcode": "https://leetcode.com/problems/minimum-cost-to-reach-city-with-discounts/",
-        "requirements": "Find minimum cost path with limited toll discounts"
-      },
-      {
-        "id": 664,
-        "leetcode_id": 1066,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Campus Bikes II",
-        "leetcode": "https://leetcode.com/problems/campus-bikes-ii/",
-        "requirements": "Assign bikes to workers minimizing total Manhattan distance"
-      },
-      {
-        "id": 665,
-        "leetcode_id": 882,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Reachable Nodes In Subdivided Graph",
-        "leetcode": "https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/",
-        "requirements": "Maximize nodes reached within limited moves"
-      },
-      {
-        "id": 666,
-        "leetcode_id": 1462,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Course Schedule IV",
-        "leetcode": "https://leetcode.com/problems/course-schedule-iv/",
-        "requirements": "Determine if courses are prerequisites using Floyd-Warshall"
-      },
-      {
-        "id": 667,
-        "leetcode_id": 2714,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Find Shortest Path with K Hops",
-        "leetcode": "https://leetcode.com/problems/find-shortest-path-with-k-hops/",
-        "requirements": "Find shortest path from source to destination with exactly k hops"
-      },
-      {
-        "id": 668,
-        "leetcode_id": 2812,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Find the Safest Path in a Grid",
-        "leetcode": "https://leetcode.com/problems/find-the-safest-path-in-a-grid/",
-        "requirements": "Find path maximizing minimum distance from thieves"
-      },
-      {
-        "id": 669,
-        "leetcode_id": 2642,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Design Graph With Shortest Path Calculator",
-        "leetcode": "https://leetcode.com/problems/design-graph-with-shortest-path-calculator/",
-        "requirements": "Implement data structure supporting shortest path queries"
-      },
-      {
-        "id": 670,
-        "leetcode_id": 2699,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Modify Graph Edge Weights",
-        "leetcode": "https://leetcode.com/problems/modify-graph-edge-weights/",
-        "requirements": "Modify edge weights to make specific shortest path value"
-      },
-      {
-        "id": 671,
-        "leetcode_id": 2662,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Cost of a Path With Special Roads",
-        "leetcode": "https://leetcode.com/problems/minimum-cost-of-a-path-with-special-roads/",
-        "requirements": "Find minimum cost path using direct moves or special roads"
-      }
-    ]
+    }
+]
   },
   "Greedy": {
     "tip": "Greedy Algorithms make locally optimal choices at each step with the hope of finding a global optimum. They're efficient but don't always guarantee the best solution for all problems. Greedy approaches work well when the problem has 'optimal substructure' (optimal solution contains optimal solutions to subproblems) and a 'greedy choice property' (locally optimal choices lead to globally optimal solution). Look for problems involving optimization, scheduling, resource allocation, or minimizing/maximizing values. Key indicators include terms like 'maximum profit', 'minimum cost', 'optimal arrangement', or scenarios where you need to make sequential decisions. Greedy solutions are typically implemented by sorting input based on a heuristic and then processing elements in that order, making the best choice at each step.",
     "problems": [
-      {
-        "id": 672,
+    {
+        "id": 1,
         "leetcode_id": 455,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Assign Cookies",
         "leetcode": "https://leetcode.com/problems/assign-cookies/",
         "requirements": "Maximize the number of content children by assigning cookies"
-      },
-      {
-        "id": 673,
+    },
+    {
+        "id": 2,
         "leetcode_id": 55,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Jump Game",
         "leetcode": "https://leetcode.com/problems/jump-game/",
         "requirements": "Determine if you can reach the last index with given jump ranges"
-      },
-      {
-        "id": 674,
+    },
+    {
+        "id": 3,
         "leetcode_id": 45,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Jump Game II",
         "leetcode": "https://leetcode.com/problems/jump-game-ii/",
         "requirements": "Find minimum jumps to reach the last index"
-      },
-      {
-        "id": 675,
+    },
+    {
+        "id": 4,
         "leetcode_id": 134,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Gas Station",
         "leetcode": "https://leetcode.com/problems/gas-station/",
         "requirements": "Find starting station to complete circuit with gas constraints"
-      },
-      {
-        "id": 676,
-        "leetcode_id": 1005,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Maximize Sum Of Array After K Negations",
-        "leetcode": "https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/",
-        "requirements": "Maximize array sum after negating elements K times"
-      },
-      {
-        "id": 677,
-        "leetcode_id": 860,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Lemonade Change",
-        "leetcode": "https://leetcode.com/problems/lemonade-change/",
-        "requirements": "Determine if you can provide change for all customer bills"
-      },
-      {
-        "id": 678,
+    },
+    {
+        "id": 5,
         "leetcode_id": 122,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Best Time to Buy and Sell Stock II",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
         "requirements": "Maximize profit by buying and selling stocks multiple times"
-      },
-      {
-        "id": 679,
-        "leetcode_id": 1846,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Element After Decreasing and Rearranging",
-        "leetcode": "https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/",
-        "requirements": "Find maximum value after applying given operations"
-      },
-      {
-        "id": 680,
-        "leetcode_id": 406,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Queue Reconstruction by Height",
-        "leetcode": "https://leetcode.com/problems/queue-reconstruction-by-height/",
-        "requirements": "Reconstruct queue based on height and position conditions"
-      },
-      {
-        "id": 681,
+    },
+    {
+        "id": 6,
         "leetcode_id": 621,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Task Scheduler",
         "leetcode": "https://leetcode.com/problems/task-scheduler/",
         "requirements": "Find minimum time to execute tasks with cooling periods"
-      },
-      {
-        "id": 682,
+    },
+    {
+        "id": 7,
         "leetcode_id": 452,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Minimum Number of Arrows to Burst Balloons",
         "leetcode": "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/",
         "requirements": "Find minimum arrows to burst all balloons"
-      },
-      {
-        "id": 683,
+    },
+    {
+        "id": 8,
         "leetcode_id": 1029,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Two City Scheduling",
         "leetcode": "https://leetcode.com/problems/two-city-scheduling/",
         "requirements": "Minimize cost of sending people to two different cities"
-      },
-      {
-        "id": 684,
+    },
+    {
+        "id": 9,
         "leetcode_id": 763,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Partition Labels",
         "leetcode": "https://leetcode.com/problems/partition-labels/",
         "requirements": "Partition string into parts where each letter appears in at most one part"
-      },
-      {
-        "id": 685,
-        "leetcode_id": 1663,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Smallest String With A Given Numeric Value",
-        "leetcode": "https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/",
-        "requirements": "Create lexicographically smallest string with specific value"
-      },
-      {
-        "id": 686,
+    },
+    {
+        "id": 10,
         "leetcode_id": 1094,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Car Pooling",
         "leetcode": "https://leetcode.com/problems/car-pooling/",
         "requirements": "Determine if all passengers can be picked up and dropped off"
-      },
-      {
-        "id": 687,
+    },
+    {
+        "id": 11,
         "leetcode_id": 1710,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Maximum Units on a Truck",
         "leetcode": "https://leetcode.com/problems/maximum-units-on-a-truck/",
         "requirements": "Maximize total units loaded on truck with box constraints"
-      },
-      {
-        "id": 688,
-        "leetcode_id": 665,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Non-decreasing Array",
-        "leetcode": "https://leetcode.com/problems/non-decreasing-array/",
-        "requirements": "Check if array can be made non-decreasing by modifying at most one element"
-      },
-      {
-        "id": 689,
-        "leetcode_id": 1818,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Absolute Sum Difference",
-        "leetcode": "https://leetcode.com/problems/minimum-absolute-sum-difference/",
-        "requirements": "Minimize sum of absolute differences by replacing one element"
-      },
-      {
-        "id": 690,
+    },
+    {
+        "id": 12,
         "leetcode_id": 881,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Boats to Save People",
         "leetcode": "https://leetcode.com/problems/boats-to-save-people/",
         "requirements": "Find minimum number of boats to carry people with weight limit"
-      },
-      {
-        "id": 691,
-        "leetcode_id": 1648,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Sell Diminishing-Valued Colored Balls",
-        "leetcode": "https://leetcode.com/problems/sell-diminishing-valued-colored-balls/",
-        "requirements": "Maximize profit from selling colored balls with decreasing values"
-      },
-      {
-        "id": 692,
-        "leetcode_id": 1536,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Swaps to Arrange a Binary Grid",
-        "leetcode": "https://leetcode.com/problems/minimum-swaps-to-arrange-a-binary-grid/",
-        "requirements": "Find minimum swaps to satisfy grid condition"
-      },
-      {
-        "id": 693,
-        "leetcode_id": 1007,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Domino Rotations For Equal Row",
-        "leetcode": "https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/",
-        "requirements": "Find minimum rotations to make all values in one row the same"
-      },
-      {
-        "id": 694,
-        "leetcode_id": 1953,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Number of Weeks for Which You Can Work",
-        "leetcode": "https://leetcode.com/problems/maximum-number-of-weeks-for-which-you-can-work/",
-        "requirements": "Find maximum number of weeks to complete projects without consecutive weeks on same project"
-      },
-      {
-        "id": 695,
-        "leetcode_id": 1057,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Campus Bikes",
-        "leetcode": "https://leetcode.com/problems/campus-bikes/",
-        "requirements": "Assign bikes to workers minimizing total Manhattan distance"
-      },
-      {
-        "id": 696,
+    },
+    {
+        "id": 13,
         "leetcode_id": 1405,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Longest Happy String",
         "leetcode": "https://leetcode.com/problems/longest-happy-string/",
         "requirements": "Construct longest string without three consecutive same characters"
-      },
-      {
-        "id": 697,
-        "leetcode_id": 995,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimum Number of K Consecutive Bit Flips",
-        "leetcode": "https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/",
-        "requirements": "Find minimum number of K-length bit flips to make all bits 1"
-      },
-      {
-        "id": 698,
+    },
+    {
+        "id": 14,
         "leetcode_id": 135,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Candy",
         "leetcode": "https://leetcode.com/problems/candy/",
         "requirements": "Distribute minimum candies to children with rating constraints"
-      },
-      {
-        "id": 699,
-        "leetcode_id": 2136,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Earliest Possible Day of Full Bloom",
-        "leetcode": "https://leetcode.com/problems/earliest-possible-day-of-full-bloom/",
-        "requirements": "Find earliest day to see all plants bloom"
-      },
-      {
-        "id": 700,
-        "leetcode_id": 1520,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Maximum Number of Non-Overlapping Substrings",
-        "leetcode": "https://leetcode.com/problems/maximum-number-of-non-overlapping-substrings/",
-        "requirements": "Find maximum non-overlapping valid substrings"
-      },
-      {
-        "id": 701,
+    },
+    {
+        "id": 15,
         "leetcode_id": 630,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Course Schedule III",
         "leetcode": "https://leetcode.com/problems/course-schedule-iii/",
         "requirements": "Maximize number of courses to take with deadlines"
-      }
-    ]
+    }
+]
   },
   "Memoization": {
     "tip": "Memoization is an optimization technique that speeds up recursive or repetitive computations by storing the results of expensive function calls and returning the cached result when the same inputs occur again. It's particularly useful for problems with overlapping subproblems and optimal substructure (properties also seen in dynamic programming). Look for recursive problems where the same calculations are performed multiple times, or problems that ask for the 'number of ways', 'minimum/maximum cost', or involve computing Fibonacci-like sequences. Implementing memoization typically involves using a hash map or array to cache results, and modifying recursive functions to check the cache before computation. While similar to bottom-up dynamic programming, memoization uses a top-down approach that often preserves the original recursive structure of the solution.",
     "problems": [
-      {
-        "id": 732,
+    {
+        "id": 1,
         "leetcode_id": 70,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/climbing-stairs/",
         "requirements": "Count ways to climb stairs using 1 or 2 steps at a time"
-      },
-      {
-        "id": 733,
+    },
+    {
+        "id": 2,
         "leetcode_id": 509,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Fibonacci Number",
         "leetcode": "https://leetcode.com/problems/fibonacci-number/",
         "requirements": "Calculate the nth Fibonacci number efficiently"
-      },
-      {
-        "id": 734,
+    },
+    {
+        "id": 3,
         "leetcode_id": 139,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Word Break",
         "leetcode": "https://leetcode.com/problems/word-break/",
         "requirements": "Determine if string can be segmented into dictionary words"
-      },
-      {
-        "id": 735,
+    },
+    {
+        "id": 4,
         "leetcode_id": 322,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Coin Change",
         "leetcode": "https://leetcode.com/problems/coin-change/",
         "requirements": "Find fewest coins needed to make a given amount"
-      },
-      {
-        "id": 736,
-        "leetcode_id": 518,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Coin Change 2",
-        "leetcode": "https://leetcode.com/problems/coin-change-2/",
-        "requirements": "Count number of ways to make a given amount with coins"
-      },
-      {
-        "id": 737,
+    },
+    {
+        "id": 5,
         "leetcode_id": 198,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "House Robber",
         "leetcode": "https://leetcode.com/problems/house-robber/",
         "requirements": "Find maximum amount you can rob without alerting police"
-      },
-      {
-        "id": 738,
-        "leetcode_id": 213,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "House Robber II",
-        "leetcode": "https://leetcode.com/problems/house-robber-ii/",
-        "requirements": "House robber problem with houses in a circle"
-      },
-      {
-        "id": 739,
+    },
+    {
+        "id": 6,
         "leetcode_id": 91,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Decode Ways",
         "leetcode": "https://leetcode.com/problems/decode-ways/",
         "requirements": "Count ways to decode a string of digits to letters"
-      },
-      {
-        "id": 740,
+    },
+    {
+        "id": 7,
         "leetcode_id": 62,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Unique Paths",
         "leetcode": "https://leetcode.com/problems/unique-paths/",
         "requirements": "Count unique paths from top-left to bottom-right in grid"
-      },
-      {
-        "id": 741,
-        "leetcode_id": 63,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Unique Paths II",
-        "leetcode": "https://leetcode.com/problems/unique-paths-ii/",
-        "requirements": "Count unique paths with obstacles in grid"
-      },
-      {
-        "id": 742,
-        "leetcode_id": 1137,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "N-th Tribonacci Number",
-        "leetcode": "https://leetcode.com/problems/n-th-tribonacci-number/",
-        "requirements": "Calculate the nth Tribonacci number efficiently"
-      },
-      {
-        "id": 743,
+    },
+    {
+        "id": 8,
         "leetcode_id": 300,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Longest Increasing Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence/",
         "requirements": "Find length of longest increasing subsequence"
-      },
-      {
-        "id": 744,
-        "leetcode_id": 494,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Target Sum",
-        "leetcode": "https://leetcode.com/problems/target-sum/",
-        "requirements": "Count ways to assign signs to make sum equal target"
-      },
-      {
-        "id": 745,
+    },
+    {
+        "id": 9,
         "leetcode_id": 416,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Partition Equal Subset Sum",
         "leetcode": "https://leetcode.com/problems/partition-equal-subset-sum/",
         "requirements": "Determine if array can be partitioned into two equal sum subsets"
-      },
-      {
-        "id": 746,
+    },
+    {
+        "id": 10,
         "leetcode_id": 1143,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Longest Common Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-common-subsequence/",
         "requirements": "Find length of longest common subsequence of two strings"
-      },
-      {
-        "id": 747,
-        "leetcode_id": 10,
-        "difficulty": "Hard",
-        "frequency": "High",
-        "problem": "Regular Expression Matching",
-        "leetcode": "https://leetcode.com/problems/regular-expression-matching/",
-        "requirements": "Implement regex pattern matching with . and *"
-      },
-      {
-        "id": 748,
-        "leetcode_id": 44,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Wildcard Matching",
-        "leetcode": "https://leetcode.com/problems/wildcard-matching/",
-        "requirements": "Implement wildcard pattern matching with ? and *"
-      },
-      {
-        "id": 749,
-        "leetcode_id": 329,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Longest Increasing Path in a Matrix",
-        "leetcode": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
-        "requirements": "Find length of longest increasing path in matrix"
-      },
-      {
-        "id": 750,
+    },
+    {
+        "id": 11,
+        "leetcode_id": 518,
+        "difficulty": "Medium",
+        "problem": "Coin Change 2",
+        "leetcode": "https://leetcode.com/problems/coin-change-2/",
+        "requirements": "Count number of ways to make a given amount with coins"
+    },
+    {
+        "id": 12,
         "leetcode_id": 72,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Edit Distance",
         "leetcode": "https://leetcode.com/problems/edit-distance/",
         "requirements": "Find minimum operations to convert one string to another"
-      },
-      {
-        "id": 751,
-        "leetcode_id": 115,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Distinct Subsequences",
-        "leetcode": "https://leetcode.com/problems/distinct-subsequences/",
-        "requirements": "Count distinct subsequences matching target string"
-      },
-      {
-        "id": 752,
-        "leetcode_id": 97,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Interleaving String",
-        "leetcode": "https://leetcode.com/problems/interleaving-string/",
-        "requirements": "Check if third string is interleaving of two input strings"
-      },
-      {
-        "id": 753,
-        "leetcode_id": 121,
-        "difficulty": "Easy",
-        "frequency": "High",
-        "problem": "Best Time to Buy and Sell Stock",
-        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-        "requirements": "Find maximum profit from single stock transaction"
-      },
-      {
-        "id": 754,
-        "leetcode_id": 122,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Best Time to Buy and Sell Stock II",
-        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
-        "requirements": "Find maximum profit from multiple stock transactions"
-      },
-      {
-        "id": 755,
-        "leetcode_id": 123,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Best Time to Buy and Sell Stock III",
-        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/",
-        "requirements": "Find maximum profit from at most two stock transactions"
-      },
-      {
-        "id": 756,
+    },
+    {
+        "id": 13,
         "leetcode_id": 120,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Triangle",
         "leetcode": "https://leetcode.com/problems/triangle/",
         "requirements": "Find minimum path sum from top to bottom in triangle"
-      },
-      {
-        "id": 757,
-        "leetcode_id": 140,
+    },
+    {
+        "id": 14,
+        "leetcode_id": 123,
         "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Word Break II",
-        "leetcode": "https://leetcode.com/problems/word-break-ii/",
-        "requirements": "Find all possible ways to segment string into dictionary words"
-      },
-      {
-        "id": 758,
-        "leetcode_id": 472,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Concatenated Words",
-        "leetcode": "https://leetcode.com/problems/concatenated-words/",
-        "requirements": "Find words that can be formed by concatenating other words"
-      },
-      {
-        "id": 759,
+        "problem": "Best Time to Buy and Sell Stock III",
+        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/",
+        "requirements": "Find maximum profit from at most two stock transactions"
+    },
+    {
+        "id": 15,
         "leetcode_id": 312,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Burst Balloons",
         "leetcode": "https://leetcode.com/problems/burst-balloons/",
         "requirements": "Find maximum coins by bursting balloons strategically"
-      },
-      {
-        "id": 760,
-        "leetcode_id": 377,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Combination Sum IV",
-        "leetcode": "https://leetcode.com/problems/combination-sum-iv/",
-        "requirements": "Count number of combinations that sum to target"
-      },
-      {
-        "id": 761,
-        "leetcode_id": 403,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Frog Jump",
-        "leetcode": "https://leetcode.com/problems/frog-jump/",
-        "requirements": "Determine if frog can cross river with constrained jumps"
-      }
-    ]
+    }
+]
   },
   "Tabulation": {
     "tip": "Tabulation is the bottom-up approach to dynamic programming where solutions to subproblems are computed iteratively, starting from the smallest subproblems and working towards the complete problem. Unlike memoization (top-down), tabulation fills a table (typically an array or matrix) systematically and doesn't rely on recursion, making it more efficient in terms of stack space. This pattern focuses on the fundamental concept of building a table of solutions to subproblems. Look for problems that can be broken down into smaller overlapping subproblems with optimal substructure. Tabulation requires identifying base cases and a recurrence relation that defines how states evolve, then systematically filling a table to reach the final solution.",
     "problems": [
-      {
-        "id": 762,
+    {
+        "id": 1,
         "leetcode_id": 70,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/climbing-stairs/",
-        "requirements": "Count ways to climb stairs using bottom-up approach"
-      },
-      {
-        "id": 763,
+        "requirements": "Count ways to climb stairs using 1 or 2 steps at a time"
+    },
+    {
+        "id": 2,
         "leetcode_id": 746,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Min Cost Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/min-cost-climbing-stairs/",
-        "requirements": "Find minimum cost to climb stairs with tabulation"
-      },
-      {
-        "id": 764,
-        "leetcode_id": 1137,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "N-th Tribonacci Number",
-        "leetcode": "https://leetcode.com/problems/n-th-tribonacci-number/",
-        "requirements": "Calculate Tribonacci numbers using tabulation"
-      },
-      {
-        "id": 765,
+        "requirements": "Find minimum cost to climb stairs"
+    },
+    {
+        "id": 3,
         "leetcode_id": 509,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Fibonacci Number",
         "leetcode": "https://leetcode.com/problems/fibonacci-number/",
-        "requirements": "Calculate Fibonacci numbers using tabulation"
-      },
-      {
-        "id": 766,
+        "requirements": "Calculate the nth Fibonacci number efficiently"
+    },
+    {
+        "id": 4,
         "leetcode_id": 198,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "House Robber",
         "leetcode": "https://leetcode.com/problems/house-robber/",
-        "requirements": "Maximum money that can be robbed using tabulation"
-      },
-      {
-        "id": 767,
+        "requirements": "Find maximum amount you can rob without alerting police"
+    },
+    {
+        "id": 5,
         "leetcode_id": 213,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "House Robber II",
         "leetcode": "https://leetcode.com/problems/house-robber-ii/",
-        "requirements": "House robber with circular arrangement using tabulation"
-      },
-      {
-        "id": 768,
+        "requirements": "House robber with circular arrangement"
+    },
+    {
+        "id": 6,
         "leetcode_id": 740,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Delete and Earn",
         "leetcode": "https://leetcode.com/problems/delete-and-earn/",
         "requirements": "Maximize points with element deletion constraints"
-      },
-      {
-        "id": 769,
+    },
+    {
+        "id": 7,
         "leetcode_id": 121,
         "difficulty": "Easy",
-        "frequency": "High",
         "problem": "Best Time to Buy and Sell Stock",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
         "requirements": "Find maximum profit from a single transaction"
-      },
-      {
-        "id": 770,
+    },
+    {
+        "id": 8,
         "leetcode_id": 122,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Best Time to Buy and Sell Stock II",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
         "requirements": "Find maximum profit from multiple transactions"
-      },
-      {
-        "id": 771,
-        "leetcode_id": 1911,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Alternating Subsequence Sum",
-        "leetcode": "https://leetcode.com/problems/maximum-alternating-subsequence-sum/",
-        "requirements": "Find maximum alternating subsequence sum using tabulation"
-      },
-      {
-        "id": 772,
+    },
+    {
+        "id": 9,
         "leetcode_id": 413,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Arithmetic Slices",
         "leetcode": "https://leetcode.com/problems/arithmetic-slices/",
-        "requirements": "Count number of arithmetic slices in array using tabulation"
-      },
-      {
-        "id": 773,
-        "leetcode_id": 1025,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Divisor Game",
-        "leetcode": "https://leetcode.com/problems/divisor-game/",
-        "requirements": "Determine winner of number game using tabulation"
-      },
-      {
-        "id": 774,
+        "requirements": "Count number of arithmetic slices in array"
+    },
+    {
+        "id": 10,
         "leetcode_id": 338,
         "difficulty": "Easy",
-        "frequency": "Medium",
         "problem": "Counting Bits",
         "leetcode": "https://leetcode.com/problems/counting-bits/",
-        "requirements": "Count set bits for range of numbers using tabulation"
-      },
-      {
-        "id": 775,
-        "leetcode_id": 2707,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Extra Characters in a String",
-        "leetcode": "https://leetcode.com/problems/extra-characters-in-a-string/",
-        "requirements": "Minimize extra characters after forming dictionary words"
-      },
-      {
-        "id": 776,
-        "leetcode_id": 2466,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Count Ways To Build Good Strings",
-        "leetcode": "https://leetcode.com/problems/count-ways-to-build-good-strings/",
-        "requirements": "Count ways to build strings with specific characters"
-      },
-      {
-        "id": 777,
-        "leetcode_id": 276,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Paint Fence",
-        "leetcode": "https://leetcode.com/problems/paint-fence/",
-        "requirements": "Count ways to paint fence with no more than two adjacent posts of same color"
-      },
-      {
-        "id": 778,
-        "leetcode_id": 983,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Cost For Tickets",
-        "leetcode": "https://leetcode.com/problems/minimum-cost-for-tickets/",
-        "requirements": "Find minimum cost for travel tickets using tabulation"
-      },
-      {
-        "id": 779,
-        "leetcode_id": 650,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "2 Keys Keyboard",
-        "leetcode": "https://leetcode.com/problems/2-keys-keyboard/",
-        "requirements": "Find minimum operations to get n 'A' characters"
-      },
-      {
-        "id": 780,
-        "leetcode_id": 935,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Knight Dialer",
-        "leetcode": "https://leetcode.com/problems/knight-dialer/",
-        "requirements": "Count phone numbers using chess knight moves"
-      },
-      {
-        "id": 781,
+        "requirements": "Count set bits for range of numbers"
+    },
+    {
+        "id": 11,
         "leetcode_id": 91,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Decode Ways",
         "leetcode": "https://leetcode.com/problems/decode-ways/",
-        "requirements": "Count ways to decode string using tabulation"
-      },
-      {
-        "id": 782,
+        "requirements": "Count ways to decode a string of digits to letters"
+    },
+    {
+        "id": 12,
+        "leetcode_id": 139,
+        "difficulty": "Medium",
+        "problem": "Word Break",
+        "leetcode": "https://leetcode.com/problems/word-break/",
+        "requirements": "Determine if string can be segmented into dictionary words"
+    },
+    {
+        "id": 13,
+        "leetcode_id": 983,
+        "difficulty": "Medium",
+        "problem": "Minimum Cost For Tickets",
+        "leetcode": "https://leetcode.com/problems/minimum-cost-for-tickets/",
+        "requirements": "Find minimum cost for travel tickets"
+    },
+    {
+        "id": 14,
         "leetcode_id": 1155,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Number of Dice Rolls With Target Sum",
         "leetcode": "https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/",
         "requirements": "Count ways to get target sum with given dice rolls"
-      },
-      {
-        "id": 783,
-        "leetcode_id": 139,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Word Break",
-        "leetcode": "https://leetcode.com/problems/word-break/",
-        "requirements": "Determine if string can be segmented using tabulation"
-      },
-      {
-        "id": 784,
-        "leetcode_id": 926,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Flip String to Monotone Increasing",
-        "leetcode": "https://leetcode.com/problems/flip-string-to-monotone-increasing/",
-        "requirements": "Minimum flips to make string monotone increasing"
-      },
-      {
-        "id": 785,
-        "leetcode_id": 1130,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Cost Tree From Leaf Values",
-        "leetcode": "https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/",
-        "requirements": "Construct binary tree with minimum sum of non-leaf nodes"
-      },
-      {
-        "id": 786,
-        "leetcode_id": 1218,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Longest Arithmetic Subsequence of Given Difference",
-        "leetcode": "https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/",
-        "requirements": "Find longest arithmetic subsequence with fixed difference"
-      },
-      {
-        "id": 787,
-        "leetcode_id": 799,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Champagne Tower",
-        "leetcode": "https://leetcode.com/problems/champagne-tower/",
-        "requirements": "Calculate champagne flow using tabulation"
-      },
-      {
-        "id": 788,
-        "leetcode_id": 123,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Best Time to Buy and Sell Stock III",
-        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/",
-        "requirements": "Find maximum profit with at most two transactions"
-      },
-      {
-        "id": 789,
-        "leetcode_id": 2222,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Number of Ways to Select Buildings",
-        "leetcode": "https://leetcode.com/problems/number-of-ways-to-select-buildings/",
-        "requirements": "Count ways to select buildings with alternating types"
-      },
-      {
-        "id": 790,
-        "leetcode_id": 2320,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Count Number of Ways to Place Houses",
-        "leetcode": "https://leetcode.com/problems/count-number-of-ways-to-place-houses/",
-        "requirements": "Count ways to place houses on both sides of street"
-      },
-      {
-        "id": 791,
+    },
+    {
+        "id": 15,
         "leetcode_id": 279,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Perfect Squares",
         "leetcode": "https://leetcode.com/problems/perfect-squares/",
         "requirements": "Find least number of perfect squares summing to n"
-      }
-    ]
+    }
+]
   },
   "1D DP": {
     "tip": "1D Dynamic Programming is a specialized form of dynamic programming where the state can be represented using a single dimension (typically an array). It's used when the subproblem solution depends on a single parameter that changes linearly. Look for problems involving sequences, chains, or series where decisions at each step affect future possibilities, and the problem can be broken down based on one changing variable (like position, size, or time). Common patterns include: linear state transitions where dp[i] depends on some previous states like dp[i-1], dp[i-2], etc.; optimization over subarrays or subsequences; and problems requiring consideration of taking or skipping elements. Unlike general tabulation, 1D DP specifically emphasizes the linear relationship between states and often requires more complex state transitions or optimizations.",
     "problems": [
-      {
-        "id": 792,
+    {
+        "id": 1,
+        "leetcode_id": 70,
+        "difficulty": "Easy",
+        "problem": "Climbing Stairs",
+        "leetcode": "https://leetcode.com/problems/climbing-stairs/",
+        "requirements": "Count ways to climb stairs using 1 or 2 steps at a time"
+    },
+    {
+        "id": 2,
         "leetcode_id": 300,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Longest Increasing Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence/",
         "requirements": "Find length of longest strictly increasing subsequence"
-      },
-      {
-        "id": 793,
+    },
+    {
+        "id": 3,
         "leetcode_id": 673,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Number of Longest Increasing Subsequence",
         "leetcode": "https://leetcode.com/problems/number-of-longest-increasing-subsequence/",
         "requirements": "Count the number of longest increasing subsequences"
-      },
-      {
-        "id": 794,
-        "leetcode_id": 334,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Increasing Triplet Subsequence",
-        "leetcode": "https://leetcode.com/problems/increasing-triplet-subsequence/",
-        "requirements": "Determine if increasing subsequence of length 3 exists"
-      },
-      {
-        "id": 795,
-        "leetcode_id": 674,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Longest Continuous Increasing Subsequence",
-        "leetcode": "https://leetcode.com/problems/longest-continuous-increasing-subsequence/",
-        "requirements": "Find length of longest continuous increasing subsequence"
-      },
-      {
-        "id": 796,
+    },
+    {
+        "id": 4,
         "leetcode_id": 152,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Maximum Product Subarray",
         "leetcode": "https://leetcode.com/problems/maximum-product-subarray/",
         "requirements": "Find the contiguous subarray with largest product"
-      },
-      {
-        "id": 797,
-        "leetcode_id": 53,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Maximum Subarray",
-        "leetcode": "https://leetcode.com/problems/maximum-subarray/",
-        "requirements": "Find contiguous subarray with largest sum using Kadane's algorithm"
-      },
-      {
-        "id": 798,
+    },
+    {
+        "id": 5,
         "leetcode_id": 918,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Maximum Sum Circular Subarray",
         "leetcode": "https://leetcode.com/problems/maximum-sum-circular-subarray/",
         "requirements": "Find maximum sum circular subarray with 1D DP"
-      },
-      {
-        "id": 799,
-        "leetcode_id": 1567,
+    },
+    {
+        "id": 6,
+        "leetcode_id": 746,
+        "difficulty": "Easy",
+        "problem": "Min Cost Climbing Stairs",
+        "leetcode": "https://leetcode.com/problems/min-cost-climbing-stairs/",
+        "requirements": "Find minimum cost to climb stairs"
+    },
+    {
+        "id": 7,
+        "leetcode_id": 91,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Length of Subarray With Positive Product",
-        "leetcode": "https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/",
-        "requirements": "Find longest subarray with positive product"
-      },
-      {
-        "id": 800,
-        "leetcode_id": 1746,
+        "problem": "Decode Ways",
+        "leetcode": "https://leetcode.com/problems/decode-ways/",
+        "requirements": "Count ways to decode a string of digits to letters"
+    },
+    {
+        "id": 8,
+        "leetcode_id": 139,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Subarray Sum After One Operation",
-        "leetcode": "https://leetcode.com/problems/maximum-subarray-sum-after-one-operation/",
-        "requirements": "Find maximum subarray sum after replacing one element"
-      },
-      {
-        "id": 801,
-        "leetcode_id": 1186,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Subarray Sum with One Deletion",
-        "leetcode": "https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/",
-        "requirements": "Maximum subarray sum allowing one element deletion"
-      },
-      {
-        "id": 802,
-        "leetcode_id": 1262,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Greatest Sum Divisible by Three",
-        "leetcode": "https://leetcode.com/problems/greatest-sum-divisible-by-three/",
-        "requirements": "Find maximum sum of elements divisible by three"
-      },
-      {
-        "id": 803,
-        "leetcode_id": 1524,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Number of Sub-arrays With Odd Sum",
-        "leetcode": "https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/",
-        "requirements": "Count subarrays with odd sum using 1D DP"
-      },
-      {
-        "id": 804,
-        "leetcode_id": 1493,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Longest Subarray of 1's After Deleting One Element",
-        "leetcode": "https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/",
-        "requirements": "Find longest subarray of 1's after deleting one element"
-      },
-      {
-        "id": 805,
-        "leetcode_id": 487,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Max Consecutive Ones II",
-        "leetcode": "https://leetcode.com/problems/max-consecutive-ones-ii/",
-        "requirements": "Find longest subarray of 1's allowing one 0 flip"
-      },
-      {
-        "id": 806,
-        "leetcode_id": 416,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Partition Equal Subset Sum",
-        "leetcode": "https://leetcode.com/problems/partition-equal-subset-sum/",
-        "requirements": "Determine if array can be partitioned into two equal sum subsets"
-      },
-      {
-        "id": 807,
-        "leetcode_id": 494,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Target Sum",
-        "leetcode": "https://leetcode.com/problems/target-sum/",
-        "requirements": "Find ways to assign + and - to reach target sum"
-      },
-      {
-        "id": 808,
-        "leetcode_id": 1049,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Last Stone Weight II",
-        "leetcode": "https://leetcode.com/problems/last-stone-weight-ii/",
-        "requirements": "Minimize remaining stone weight after smashing pairs"
-      },
-      {
-        "id": 809,
-        "leetcode_id": 322,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Coin Change",
-        "leetcode": "https://leetcode.com/problems/coin-change/",
-        "requirements": "Find fewest coins needed to make a given amount"
-      },
-      {
-        "id": 810,
-        "leetcode_id": 518,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Coin Change 2",
-        "leetcode": "https://leetcode.com/problems/coin-change-2/",
-        "requirements": "Count number of ways to make amount with given coins"
-      },
-      {
-        "id": 811,
-        "leetcode_id": 377,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Combination Sum IV",
-        "leetcode": "https://leetcode.com/problems/combination-sum-iv/",
-        "requirements": "Count combinations that sum to target (with repetition)"
-      },
-      {
-        "id": 812,
-        "leetcode_id": 343,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Integer Break",
-        "leetcode": "https://leetcode.com/problems/integer-break/",
-        "requirements": "Break integer into sum of integers with maximum product"
-      },
-      {
-        "id": 813,
-        "leetcode_id": 1105,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Filling Bookcase Shelves",
-        "leetcode": "https://leetcode.com/problems/filling-bookcase-shelves/",
-        "requirements": "Organize books on shelves to minimize height"
-      },
-      {
-        "id": 814,
-        "leetcode_id": 1416,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Restore The Array",
-        "leetcode": "https://leetcode.com/problems/restore-the-array/",
-        "requirements": "Count ways to restore array from string with bounds"
-      },
-      {
-        "id": 815,
+        "problem": "Word Break",
+        "leetcode": "https://leetcode.com/problems/word-break/",
+        "requirements": "Determine if string can be segmented into dictionary words"
+    },
+    {
+        "id": 9,
         "leetcode_id": 309,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Best Time to Buy and Sell Stock with Cooldown",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
         "requirements": "Maximum profit with cooldown using state transitions"
-      },
-      {
-        "id": 816,
+    },
+    {
+        "id": 10,
         "leetcode_id": 714,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Best Time to Buy and Sell Stock with Transaction Fee",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/",
         "requirements": "Maximum profit with transaction fee using state transitions"
-      },
-      {
-        "id": 817,
+    },
+    {
+        "id": 11,
+        "leetcode_id": 983,
+        "difficulty": "Medium",
+        "problem": "Minimum Cost For Tickets",
+        "leetcode": "https://leetcode.com/problems/minimum-cost-for-tickets/",
+        "requirements": "Find minimum cost for travel tickets"
+    },
+    {
+        "id": 12,
+        "leetcode_id": 1155,
+        "difficulty": "Medium",
+        "problem": "Number of Dice Rolls With Target Sum",
+        "leetcode": "https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/",
+        "requirements": "Count ways to get target sum with given dice rolls"
+    },
+    {
+        "id": 13,
+        "leetcode_id": 279,
+        "difficulty": "Medium",
+        "problem": "Perfect Squares",
+        "leetcode": "https://leetcode.com/problems/perfect-squares/",
+        "requirements": "Find least number of perfect squares summing to n"
+    },
+    {
+        "id": 14,
         "leetcode_id": 376,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Wiggle Subsequence",
         "leetcode": "https://leetcode.com/problems/wiggle-subsequence/",
         "requirements": "Find longest wiggle subsequence with alternating differences"
-      },
-      {
-        "id": 818,
-        "leetcode_id": 2110,
+    },
+    {
+        "id": 15,
+        "leetcode_id": 343,
         "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Number of Smooth Descent Periods of a Stock",
-        "leetcode": "https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/",
-        "requirements": "Count periods of strictly decreasing stock prices"
-      },
-      {
-        "id": 819,
-        "leetcode_id": 256,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Paint House",
-        "leetcode": "https://leetcode.com/problems/paint-house/",
-        "requirements": "Minimize cost of painting houses with different colors"
-      },
-      {
-        "id": 820,
-        "leetcode_id": 1340,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Jump Game V",
-        "leetcode": "https://leetcode.com/problems/jump-game-v/",
-        "requirements": "Maximum buildings visited with height constraints on jumps"
-      },
-      {
-        "id": 821,
-        "leetcode_id": 1575,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count All Possible Routes",
-        "leetcode": "https://leetcode.com/problems/count-all-possible-routes/",
-        "requirements": "Count routes between cities with fuel constraints"
-      }
-    ]
+        "problem": "Integer Break",
+        "leetcode": "https://leetcode.com/problems/integer-break/",
+        "requirements": "Break integer into sum of integers with maximum product"
+    }
+]
   },
   "2D DP": {
     "tip": "2D Dynamic Programming involves creating and filling a two-dimensional table where each cell (i,j) represents the solution to a subproblem defined by two changing parameters. This pattern is essential for problems involving pairs of sequences (like strings or arrays), grid traversal with constraints, or situations where tracking two independent variables is necessary. Look for problems involving string comparisons, matrix paths, matching or alignment, or optimization scenarios with two varying dimensions. The recurrence relation typically depends on previously computed values in the table, often accessing dp[i-1][j], dp[i][j-1], dp[i-1][j-1], or other nearby cells. Visualizing the 2D table and carefully defining the meaning of each cell is crucial for solving these problems successfully.",
     "problems": [
-      {
-        "id": 822,
+    {
+        "id": 1,
         "leetcode_id": 1143,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Longest Common Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-common-subsequence/",
         "requirements": "Find length of longest common subsequence of two strings"
-      },
-      {
-        "id": 823,
+    },
+    {
+        "id": 2,
         "leetcode_id": 72,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Edit Distance",
         "leetcode": "https://leetcode.com/problems/edit-distance/",
         "requirements": "Find minimum operations to convert one string to another"
-      },
-      {
-        "id": 824,
+    },
+    {
+        "id": 3,
         "leetcode_id": 10,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Regular Expression Matching",
         "leetcode": "https://leetcode.com/problems/regular-expression-matching/",
         "requirements": "Implement regex pattern matching with . and *"
-      },
-      {
-        "id": 825,
+    },
+    {
+        "id": 4,
         "leetcode_id": 44,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Wildcard Matching",
         "leetcode": "https://leetcode.com/problems/wildcard-matching/",
         "requirements": "Implement wildcard pattern matching with ? and *"
-      },
-      {
-        "id": 826,
-        "leetcode_id": 97,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Interleaving String",
-        "leetcode": "https://leetcode.com/problems/interleaving-string/",
-        "requirements": "Check if third string is interleaving of two input strings"
-      },
-      {
-        "id": 827,
+    },
+    {
+        "id": 5,
         "leetcode_id": 115,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Distinct Subsequences",
         "leetcode": "https://leetcode.com/problems/distinct-subsequences/",
         "requirements": "Count distinct subsequences matching target string"
-      },
-      {
-        "id": 828,
+    },
+    {
+        "id": 6,
         "leetcode_id": 516,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Longest Palindromic Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-palindromic-subsequence/",
         "requirements": "Find longest palindromic subsequence using 2D DP"
-      },
-      {
-        "id": 829,
-        "leetcode_id": 712,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum ASCII Delete Sum for Two Strings",
-        "leetcode": "https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/",
-        "requirements": "Find minimum ASCII sum of deleted characters to make strings equal"
-      },
-      {
-        "id": 830,
-        "leetcode_id": 1092,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Shortest Common Supersequence",
-        "leetcode": "https://leetcode.com/problems/shortest-common-supersequence/",
-        "requirements": "Find shortest string that has both strings as subsequences"
-      },
-      {
-        "id": 831,
-        "leetcode_id": 1312,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimum Insertion Steps to Make a String Palindrome",
-        "leetcode": "https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/",
-        "requirements": "Find minimum insertions to make string a palindrome"
-      },
-      {
-        "id": 832,
+    },
+    {
+        "id": 7,
         "leetcode_id": 64,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Minimum Path Sum",
         "leetcode": "https://leetcode.com/problems/minimum-path-sum/",
         "requirements": "Find path with minimum sum in grid using 2D DP"
-      },
-      {
-        "id": 833,
+    },
+    {
+        "id": 8,
         "leetcode_id": 62,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Unique Paths",
         "leetcode": "https://leetcode.com/problems/unique-paths/",
         "requirements": "Count unique paths in grid using 2D DP"
-      },
-      {
-        "id": 834,
+    },
+    {
+        "id": 9,
         "leetcode_id": 63,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Unique Paths II",
         "leetcode": "https://leetcode.com/problems/unique-paths-ii/",
         "requirements": "Count unique paths with obstacles using 2D DP"
-      },
-      {
-        "id": 835,
+    },
+    {
+        "id": 10,
         "leetcode_id": 120,
         "difficulty": "Medium",
-        "frequency": "Medium",
         "problem": "Triangle",
         "leetcode": "https://leetcode.com/problems/triangle/",
         "requirements": "Find minimum path sum in triangle using 2D DP"
-      },
-      {
-        "id": 836,
-        "leetcode_id": 931,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Falling Path Sum",
-        "leetcode": "https://leetcode.com/problems/minimum-falling-path-sum/",
-        "requirements": "Find minimum sum of falling path through matrix"
-      },
-      {
-        "id": 837,
+    },
+    {
+        "id": 11,
         "leetcode_id": 221,
         "difficulty": "Medium",
-        "frequency": "High",
         "problem": "Maximal Square",
         "leetcode": "https://leetcode.com/problems/maximal-square/",
         "requirements": "Find largest square of 1's in binary matrix using 2D DP"
-      },
-      {
-        "id": 838,
+    },
+    {
+        "id": 12,
         "leetcode_id": 85,
         "difficulty": "Hard",
-        "frequency": "High",
         "problem": "Maximal Rectangle",
         "leetcode": "https://leetcode.com/problems/maximal-rectangle/",
         "requirements": "Find largest rectangle in binary matrix using 2D DP"
-      },
-      {
-        "id": 839,
-        "leetcode_id": 1277,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Count Square Submatrices with All Ones",
-        "leetcode": "https://leetcode.com/problems/count-square-submatrices-with-all-ones/",
-        "requirements": "Count square submatrices with all 1's using 2D DP"
-      },
-      {
-        "id": 840,
+    },
+    {
+        "id": 13,
         "leetcode_id": 174,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Dungeon Game",
         "leetcode": "https://leetcode.com/problems/dungeon-game/",
         "requirements": "Find minimum initial health to reach bottom-right cell"
-      },
-      {
-        "id": 841,
+    },
+    {
+        "id": 14,
         "leetcode_id": 741,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Cherry Pickup",
         "leetcode": "https://leetcode.com/problems/cherry-pickup/",
         "requirements": "Collect maximum cherries with two traversals using 2D DP"
-      },
-      {
-        "id": 842,
-        "leetcode_id": 1463,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Cherry Pickup II",
-        "leetcode": "https://leetcode.com/problems/cherry-pickup-ii/",
-        "requirements": "Two robots collecting cherries using 2D DP"
-      },
-      {
-        "id": 843,
-        "leetcode_id": 123,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Best Time to Buy and Sell Stock III",
-        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/",
-        "requirements": "Maximum profit with 2 transactions using 2D state representation"
-      },
-      {
-        "id": 844,
+    },
+    {
+        "id": 15,
         "leetcode_id": 188,
         "difficulty": "Hard",
-        "frequency": "Medium",
         "problem": "Best Time to Buy and Sell Stock IV",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/",
         "requirements": "Maximum profit with k transactions using 2D DP"
-      },
-      {
-        "id": 845,
-        "leetcode_id": 688,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Knight Probability in Chessboard",
-        "leetcode": "https://leetcode.com/problems/knight-probability-in-chessboard/",
-        "requirements": "Probability of knight staying on board after k moves"
-      },
-      {
-        "id": 846,
-        "leetcode_id": 1140,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Stone Game II",
-        "leetcode": "https://leetcode.com/problems/stone-game-ii/",
-        "requirements": "Game theory maximum score using 2D DP"
-      },
-      {
-        "id": 847,
-        "leetcode_id": 494,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Target Sum",
-        "leetcode": "https://leetcode.com/problems/target-sum/",
-        "requirements": "Count ways to assign + and - using 2D DP approach"
-      },
-      {
-        "id": 848,
-        "leetcode_id": 1499,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Max Value of Equation",
-        "leetcode": "https://leetcode.com/problems/max-value-of-equation/",
-        "requirements": "Maximum value of yi + yj + |xi - xj| with 2D constraints"
-      },
-      {
-        "id": 849,
-        "leetcode_id": 1444,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Number of Ways of Cutting a Pizza",
-        "leetcode": "https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/",
-        "requirements": "Count ways to cut pizza k times with apples using 2D DP"
-      },
-      {
-        "id": 850,
-        "leetcode_id": 1691,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Maximum Height by Stacking Cuboids",
-        "leetcode": "https://leetcode.com/problems/maximum-height-by-stacking-cuboids/",
-        "requirements": "Maximum height by stacking cuboids with 2D state tracking"
-      },
-      {
-        "id": 851,
-        "leetcode_id": 1937,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Number of Points with Cost",
-        "leetcode": "https://leetcode.com/problems/maximum-number-of-points-with-cost/",
-        "requirements": "Maximum points with position cost using 2D DP"
-      }
-    ]
+    }
+]
   },
   "Segment Trees": {
     "tip": "Segment Trees are a specialized data structure that allows for efficient range queries and updates on arrays. They enable operations like finding the sum, minimum, maximum, or GCD of elements within any range in O(log n) time, while also supporting modifications to the underlying array also in O(log n) time. Look for problems involving multiple range queries or updates, especially those that would be inefficient with brute force approaches. Key indicators include 'range queries', 'interval operations', or problems requiring repeated computation over dynamic intervals. Segment trees are particularly useful when you need to handle both queries and updates efficiently, unlike prefix sums which only handle queries well but struggle with updates.",
     "problems": [
-      {
-        "id": 852,
-        "leetcode_id": 307,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Range Sum Query - Mutable",
-        "leetcode": "https://leetcode.com/problems/range-sum-query-mutable/",
-        "requirements": "Support range sum queries with array modifications"
-      },
-      {
-        "id": 853,
-        "leetcode_id": 308,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Range Sum Query 2D - Mutable",
-        "leetcode": "https://leetcode.com/problems/range-sum-query-2d-mutable/",
-        "requirements": "Support 2D range sum queries with matrix modifications"
-      },
-      {
-        "id": 854,
-        "leetcode_id": 315,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count of Smaller Numbers After Self",
-        "leetcode": "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
-        "requirements": "Count smaller elements to the right of each element"
-      },
-      {
-        "id": 855,
-        "leetcode_id": 493,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Reverse Pairs",
-        "leetcode": "https://leetcode.com/problems/reverse-pairs/",
-        "requirements": "Count pairs i < j where nums[i] > 2*nums[j]"
-      },
-      {
-        "id": 856,
-        "leetcode_id": 327,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count of Range Sum",
-        "leetcode": "https://leetcode.com/problems/count-of-range-sum/",
-        "requirements": "Count range sums within a specific range"
-      },
-      {
-        "id": 857,
-        "leetcode_id": 218,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "The Skyline Problem",
-        "leetcode": "https://leetcode.com/problems/the-skyline-problem/",
-        "requirements": "Find skyline formed by buildings using segment tree"
-      },
-      {
-        "id": 858,
-        "leetcode_id": 732,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "My Calendar III",
-        "leetcode": "https://leetcode.com/problems/my-calendar-iii/",
-        "requirements": "Find maximum booking overlaps using segment tree"
-      },
-      {
-        "id": 859,
-        "leetcode_id": 699,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Falling Squares",
-        "leetcode": "https://leetcode.com/problems/falling-squares/",
-        "requirements": "Track heights as squares fall using segment tree"
-      },
-      {
-        "id": 860,
-        "leetcode_id": 1157,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Online Majority Element In Subarray",
-        "leetcode": "https://leetcode.com/problems/online-majority-element-in-subarray/",
-        "requirements": "Find majority element in given range"
-      },
-      {
-        "id": 861,
-        "leetcode_id": 715,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Range Module",
-        "leetcode": "https://leetcode.com/problems/range-module/",
-        "requirements": "Track ranges with add, remove, and query operations"
-      },
-      {
-        "id": 862,
-        "leetcode_id": 1649,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Create Sorted Array through Instructions",
-        "leetcode": "https://leetcode.com/problems/create-sorted-array-through-instructions/",
-        "requirements": "Count elements less than and greater than current"
-      },
-      {
-        "id": 863,
-        "leetcode_id": 1622,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Fancy Sequence",
-        "leetcode": "https://leetcode.com/problems/fancy-sequence/",
-        "requirements": "Support sequence operations with lazy propagation"
-      },
-      {
-        "id": 864,
-        "leetcode_id": 850,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Rectangle Area II",
-        "leetcode": "https://leetcode.com/problems/rectangle-area-ii/",
-        "requirements": "Calculate area covered by rectangles using segment tree"
-      },
-      {
-        "id": 865,
-        "leetcode_id": 239,
-        "difficulty": "Hard",
-        "frequency": "High",
-        "problem": "Sliding Window Maximum",
-        "leetcode": "https://leetcode.com/problems/sliding-window-maximum/",
-        "requirements": "Find maximum in sliding window using segment tree"
-      },
-      {
-        "id": 866,
-        "leetcode_id": 2407,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Longest Increasing Subsequence II",
-        "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence-ii/",
-        "requirements": "Find LIS with difference constraint using segment tree"
-      },
-      {
-        "id": 867,
-        "leetcode_id": 2179,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count Good Triplets in an Array",
-        "leetcode": "https://leetcode.com/problems/count-good-triplets-in-an-array/",
-        "requirements": "Count triplets maintaining relative positions"
-      },
-      {
-        "id": 868,
-        "leetcode_id": 2213,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Longest Substring of One Repeating Character",
-        "leetcode": "https://leetcode.com/problems/longest-substring-of-one-repeating-character/",
-        "requirements": "Find longest repeating character after replacements"
-      },
-      {
-        "id": 869,
-        "leetcode_id": 2940,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Find Building Where Alice and Bob Can Meet",
-        "leetcode": "https://leetcode.com/problems/find-building-where-alice-and-bob-can-meet/",
-        "requirements": "Find meeting points with height constraints"
-      },
-      {
-        "id": 870,
-        "leetcode_id": 2286,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Booking Concert Tickets in Groups",
-        "leetcode": "https://leetcode.com/problems/booking-concert-tickets-in-groups/",
-        "requirements": "Book seats with max and sum queries"
-      },
-      {
-        "id": 871,
-        "leetcode_id": 2276,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count Integers in Intervals",
-        "leetcode": "https://leetcode.com/problems/count-integers-in-intervals/",
-        "requirements": "Count integers covered by intervals with updates"
-      },
-      {
-        "id": 872,
-        "leetcode_id": 1224,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Maximum Equal Frequency",
-        "leetcode": "https://leetcode.com/problems/maximum-equal-frequency/",
-        "requirements": "Find longest prefix where frequency condition holds"
-      },
-      {
-        "id": 873,
-        "leetcode_id": 1851,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimum Interval to Include Each Query",
-        "leetcode": "https://leetcode.com/problems/minimum-interval-to-include-each-query/",
-        "requirements": "Find smallest interval containing each query point"
-      },
-      {
-        "id": 874,
-        "leetcode_id": 2158,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Amount of New Area Painted Each Day",
-        "leetcode": "https://leetcode.com/problems/amount-of-new-area-painted-each-day/",
-        "requirements": "Track newly painted sections using segment tree"
-      },
-      {
-        "id": 875,
-        "leetcode_id": 2916,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Subarrays Distinct Element Sum of Squares II",
-        "leetcode": "https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-ii/",
-        "requirements": "Calculate sum of squares of distinct counts"
-      },
-      {
-        "id": 876,
-        "leetcode_id": 1637,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Widest Vertical Area Between Two Points Containing No Points",
-        "leetcode": "https://leetcode.com/problems/widest-vertical-area-between-two-points-containing-no-points/",
-        "requirements": "Find maximum gap between sorted x-coordinates"
-      },
-      {
-        "id": 877,
-        "leetcode_id": 2569,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Handling Sum Queries After Update",
-        "leetcode": "https://leetcode.com/problems/handling-sum-queries-after-update/",
-        "requirements": "Process queries with bit flipping and sum operations"
-      },
-      {
-        "id": 878,
-        "leetcode_id": 683,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "K Empty Slots",
-        "leetcode": "https://leetcode.com/problems/k-empty-slots/",
-        "requirements": "Find day when exactly k empty slots between blooming flowers"
-      },
-      {
-        "id": 879,
-        "leetcode_id": 768,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Max Chunks To Make Sorted II",
-        "leetcode": "https://leetcode.com/problems/max-chunks-to-make-sorted-ii/",
-        "requirements": "Maximize number of chunks that sort to original array"
-      },
-      {
-        "id": 880,
-        "leetcode_id": 2426,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Number of Pairs Satisfying Inequality",
-        "leetcode": "https://leetcode.com/problems/number-of-pairs-satisfying-inequality/",
-        "requirements": "Count pairs with nums1[i] - nums1[j] <= nums2[i] - nums2[j] + diff"
-      },
-      {
-        "id": 881,
-        "leetcode_id": 370,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Range Addition",
-        "leetcode": "https://leetcode.com/problems/range-addition/",
-        "requirements": "Process range update operations efficiently"
-      }
-    ]
+  {
+    "id": 1,
+    "leetcode_id": 307,
+    "difficulty": "Medium",
+    "problem": "Range Sum Query - Mutable",
+    "leetcode": "https://leetcode.com/problems/range-sum-query-mutable/",
+    "requirements": "Implement data structure for range sum queries with updates"
+  },
+  {
+    "id": 2,
+    "leetcode_id": 239,
+    "difficulty": "Hard",
+    "problem": "Sliding Window Maximum",
+    "leetcode": "https://leetcode.com/problems/sliding-window-maximum/",
+    "requirements": "Find maximum element in sliding window using range queries"
+  },
+  {
+    "id": 3,
+    "leetcode_id": 315,
+    "difficulty": "Hard",
+    "problem": "Count of Smaller Numbers After Self",
+    "leetcode": "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
+    "requirements": "Count smaller elements to the right using segment tree"
+  },
+  {
+    "id": 4,
+    "leetcode_id": 732,
+    "difficulty": "Hard",
+    "problem": "My Calendar III",
+    "leetcode": "https://leetcode.com/problems/my-calendar-iii/",
+    "requirements": "Track maximum booking overlaps using lazy propagation"
+  },
+  {
+    "id": 5,
+    "leetcode_id": 715,
+    "difficulty": "Hard",
+    "problem": "Range Module",
+    "leetcode": "https://leetcode.com/problems/range-module/",
+    "requirements": "Implement data structure for tracking ranges"
+  },
+  {
+    "id": 6,
+    "leetcode_id": 218,
+    "difficulty": "Hard",
+    "problem": "The Skyline Problem",
+    "leetcode": "https://leetcode.com/problems/the-skyline-problem/",
+    "requirements": "Find skyline formed by buildings using segment tree"
+  },
+  {
+    "id": 7,
+    "leetcode_id": 493,
+    "difficulty": "Hard",
+    "problem": "Reverse Pairs",
+    "leetcode": "https://leetcode.com/problems/reverse-pairs/",
+    "requirements": "Count reverse pairs (i<j, nums[i]>2*nums[j]) using segment tree"
+  },
+  {
+    "id": 8,
+    "leetcode_id": 308,
+    "difficulty": "Hard",
+    "problem": "Range Sum Query 2D - Mutable",
+    "leetcode": "https://leetcode.com/problems/range-sum-query-2d-mutable/",
+    "requirements": "Implement 2D range sum query with updates"
+  },
+  {
+    "id": 9,
+    "leetcode_id": 699,
+    "difficulty": "Hard",
+    "problem": "Falling Squares",
+    "leetcode": "https://leetcode.com/problems/falling-squares/",
+    "requirements": "Track maximum height after placing squares using lazy updates"
+  },
+  {
+    "id": 10,
+    "leetcode_id": 327,
+    "difficulty": "Hard",
+    "problem": "Count of Range Sum",
+    "leetcode": "https://leetcode.com/problems/count-of-range-sum/",
+    "requirements": "Count range sums within specific range using segment tree"
+  },
+  {
+    "id": 11,
+    "leetcode_id": 850,
+    "difficulty": "Hard",
+    "problem": "Rectangle Area II",
+    "leetcode": "https://leetcode.com/problems/rectangle-area-ii/",
+    "requirements": "Calculate total area covered by rectangles using segment tree"
+  },
+  {
+    "id": 12,
+    "leetcode_id": 2407,
+    "difficulty": "Hard",
+    "problem": "Longest Increasing Subsequence II",
+    "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence-ii/",
+    "requirements": "Find LIS with difference constraints using segment tree"
+  },
+  {
+    "id": 13,
+    "leetcode_id": 1649,
+    "difficulty": "Hard",
+    "problem": "Create Sorted Array through Instructions",
+    "leetcode": "https://leetcode.com/problems/create-sorted-array-through-instructions/",
+    "requirements": "Count elements smaller/greater than current using segment tree"
+  },
+  {
+    "id": 14,
+    "leetcode_id": 2158,
+    "difficulty": "Hard",
+    "problem": "Amount of New Area Painted Each Day",
+    "leetcode": "https://leetcode.com/problems/amount-of-new-area-painted-each-day/",
+    "requirements": "Track painted intervals using lazy segment tree"
+  },
+  {
+    "id": 15,
+    "leetcode_id": 1157,
+    "difficulty": "Hard",
+    "problem": "Online Majority Element In Subarray",
+    "leetcode": "https://leetcode.com/problems/online-majority-element-in-subarray/",
+    "requirements": "Find majority element in range using segment tree"
+  }
+]
   },
   "Intervals": {
     "tip": "Interval problems involve ranges defined by start and end points, and typically require analyzing their relationships (overlap, containment, adjacency). The key to solving these problems often lies in sorting the intervals (usually by start or end point) and then processing them in order. Watch for problems involving scheduling, resource allocation, or range-based operations. Look for keywords like 'merge', 'overlap', 'conflicting intervals', or scenarios dealing with time periods, meeting rooms, or coverage. Common operations include merging overlapping intervals, finding gaps between intervals, calculating total covered length, and resolving conflicts. Visualizing intervals on a number line can help clarify the logic needed for these problems.",
     "problems": [
-      {
-        "id": 702,
-        "leetcode_id": 56,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Merge Intervals",
-        "leetcode": "https://leetcode.com/problems/merge-intervals/",
-        "requirements": "Merge all overlapping intervals into non-overlapping intervals"
-      },
-      {
-        "id": 703,
-        "leetcode_id": 57,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Insert Interval",
-        "leetcode": "https://leetcode.com/problems/insert-interval/",
-        "requirements": "Insert a new interval and merge if necessary"
-      },
-      {
-        "id": 704,
-        "leetcode_id": 252,
-        "difficulty": "Easy",
-        "frequency": "High",
-        "problem": "Meeting Rooms",
-        "leetcode": "https://leetcode.com/problems/meeting-rooms/",
-        "requirements": "Determine if a person can attend all meetings"
-      },
-      {
-        "id": 705,
-        "leetcode_id": 253,
-        "difficulty": "Medium",
-        "frequency": "High",
-        "problem": "Meeting Rooms II",
-        "leetcode": "https://leetcode.com/problems/meeting-rooms-ii/",
-        "requirements": "Find minimum number of conference rooms required"
-      },
-      {
-        "id": 706,
-        "leetcode_id": 435,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Non-overlapping Intervals",
-        "leetcode": "https://leetcode.com/problems/non-overlapping-intervals/",
-        "requirements": "Find minimum intervals to remove to make all non-overlapping"
-      },
-      {
-        "id": 707,
-        "leetcode_id": 1288,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Remove Covered Intervals",
-        "leetcode": "https://leetcode.com/problems/remove-covered-intervals/",
-        "requirements": "Remove intervals that are covered by another interval"
-      },
-      {
-        "id": 708,
-        "leetcode_id": 986,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Interval List Intersections",
-        "leetcode": "https://leetcode.com/problems/interval-list-intersections/",
-        "requirements": "Find intersections of two lists of intervals"
-      },
-      {
-        "id": 709,
-        "leetcode_id": 759,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Employee Free Time",
-        "leetcode": "https://leetcode.com/problems/employee-free-time/",
-        "requirements": "Find common free time intervals across all employees"
-      },
-      {
-        "id": 710,
-        "leetcode_id": 1094,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Car Pooling",
-        "leetcode": "https://leetcode.com/problems/car-pooling/",
-        "requirements": "Determine if all passengers can be picked up and dropped off"
-      },
-      {
-        "id": 711,
-        "leetcode_id": 452,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Number of Arrows to Burst Balloons",
-        "leetcode": "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/",
-        "requirements": "Find minimum arrows to burst all balloons with interval representation"
-      },
-      {
-        "id": 712,
-        "leetcode_id": 1235,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Maximum Profit in Job Scheduling",
-        "leetcode": "https://leetcode.com/problems/maximum-profit-in-job-scheduling/",
-        "requirements": "Find maximum profit from non-overlapping jobs"
-      },
-      {
-        "id": 713,
-        "leetcode_id": 218,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "The Skyline Problem",
-        "leetcode": "https://leetcode.com/problems/the-skyline-problem/",
-        "requirements": "Find skyline formed by buildings represented as intervals"
-      },
-      {
-        "id": 714,
-        "leetcode_id": 1272,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Remove Interval",
-        "leetcode": "https://leetcode.com/problems/remove-interval/",
-        "requirements": "Remove portions of intervals that overlap with given interval"
-      },
-      {
-        "id": 715,
-        "leetcode_id": 352,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Data Stream as Disjoint Intervals",
-        "leetcode": "https://leetcode.com/problems/data-stream-as-disjoint-intervals/",
-        "requirements": "Design data structure for disjoint intervals from stream of integers"
-      },
-      {
-        "id": 716,
-        "leetcode_id": 1851,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Minimum Interval to Include Each Query",
-        "leetcode": "https://leetcode.com/problems/minimum-interval-to-include-each-query/",
-        "requirements": "Find minimum size interval containing each query point"
-      },
-      {
-        "id": 717,
-        "leetcode_id": 1229,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Meeting Scheduler",
-        "leetcode": "https://leetcode.com/problems/meeting-scheduler/",
-        "requirements": "Find earliest time slot of given duration available for both persons"
-      },
-      {
-        "id": 718,
-        "leetcode_id": 1024,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Video Stitching",
-        "leetcode": "https://leetcode.com/problems/video-stitching/",
-        "requirements": "Find minimum clips needed to cover entire time range"
-      },
-      {
-        "id": 719,
-        "leetcode_id": 1589,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Maximum Sum Obtained of Any Permutation",
-        "leetcode": "https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/",
-        "requirements": "Maximize sum of elements covered by requests intervals"
-      },
-      {
-        "id": 720,
-        "leetcode_id": 1893,
-        "difficulty": "Easy",
-        "frequency": "Medium",
-        "problem": "Check if All the Integers in a Range Are Covered",
-        "leetcode": "https://leetcode.com/problems/check-if-all-the-integers-in-a-range-are-covered/",
-        "requirements": "Check if range is completely covered by intervals"
-      },
-      {
-        "id": 721,
-        "leetcode_id": 2276,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Count Integers in Intervals",
-        "leetcode": "https://leetcode.com/problems/count-integers-in-intervals/",
-        "requirements": "Count integers covered after adding intervals dynamically"
-      },
-      {
-        "id": 722,
-        "leetcode_id": 699,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Falling Squares",
-        "leetcode": "https://leetcode.com/problems/falling-squares/",
-        "requirements": "Compute height profile as squares fall on 1D line"
-      },
-      {
-        "id": 723,
-        "leetcode_id": 1674,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Minimum Moves to Make Array Complementary",
-        "leetcode": "https://leetcode.com/problems/minimum-moves-to-make-array-complementary/",
-        "requirements": "Find minimum moves to make all pairs sum to same value"
-      },
-      {
-        "id": 724,
-        "leetcode_id": 2158,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Amount of New Area Painted Each Day",
-        "leetcode": "https://leetcode.com/problems/amount-of-new-area-painted-each-day/",
-        "requirements": "Calculate newly painted area each day with overlapping intervals"
-      },
-      {
-        "id": 725,
-        "leetcode_id": 850,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "Rectangle Area II",
-        "leetcode": "https://leetcode.com/problems/rectangle-area-ii/",
-        "requirements": "Find total area covered by rectangles"
-      },
-      {
-        "id": 726,
-        "leetcode_id": 732,
-        "difficulty": "Hard",
-        "frequency": "Medium",
-        "problem": "My Calendar III",
-        "leetcode": "https://leetcode.com/problems/my-calendar-iii/",
-        "requirements": "Find maximum number of overlapping calendar events"
-      },
-      {
-        "id": 727,
-        "leetcode_id": 731,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "My Calendar II",
-        "leetcode": "https://leetcode.com/problems/my-calendar-ii/",
-        "requirements": "Implement calendar that detects triple booking"
-      },
-      {
-        "id": 728,
-        "leetcode_id": 729,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "My Calendar I",
-        "leetcode": "https://leetcode.com/problems/my-calendar-i/",
-        "requirements": "Implement calendar that rejects overlapping events"
-      },
-      {
-        "id": 729,
-        "leetcode_id": 2406,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Divide Intervals Into Minimum Number of Groups",
-        "leetcode": "https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/",
-        "requirements": "Divide intervals into minimum number of conflict-free groups"
-      },
-      {
-        "id": 730,
-        "leetcode_id": 495,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Teemo Attacking",
-        "leetcode": "https://leetcode.com/problems/teemo-attacking/",
-        "requirements": "Calculate total duration of poisoning from overlapping attacks"
-      },
-      {
-        "id": 731,
-        "leetcode_id": 370,
-        "difficulty": "Medium",
-        "frequency": "Medium",
-        "problem": "Range Addition",
-        "leetcode": "https://leetcode.com/problems/range-addition/",
-        "requirements": "Apply multiple range addition operations efficiently"
-      }
-    ]
+  {
+    "id": 1,
+    "leetcode_id": 56,
+    "difficulty": "Medium",
+    "frequency": "High",
+    "problem": "Merge Intervals",
+    "leetcode": "https://leetcode.com/problems/merge-intervals/",
+    "requirements": "Merge all overlapping intervals into non-overlapping intervals"
+  },
+  {
+    "id": 2,
+    "leetcode_id": 57,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Insert Interval",
+    "leetcode": "https://leetcode.com/problems/insert-interval/",
+    "requirements": "Insert a new interval and merge if necessary"
+  },
+  {
+    "id": 3,
+    "leetcode_id": 252,
+    "difficulty": "Easy",
+    "frequency": "High",
+    "problem": "Meeting Rooms",
+    "leetcode": "https://leetcode.com/problems/meeting-rooms/",
+    "requirements": "Determine if a person can attend all meetings"
+  },
+  {
+    "id": 4,
+    "leetcode_id": 253,
+    "difficulty": "Medium",
+    "frequency": "High",
+    "problem": "Meeting Rooms II",
+    "leetcode": "https://leetcode.com/problems/meeting-rooms-ii/",
+    "requirements": "Find minimum number of conference rooms required"
+  },
+  {
+    "id": 5,
+    "leetcode_id": 435,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Non-overlapping Intervals",
+    "leetcode": "https://leetcode.com/problems/non-overlapping-intervals/",
+    "requirements": "Find minimum intervals to remove to make all non-overlapping"
+  },
+  {
+    "id": 6,
+    "leetcode_id": 1288,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Remove Covered Intervals",
+    "leetcode": "https://leetcode.com/problems/remove-covered-intervals/",
+    "requirements": "Remove intervals that are covered by another interval"
+  },
+  {
+    "id": 7,
+    "leetcode_id": 986,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Interval List Intersections",
+    "leetcode": "https://leetcode.com/problems/interval-list-intersections/",
+    "requirements": "Find intersections of two lists of intervals"
+  },
+  {
+    "id": 8,
+    "leetcode_id": 759,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Employee Free Time",
+    "leetcode": "https://leetcode.com/problems/employee-free-time/",
+    "requirements": "Find common free time intervals across all employees"
+  },
+  {
+    "id": 9,
+    "leetcode_id": 1094,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Car Pooling",
+    "leetcode": "https://leetcode.com/problems/car-pooling/",
+    "requirements": "Determine if all passengers can be picked up and dropped off"
+  },
+  {
+    "id": 10,
+    "leetcode_id": 452,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Minimum Number of Arrows to Burst Balloons",
+    "leetcode": "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/",
+    "requirements": "Find minimum arrows to burst all balloons with interval representation"
+  },
+  {
+    "id": 11,
+    "leetcode_id": 1235,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Maximum Profit in Job Scheduling",
+    "leetcode": "https://leetcode.com/problems/maximum-profit-in-job-scheduling/",
+    "requirements": "Find maximum profit from non-overlapping jobs"
+  },
+  {
+    "id": 12,
+    "leetcode_id": 218,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "The Skyline Problem",
+    "leetcode": "https://leetcode.com/problems/the-skyline-problem/",
+    "requirements": "Find skyline formed by buildings represented as intervals"
+  },
+  {
+    "id": 13,
+    "leetcode_id": 1229,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Meeting Scheduler",
+    "leetcode": "https://leetcode.com/problems/meeting-scheduler/",
+    "requirements": "Find earliest time slot of given duration available for both persons"
+  },
+  {
+    "id": 14,
+    "leetcode_id": 1024,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Video Stitching",
+    "leetcode": "https://leetcode.com/problems/video-stitching/",
+    "requirements": "Find minimum clips needed to cover entire time range"
+  },
+  {
+    "id": 15,
+    "leetcode_id": 370,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Range Addition",
+    "leetcode": "https://leetcode.com/problems/range-addition/",
+    "requirements": "Apply multiple range addition operations efficiently"
+  }
+]
   },
   "Bit Manipulation": {
     "tip": "Bit Manipulation involves directly manipulating individual bits in a number using bitwise operators like AND (&), OR (|), XOR (^), NOT (~), and bit shifts (<<, >>). This technique is useful for problems involving binary representation, optimization of space usage, or implementing certain algorithms more efficiently. Look for problems involving counting bits, power of two checks, finding unique numbers, or scenarios where using the binary structure of numbers provides elegant solutions. Bit manipulation often leads to solutions that are both time and space efficient, and can simplify complex logic that would otherwise require multiple conditional statements or loops.",
     "problems": [
       {
-        "id": 882,
+        "id": 1,
         "leetcode_id": 136,
         "difficulty": "Easy",
         "frequency": "High",
@@ -6575,7 +4718,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find the number that appears only once using XOR"
       },
       {
-        "id": 883,
+        "id": 2,
         "leetcode_id": 191,
         "difficulty": "Easy",
         "frequency": "High",
@@ -6584,7 +4727,7 @@ const CATEGORIES_DATA = {
         "requirements": "Count the number of 1 bits in an integer"
       },
       {
-        "id": 884,
+        "id": 3,
         "leetcode_id": 338,
         "difficulty": "Easy",
         "frequency": "Medium",
@@ -6593,7 +4736,7 @@ const CATEGORIES_DATA = {
         "requirements": "Count bits in numbers from 0 to n efficiently"
       },
       {
-        "id": 885,
+        "id": 4,
         "leetcode_id": 190,
         "difficulty": "Easy",
         "frequency": "Medium",
@@ -6602,7 +4745,7 @@ const CATEGORIES_DATA = {
         "requirements": "Reverse the bits of a 32-bit unsigned integer"
       },
       {
-        "id": 886,
+        "id": 5,
         "leetcode_id": 371,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6611,7 +4754,7 @@ const CATEGORIES_DATA = {
         "requirements": "Add two numbers without using + or - operators"
       },
       {
-        "id": 887,
+        "id": 6,
         "leetcode_id": 268,
         "difficulty": "Easy",
         "frequency": "Medium",
@@ -6620,7 +4763,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find missing number using bit manipulation"
       },
       {
-        "id": 888,
+        "id": 7,
         "leetcode_id": 137,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6629,7 +4772,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find number that appears once while others appear three times"
       },
       {
-        "id": 889,
+        "id": 8,
         "leetcode_id": 260,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6638,7 +4781,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find two numbers that appear only once"
       },
       {
-        "id": 890,
+        "id": 9,
         "leetcode_id": 201,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6647,7 +4790,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find AND of all numbers in a range"
       },
       {
-        "id": 891,
+        "id": 10,
         "leetcode_id": 231,
         "difficulty": "Easy",
         "frequency": "Medium",
@@ -6656,7 +4799,7 @@ const CATEGORIES_DATA = {
         "requirements": "Check if number is power of two using bit manipulation"
       },
       {
-        "id": 892,
+        "id": 11,
         "leetcode_id": 1009,
         "difficulty": "Easy",
         "frequency": "Medium",
@@ -6665,7 +4808,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find the complement of a number"
       },
       {
-        "id": 893,
+        "id": 12,
         "leetcode_id": 78,
         "difficulty": "Medium",
         "frequency": "High",
@@ -6674,7 +4817,7 @@ const CATEGORIES_DATA = {
         "requirements": "Generate all subsets using bit manipulation"
       },
       {
-        "id": 894,
+        "id": 13,
         "leetcode_id": 421,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6683,7 +4826,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find maximum XOR of any two numbers in array"
       },
       {
-        "id": 895,
+        "id": 14,
         "leetcode_id": 1342,
         "difficulty": "Easy",
         "frequency": "Medium",
@@ -6692,7 +4835,7 @@ const CATEGORIES_DATA = {
         "requirements": "Count steps to reduce number to zero using bit operations"
       },
       {
-        "id": 896,
+        "id": 15,
         "leetcode_id": 1720,
         "difficulty": "Easy",
         "frequency": "Medium",
@@ -6706,7 +4849,7 @@ const CATEGORIES_DATA = {
     "tip": "Math & Geometry problems leverage mathematical principles, formulas, and geometric concepts to solve computational challenges. These problems often have elegant solutions that rely on mathematical insights rather than complex algorithms. Look for problems involving number theory, combinatorics, probability, coordinate geometry, or pattern recognition. The key to solving these problems is identifying the underlying mathematical principle and applying the appropriate formula or approach. While these problems may seem specialized, they test fundamental problem-solving abilities and often have applications in various domains of computer science and engineering.",
     "problems": [
       {
-        "id": 897,
+        "id": 1,
         "leetcode_id": 50,
         "difficulty": "Medium",
         "frequency": "High",
@@ -6715,7 +4858,7 @@ const CATEGORIES_DATA = {
         "requirements": "Implement efficient power function using exponentiation by squaring"
       },
       {
-        "id": 898,
+        "id": 2,
         "leetcode_id": 69,
         "difficulty": "Easy",
         "frequency": "High",
@@ -6724,7 +4867,7 @@ const CATEGORIES_DATA = {
         "requirements": "Implement square root function without using built-in math functions"
       },
       {
-        "id": 899,
+        "id": 3,
         "leetcode_id": 204,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6733,7 +4876,7 @@ const CATEGORIES_DATA = {
         "requirements": "Count prime numbers less than n using Sieve of Eratosthenes"
       },
       {
-        "id": 900,
+        "id": 4,
         "leetcode_id": 48,
         "difficulty": "Medium",
         "frequency": "High",
@@ -6742,7 +4885,7 @@ const CATEGORIES_DATA = {
         "requirements": "Rotate a matrix 90 degrees clockwise in-place"
       },
       {
-        "id": 901,
+        "id": 5,
         "leetcode_id": 43,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6751,7 +4894,7 @@ const CATEGORIES_DATA = {
         "requirements": "Multiply two numbers represented as strings"
       },
       {
-        "id": 902,
+        "id": 6,
         "leetcode_id": 13,
         "difficulty": "Easy",
         "frequency": "High",
@@ -6760,7 +4903,7 @@ const CATEGORIES_DATA = {
         "requirements": "Convert Roman numeral to integer"
       },
       {
-        "id": 903,
+        "id": 7,
         "leetcode_id": 12,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6769,7 +4912,7 @@ const CATEGORIES_DATA = {
         "requirements": "Convert integer to Roman numeral"
       },
       {
-        "id": 904,
+        "id": 8,
         "leetcode_id": 149,
         "difficulty": "Hard",
         "frequency": "Medium",
@@ -6778,7 +4921,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find maximum points that lie on the same line"
       },
       {
-        "id": 905,
+        "id": 9,
         "leetcode_id": 60,
         "difficulty": "Hard",
         "frequency": "Medium",
@@ -6787,7 +4930,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find the kth permutation sequence using factorial number system"
       },
       {
-        "id": 906,
+        "id": 10,
         "leetcode_id": 172,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6796,7 +4939,7 @@ const CATEGORIES_DATA = {
         "requirements": "Count trailing zeroes in factorial of n"
       },
       {
-        "id": 907,
+        "id": 11,
         "leetcode_id": 7,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6805,7 +4948,7 @@ const CATEGORIES_DATA = {
         "requirements": "Reverse digits of an integer with overflow handling"
       },
       {
-        "id": 908,
+        "id": 12,
         "leetcode_id": 29,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6814,7 +4957,7 @@ const CATEGORIES_DATA = {
         "requirements": "Divide two integers without using multiplication, division or mod"
       },
       {
-        "id": 909,
+        "id": 13,
         "leetcode_id": 223,
         "difficulty": "Medium",
         "frequency": "Medium",
@@ -6823,7 +4966,7 @@ const CATEGORIES_DATA = {
         "requirements": "Find total area covered by two overlapping rectangles"
       },
       {
-        "id": 910,
+        "id": 14,
         "leetcode_id": 9,
         "difficulty": "Easy",
         "frequency": "High",
@@ -6832,7 +4975,7 @@ const CATEGORIES_DATA = {
         "requirements": "Determine if an integer is a palindrome without converting to string"
       },
       {
-        "id": 911,
+        "id": 15,
         "leetcode_id": 166,
         "difficulty": "Medium",
         "frequency": "Medium",
