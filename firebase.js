@@ -6664,7 +6664,6 @@ function getCategoryTitle(category) {
   return category;
 }
 
-// Initialize the ag-Grid with column definitions and row data
 function initializeGrid(category) {
   console.log(`Initializing grid for category: ${category}`);
   
@@ -6672,7 +6671,8 @@ function initializeGrid(category) {
     console.error(`No data found for category: ${category}`);
     return;
   }
-
+  
+  // Status column - only shown for logged in users
   const statusColumn = currentUser
     ? [{
         headerName: 'Status',
@@ -6689,9 +6689,53 @@ function initializeGrid(category) {
         headerClass: 'ag-center-header'
       }]
     : []; // Omit column if not logged in
-
+  
+  // Video column - only shown if video data exists
+  const videoColumn = [{
+    headerName: '',
+    field: 'video_url',
+    width: 50,
+    cellRenderer: (params) => {
+      //if (!params.value) return '';
+      // Using YouTube icon (play button icon)
+      return `<a href="${params.value}" target="_blank" title="Watch Video Solution" class="grid-icon youtube-icon">&#9654;&#65039;</a>`;
+    },
+    suppressSizeToFit: true,
+    headerClass: 'ag-center-header',
+    filter: {
+      valueGetter: params => !!params.data.video_url,
+      filterParams: {
+        values: [true, false],
+        cellRenderer: params => params.value ? 'Has Video' : 'No Video'
+      }
+    }
+  }];
+  
+  // Article column - only shown if article data exists
+  const articleColumn = [{
+    headerName: '',
+    field: 'article_url',
+    width: 50,
+    cellRenderer: (params) => {
+     // if (!params.value) return '';
+      // Using document icon
+      return `<a href="${params.value}" target="_blank" title="Read Article Solution" class="grid-icon article-icon">&#128196;</a>`;
+    },
+    suppressSizeToFit: true,
+    headerClass: 'ag-center-header',
+    filter: {
+      valueGetter: params => !!params.data.article_url,
+      filterParams: {
+        values: [true, false],
+        cellRenderer: params => params.value ? 'Has Article' : 'No Article'
+      }
+    }
+  }];
+  
   const columnDefs = [
     ...statusColumn,
+    ...videoColumn,
+    ...articleColumn,
     {
       headerName: 'Problem',
       field: 'problem',
@@ -6731,7 +6775,8 @@ function initializeGrid(category) {
   
   // For "all" category, add a Category column
   if (category === 'all') {
-    columnDefs.splice(2, 0, {
+    // Insert the category column after the problem column
+    columnDefs.splice(4, 0, {
       headerName: 'Category',
       field: 'category',
       width: 150,
@@ -6748,7 +6793,7 @@ function initializeGrid(category) {
     rowCount: rowData.length,
     firstRowSample: rowData[0]
   });
-
+  
   const gridOptions = {
     columnDefs: columnDefs,
     rowData: rowData,
