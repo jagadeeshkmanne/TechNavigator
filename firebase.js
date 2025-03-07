@@ -367,54 +367,20 @@ function getRevisionProblems() {
 
 // REVISION FEATURE: Show revision problems
 function showRevisionProblems() {
-  // Create a "revision" category if it doesn't exist
-  if (!problemDataByCategory.revision) {
-    problemDataByCategory.revision = getRevisionProblems();
-    
-    // Add to sidebar if not already there
-    const sidebarNav = document.querySelector('.sidebar-nav');
-    const revisionListItem = document.getElementById('revision-list-item');
-    
-    if (!revisionListItem) {
-      const li = document.createElement('li');
-      li.className = 'sidebar-nav-item';
-      li.id = 'revision-list-item';
-      
-      const link = document.createElement('a');
-      link.href = 'javascript:void(0);';
-      link.className = 'sidebar-nav-link';
-      link.dataset.category = 'revision';
-      link.id = 'revision-link-sidebar';
-      
-      link.innerHTML = `
-        <span>Revision List</span>
-        <span class="nav-progress" id="revision-nav-progress">
-          <div class="progress-mini"><div class="progress-mini-bar" style="width:0%"></div></div>
-          0/0
-        </span>
-      `;
-      
-      link.addEventListener('click', function() {
-        showRevisionProblems();
-      });
-      
-      li.appendChild(link);
-      sidebarNav.appendChild(li);
-    }
-  } else {
-    // Update the problems in the revision category
-    problemDataByCategory.revision = getRevisionProblems();
-  }
+  // Create or update the revision category
+  problemDataByCategory.revision = getRevisionProblems();
   
   // Change to the revision category
   changeCategory('revision');
   
-  // Update active sidebar link
-  document.querySelectorAll('.sidebar-nav-link').forEach(link => {
-    link.classList.remove('active');
-  });
-  const revisionSidebarLink = document.getElementById('revision-link-sidebar');
-  if (revisionSidebarLink) revisionSidebarLink.classList.add('active');
+  // Update the title manually since "revision" may not be in the sidebar
+  document.querySelector('.category-name').textContent = "Problems Marked for Revision";
+  
+  // Set a special class on the problem grid to highlight it's a revision list
+  const problemGrid = document.getElementById('problem-grid');
+  if (problemGrid) {
+    problemGrid.classList.add('revision-mode');
+  }
 }
 
 /***********************
