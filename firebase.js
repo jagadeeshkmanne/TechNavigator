@@ -6696,7 +6696,7 @@ function initializeGrid(category) {
     field: 'video_url',
     width: 50,
     cellRenderer: (params) => {
-      //if (!params.value) return '';
+      if (!params.value) return '';
       // Using YouTube icon (play button icon)
       return `<a href="${params.value}" target="_blank" title="Watch Video Solution" class="grid-icon youtube-icon">&#9654;&#65039;</a>`;
     },
@@ -6717,7 +6717,7 @@ function initializeGrid(category) {
     field: 'article_url',
     width: 50,
     cellRenderer: (params) => {
-     // if (!params.value) return '';
+      if (!params.value) return '';
       // Using document icon
       return `<a href="${params.value}" target="_blank" title="Read Article Solution" class="grid-icon article-icon">&#128196;</a>`;
     },
