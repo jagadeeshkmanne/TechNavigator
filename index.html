@@ -779,6 +779,53 @@
 .ag-cell a {
   font-size: 13px !important;
 }
+    /* Add these styles to your stylesheet */
+
+/* Revision star styles */
+.revision-star {
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.revision-star.marked {
+  fill: var(--professional-orange);
+  color: var(--professional-orange);
+}
+
+.revision-star-wrapper:hover .revision-star {
+  color: var(--professional-orange);
+}
+
+/* Counter badge in the header */
+.revision-count {
+  background-color: var(--professional-orange);
+  color: white;
+  border-radius: 9999px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+/* Hover effect for revision link */
+#revision-link {
+  position: relative;
+}
+
+#revision-link:hover svg {
+  color: var(--professional-orange);
+}
+
+/* Animation for the star when marked */
+@keyframes star-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.revision-star.marked {
+  animation: star-pulse 0.3s ease-in-out;
+}
   </style>
   
 <script src="firebase.js"></script>
@@ -814,7 +861,15 @@
           </div>
           <span id="overall-progress-text">0% Completed</span>
         </div>
-        
+        <!-- Add this revision link -->
+        <a class="nav-link" href="javascript:void(0);" id="revision-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>Revision List</span>
+          <span class="revision-count" id="revision-count">0</span>
+        </a>
         <a class="nav-link" href="https://blog.technavigator.io/">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
