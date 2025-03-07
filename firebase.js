@@ -326,6 +326,14 @@ function revisionStarCellRenderer(params) {
     // Save to Firebase
     saveRevisionStatus(data.leetcode_id, newMarkedStatus);
     
+    // Update the revision count in the header immediately
+    const revisionCount = document.getElementById('revision-count');
+    if (revisionCount) {
+      // Count the actual number of true values in problemRevisions
+      const markedCount = Object.values(problemRevisions).filter(Boolean).length;
+      revisionCount.textContent = markedCount;
+    }
+    
     // Refresh grid for other instances of this problem
     gridApi.refreshCells();
   });
