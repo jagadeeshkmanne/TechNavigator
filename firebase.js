@@ -2097,7 +2097,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Plus One",
     "leetcode": "https://leetcode.com/problems/plus-one/",
-    "requirements": "Array representation of numbers"
+    "requirements": "Array representation of numbers",
+      "article_url": "https://neetcode.io/solutions/plus-one",
+    "video_url": "https://neetcode.io/solutions/plus-one"
   },
   {
     "id": 7,
@@ -2115,7 +2117,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Rotate Image",
     "leetcode": "https://leetcode.com/problems/rotate-image/",
-    "requirements": "2D array in-place rotation"
+    "requirements": "2D array in-place rotation",
+      "article_url": "https://neetcode.io/solutions/rotate-image",
+    "video_url": "https://neetcode.io/solutions/rotate-image"
   },
   {
     "id": 9,
@@ -2133,7 +2137,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Set Matrix Zeroes",
     "leetcode": "https://leetcode.com/problems/set-matrix-zeroes/",
-    "requirements": "2D array in-place modification"
+    "requirements": "2D array in-place modification",
+      "article_url": "https://neetcode.io/solutions/set-matrix-zeroes",
+    "video_url": "https://neetcode.io/solutions/set-matrix-zeroes"
   },
   {
     "id": 11,
@@ -2151,7 +2157,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Spiral Matrix",
     "leetcode": "https://leetcode.com/problems/spiral-matrix/",
-    "requirements": "2D array traversal pattern"
+    "requirements": "2D array traversal pattern",
+       "article_url": "https://neetcode.io/solutions/spiral-matrix",
+    "video_url": "https://neetcode.io/solutions/spiral-matrix"
   },
   {
     "id": 13,
@@ -3008,7 +3016,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Missing Number",
         "leetcode": "https://leetcode.com/problems/missing-number/",
-        "requirements": "Find the missing number in range [0,n]"
+        "requirements": "Find the missing number in range [0,n]",
+          "article_url": "https://neetcode.io/solutions/missing-number",
+    "video_url": "https://neetcode.io/solutions/missing-number"
       },
       {
         "id": 182,
@@ -3078,7 +3088,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Rotate Image",
     "leetcode": "https://leetcode.com/problems/rotate-image/",
-    "requirements": "In-place matrix rotation"
+    "requirements": "In-place matrix rotation",
+      "article_url": "https://neetcode.io/solutions/rotate-image",
+    "video_url": "https://neetcode.io/solutions/rotate-image"
   },
   {
     "id": 2,
@@ -3087,7 +3099,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Spiral Matrix",
     "leetcode": "https://leetcode.com/problems/spiral-matrix/",
-    "requirements": "Spiral traversal pattern"
+    "requirements": "Spiral traversal pattern",
+       "article_url": "https://neetcode.io/solutions/spiral-matrix",
+    "video_url": "https://neetcode.io/solutions/spiral-matrix"
   },
   {
     "id": 3,
@@ -3096,7 +3110,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Set Matrix Zeroes",
     "leetcode": "https://leetcode.com/problems/set-matrix-zeroes/",
-    "requirements": "Matrix modification with constraints"
+    "requirements": "Matrix modification with constraints",
+      "article_url": "https://neetcode.io/solutions/set-matrix-zeroes",
+    "video_url": "https://neetcode.io/solutions/set-matrix-zeroes"
   },
   {
     "id": 4,
@@ -3756,7 +3772,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Happy Number",
     "leetcode": "https://leetcode.com/problems/happy-number/",
-    "requirements": "Detect cycle in number sequence"
+    "requirements": "Detect cycle in number sequence",
+       "article_url": "https://neetcode.io/solutions/happy-number",
+    "video_url": "https://neetcode.io/solutions/happy-number"
   },
   {
     "id": 10,
@@ -3940,7 +3958,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Pow(x, n)",
         "leetcode": "https://leetcode.com/problems/powx-n/",
-        "requirements": "Implement power function with optimized recursion"
+        "requirements": "Implement power function with optimized recursion",
+         "article_url": "https://neetcode.io/solutions/powx-n",
+    "video_url": "https://neetcode.io/solutions/powx-n"
     },
     {
         "id": 6,
@@ -4526,7 +4546,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Maximum Subarray",
         "leetcode": "https://leetcode.com/problems/maximum-subarray/",
-        "requirements": "Find contiguous subarray with largest sum"
+        "requirements": "Find contiguous subarray with largest sum",
+        "article_url": "https://neetcode.io/solutions/maximum-subarray",
+    "video_url": "https://neetcode.io/solutions/maximum-subarray"
     },
     {
         "id": 3,
@@ -4590,7 +4612,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Pow(x, n)",
         "leetcode": "https://leetcode.com/problems/powx-n/",
-        "requirements": "Implement power function efficiently"
+        "requirements": "Implement power function efficiently",
+         "article_url": "https://neetcode.io/solutions/powx-n",
+    "video_url": "https://neetcode.io/solutions/powx-n"
     },
     {
         "id": 10,
@@ -4876,7 +4900,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Meeting Rooms II",
         "leetcode": "https://leetcode.com/problems/meeting-rooms-ii/",
-        "requirements": "Find minimum meeting rooms required"
+        "requirements": "Find minimum meeting rooms required",
+         "article_url": "https://neetcode.io/solutions/meeting-rooms-ii",
+    "video_url": "https://neetcode.io/solutions/meeting-rooms-ii"
     },
     {
         "id": 8,
@@ -5684,7 +5710,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Longest Increasing Path in a Matrix",
         "leetcode": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
-        "requirements": "Find the length of the longest increasing path in a matrix"
+        "requirements": "Find the length of the longest increasing path in a matrix",
+         "article_url": "https://neetcode.io/solutions/longest-increasing-path-in-a-matrix",
+    "video_url": "https://neetcode.io/solutions/longest-increasing-path-in-a-matrix"
     },
     {
         "id": 5,
@@ -5938,7 +5966,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Jump Game",
         "leetcode": "https://leetcode.com/problems/jump-game/",
-        "requirements": "Determine if you can reach the last index with given jump ranges"
+        "requirements": "Determine if you can reach the last index with given jump ranges",
+        "article_url": "https://neetcode.io/solutions/jump-game",
+    "video_url": "https://neetcode.io/solutions/jump-game"
     },
     {
         "id": 3,
@@ -5946,7 +5976,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Jump Game II",
         "leetcode": "https://leetcode.com/problems/jump-game-ii/",
-        "requirements": "Find minimum jumps to reach the last index"
+        "requirements": "Find minimum jumps to reach the last index",
+         "article_url": "https://neetcode.io/solutions/jump-game-ii",
+    "video_url": "https://neetcode.io/solutions/jump-game-ii"
     },
     {
         "id": 4,
@@ -5954,7 +5986,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Gas Station",
         "leetcode": "https://leetcode.com/problems/gas-station/",
-        "requirements": "Find starting station to complete circuit with gas constraints"
+        "requirements": "Find starting station to complete circuit with gas constraints",
+        "article_url": "https://neetcode.io/solutions/gas-station",
+    "video_url": "https://neetcode.io/solutions/gas-station"
     },
     {
         "id": 5,
@@ -5996,7 +6030,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Partition Labels",
         "leetcode": "https://leetcode.com/problems/partition-labels/",
-        "requirements": "Partition string into parts where each letter appears in at most one part"
+        "requirements": "Partition string into parts where each letter appears in at most one part",
+         "article_url": "https://neetcode.io/solutions/partition-labels",
+    "video_url": "https://neetcode.io/solutions/partition-labels"
     },
     {
         "id": 10,
@@ -6075,7 +6111,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Word Break",
         "leetcode": "https://leetcode.com/problems/word-break/",
-        "requirements": "Determine if string can be segmented into dictionary words"
+        "requirements": "Determine if string can be segmented into dictionary words",
+        "article_url": "https://neetcode.io/solutions/word-break",
+    "video_url": "https://neetcode.io/solutions/word-break"
     },
     {
         "id": 4,
@@ -6083,7 +6121,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Coin Change",
         "leetcode": "https://leetcode.com/problems/coin-change/",
-        "requirements": "Find fewest coins needed to make a given amount"
+        "requirements": "Find fewest coins needed to make a given amount",
+        "article_url": "https://neetcode.io/solutions/coin-change",
+    "video_url": "https://neetcode.io/solutions/coin-change"
     },
     {
         "id": 5,
@@ -6091,7 +6131,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "House Robber",
         "leetcode": "https://leetcode.com/problems/house-robber/",
-        "requirements": "Find maximum amount you can rob without alerting police"
+        "requirements": "Find maximum amount you can rob without alerting police",
+        "article_url": "https://neetcode.io/solutions/house-robber",
+    "video_url": "https://neetcode.io/solutions/house-robber"
     },
     {
         "id": 6,
@@ -6099,7 +6141,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Decode Ways",
         "leetcode": "https://leetcode.com/problems/decode-ways/",
-        "requirements": "Count ways to decode a string of digits to letters"
+        "requirements": "Count ways to decode a string of digits to letters",
+        "article_url": "https://neetcode.io/solutions/decode-ways",
+    "video_url": "https://neetcode.io/solutions/decode-ways"
     },
     {
         "id": 7,
@@ -6107,7 +6151,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Unique Paths",
         "leetcode": "https://leetcode.com/problems/unique-paths/",
-        "requirements": "Count unique paths from top-left to bottom-right in grid"
+        "requirements": "Count unique paths from top-left to bottom-right in grid",
+        "article_url": "https://neetcode.io/solutions/unique-paths",
+    "video_url": "https://neetcode.io/solutions/unique-paths"
     },
     {
         "id": 8,
@@ -6115,7 +6161,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Longest Increasing Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence/",
-        "requirements": "Find length of longest increasing subsequence"
+        "requirements": "Find length of longest increasing subsequence",
+         "article_url": "https://neetcode.io/solutions/longest-increasing-subsequence",
+    "video_url": "https://neetcode.io/solutions/longest-increasing-subsequence"
     },
     {
         "id": 9,
@@ -6123,7 +6171,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Partition Equal Subset Sum",
         "leetcode": "https://leetcode.com/problems/partition-equal-subset-sum/",
-        "requirements": "Determine if array can be partitioned into two equal sum subsets"
+        "requirements": "Determine if array can be partitioned into two equal sum subsets",
+        "article_url": "https://neetcode.io/solutions/partition-equal-subset-sum",
+    "video_url": "https://neetcode.io/solutions/partition-equal-subset-sum"
     },
     {
         "id": 10,
@@ -6131,7 +6181,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Longest Common Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-common-subsequence/",
-        "requirements": "Find length of longest common subsequence of two strings"
+        "requirements": "Find length of longest common subsequence of two strings",
+         "article_url": "https://neetcode.io/solutions/longest-common-subsequence",
+    "video_url": "https://neetcode.io/solutions/longest-common-subsequence"
     },
     {
         "id": 11,
@@ -6147,7 +6199,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Edit Distance",
         "leetcode": "https://leetcode.com/problems/edit-distance/",
-        "requirements": "Find minimum operations to convert one string to another"
+        "requirements": "Find minimum operations to convert one string to another",
+         "article_url": "https://neetcode.io/solutions/edit-distance",
+    "video_url": "https://neetcode.io/solutions/edit-distance"
     },
     {
         "id": 13,
@@ -6171,7 +6225,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Burst Balloons",
         "leetcode": "https://leetcode.com/problems/burst-balloons/",
-        "requirements": "Find maximum coins by bursting balloons strategically"
+        "requirements": "Find maximum coins by bursting balloons strategically",
+         "article_url": "https://neetcode.io/solutions/burst-balloons",
+    "video_url": "https://neetcode.io/solutions/burst-balloons"
     }
 ]
   },
@@ -6212,7 +6268,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "House Robber",
         "leetcode": "https://leetcode.com/problems/house-robber/",
-        "requirements": "Find maximum amount you can rob without alerting police"
+        "requirements": "Find maximum amount you can rob without alerting police",
+        "article_url": "https://neetcode.io/solutions/house-robber",
+    "video_url": "https://neetcode.io/solutions/house-robber"
     },
     {
         "id": 5,
@@ -6220,7 +6278,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "House Robber II",
         "leetcode": "https://leetcode.com/problems/house-robber-ii/",
-        "requirements": "House robber with circular arrangement"
+        "requirements": "House robber with circular arrangement",
+        "article_url": "https://neetcode.io/solutions/house-robber-ii",
+    "video_url": "https://neetcode.io/solutions/house-robber-ii"
     },
     {
         "id": 6,
@@ -6262,7 +6322,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Counting Bits",
         "leetcode": "https://leetcode.com/problems/counting-bits/",
-        "requirements": "Count set bits for range of numbers"
+        "requirements": "Count set bits for range of numbers",
+         "article_url": "https://neetcode.io/solutions/counting-bits",
+    "video_url": "https://neetcode.io/solutions/counting-bits"
     },
     {
         "id": 11,
@@ -6270,7 +6332,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Decode Ways",
         "leetcode": "https://leetcode.com/problems/decode-ways/",
-        "requirements": "Count ways to decode a string of digits to letters"
+        "requirements": "Count ways to decode a string of digits to letters",
+        "article_url": "https://neetcode.io/solutions/decode-ways",
+    "video_url": "https://neetcode.io/solutions/decode-ways"
     },
     {
         "id": 12,
@@ -6278,7 +6342,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Word Break",
         "leetcode": "https://leetcode.com/problems/word-break/",
-        "requirements": "Determine if string can be segmented into dictionary words"
+        "requirements": "Determine if string can be segmented into dictionary words",
+        "article_url": "https://neetcode.io/solutions/word-break",
+    "video_url": "https://neetcode.io/solutions/word-break"
     },
     {
         "id": 13,
@@ -6325,7 +6391,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Longest Increasing Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence/",
-        "requirements": "Find length of longest strictly increasing subsequence"
+        "requirements": "Find length of longest strictly increasing subsequence",
+         "article_url": "https://neetcode.io/solutions/longest-increasing-subsequence",
+    "video_url": "https://neetcode.io/solutions/longest-increasing-subsequence"
     },
     {
         "id": 3,
@@ -6341,7 +6409,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Maximum Product Subarray",
         "leetcode": "https://leetcode.com/problems/maximum-product-subarray/",
-        "requirements": "Find the contiguous subarray with largest product"
+        "requirements": "Find the contiguous subarray with largest product",
+        "article_url": "https://neetcode.io/solutions/maximum-product-subarray",
+    "video_url": "https://neetcode.io/solutions/maximum-product-subarray"
     },
     {
         "id": 5,
@@ -6367,7 +6437,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Decode Ways",
         "leetcode": "https://leetcode.com/problems/decode-ways/",
-        "requirements": "Count ways to decode a string of digits to letters"
+        "requirements": "Count ways to decode a string of digits to letters",
+        "article_url": "https://neetcode.io/solutions/decode-ways",
+    "video_url": "https://neetcode.io/solutions/decode-ways"
     },
     {
         "id": 8,
@@ -6375,7 +6447,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Word Break",
         "leetcode": "https://leetcode.com/problems/word-break/",
-        "requirements": "Determine if string can be segmented into dictionary words"
+        "requirements": "Determine if string can be segmented into dictionary words",
+        "article_url": "https://neetcode.io/solutions/word-break",
+    "video_url": "https://neetcode.io/solutions/word-break"
     },
     {
         "id": 9,
@@ -6383,7 +6457,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Best Time to Buy and Sell Stock with Cooldown",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
-        "requirements": "Maximum profit with cooldown using state transitions"
+        "requirements": "Maximum profit with cooldown using state transitions",
+        "article_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock-with-cooldown",
+    "video_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock-with-cooldown"
     },
     {
         "id": 10,
@@ -6444,7 +6520,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Longest Common Subsequence",
         "leetcode": "https://leetcode.com/problems/longest-common-subsequence/",
-        "requirements": "Find length of longest common subsequence of two strings"
+        "requirements": "Find length of longest common subsequence of two strings",
+         "article_url": "https://neetcode.io/solutions/longest-common-subsequence",
+    "video_url": "https://neetcode.io/solutions/longest-common-subsequence"
     },
     {
         "id": 2,
@@ -6452,7 +6530,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Edit Distance",
         "leetcode": "https://leetcode.com/problems/edit-distance/",
-        "requirements": "Find minimum operations to convert one string to another"
+        "requirements": "Find minimum operations to convert one string to another",
+         "article_url": "https://neetcode.io/solutions/edit-distance",
+    "video_url": "https://neetcode.io/solutions/edit-distance"
     },
     {
         "id": 3,
@@ -6460,7 +6540,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Regular Expression Matching",
         "leetcode": "https://leetcode.com/problems/regular-expression-matching/",
-        "requirements": "Implement regex pattern matching with . and *"
+        "requirements": "Implement regex pattern matching with . and *",
+         "article_url": "https://neetcode.io/solutions/regular-expression-matching",
+    "video_url": "https://neetcode.io/solutions/regular-expression-matching"
     },
     {
         "id": 4,
@@ -6476,7 +6558,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Distinct Subsequences",
         "leetcode": "https://leetcode.com/problems/distinct-subsequences/",
-        "requirements": "Count distinct subsequences matching target string"
+        "requirements": "Count distinct subsequences matching target string",
+        "article_url": "https://neetcode.io/solutions/distinct-subsequences",
+    "video_url": "https://neetcode.io/solutions/distinct-subsequences"
     },
     {
         "id": 6,
@@ -6500,7 +6584,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Unique Paths",
         "leetcode": "https://leetcode.com/problems/unique-paths/",
-        "requirements": "Count unique paths in grid using 2D DP"
+        "requirements": "Count unique paths in grid using 2D DP",
+        "article_url": "https://neetcode.io/solutions/unique-paths",
+    "video_url": "https://neetcode.io/solutions/unique-paths"
     },
     {
         "id": 9,
@@ -6695,7 +6781,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Merge Intervals",
     "leetcode": "https://leetcode.com/problems/merge-intervals/",
-    "requirements": "Merge all overlapping intervals into non-overlapping intervals"
+    "requirements": "Merge all overlapping intervals into non-overlapping intervals",
+       "article_url": "https://neetcode.io/solutions/merge-intervals",
+    "video_url": "https://neetcode.io/solutions/merge-intervals"
   },
   {
     "id": 2,
@@ -6704,7 +6792,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Insert Interval",
     "leetcode": "https://leetcode.com/problems/insert-interval/",
-    "requirements": "Insert a new interval and merge if necessary"
+    "requirements": "Insert a new interval and merge if necessary",
+       "article_url": "https://neetcode.io/solutions/insert-interval",
+    "video_url": "https://neetcode.io/solutions/insert-interval"
   },
   {
     "id": 3,
@@ -6713,7 +6803,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Meeting Rooms",
     "leetcode": "https://leetcode.com/problems/meeting-rooms/",
-    "requirements": "Determine if a person can attend all meetings"
+    "requirements": "Determine if a person can attend all meetings",
+       "article_url": "https://neetcode.io/solutions/meeting-rooms",
+    "video_url": "https://neetcode.io/solutions/meeting-rooms"
   },
   {
     "id": 4,
@@ -6722,7 +6814,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Meeting Rooms II",
     "leetcode": "https://leetcode.com/problems/meeting-rooms-ii/",
-    "requirements": "Find minimum number of conference rooms required"
+    "requirements": "Find minimum number of conference rooms required",
+       "article_url": "https://neetcode.io/solutions/meeting-rooms-ii",
+    "video_url": "https://neetcode.io/solutions/meeting-rooms-ii"
   },
   {
     "id": 5,
@@ -6731,7 +6825,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Non-overlapping Intervals",
     "leetcode": "https://leetcode.com/problems/non-overlapping-intervals/",
-    "requirements": "Find minimum intervals to remove to make all non-overlapping"
+    "requirements": "Find minimum intervals to remove to make all non-overlapping",
+      "article_url": "https://neetcode.io/solutions/non-overlapping-intervals",
+    "video_url": "https://neetcode.io/solutions/non-overlapping-intervals"
   },
   {
     "id": 6,
@@ -6835,7 +6931,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Single Number",
         "leetcode": "https://leetcode.com/problems/single-number/",
-        "requirements": "Find the number that appears only once using XOR"
+        "requirements": "Find the number that appears only once using XOR",
+         "article_url": "https://neetcode.io/solutions/single-number",
+    "video_url": "https://neetcode.io/solutions/single-number"
       },
       {
         "id": 2,
@@ -6844,7 +6942,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Number of 1 Bits",
         "leetcode": "https://leetcode.com/problems/number-of-1-bits/",
-        "requirements": "Count the number of 1 bits in an integer"
+        "requirements": "Count the number of 1 bits in an integer",
+          "article_url": "https://neetcode.io/solutions/number-of-1-bits",
+    "video_url": "https://neetcode.io/solutions/number-of-1-bits"
       },
       {
         "id": 3,
@@ -6853,7 +6953,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Counting Bits",
         "leetcode": "https://leetcode.com/problems/counting-bits/",
-        "requirements": "Count bits in numbers from 0 to n efficiently"
+        "requirements": "Count bits in numbers from 0 to n efficiently",
+           "article_url": "https://neetcode.io/solutions/counting-bits",
+    "video_url": "https://neetcode.io/solutions/counting-bits"
       },
       {
         "id": 4,
@@ -6862,7 +6964,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Reverse Bits",
         "leetcode": "https://leetcode.com/problems/reverse-bits/",
-        "requirements": "Reverse the bits of a 32-bit unsigned integer"
+        "requirements": "Reverse the bits of a 32-bit unsigned integer",
+          "article_url": "https://neetcode.io/solutions/reverse-bits",
+    "video_url": "https://neetcode.io/solutions/reverse-bits"
       },
       {
         "id": 5,
@@ -6871,7 +6975,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Sum of Two Integers",
         "leetcode": "https://leetcode.com/problems/sum-of-two-integers/",
-        "requirements": "Add two numbers without using + or - operators"
+        "requirements": "Add two numbers without using + or - operators",
+          "article_url": "https://neetcode.io/solutions/sum-of-two-integers",
+    "video_url": "https://neetcode.io/solutions/sum-of-two-integers"
       },
       {
         "id": 6,
@@ -6880,7 +6986,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Missing Number",
         "leetcode": "https://leetcode.com/problems/missing-number/",
-        "requirements": "Find missing number using bit manipulation"
+        "requirements": "Find missing number using bit manipulation",
+          "article_url": "https://neetcode.io/solutions/missing-number",
+    "video_url": "https://neetcode.io/solutions/missing-number"
       },
       {
         "id": 7,
@@ -6977,7 +7085,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Pow(x, n)",
         "leetcode": "https://leetcode.com/problems/powx-n/",
-        "requirements": "Implement efficient power function using exponentiation by squaring"
+        "requirements": "Implement efficient power function using exponentiation by squaring",
+           "article_url": "https://neetcode.io/solutions/powx-n",
+    "video_url": "https://neetcode.io/solutions/powx-n"
       },
       {
         "id": 2,
@@ -7004,7 +7114,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Rotate Image",
         "leetcode": "https://leetcode.com/problems/rotate-image/",
-        "requirements": "Rotate a matrix 90 degrees clockwise in-place"
+        "requirements": "Rotate a matrix 90 degrees clockwise in-place",
+          "article_url": "https://neetcode.io/solutions/rotate-image",
+    "video_url": "https://neetcode.io/solutions/rotate-image"
       },
       {
         "id": 5,
@@ -7013,7 +7125,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Multiply Strings",
         "leetcode": "https://leetcode.com/problems/multiply-strings/",
-        "requirements": "Multiply two numbers represented as strings"
+        "requirements": "Multiply two numbers represented as strings",
+           "article_url": "https://neetcode.io/solutions/multiply-strings",
+    "video_url": "https://neetcode.io/solutions/multiply-strings"
       },
       {
         "id": 6,
