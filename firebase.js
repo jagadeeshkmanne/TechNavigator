@@ -396,7 +396,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Contains Duplicate",
     "leetcode": "https://leetcode.com/problems/contains-duplicate/",
-    "requirements": "Hash set to detect duplicates in an array"
+    "requirements": "Hash set to detect duplicates in an array",
+    "article_url": "https://neetcode.io/solutions/contains-duplicate",
+    "video_url": "https://neetcode.io/solutions/contains-duplicate"
   },
   {
     "id": 2,
@@ -405,7 +407,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Valid Anagram",
     "leetcode": "https://leetcode.com/problems/valid-anagram/",
-    "requirements": "Character counting or sorting to compare strings"
+    "requirements": "HashMap to compare character frequencies",
+    "article_url": "https://neetcode.io/solutions/valid-anagram",
+    "video_url": "https://neetcode.io/solutions/valid-anagram"
   },
   {
     "id": 3,
@@ -414,7 +418,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Two Sum",
     "leetcode": "https://leetcode.com/problems/two-sum/",
-    "requirements": "Hash map to track complements for target sum"
+    "requirements": "HashMap to find complement pairs",
+    "article_url": "https://neetcode.io/solutions/two-sum",
+    "video_url": "https://neetcode.io/solutions/two-sum"
   },
   {
     "id": 4,
@@ -423,7 +429,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Group Anagrams",
     "leetcode": "https://leetcode.com/problems/group-anagrams/",
-    "requirements": "String sorting and hash map grouping"
+    "requirements": "HashMap with sorted strings as keys",
+    "article_url": "https://neetcode.io/solutions/group-anagrams",
+    "video_url": "https://neetcode.io/solutions/group-anagrams"
   },
   {
     "id": 5,
@@ -432,7 +440,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Top K Frequent Elements",
     "leetcode": "https://leetcode.com/problems/top-k-frequent-elements/",
-    "requirements": "Hash map counting and heap for top K elements"
+    "requirements": "HashMap and heap/bucket sort",
+    "article_url": "https://neetcode.io/solutions/top-k-frequent-elements",
+    "video_url": "https://neetcode.io/solutions/top-k-frequent-elements"
   },
   {
     "id": 6,
@@ -441,7 +451,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Encode and Decode Strings",
     "leetcode": "https://leetcode.com/problems/encode-and-decode-strings/",
-    "requirements": "String parsing with length encoding"
+    "requirements": "String manipulation with length encoding",
+    "article_url": "https://neetcode.io/solutions/encode-and-decode-strings",
+    "video_url": "https://neetcode.io/solutions/encode-and-decode-strings"
   },
   {
     "id": 7,
@@ -450,7 +462,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Product of Array Except Self",
     "leetcode": "https://leetcode.com/problems/product-of-array-except-self/",
-    "requirements": "Prefix and suffix products calculation"
+    "requirements": "Prefix and postfix products",
+    "article_url": "https://neetcode.io/solutions/product-of-array-except-self",
+    "video_url": "https://neetcode.io/solutions/product-of-array-except-self"
   },
   {
     "id": 8,
@@ -459,7 +473,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Valid Sudoku",
     "leetcode": "https://leetcode.com/problems/valid-sudoku/",
-    "requirements": "Grid validation with hash sets"
+    "requirements": "HashSet for row, column, and subgrid validation",
+    "article_url": "https://neetcode.io/solutions/valid-sudoku",
+    "video_url": "https://neetcode.io/solutions/valid-sudoku"
   },
   {
     "id": 9,
@@ -468,25 +484,31 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Longest Consecutive Sequence",
     "leetcode": "https://leetcode.com/problems/longest-consecutive-sequence/",
-    "requirements": "Hash set and sequence tracking"
+    "requirements": "HashSet for O(n) sequence detection",
+    "article_url": "https://neetcode.io/solutions/longest-consecutive-sequence",
+    "video_url": "https://neetcode.io/solutions/longest-consecutive-sequence"
   },
   {
     "id": 10,
     "leetcode_id": 125,
     "difficulty": "Easy",
-    "frequency": "Medium",
+    "frequency": "High",
     "problem": "Valid Palindrome",
     "leetcode": "https://leetcode.com/problems/valid-palindrome/",
-    "requirements": "Two-pointer technique with character validation"
+    "requirements": "Two-pointer technique with character validation",
+    "article_url": "https://neetcode.io/solutions/valid-palindrome",
+    "video_url": "https://neetcode.io/solutions/valid-palindrome"
   },
   {
     "id": 11,
     "leetcode_id": 167,
-    "difficulty": "Easy",
+    "difficulty": "Medium",
     "frequency": "Medium",
     "problem": "Two Sum II Input Array Is Sorted",
     "leetcode": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
-    "requirements": "Two-pointer technique in sorted array"
+    "requirements": "Two-pointer technique with sorted array",
+    "article_url": "https://neetcode.io/solutions/two-sum-ii-input-array-is-sorted",
+    "video_url": "https://neetcode.io/solutions/two-sum-ii-input-array-is-sorted"
   },
   {
     "id": 12,
@@ -495,7 +517,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "3Sum",
     "leetcode": "https://leetcode.com/problems/3sum/",
-    "requirements": "Sorting and two-pointer technique"
+    "requirements": "Two-pointer technique with sorted array",
+    "article_url": "https://neetcode.io/solutions/3sum",
+    "video_url": "https://neetcode.io/solutions/3sum"
   },
   {
     "id": 13,
@@ -504,1242 +528,1517 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Container With Most Water",
     "leetcode": "https://leetcode.com/problems/container-with-most-water/",
-    "requirements": "Two-pointer technique to maximize area"
+    "requirements": "Two-pointer technique maximizing area",
+    "article_url": "https://neetcode.io/solutions/container-with-most-water",
+    "video_url": "https://neetcode.io/solutions/container-with-most-water"
   },
   {
     "id": 14,
-    "leetcode_id": 121,
-    "difficulty": "Easy",
-    "frequency": "High",
-    "problem": "Best Time to Buy and Sell Stock",
-    "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-    "requirements": "Array traversal and tracking maximum difference"
+    "leetcode_id": 42,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Trapping Rain Water",
+    "leetcode": "https://leetcode.com/problems/trapping-rain-water/",
+    "requirements": "Two-pointer technique with height tracking",
+    "article_url": "https://neetcode.io/solutions/trapping-rain-water",
+    "video_url": "https://neetcode.io/solutions/trapping-rain-water"
   },
   {
     "id": 15,
-    "leetcode_id": 3,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Longest Substring Without Repeating Characters",
-    "leetcode": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
-    "requirements": "Sliding window with character tracking"
+    "leetcode_id": 121,
+    "difficulty": "Easy",
+    "frequency": "High",
+    "problem": "Best Time to Buy And Sell Stock",
+    "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+    "requirements": "One-pass algorithm tracking minimum price",
+    "article_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
+    "video_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock"
   },
   {
     "id": 16,
+    "leetcode_id": 3,
+    "difficulty": "Medium",
+    "frequency": "High",
+    "problem": "Longest Substring Without Repeating Characters",
+    "leetcode": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+    "requirements": "Sliding window with HashSet",
+    "article_url": "https://neetcode.io/solutions/longest-substring-without-repeating-characters",
+    "video_url": "https://neetcode.io/solutions/longest-substring-without-repeating-characters"
+  },
+  {
+    "id": 17,
     "leetcode_id": 424,
     "difficulty": "Medium",
     "frequency": "Medium",
     "problem": "Longest Repeating Character Replacement",
     "leetcode": "https://leetcode.com/problems/longest-repeating-character-replacement/",
-    "requirements": "Sliding window with character frequency counting"
+    "requirements": "Sliding window with character frequency tracking",
+    "article_url": "https://neetcode.io/solutions/longest-repeating-character-replacement",
+    "video_url": "https://neetcode.io/solutions/longest-repeating-character-replacement"
   },
   {
-    "id": 17,
+    "id": 18,
+    "leetcode_id": 567,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Permutation In String",
+    "leetcode": "https://leetcode.com/problems/permutation-in-string/",
+    "requirements": "Sliding window with character frequency comparison",
+    "article_url": "https://neetcode.io/solutions/permutation-in-string",
+    "video_url": "https://neetcode.io/solutions/permutation-in-string"
+  },
+  {
+    "id": 19,
     "leetcode_id": 76,
     "difficulty": "Hard",
     "frequency": "Medium",
     "problem": "Minimum Window Substring",
     "leetcode": "https://leetcode.com/problems/minimum-window-substring/",
-    "requirements": "Sliding window with character frequency matching"
-  },
-  {
-    "id": 18,
-    "leetcode_id": 20,
-    "difficulty": "Easy",
-    "frequency": "High",
-    "problem": "Valid Parentheses",
-    "leetcode": "https://leetcode.com/problems/valid-parentheses/",
-    "requirements": "Stack to track opening and closing brackets"
-  },
-  {
-    "id": 19,
-    "leetcode_id": 153,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Find Minimum in Rotated Sorted Array",
-    "leetcode": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
-    "requirements": "Modified binary search in rotated array"
+    "requirements": "Sliding window with character frequency tracking",
+    "article_url": "https://neetcode.io/solutions/minimum-window-substring",
+    "video_url": "https://neetcode.io/solutions/minimum-window-substring"
   },
   {
     "id": 20,
-    "leetcode_id": 33,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Search in Rotated Sorted Array",
-    "leetcode": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
-    "requirements": "Modified binary search with pivot handling"
-  },
-  {
-    "id": 21,
-    "leetcode_id": 206,
-    "difficulty": "Easy",
-    "frequency": "High",
-    "problem": "Reverse Linked List",
-    "leetcode": "https://leetcode.com/problems/reverse-linked-list/",
-    "requirements": "Iterative or recursive pointer manipulation"
-  },
-  {
-    "id": 22,
-    "leetcode_id": 21,
-    "difficulty": "Easy",
-    "frequency": "High",
-    "problem": "Merge Two Sorted Lists",
-    "leetcode": "https://leetcode.com/problems/merge-two-sorted-lists/",
-    "requirements": "Linked list merging with dummy head"
-  },
-  {
-    "id": 23,
-    "leetcode_id": 143,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Reorder List",
-    "leetcode": "https://leetcode.com/problems/reorder-list/",
-    "requirements": "Fast/slow pointers, reversing, and merging"
-  },
-  {
-    "id": 24,
-    "leetcode_id": 19,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Remove Nth Node From End of List",
-    "leetcode": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
-    "requirements": "Two pointers with gap technique"
-  },
-  {
-    "id": 25,
-    "leetcode_id": 141,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Linked List Cycle",
-    "leetcode": "https://leetcode.com/problems/linked-list-cycle/",
-    "requirements": "Fast and slow pointer (Floyd's cycle detection)"
-  },
-  {
-    "id": 26,
-    "leetcode_id": 23,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Merge K Sorted Lists",
-    "leetcode": "https://leetcode.com/problems/merge-k-sorted-lists/",
-    "requirements": "Priority queue or divide and conquer"
-  },
-  {
-    "id": 27,
-    "leetcode_id": 226,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Invert Binary Tree",
-    "leetcode": "https://leetcode.com/problems/invert-binary-tree/",
-    "requirements": "Recursive tree traversal and node swapping"
-  },
-  {
-    "id": 28,
-    "leetcode_id": 104,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Maximum Depth of Binary Tree",
-    "leetcode": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
-    "requirements": "Recursive or iterative tree traversal"
-  },
-  {
-    "id": 29,
-    "leetcode_id": 100,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Same Tree",
-    "leetcode": "https://leetcode.com/problems/same-tree/",
-    "requirements": "Recursive structure comparison"
-  },
-  {
-    "id": 30,
-    "leetcode_id": 572,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Subtree of Another Tree",
-    "leetcode": "https://leetcode.com/problems/subtree-of-another-tree/",
-    "requirements": "Recursive tree matching"
-  },
-  {
-    "id": 31,
-    "leetcode_id": 235,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Lowest Common Ancestor of a Binary Search Tree",
-    "leetcode": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
-    "requirements": "BST property traversal"
-  },
-  {
-    "id": 32,
-    "leetcode_id": 102,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Binary Tree Level Order Traversal",
-    "leetcode": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
-    "requirements": "BFS with queue"
-  },
-  {
-    "id": 33,
-    "leetcode_id": 98,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Validate Binary Search Tree",
-    "leetcode": "https://leetcode.com/problems/validate-binary-search-tree/",
-    "requirements": "Recursive BST property validation"
-  },
-  {
-    "id": 34,
-    "leetcode_id": 230,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Kth Smallest Element in a BST",
-    "leetcode": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
-    "requirements": "Inorder traversal counting"
-  },
-  {
-    "id": 35,
-    "leetcode_id": 105,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Construct Binary Tree from Preorder and Inorder Traversal",
-    "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
-    "requirements": "Recursive tree construction"
-  },
-  {
-    "id": 36,
-    "leetcode_id": 124,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Binary Tree Maximum Path Sum",
-    "leetcode": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
-    "requirements": "Recursive path calculation with global tracking"
-  },
-  {
-    "id": 37,
-    "leetcode_id": 297,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Serialize and Deserialize Binary Tree",
-    "leetcode": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
-    "requirements": "String encoding and decoding of tree structure"
-  },
-  {
-    "id": 38,
-    "leetcode_id": 208,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Implement Trie (Prefix Tree)",
-    "leetcode": "https://leetcode.com/problems/implement-trie-prefix-tree/",
-    "requirements": "Custom trie data structure implementation"
-  },
-  {
-    "id": 39,
-    "leetcode_id": 211,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Design Add and Search Words Data Structure",
-    "leetcode": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
-    "requirements": "Trie with wildcard search"
-  },
-  {
-    "id": 40,
-    "leetcode_id": 212,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Word Search II",
-    "leetcode": "https://leetcode.com/problems/word-search-ii/",
-    "requirements": "Trie and backtracking on grid"
-  },
-  {
-    "id": 41,
-    "leetcode_id": 295,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Find Median from Data Stream",
-    "leetcode": "https://leetcode.com/problems/find-median-from-data-stream/",
-    "requirements": "Heap-based data structure design"
-  },
-  {
-    "id": 42,
-    "leetcode_id": 39,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Combination Sum",
-    "leetcode": "https://leetcode.com/problems/combination-sum/",
-    "requirements": "Backtracking with sum target"
-  },
-  {
-    "id": 43,
-    "leetcode_id": 79,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Word Search",
-    "leetcode": "https://leetcode.com/problems/word-search/",
-    "requirements": "DFS with backtracking on grid"
-  },
-  {
-    "id": 44,
-    "leetcode_id": 200,
-    "difficulty": "Medium",
-    "frequency": "High",
-    "problem": "Number of Islands",
-    "leetcode": "https://leetcode.com/problems/number-of-islands/",
-    "requirements": "DFS or BFS grid traversal"
-  },
-  {
-    "id": 45,
-    "leetcode_id": 133,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Clone Graph",
-    "leetcode": "https://leetcode.com/problems/clone-graph/",
-    "requirements": "BFS or DFS with hash map tracking"
-  },
-  {
-    "id": 46,
-    "leetcode_id": 417,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Pacific Atlantic Water Flow",
-    "leetcode": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
-    "requirements": "Multi-source BFS or DFS"
-  },
-  {
-    "id": 47,
-    "leetcode_id": 207,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Course Schedule",
-    "leetcode": "https://leetcode.com/problems/course-schedule/",
-    "requirements": "Directed graph cycle detection"
-  },
-  {
-    "id": 48,
-    "leetcode_id": 323,
-    "difficulty": "Medium", 
-    "frequency": "Medium",
-    "problem": "Number of Connected Components In An Undirected Graph",
-    "leetcode": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
-    "requirements": "DFS or Union-Find"
-  },
-  {
-    "id": 49,
-    "leetcode_id": 261,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Graph Valid Tree",
-    "leetcode": "https://leetcode.com/problems/graph-valid-tree/",
-    "requirements": "Cycle detection in undirected graph"
-  },
-  {
-    "id": 50,
-    "leetcode_id": 70,
-    "difficulty": "Easy",
-    "frequency": "High",
-    "problem": "Climbing Stairs",
-    "leetcode": "https://leetcode.com/problems/climbing-stairs/",
-    "requirements": "Dynamic programming with state transition"
-  },
-  {
-    "id": 51,
-    "leetcode_id": 322,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Coin Change",
-    "leetcode": "https://leetcode.com/problems/coin-change/",
-    "requirements": "Dynamic programming with minimization"
-  },
-  {
-    "id": 52,
-    "leetcode_id": 300,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Longest Increasing Subsequence",
-    "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence/",
-    "requirements": "Dynamic programming with binary search optimization"
-  },
-  {
-    "id": 53,
-    "leetcode_id": 1143,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Longest Common Subsequence",
-    "leetcode": "https://leetcode.com/problems/longest-common-subsequence/",
-    "requirements": "2D dynamic programming grid"
-  },
-  {
-    "id": 54,
-    "leetcode_id": 139,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Word Break",
-    "leetcode": "https://leetcode.com/problems/word-break/",
-    "requirements": "Dynamic programming with string matching"
-  },
-  {
-    "id": 55,
-    "leetcode_id": 377,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Combination Sum IV",
-    "leetcode": "https://leetcode.com/problems/combination-sum-iv/",
-    "requirements": "Dynamic programming counting combinations"
-  },
-  {
-    "id": 56,
-    "leetcode_id": 198,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "House Robber",
-    "leetcode": "https://leetcode.com/problems/house-robber/",
-    "requirements": "Dynamic programming with adjacent constraints"
-  },
-  {
-    "id": 57,
-    "leetcode_id": 213,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "House Robber II",
-    "leetcode": "https://leetcode.com/problems/house-robber-ii/",
-    "requirements": "Dynamic programming with circular array handling"
-  },
-  {
-    "id": 58,
-    "leetcode_id": 91,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Decode Ways",
-    "leetcode": "https://leetcode.com/problems/decode-ways/",
-    "requirements": "Dynamic programming with string parsing"
-  },
-  {
-    "id": 59,
-    "leetcode_id": 62,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Unique Paths",
-    "leetcode": "https://leetcode.com/problems/unique-paths/",
-    "requirements": "2D dynamic programming grid traversal"
-  },
-  {
-    "id": 60,
-    "leetcode_id": 55,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Jump Game",
-    "leetcode": "https://leetcode.com/problems/jump-game/",
-    "requirements": "Greedy approach or dynamic programming"
-  },
-  {
-    "id": 61,
-    "leetcode_id": 268,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Missing Number",
-    "leetcode": "https://leetcode.com/problems/missing-number/",
-    "requirements": "Math formula or XOR technique"
-  },
-  {
-    "id": 62,
-    "leetcode_id": 190,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Reverse Bits",
-    "leetcode": "https://leetcode.com/problems/reverse-bits/",
-    "requirements": "Bit manipulation to reverse binary representation"
-  },
-  {
-    "id": 63,
-    "leetcode_id": 191,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Number of 1 Bits",
-    "leetcode": "https://leetcode.com/problems/number-of-1-bits/",
-    "requirements": "Bit manipulation to count set bits"
-  },
-  {
-    "id": 64,
-    "leetcode_id": 338,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Counting Bits",
-    "leetcode": "https://leetcode.com/problems/counting-bits/",
-    "requirements": "Dynamic programming with bit manipulation"
-  },
-  {
-    "id": 65,
-    "leetcode_id": 371,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Sum of Two Integers",
-    "leetcode": "https://leetcode.com/problems/sum-of-two-integers/",
-    "requirements": "Bit manipulation to implement addition without + operator"
-  },
-  {
-    "id": 66,
-    "leetcode_id": 53,
-    "difficulty": "Easy",
-    "frequency": "High",
-    "problem": "Maximum Subarray",
-    "leetcode": "https://leetcode.com/problems/maximum-subarray/",
-    "requirements": "Kadane's algorithm or dynamic programming"
-  },
-  {
-    "id": 67,
-    "leetcode_id": 152,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Maximum Product Subarray",
-    "leetcode": "https://leetcode.com/problems/maximum-product-subarray/",
-    "requirements": "Dynamic programming with min/max tracking"
-  },
-  {
-    "id": 68,
-    "leetcode_id": 1186,
-    "difficulty": "Medium",
-    "frequency": "Low",
-    "problem": "Find Valid Matrix Given Row and Column Sums",
-    "leetcode": "https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/",
-    "requirements": "Greedy algorithm with matrix construction"
-  },
-  {
-    "id": 69,
-    "leetcode_id": 704,
-    "difficulty": "Easy",
-    "frequency": "High",
-    "problem": "Binary Search",
-    "leetcode": "https://leetcode.com/problems/binary-search/",
-    "requirements": "Basic binary search implementation"
-  },
-  {
-    "id": 70,
-    "leetcode_id": 74,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Search a 2D Matrix",
-    "leetcode": "https://leetcode.com/problems/search-a-2d-matrix/",
-    "requirements": "Binary search in 2D sorted matrix"
-  },
-  {
-    "id": 71,
-    "leetcode_id": 875,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Koko Eating Bananas",
-    "leetcode": "https://leetcode.com/problems/koko-eating-bananas/",
-    "requirements": "Binary search for minimum rate"
-  },
-  {
-    "id": 72,
-    "leetcode_id": 4,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Median of Two Sorted Arrays",
-    "leetcode": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
-    "requirements": "Binary search in two sorted arrays"
-  },
-  {
-    "id": 73,
-    "leetcode_id": 202,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Happy Number",
-    "leetcode": "https://leetcode.com/problems/happy-number/",
-    "requirements": "Hash set to detect cycles in number sequences"
-  },
-  {
-    "id": 74,
-    "leetcode_id": 66,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Plus One",
-    "leetcode": "https://leetcode.com/problems/plus-one/",
-    "requirements": "Array manipulation with carry handling"
-  },
-  {
-    "id": 75,
-    "leetcode_id": 50,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Pow(x, n)",
-    "leetcode": "https://leetcode.com/problems/powx-n/",
-    "requirements": "Fast power algorithm using binary exponentiation"
-  },
-  {
-    "id": 76,
-    "leetcode_id": 43,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Multiply Strings",
-    "leetcode": "https://leetcode.com/problems/multiply-strings/",
-    "requirements": "String manipulation and implementing multiplication algorithm"
-  },
-  {
-    "id": 77,
-    "leetcode_id": 2013,
-    "difficulty": "Medium",
-    "frequency": "Low",
-    "problem": "Detect Squares",
-    "leetcode": "https://leetcode.com/problems/detect-squares/",
-    "requirements": "Geometric calculations and data structure design"
-  },
-  {
-    "id": 78,
-    "leetcode_id": 136,
-    "difficulty": "Easy",
-    "frequency": "High",
-    "problem": "Single Number",
-    "leetcode": "https://leetcode.com/problems/single-number/",
-    "requirements": "XOR operation to find unique element"
-  },
-  {
-    "id": 79,
-    "leetcode_id": 7,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Reverse Integer",
-    "leetcode": "https://leetcode.com/problems/reverse-integer/",
-    "requirements": "Math operations with overflow handling"
-  },
-  {
-    "id": 80,
-    "leetcode_id": 896,
-    "difficulty": "Easy",
-    "frequency": "Low",
-    "problem": "Monotonic Array",
-    "leetcode": "https://leetcode.com/problems/monotonic-array/",
-    "requirements": "Array traversal with condition checking"
-  },
-  {
-    "id": 81,
-    "leetcode_id": 150,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Evaluate Reverse Polish Notation",
-    "leetcode": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
-    "requirements": "Stack-based expression evaluation"
-  },
-  {
-    "id": 82,
-    "leetcode_id": 22,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Generate Parentheses",
-    "leetcode": "https://leetcode.com/problems/generate-parentheses/",
-    "requirements": "Backtracking with valid parentheses constraints"
-  },
-  {
-    "id": 83,
-    "leetcode_id": 739,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Daily Temperatures",
-    "leetcode": "https://leetcode.com/problems/daily-temperatures/",
-    "requirements": "Monotonic stack for next greater element"
-  },
-  {
-    "id": 84,
-    "leetcode_id": 853,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Car Fleet",
-    "leetcode": "https://leetcode.com/problems/car-fleet/",
-    "requirements": "Sorting and simulation"
-  },
-  {
-    "id": 85,
-    "leetcode_id": 155,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Min Stack",
-    "leetcode": "https://leetcode.com/problems/min-stack/",
-    "requirements": "Stack design with constant time minimum"
-  },
-  {
-    "id": 86,
-    "leetcode_id": 84,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Largest Rectangle in Histogram",
-    "leetcode": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
-    "requirements": "Monotonic stack for area calculation"
-  },
-  {
-    "id": 87,
-    "leetcode_id": 456,
-    "difficulty": "Medium",
-    "frequency": "Low",
-    "problem": "132 Pattern",
-    "leetcode": "https://leetcode.com/problems/132-pattern/",
-    "requirements": "Stack-based pattern matching"
-  },
-  {
-    "id": 88,
     "leetcode_id": 239,
     "difficulty": "Hard",
     "frequency": "Medium",
     "problem": "Sliding Window Maximum",
     "leetcode": "https://leetcode.com/problems/sliding-window-maximum/",
-    "requirements": "Monotonic queue for sliding window maximum"
+    "requirements": "Sliding window with deque for maximum tracking",
+    "article_url": "https://neetcode.io/solutions/sliding-window-maximum",
+    "video_url": "https://neetcode.io/solutions/sliding-window-maximum"
   },
   {
-    "id": 89,
-    "leetcode_id": 641,
+    "id": 21,
+    "leetcode_id": 20,
+    "difficulty": "Easy",
+    "frequency": "High",
+    "problem": "Valid Parentheses",
+    "leetcode": "https://leetcode.com/problems/valid-parentheses/",
+    "requirements": "Stack for matching parentheses",
+    "article_url": "https://neetcode.io/solutions/valid-parentheses",
+    "video_url": "https://neetcode.io/solutions/valid-parentheses"
+  },
+  {
+    "id": 22,
+    "leetcode_id": 155,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Min Stack",
+    "leetcode": "https://leetcode.com/problems/min-stack/",
+    "requirements": "Stack with minimum value tracking",
+    "article_url": "https://neetcode.io/solutions/min-stack",
+    "video_url": "https://neetcode.io/solutions/min-stack"
+  },
+  {
+    "id": 23,
+    "leetcode_id": 150,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Evaluate Reverse Polish Notation",
+    "leetcode": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+    "requirements": "Stack for postfix expression evaluation",
+    "article_url": "https://neetcode.io/solutions/evaluate-reverse-polish-notation",
+    "video_url": "https://neetcode.io/solutions/evaluate-reverse-polish-notation"
+  },
+  {
+    "id": 24,
+    "leetcode_id": 22,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Generate Parentheses",
+    "leetcode": "https://leetcode.com/problems/generate-parentheses/",
+    "requirements": "Backtracking with valid parentheses constraints",
+    "article_url": "https://neetcode.io/solutions/generate-parentheses",
+    "video_url": "https://neetcode.io/solutions/generate-parentheses"
+  },
+  {
+    "id": 25,
+    "leetcode_id": 739,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Daily Temperatures",
+    "leetcode": "https://leetcode.com/problems/daily-temperatures/",
+    "requirements": "Monotonic stack for next greater element",
+    "article_url": "https://neetcode.io/solutions/daily-temperatures",
+    "video_url": "https://neetcode.io/solutions/daily-temperatures"
+  },
+  {
+    "id": 26,
+    "leetcode_id": 853,
     "difficulty": "Medium",
     "frequency": "Low",
-    "problem": "Design Circular Deque",
-    "leetcode": "https://leetcode.com/problems/design-circular-deque/",
-    "requirements": "Array-based deque implementation"
+    "problem": "Car Fleet",
+    "leetcode": "https://leetcode.com/problems/car-fleet/",
+    "requirements": "Sorting and stack for merging car fleets",
+    "article_url": "https://neetcode.io/solutions/car-fleet",
+    "video_url": "https://neetcode.io/solutions/car-fleet"
   },
   {
-    "id": 90,
-    "leetcode_id": 622,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Design Circular Queue",
-    "leetcode": "https://leetcode.com/problems/design-circular-queue/",
-    "requirements": "Array-based circular queue implementation"
-  },
-  {
-    "id": 91,
-    "leetcode_id": 146,
-    "difficulty": "Medium",
-    "frequency": "High",
-    "problem": "LRU Cache",
-    "leetcode": "https://leetcode.com/problems/lru-cache/",
-    "requirements": "Hash map with doubly linked list"
-  },
-  {
-    "id": 92,
-    "leetcode_id": 380,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Insert Delete GetRandom O(1)",
-    "leetcode": "https://leetcode.com/problems/insert-delete-getrandom-o1/",
-    "requirements": "Hash map with array for constant time operations"
-  },
-  {
-    "id": 93,
-    "leetcode_id": 460,
+    "id": 27,
+    "leetcode_id": 84,
     "difficulty": "Hard",
     "frequency": "Medium",
-    "problem": "LFU Cache",
-    "leetcode": "https://leetcode.com/problems/lfu-cache/",
-    "requirements": "Complex data structure design with frequency tracking"
+    "problem": "Largest Rectangle In Histogram",
+    "leetcode": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+    "requirements": "Monotonic stack for area calculation",
+    "article_url": "https://neetcode.io/solutions/largest-rectangle-in-histogram",
+    "video_url": "https://neetcode.io/solutions/largest-rectangle-in-histogram"
   },
   {
-    "id": 94,
-    "leetcode_id": 54,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Spiral Matrix",
-    "leetcode": "https://leetcode.com/problems/spiral-matrix/",
-    "requirements": "Matrix traversal with direction changes"
-  },
-  {
-    "id": 95,
-    "leetcode_id": 73,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Set Matrix Zeroes",
-    "leetcode": "https://leetcode.com/problems/set-matrix-zeroes/",
-    "requirements": "Matrix manipulation with in-place markers"
-  },
-  {
-    "id": 96,
-    "leetcode_id": 48,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Rotate Image",
-    "leetcode": "https://leetcode.com/problems/rotate-image/",
-    "requirements": "Matrix rotation with in-place transformations"
-  },
-  {
-    "id": 97,
-    "leetcode_id": 56,
-    "difficulty": "Medium",
-    "frequency": "High",
-    "problem": "Merge Intervals",
-    "leetcode": "https://leetcode.com/problems/merge-intervals/",
-    "requirements": "Interval merging with sorting"
-  },
-  {
-    "id": 98,
-    "leetcode_id": 57,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Insert Interval",
-    "leetcode": "https://leetcode.com/problems/insert-interval/",
-    "requirements": "Interval manipulation with boundary handling"
-  },
-  {
-    "id": 99,
-    "leetcode_id": 435,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Non-overlapping Intervals",
-    "leetcode": "https://leetcode.com/problems/non-overlapping-intervals/",
-    "requirements": "Greedy interval scheduling"
-  },
-  {
-    "id": 100,
-    "leetcode_id": 252,
+    "id": 28,
+    "leetcode_id": 704,
     "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Meeting Rooms",
-    "leetcode": "https://leetcode.com/problems/meeting-rooms/",
-    "requirements": "Interval overlap checking"
-  },
-  {
-    "id": 101,
-    "leetcode_id": 253,
-    "difficulty": "Medium",
     "frequency": "High",
-    "problem": "Meeting Rooms II",
-    "leetcode": "https://leetcode.com/problems/meeting-rooms-ii/",
-    "requirements": "Interval scheduling with priority queue"
+    "problem": "Binary Search",
+    "leetcode": "https://leetcode.com/problems/binary-search/",
+    "requirements": "Binary search on sorted array",
+    "article_url": "https://neetcode.io/solutions/binary-search",
+    "video_url": "https://neetcode.io/solutions/binary-search"
   },
   {
-    "id": 102,
-    "leetcode_id": 57,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Insert Interval",
-    "leetcode": "https://leetcode.com/problems/insert-interval/",
-    "requirements": "Interval manipulation with boundary handling"
-  },
-  {
-    "id": 103,
-    "leetcode_id": 42,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Trapping Rain Water",
-    "leetcode": "https://leetcode.com/problems/trapping-rain-water/",
-    "requirements": "Two-pointer or dynamic programming approach"
-  },
-  {
-    "id": 104,
-    "leetcode_id": 287,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Find the Duplicate Number",
-    "leetcode": "https://leetcode.com/problems/find-the-duplicate-number/",
-    "requirements": "Floyd's cycle detection algorithm"
-  },
-  {
-    "id": 105,
-    "leetcode_id": 24,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Swap Nodes in Pairs",
-    "leetcode": "https://leetcode.com/problems/swap-nodes-in-pairs/",
-    "requirements": "Linked list node manipulation"
-  },
-  {
-    "id": 106,
-    "leetcode_id": 138,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Copy List with Random Pointer",
-    "leetcode": "https://leetcode.com/problems/copy-list-with-random-pointer/",
-    "requirements": "Hash map for node mapping or interleaving technique"
-  },
-  {
-    "id": 107,
-    "leetcode_id": 973,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "K Closest Points to Origin",
-    "leetcode": "https://leetcode.com/problems/k-closest-points-to-origin/",
-    "requirements": "Heap or quickselect algorithm"
-  },
-  {
-    "id": 108,
-    "leetcode_id": 215,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Kth Largest Element in an Array",
-    "leetcode": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
-    "requirements": "Heap or quickselect algorithm"
-  },
-  {
-    "id": 109,
-    "leetcode_id": 78,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Subsets",
-    "leetcode": "https://leetcode.com/problems/subsets/",
-    "requirements": "Backtracking or bit manipulation"
-  },
-  {
-    "id": 110,
-    "leetcode_id": 46,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Permutations",
-    "leetcode": "https://leetcode.com/problems/permutations/",
-    "requirements": "Backtracking with swapping or visited tracking"
-  },
-  {
-    "id": 111,
-    "leetcode_id": 51,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "N-Queens",
-    "leetcode": "https://leetcode.com/problems/n-queens/",
-    "requirements": "Backtracking with constraint checking"
-  },
-  {
-    "id": 112,
-    "leetcode_id": 93,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Restore IP Addresses",
-    "leetcode": "https://leetcode.com/problems/restore-ip-addresses/",
-    "requirements": "Backtracking with IP address validation"
-  },
-  {
-    "id": 113,
-    "leetcode_id": 17,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Letter Combinations of a Phone Number",
-    "leetcode": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
-    "requirements": "Backtracking or iterative combination building"
-  },
-  {
-    "id": 114,
-    "leetcode_id": 131,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Palindrome Partitioning",
-    "leetcode": "https://leetcode.com/problems/palindrome-partitioning/",
-    "requirements": "Backtracking with palindrome checking"
-  },
-  {
-    "id": 115,
-    "leetcode_id": 129,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Sum Root to Leaf Numbers",
-    "leetcode": "https://leetcode.com/problems/sum-root-to-leaf-numbers/",
-    "requirements": "DFS tree traversal with path sum"
-  },
-  {
-    "id": 116,
-    "leetcode_id": 210,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Course Schedule II",
-    "leetcode": "https://leetcode.com/problems/course-schedule-ii/",
-    "requirements": "Topological sort in directed graph"
-  },
-  {
-    "id": 117,
-    "leetcode_id": 684,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Redundant Connection",
-    "leetcode": "https://leetcode.com/problems/redundant-connection/",
-    "requirements": "Union-Find algorithm for cycle detection"
-  },
-  {
-    "id": 118,
-    "leetcode_id": 127,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Word Ladder",
-    "leetcode": "https://leetcode.com/problems/word-ladder/",
-    "requirements": "BFS with word transformation graph"
-  },
-  {
-    "id": 119,
-    "leetcode_id": 994,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Rotting Oranges",
-    "leetcode": "https://leetcode.com/problems/rotting-oranges/",
-    "requirements": "BFS with multi-source propagation"
-  },
-  {
-    "id": 120,
-    "leetcode_id": 926,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Flip String to Monotone Increasing",
-    "leetcode": "https://leetcode.com/problems/flip-string-to-monotone-increasing/",
-    "requirements": "Dynamic programming with state transitions"
-  },
-  {
-    "id": 121,
-    "leetcode_id": 198,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "House Robber",
-    "leetcode": "https://leetcode.com/problems/house-robber/",
-    "requirements": "Dynamic programming with adjacent constraints"
-  },
-  {
-    "id": 122,
-    "leetcode_id": 416,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Partition Equal Subset Sum",
-    "leetcode": "https://leetcode.com/problems/partition-equal-subset-sum/",
-    "requirements": "Dynamic programming subset sum problem"
-  },
-  {
-    "id": 123,
-    "leetcode_id": 2,
-    "difficulty": "Medium",
-    "frequency": "High",
-    "problem": "Add Two Numbers",
-    "leetcode": "https://leetcode.com/problems/add-two-numbers/",
-    "requirements": "Linked list manipulation with carry handling"
-  },
-  {
-    "id": 124,
-    "leetcode_id": 42,
-    "difficulty": "Hard",
-    "frequency": "Medium",
-    "problem": "Trapping Rain Water",
-    "leetcode": "https://leetcode.com/problems/trapping-rain-water/",
-    "requirements": "Two-pointer or dynamic programming approach"
-  },
-  {
-    "id": 125,
+    "id": 29,
     "leetcode_id": 74,
     "difficulty": "Medium",
     "frequency": "Medium",
     "problem": "Search a 2D Matrix",
     "leetcode": "https://leetcode.com/problems/search-a-2d-matrix/",
-    "requirements": "Binary search in 2D matrix"
+    "requirements": "Binary search on sorted 2D matrix",
+    "article_url": "https://neetcode.io/solutions/search-a-2d-matrix",
+    "video_url": "https://neetcode.io/solutions/search-a-2d-matrix"
   },
   {
-    "id": 126,
-    "leetcode_id": 75,
+    "id": 30,
+    "leetcode_id": 875,
     "difficulty": "Medium",
     "frequency": "Medium",
-    "problem": "Sort Colors",
-    "leetcode": "https://leetcode.com/problems/sort-colors/",
-    "requirements": "Dutch national flag algorithm"
+    "problem": "Koko Eating Bananas",
+    "leetcode": "https://leetcode.com/problems/koko-eating-bananas/",
+    "requirements": "Binary search for minimum eating speed",
+    "article_url": "https://neetcode.io/solutions/koko-eating-bananas",
+    "video_url": "https://neetcode.io/solutions/koko-eating-bananas"
   },
   {
-    "id": 127,
-    "leetcode_id": 13,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Roman to Integer",
-    "leetcode": "https://leetcode.com/problems/roman-to-integer/",
-    "requirements": "String parsing with symbol mapping"
-  },
-  {
-    "id": 128,
-    "leetcode_id": 80,
+    "id": 31,
+    "leetcode_id": 153,
     "difficulty": "Medium",
     "frequency": "Medium",
-    "problem": "Remove Duplicates from Sorted Array II",
-    "leetcode": "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/",
-    "requirements": "Two-pointer technique with count tracking"
+    "problem": "Find Minimum In Rotated Sorted Array",
+    "leetcode": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+    "requirements": "Modified binary search for pivot point",
+    "article_url": "https://neetcode.io/solutions/find-minimum-in-rotated-sorted-array",
+    "video_url": "https://neetcode.io/solutions/find-minimum-in-rotated-sorted-array"
   },
   {
-    "id": 129,
-    "leetcode_id": 5,
+    "id": 32,
+    "leetcode_id": 33,
     "difficulty": "Medium",
     "frequency": "High",
-    "problem": "Longest Palindromic Substring",
-    "leetcode": "https://leetcode.com/problems/longest-palindromic-substring/",
-    "requirements": "Dynamic programming or expand around center"
+    "problem": "Search In Rotated Sorted Array",
+    "leetcode": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+    "requirements": "Modified binary search with pivot handling",
+    "article_url": "https://neetcode.io/solutions/search-in-rotated-sorted-array",
+    "video_url": "https://neetcode.io/solutions/search-in-rotated-sorted-array"
   },
   {
-    "id": 130,
-    "leetcode_id": 647,
+    "id": 33,
+    "leetcode_id": 981,
     "difficulty": "Medium",
     "frequency": "Medium",
-    "problem": "Palindromic Substrings",
-    "leetcode": "https://leetcode.com/problems/palindromic-substrings/",
-    "requirements": "Dynamic programming or expand around center"
+    "problem": "Time Based Key Value Store",
+    "leetcode": "https://leetcode.com/problems/time-based-key-value-store/",
+    "requirements": "HashMap with binary search for timestamp",
+    "article_url": "https://neetcode.io/solutions/time-based-key-value-store",
+    "video_url": "https://neetcode.io/solutions/time-based-key-value-store"
   },
   {
-    "id": 131,
-    "leetcode_id": 91,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Decode Ways",
-    "leetcode": "https://leetcode.com/problems/decode-ways/",
-    "requirements": "Dynamic programming with string parsing"
+    "id": 34,
+    "leetcode_id": 4,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Median of Two Sorted Arrays",
+    "leetcode": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+    "requirements": "Binary search on two sorted arrays",
+    "article_url": "https://neetcode.io/solutions/median-of-two-sorted-arrays",
+    "video_url": "https://neetcode.io/solutions/median-of-two-sorted-arrays"
   },
   {
-    "id": 132,
-    "leetcode_id": 678,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Valid Parenthesis String",
-    "leetcode": "https://leetcode.com/problems/valid-parenthesis-string/",
-    "requirements": "Greedy approach with boundary tracking"
-  },
-  {
-    "id": 133,
-    "leetcode_id": 14,
-    "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Longest Common Prefix",
-    "leetcode": "https://leetcode.com/problems/longest-common-prefix/",
-    "requirements": "String comparison for common prefix"
-  },
-  {
-    "id": 134,
-    "leetcode_id": 424,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Longest Repeating Character Replacement",
-    "leetcode": "https://leetcode.com/problems/longest-repeating-character-replacement/",
-    "requirements": "Sliding window with character frequency counting"
-  },
-  {
-    "id": 135,
-    "leetcode_id": 1631,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Path With Minimum Effort",
-    "leetcode": "https://leetcode.com/problems/path-with-minimum-effort/",
-    "requirements": "Dijkstra's algorithm or binary search with BFS"
-  },
-  {
-    "id": 136,
-    "leetcode_id": 684,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Redundant Connection",
-    "leetcode": "https://leetcode.com/problems/redundant-connection/",
-    "requirements": "Union-Find for cycle detection"
-  },
-  {
-    "id": 137,
-    "leetcode_id": 378,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Kth Smallest Element in a Sorted Matrix",
-    "leetcode": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/",
-    "requirements": "Binary search or min heap approach"
-  },
-  {
-    "id": 138,
-    "leetcode_id": 26,
+    "id": 35,
+    "leetcode_id": 206,
     "difficulty": "Easy",
     "frequency": "High",
-    "problem": "Remove Duplicates from Sorted Array",
-    "leetcode": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
-    "requirements": "Two-pointer technique for in-place modification"
+    "problem": "Reverse Linked List",
+    "leetcode": "https://leetcode.com/problems/reverse-linked-list/",
+    "requirements": "Iterative or recursive pointer manipulation",
+    "article_url": "https://neetcode.io/solutions/reverse-linked-list",
+    "video_url": "https://neetcode.io/solutions/reverse-linked-list"
   },
   {
-    "id": 139,
-    "leetcode_id": 844,
+    "id": 36,
+    "leetcode_id": 21,
     "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Backspace String Compare",
-    "leetcode": "https://leetcode.com/problems/backspace-string-compare/",
-    "requirements": "Stack or two-pointer approach"
+    "frequency": "High",
+    "problem": "Merge Two Sorted Lists",
+    "leetcode": "https://leetcode.com/problems/merge-two-sorted-lists/",
+    "requirements": "Iterative or recursive merging of lists",
+    "article_url": "https://neetcode.io/solutions/merge-two-sorted-lists",
+    "video_url": "https://neetcode.io/solutions/merge-two-sorted-lists"
   },
   {
-    "id": 140,
-    "leetcode_id": 323,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Number of Connected Components In An Undirected Graph",
-    "leetcode": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
-    "requirements": "DFS or Union-Find algorithm"
-  },
-  {
-    "id": 141,
-    "leetcode_id": 743,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Network Delay Time",
-    "leetcode": "https://leetcode.com/problems/network-delay-time/",
-    "requirements": "Dijkstra's algorithm for shortest path"
-  },
-  {
-    "id": 142,
-    "leetcode_id": 8,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "String to Integer (atoi)",
-    "leetcode": "https://leetcode.com/problems/string-to-integer-atoi/",
-    "requirements": "String parsing with boundary handling"
-  },
-  {
-    "id": 143,
-    "leetcode_id": 310,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Minimum Height Trees",
-    "leetcode": "https://leetcode.com/problems/minimum-height-trees/",
-    "requirements": "BFS from leaf nodes inward"
-  },
-  {
-    "id": 144,
-    "leetcode_id": 57,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Insert Interval",
-    "leetcode": "https://leetcode.com/problems/insert-interval/",
-    "requirements": "Interval manipulation with boundary handling"
-  },
-  {
-    "id": 145,
-    "leetcode_id": 240,
-    "difficulty": "Medium",
-    "frequency": "Medium",
-    "problem": "Search a 2D Matrix II",
-    "leetcode": "https://leetcode.com/problems/search-a-2d-matrix-ii/",
-    "requirements": "Efficient search in sorted 2D matrix"
-  },
-  {
-    "id": 146,
-    "leetcode_id": 160,
+    "id": 37,
+    "leetcode_id": 141,
     "difficulty": "Easy",
-    "frequency": "Medium",
-    "problem": "Intersection of Two Linked Lists",
-    "leetcode": "https://leetcode.com/problems/intersection-of-two-linked-lists/",
-    "requirements": "Two-pointer technique with linked lists"
+    "frequency": "High",
+    "problem": "Linked List Cycle",
+    "leetcode": "https://leetcode.com/problems/linked-list-cycle/",
+    "requirements": "Floyd's tortoise and hare algorithm",
+    "article_url": "https://neetcode.io/solutions/linked-list-cycle",
+    "video_url": "https://neetcode.io/solutions/linked-list-cycle"
   },
   {
-    "id": 147,
-    "leetcode_id": 98,
+    "id": 38,
+    "leetcode_id": 143,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Reorder List",
+    "leetcode": "https://leetcode.com/problems/reorder-list/",
+    "requirements": "Find middle, reverse second half, merge",
+    "article_url": "https://neetcode.io/solutions/reorder-list",
+    "video_url": "https://neetcode.io/solutions/reorder-list"
+  },
+  {
+    "id": 39,
+    "leetcode_id": 19,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Remove Nth Node From End of List",
+    "leetcode": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+    "requirements": "Two-pointer technique with offset",
+    "article_url": "https://neetcode.io/solutions/remove-nth-node-from-end-of-list",
+    "video_url": "https://neetcode.io/solutions/remove-nth-node-from-end-of-list"
+  },
+  {
+    "id": 40,
+    "leetcode_id": 138,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Copy List With Random Pointer",
+    "leetcode": "https://leetcode.com/problems/copy-list-with-random-pointer/",
+    "requirements": "HashMap for node mapping or interweaving technique",
+    "article_url": "https://neetcode.io/solutions/copy-list-with-random-pointer",
+    "video_url": "https://neetcode.io/solutions/copy-list-with-random-pointer"
+  },
+  {
+    "id": 41,
+    "leetcode_id": 2,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Add Two Numbers",
+    "leetcode": "https://leetcode.com/problems/add-two-numbers/",
+    "requirements": "Linked list traversal with carry handling",
+    "article_url": "https://neetcode.io/solutions/add-two-numbers",
+    "video_url": "https://neetcode.io/solutions/add-two-numbers"
+  },
+  {
+    "id": 42,
+    "leetcode_id": 287,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Find The Duplicate Number",
+    "leetcode": "https://leetcode.com/problems/find-the-duplicate-number/",
+    "requirements": "Floyd's tortoise and hare algorithm",
+    "article_url": "https://neetcode.io/solutions/find-the-duplicate-number",
+    "video_url": "https://neetcode.io/solutions/find-the-duplicate-number"
+  },
+  {
+    "id": 43,
+    "leetcode_id": 146,
     "difficulty": "Medium",
     "frequency": "High",
-    "problem": "Validate Binary Search Tree",
-    "leetcode": "https://leetcode.com/problems/validate-binary-search-tree/",
-    "requirements": "Recursive BST property validation"
+    "problem": "LRU Cache",
+    "leetcode": "https://leetcode.com/problems/lru-cache/",
+    "requirements": "HashMap with doubly linked list",
+    "article_url": "https://neetcode.io/solutions/lru-cache",
+    "video_url": "https://neetcode.io/solutions/lru-cache"
   },
   {
-    "id": 148,
+    "id": 44,
+    "leetcode_id": 23,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Merge K Sorted Lists",
+    "leetcode": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "requirements": "Priority queue or divide and conquer",
+    "article_url": "https://neetcode.io/solutions/merge-k-sorted-lists",
+    "video_url": "https://neetcode.io/solutions/merge-k-sorted-lists"
+  },
+  {
+    "id": 45,
+    "leetcode_id": 25,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Reverse Nodes In K Group",
+    "leetcode": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
+    "requirements": "Linked list reversal with group handling",
+    "article_url": "https://neetcode.io/solutions/reverse-nodes-in-k-group",
+    "video_url": "https://neetcode.io/solutions/reverse-nodes-in-k-group"
+  },
+  {
+    "id": 46,
+    "leetcode_id": 226,
+    "difficulty": "Easy",
+    "frequency": "High",
+    "problem": "Invert Binary Tree",
+    "leetcode": "https://leetcode.com/problems/invert-binary-tree/",
+    "requirements": "Recursive or iterative tree traversal",
+    "article_url": "https://neetcode.io/solutions/invert-binary-tree",
+    "video_url": "https://neetcode.io/solutions/invert-binary-tree"
+  },
+  {
+    "id": 47,
+    "leetcode_id": 104,
+    "difficulty": "Easy",
+    "frequency": "High",
+    "problem": "Maximum Depth of Binary Tree",
+    "leetcode": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+    "requirements": "Recursive or iterative tree traversal",
+    "article_url": "https://neetcode.io/solutions/maximum-depth-of-binary-tree",
+    "video_url": "https://neetcode.io/solutions/maximum-depth-of-binary-tree"
+  },
+  {
+    "id": 48,
+    "leetcode_id": 543,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Diameter of Binary Tree",
+    "leetcode": "https://leetcode.com/problems/diameter-of-binary-tree/",
+    "requirements": "Recursive depth calculation with diameter tracking",
+    "article_url": "https://neetcode.io/solutions/diameter-of-binary-tree",
+    "video_url": "https://neetcode.io/solutions/diameter-of-binary-tree"
+  },
+  {
+    "id": 49,
+    "leetcode_id": 110,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Balanced Binary Tree",
+    "leetcode": "https://leetcode.com/problems/balanced-binary-tree/",
+    "requirements": "Recursive height calculation with balance check",
+    "article_url": "https://neetcode.io/solutions/balanced-binary-tree",
+    "video_url": "https://neetcode.io/solutions/balanced-binary-tree"
+  },
+  {
+    "id": 50,
+    "leetcode_id": 100,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Same Tree",
+    "leetcode": "https://leetcode.com/problems/same-tree/",
+    "requirements": "Recursive or iterative tree comparison",
+    "article_url": "https://neetcode.io/solutions/same-tree",
+    "video_url": "https://neetcode.io/solutions/same-tree"
+  },
+  {
+    "id": 51,
+    "leetcode_id": 572,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Subtree of Another Tree",
+    "leetcode": "https://leetcode.com/problems/subtree-of-another-tree/",
+    "requirements": "Recursive subtree comparison",
+    "article_url": "https://neetcode.io/solutions/subtree-of-another-tree",
+    "video_url": "https://neetcode.io/solutions/subtree-of-another-tree"
+  },
+  {
+    "id": 52,
+    "leetcode_id": 235,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Lowest Common Ancestor of a Binary Search Tree",
+    "leetcode": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+    "requirements": "BST property traversal",
+    "article_url": "https://neetcode.io/solutions/lowest-common-ancestor-of-a-binary-search-tree",
+    "video_url": "https://neetcode.io/solutions/lowest-common-ancestor-of-a-binary-search-tree"
+  },
+  {
+    "id": 53,
+    "leetcode_id": 102,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Binary Tree Level Order Traversal",
+    "leetcode": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+    "requirements": "BFS with queue",
+    "article_url": "https://neetcode.io/solutions/binary-tree-level-order-traversal",
+    "video_url": "https://neetcode.io/solutions/binary-tree-level-order-traversal"
+  },
+  {
+    "id": 54,
     "leetcode_id": 199,
     "difficulty": "Medium",
     "frequency": "Medium",
     "problem": "Binary Tree Right Side View",
     "leetcode": "https://leetcode.com/problems/binary-tree-right-side-view/",
-    "requirements": "BFS or DFS with level tracking"
+    "requirements": "BFS or DFS with level tracking",
+    "article_url": "https://neetcode.io/solutions/binary-tree-right-side-view",
+    "video_url": "https://neetcode.io/solutions/binary-tree-right-side-view"
   },
   {
-    "id": 149,
-    "leetcode_id": 34,
+    "id": 55,
+    "leetcode_id": 1448,
     "difficulty": "Medium",
     "frequency": "Medium",
-    "problem": "Find First and Last Position of Element in Sorted Array",
-    "leetcode": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
-    "requirements": "Binary search for range boundaries"
+    "problem": "Count Good Nodes In Binary Tree",
+    "leetcode": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/",
+    "requirements": "DFS with path maximum tracking",
+    "article_url": "https://neetcode.io/solutions/count-good-nodes-in-binary-tree",
+    "video_url": "https://neetcode.io/solutions/count-good-nodes-in-binary-tree"
   },
   {
-    "id": 150,
+    "id": 56,
+    "leetcode_id": 98,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Validate Binary Search Tree",
+    "leetcode": "https://leetcode.com/problems/validate-binary-search-tree/",
+    "requirements": "Recursive BST property validation",
+    "article_url": "https://neetcode.io/solutions/validate-binary-search-tree",
+    "video_url": "https://neetcode.io/solutions/validate-binary-search-tree"
+  },
+  {
+    "id": 57,
+    "leetcode_id": 230,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Kth Smallest Element In a Bst",
+    "leetcode": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+    "requirements": "Inorder traversal with counter",
+    "article_url": "https://neetcode.io/solutions/kth-smallest-element-in-a-bst",
+    "video_url": "https://neetcode.io/solutions/kth-smallest-element-in-a-bst"
+  },
+  {
+    "id": 58,
+    "leetcode_id": 105,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Construct Binary Tree From Preorder And Inorder Traversal",
+    "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+    "requirements": "Recursive tree construction",
+    "article_url": "https://neetcode.io/solutions/construct-binary-tree-from-preorder-and-inorder-traversal",
+    "video_url": "https://neetcode.io/solutions/construct-binary-tree-from-preorder-and-inorder-traversal"
+  },
+  {
+    "id": 59,
+    "leetcode_id": 124,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Binary Tree Maximum Path Sum",
+    "leetcode": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+    "requirements": "Recursive path sum calculation",
+    "article_url": "https://neetcode.io/solutions/binary-tree-maximum-path-sum",
+    "video_url": "https://neetcode.io/solutions/binary-tree-maximum-path-sum"
+  },
+  {
+    "id": 60,
+    "leetcode_id": 297,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Serialize And Deserialize Binary Tree",
+    "leetcode": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+    "requirements": "Tree traversal with string encoding/decoding",
+    "article_url": "https://neetcode.io/solutions/serialize-and-deserialize-binary-tree",
+    "video_url": "https://neetcode.io/solutions/serialize-and-deserialize-binary-tree"
+  },
+  {
+    "id": 61,
+    "leetcode_id": 703,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Kth Largest Element In a Stream",
+    "leetcode": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+    "requirements": "Min heap of size k",
+    "article_url": "https://neetcode.io/solutions/kth-largest-element-in-a-stream",
+    "video_url": "https://neetcode.io/solutions/kth-largest-element-in-a-stream"
+  },
+  {
+    "id": 62,
+    "leetcode_id": 1046,
+    "difficulty": "Easy",
+    "frequency": "Low",
+    "problem": "Last Stone Weight",
+    "leetcode": "https://leetcode.com/problems/last-stone-weight/",
+    "requirements": "Max heap for stone smashing",
+    "article_url": "https://neetcode.io/solutions/last-stone-weight",
+    "video_url": "https://neetcode.io/solutions/last-stone-weight"
+  },
+  {
+    "id": 63,
+    "leetcode_id": 973,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "K Closest Points to Origin",
+    "leetcode": "https://leetcode.com/problems/k-closest-points-to-origin/",
+    "requirements": "Min heap or quickselect",
+    "article_url": "https://neetcode.io/solutions/k-closest-points-to-origin",
+    "video_url": "https://neetcode.io/solutions/k-closest-points-to-origin"
+  },
+  {
+    "id": 64,
+    "leetcode_id": 215,
+    "difficulty": "Medium",
+    "frequency": "High",
+    "problem": "Kth Largest Element In An Array",
+    "leetcode": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+    "requirements": "Min heap or quickselect",
+    "article_url": "https://neetcode.io/solutions/kth-largest-element-in-an-array",
+    "video_url": "https://neetcode.io/solutions/kth-largest-element-in-an-array"
+  },
+  {
+    "id": 65,
+    "leetcode_id": 621,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Task Scheduler",
+    "leetcode": "https://leetcode.com/problems/task-scheduler/",
+    "requirements": "Greedy approach with frequency counting",
+    "article_url": "https://neetcode.io/solutions/task-scheduler",
+    "video_url": "https://neetcode.io/solutions/task-scheduler"
+  },
+  {
+    "id": 66,
+    "leetcode_id": 355,
+    "difficulty": "Medium",
+    "frequency": "Low",
+    "problem": "Design Twitter",
+    "leetcode": "https://leetcode.com/problems/design-twitter/",
+    "requirements": "Custom data structure with heap",
+    "article_url": "https://neetcode.io/solutions/design-twitter",
+    "video_url": "https://neetcode.io/solutions/design-twitter"
+  },
+  {
+    "id": 67,
+    "leetcode_id": 295,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Find Median From Data Stream",
+    "leetcode": "https://leetcode.com/problems/find-median-from-data-stream/",
+    "requirements": "Two heaps (max and min)",
+    "article_url": "https://neetcode.io/solutions/find-median-from-data-stream",
+    "video_url": "https://neetcode.io/solutions/find-median-from-data-stream"
+  },
+  {
+    "id": 68,
+    "leetcode_id": 78,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Subsets",
+    "leetcode": "https://leetcode.com/problems/subsets/",
+    "requirements": "Backtracking or bit manipulation",
+    "article_url": "https://neetcode.io/solutions/subsets",
+    "video_url": "https://neetcode.io/solutions/subsets"
+  },
+  {
+    "id": 69,
+    "leetcode_id": 39,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Combination Sum",
+    "leetcode": "https://leetcode.com/problems/combination-sum/",
+    "requirements": "Backtracking with candidates",
+    "article_url": "https://neetcode.io/solutions/combination-sum",
+    "video_url": "https://neetcode.io/solutions/combination-sum"
+  },
+  {
+    "id": 70,
+    "leetcode_id": 40,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Combination Sum II",
+    "leetcode": "https://leetcode.com/problems/combination-sum-ii/",
+    "requirements": "Backtracking with duplicate handling",
+    "article_url": "https://neetcode.io/solutions/combination-sum-ii",
+    "video_url": "https://neetcode.io/solutions/combination-sum-ii"
+  },
+  {
+    "id": 71,
+    "leetcode_id": 46,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Permutations",
+    "leetcode": "https://leetcode.com/problems/permutations/",
+    "requirements": "Backtracking for all permutations",
+    "article_url": "https://neetcode.io/solutions/permutations",
+    "video_url": "https://neetcode.io/solutions/permutations"
+  },
+  {
+    "id": 72,
+    "leetcode_id": 90,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Subsets II",
+    "leetcode": "https://leetcode.com/problems/subsets-ii/",
+    "requirements": "Backtracking with duplicate handling",
+    "article_url": "https://neetcode.io/solutions/subsets-ii",
+    "video_url": "https://neetcode.io/solutions/subsets-ii"
+  },
+  {
+    "id": 73,
+    "leetcode_id": 79,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Word Search",
+    "leetcode": "https://leetcode.com/problems/word-search/",
+    "requirements": "Backtracking on 2D grid",
+    "article_url": "https://neetcode.io/solutions/word-search",
+    "video_url": "https://neetcode.io/solutions/word-search"
+  },
+  {
+    "id": 74,
+    "leetcode_id": 131,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Palindrome Partitioning",
+    "leetcode": "https://leetcode.com/problems/palindrome-partitioning/",
+    "requirements": "Backtracking with palindrome check",
+    "article_url": "https://neetcode.io/solutions/palindrome-partitioning",
+    "video_url": "https://neetcode.io/solutions/palindrome-partitioning"
+  },
+  {
+    "id": 75,
+    "leetcode_id": 17,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Letter Combinations of a Phone Number",
+    "leetcode": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
+    "requirements": "Backtracking with digit mapping",
+    "article_url": "https://neetcode.io/solutions/letter-combinations-of-a-phone-number",
+    "video_url": "https://neetcode.io/solutions/letter-combinations-of-a-phone-number"
+  },
+  {
+    "id": 76,
+    "leetcode_id": 51,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "N Queens",
+    "leetcode": "https://leetcode.com/problems/n-queens/",
+    "requirements": "Backtracking with constraint checking",
+    "article_url": "https://neetcode.io/solutions/n-queens",
+    "video_url": "https://neetcode.io/solutions/n-queens"
+  },
+  {
+    "id": 77,
+    "leetcode_id": 208,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Implement Trie Prefix Tree",
+    "leetcode": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+    "requirements": "Trie data structure implementation",
+    "article_url": "https://neetcode.io/solutions/implement-trie-prefix-tree",
+    "video_url": "https://neetcode.io/solutions/implement-trie-prefix-tree"
+  },
+  {
+    "id": 78,
+    "leetcode_id": 211,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Design Add And Search Words Data Structure",
+    "leetcode": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+    "requirements": "Trie with wildcard search",
+    "article_url": "https://neetcode.io/solutions/design-add-and-search-words-data-structure",
+    "video_url": "https://neetcode.io/solutions/design-add-and-search-words-data-structure"
+  },
+  {
+    "id": 79,
+    "leetcode_id": 212,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Word Search II",
+    "leetcode": "https://leetcode.com/problems/word-search-ii/",
+    "requirements": "Trie with backtracking on 2D grid",
+    "article_url": "https://neetcode.io/solutions/word-search-ii",
+    "video_url": "https://neetcode.io/solutions/word-search-ii"
+  },
+  {
+    "id": 80,
+    "leetcode_id": 200,
+    "difficulty": "Medium",
+    "frequency": "High",
+    "problem": "Number of Islands",
+    "leetcode": "https://leetcode.com/problems/number-of-islands/",
+    "requirements": "DFS or BFS on 2D grid",
+    "article_url": "https://neetcode.io/solutions/number-of-islands",
+    "video_url": "https://neetcode.io/solutions/number-of-islands"
+  },
+  {
+    "id": 81,
+    "leetcode_id": 695,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Max Area of Island",
+    "leetcode": "https://leetcode.com/problems/max-area-of-island/",
+    "requirements": "DFS or BFS with area tracking",
+    "article_url": "https://neetcode.io/solutions/max-area-of-island",
+    "video_url": "https://neetcode.io/solutions/max-area-of-island"
+  },
+  {
+    "id": 82,
+    "leetcode_id": 133,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Clone Graph",
+    "leetcode": "https://leetcode.com/problems/clone-graph/",
+    "requirements": "DFS or BFS with HashMap for mapping",
+    "article_url": "https://neetcode.io/solutions/clone-graph",
+    "video_url": "https://neetcode.io/solutions/clone-graph"
+  },
+  {
+    "id": 83,
+    "leetcode_id": 286,
+    "difficulty": "Medium", 
+    "frequency": "Medium",
+    "problem": "Walls And Gates",
+    "leetcode": "https://leetcode.com/problems/walls-and-gates/",
+    "requirements": "Multi-source BFS",
+    "article_url": "https://neetcode.io/solutions/walls-and-gates",
+    "video_url": "https://neetcode.io/solutions/walls-and-gates"
+  },
+  {
+    "id": 84,
     "leetcode_id": 994,
     "difficulty": "Medium",
     "frequency": "Medium",
     "problem": "Rotting Oranges",
     "leetcode": "https://leetcode.com/problems/rotting-oranges/",
-    "requirements": "BFS with multi-source propagation"
-  }
-]
+    "requirements": "Multi-source BFS with time tracking",
+    "article_url": "https://neetcode.io/solutions/rotting-oranges",
+    "video_url": "https://neetcode.io/solutions/rotting-oranges"
+  },
+  {
+    "id": 85,
+    "leetcode_id": 417,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Pacific Atlantic Water Flow",
+    "leetcode": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+    "requirements": "Multi-source DFS or BFS",
+    "article_url": "https://neetcode.io/solutions/pacific-atlantic-water-flow",
+    "video_url": "https://neetcode.io/solutions/pacific-atlantic-water-flow"
+  },
+  {
+    "id": 86,
+    "leetcode_id": 130,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Surrounded Regions",
+    "leetcode": "https://leetcode.com/problems/surrounded-regions/",
+    "requirements": "Boundary DFS",
+    "article_url": "https://neetcode.io/solutions/surrounded-regions",
+    "video_url": "https://neetcode.io/solutions/surrounded-regions"
+  },
+  {
+    "id": 87,
+    "leetcode_id": 207,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Course Schedule",
+    "leetcode": "https://leetcode.com/problems/course-schedule/",
+    "requirements": "Topological sort with cycle detection",
+    "article_url": "https://neetcode.io/solutions/course-schedule",
+    "video_url": "https://neetcode.io/solutions/course-schedule"
+  },
+  {
+    "id": 88,
+    "leetcode_id": 210,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Course Schedule II",
+    "leetcode": "https://leetcode.com/problems/course-schedule-ii/",
+    "requirements": "Topological sort with ordering",
+    "article_url": "https://neetcode.io/solutions/course-schedule-ii",
+    "video_url": "https://neetcode.io/solutions/course-schedule-ii"
+  },
+  {
+    "id": 89,
+    "leetcode_id": 261,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Graph Valid Tree",
+    "leetcode": "https://leetcode.com/problems/graph-valid-tree/",
+    "requirements": "Union-find or DFS with cycle detection",
+    "article_url": "https://neetcode.io/solutions/graph-valid-tree",
+    "video_url": "https://neetcode.io/solutions/graph-valid-tree"
+  },
+  {
+    "id": 90,
+    "leetcode_id": 323,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Number of Connected Components In An Undirected Graph",
+    "leetcode": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
+    "requirements": "Union-find or DFS",
+    "article_url": "https://neetcode.io/solutions/number-of-connected-components-in-an-undirected-graph",
+    "video_url": "https://neetcode.io/solutions/number-of-connected-components-in-an-undirected-graph"
+  },
+  {
+    "id": 91,
+    "leetcode_id": 684,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Redundant Connection",
+    "leetcode": "https://leetcode.com/problems/redundant-connection/",
+    "requirements": "Union-find for cycle detection",
+    "article_url": "https://neetcode.io/solutions/redundant-connection",
+    "video_url": "https://neetcode.io/solutions/redundant-connection"
+  },
+  {
+    "id": 92,
+    "leetcode_id": 127,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Word Ladder",
+    "leetcode": "https://leetcode.com/problems/word-ladder/",
+    "requirements": "BFS with word transformation",
+    "article_url": "https://neetcode.io/solutions/word-ladder",
+    "video_url": "https://neetcode.io/solutions/word-ladder"
+  },
+  {
+    "id": 93,
+    "leetcode_id": 743,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Network Delay Time",
+    "leetcode": "https://leetcode.com/problems/network-delay-time/",
+    "requirements": "Dijkstra's algorithm",
+    "article_url": "https://neetcode.io/solutions/network-delay-time",
+    "video_url": "https://neetcode.io/solutions/network-delay-time"
+  },
+  {
+    "id": 94,
+    "leetcode_id": 332,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Reconstruct Itinerary",
+    "leetcode": "https://leetcode.com/problems/reconstruct-itinerary/",
+    "requirements": "Eulerian path with DFS",
+    "article_url": "https://neetcode.io/solutions/reconstruct-itinerary",
+    "video_url": "https://neetcode.io/solutions/reconstruct-itinerary"
+  },
+  {
+    "id": 95,
+    "leetcode_id": 1584,
+    "difficulty": "Medium",
+    "frequency": "Low",
+    "problem": "Min Cost to Connect All Points",
+    "leetcode": "https://leetcode.com/problems/min-cost-to-connect-all-points/",
+    "requirements": "Minimum spanning tree (Prim's or Kruskal's)",
+    "article_url": "https://neetcode.io/solutions/min-cost-to-connect-all-points",
+    "video_url": "https://neetcode.io/solutions/min-cost-to-connect-all-points"
+  },
+  {
+    "id": 96,
+    "leetcode_id": 778,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Swim In Rising Water",
+    "leetcode": "https://leetcode.com/problems/swim-in-rising-water/",
+    "requirements": "Binary search or Dijkstra's algorithm",
+    "article_url": "https://neetcode.io/solutions/swim-in-rising-water",
+    "video_url": "https://neetcode.io/solutions/swim-in-rising-water"
+  },
+  {
+    "id": 97,
+    "leetcode_id": 269,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Alien Dictionary",
+    "leetcode": "https://leetcode.com/problems/alien-dictionary/",
+    "requirements": "Topological sort with character ordering",
+    "article_url": "https://neetcode.io/solutions/alien-dictionary",
+    "video_url": "https://neetcode.io/solutions/alien-dictionary"
+  },
+  {
+    "id": 98,
+    "leetcode_id": 787,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Cheapest Flights Within K Stops",
+    "leetcode": "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
+    "requirements": "Bellman-Ford or modified Dijkstra's",
+    "article_url": "https://neetcode.io/solutions/cheapest-flights-within-k-stops",
+    "video_url": "https://neetcode.io/solutions/cheapest-flights-within-k-stops"
+  },
+  {
+    "id": 99,
+    "leetcode_id": 70,
+    "difficulty": "Easy",
+    "frequency": "High",
+    "problem": "Climbing Stairs",
+    "leetcode": "https://leetcode.com/problems/climbing-stairs/",
+    "requirements": "Dynamic programming with Fibonacci pattern",
+    "article_url": "https://neetcode.io/solutions/climbing-stairs",
+    "video_url": "https://neetcode.io/solutions/climbing-stairs"
+  },
+  {
+    "id": 100,
+    "leetcode_id": 746,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Min Cost Climbing Stairs",
+    "leetcode": "https://leetcode.com/problems/min-cost-climbing-stairs/",
+    "requirements": "Dynamic programming with minimum cost",
+    "article_url": "https://neetcode.io/solutions/min-cost-climbing-stairs",
+    "video_url": "https://neetcode.io/solutions/min-cost-climbing-stairs"
+  },
+  {
+    "id": 101,
+    "leetcode_id": 198,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "House Robber",
+    "leetcode": "https://leetcode.com/problems/house-robber/",
+    "requirements": "Dynamic programming with non-adjacent selection",
+    "article_url": "https://neetcode.io/solutions/house-robber",
+    "video_url": "https://neetcode.io/solutions/house-robber"
+  },
+  {
+    "id": 102,
+    "leetcode_id": 213,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "House Robber II",
+    "leetcode": "https://leetcode.com/problems/house-robber-ii/",
+    "requirements": "Dynamic programming with circular constraint",
+    "article_url": "https://neetcode.io/solutions/house-robber-ii",
+    "video_url": "https://neetcode.io/solutions/house-robber-ii"
+  },
+  {
+    "id": 103,
+    "leetcode_id": 5,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Longest Palindromic Substring",
+    "leetcode": "https://leetcode.com/problems/longest-palindromic-substring/",
+    "requirements": "Expand around center or dynamic programming",
+    "article_url": "https://neetcode.io/solutions/longest-palindromic-substring",
+    "video_url": "https://neetcode.io/solutions/longest-palindromic-substring"
+  },
+  {
+    "id": 104,
+    "leetcode_id": 647,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Palindromic Substrings",
+    "leetcode": "https://leetcode.com/problems/palindromic-substrings/",
+    "requirements": "Expand around center",
+    "article_url": "https://neetcode.io/solutions/palindromic-substrings",
+    "video_url": "https://neetcode.io/solutions/palindromic-substrings"
+  },
+  {
+    "id": 105,
+    "leetcode_id": 91,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Decode Ways",
+    "leetcode": "https://leetcode.com/problems/decode-ways/",
+    "requirements": "Dynamic programming with string parsing",
+    "article_url": "https://neetcode.io/solutions/decode-ways",
+    "video_url": "https://neetcode.io/solutions/decode-ways"
+  },
+  {
+    "id": 106,
+    "leetcode_id": 322,
+    "difficulty": "Medium",
+    "frequency": "High",
+    "problem": "Coin Change",
+    "leetcode": "https://leetcode.com/problems/coin-change/",
+    "requirements": "Dynamic programming with minimization",
+    "article_url": "https://neetcode.io/solutions/coin-change",
+    "video_url": "https://neetcode.io/solutions/coin-change"
+  },
+  {
+    "id": 107,
+    "leetcode_id": 152,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Maximum Product Subarray",
+    "leetcode": "https://leetcode.com/problems/maximum-product-subarray/",
+    "requirements": "Dynamic programming with min/max tracking",
+    "article_url": "https://neetcode.io/solutions/maximum-product-subarray",
+    "video_url": "https://neetcode.io/solutions/maximum-product-subarray"
+  },
+  {
+    "id": 108,
+    "leetcode_id": 139,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Word Break",
+    "leetcode": "https://leetcode.com/problems/word-break/",
+    "requirements": "Dynamic programming with string matching",
+    "article_url": "https://neetcode.io/solutions/word-break",
+    "video_url": "https://neetcode.io/solutions/word-break"
+  },
+  {
+    "id": 109,
+    "leetcode_id": 300,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Longest Increasing Subsequence",
+    "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence/",
+    "requirements": "Dynamic programming or binary search",
+    "article_url": "https://neetcode.io/solutions/longest-increasing-subsequence",
+    "video_url": "https://neetcode.io/solutions/longest-increasing-subsequence"
+  },
+  {
+    "id": 110,
+    "leetcode_id": 416,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Partition Equal Subset Sum",
+    "leetcode": "https://leetcode.com/problems/partition-equal-subset-sum/",
+    "requirements": "Dynamic programming with subset sum",
+    "article_url": "https://neetcode.io/solutions/partition-equal-subset-sum",
+    "video_url": "https://neetcode.io/solutions/partition-equal-subset-sum"
+  },
+  {
+    "id": 111,
+    "leetcode_id": 62,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Unique Paths",
+    "leetcode": "https://leetcode.com/problems/unique-paths/",
+    "requirements": "Dynamic programming on 2D grid",
+    "article_url": "https://neetcode.io/solutions/unique-paths",
+    "video_url": "https://neetcode.io/solutions/unique-paths"
+  },
+  {
+    "id": 112,
+    "leetcode_id": 1143,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Longest Common Subsequence",
+    "leetcode": "https://leetcode.com/problems/longest-common-subsequence/",
+    "requirements": "Dynamic programming with string comparison",
+    "article_url": "https://neetcode.io/solutions/longest-common-subsequence",
+    "video_url": "https://neetcode.io/solutions/longest-common-subsequence"
+  },
+  {
+    "id": 113,
+    "leetcode_id": 309,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Best Time to Buy And Sell Stock With Cooldown",
+    "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
+    "requirements": "Dynamic programming with state machine",
+    "article_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock-with-cooldown",
+    "video_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock-with-cooldown"
+  },
+  {
+    "id": 114,
+    "leetcode_id": 518,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Coin Change II",
+    "leetcode": "https://leetcode.com/problems/coin-change-ii/",
+    "requirements": "Dynamic programming with combination count",
+    "article_url": "https://neetcode.io/solutions/coin-change-ii",
+    "video_url": "https://neetcode.io/solutions/coin-change-ii"
+  },
+  {
+    "id": 115,
+    "leetcode_id": 494,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Target Sum",
+    "leetcode": "https://leetcode.com/problems/target-sum/",
+    "requirements": "Dynamic programming with subset difference",
+    "article_url": "https://neetcode.io/solutions/target-sum",
+    "video_url": "https://neetcode.io/solutions/target-sum"
+  },
+  {
+    "id": 116,
+    "leetcode_id": 97,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Interleaving String",
+    "leetcode": "https://leetcode.com/problems/interleaving-string/",
+    "requirements": "Dynamic programming with string interleaving",
+    "article_url": "https://neetcode.io/solutions/interleaving-string",
+    "video_url": "https://neetcode.io/solutions/interleaving-string"
+  },
+  {
+    "id": 117,
+    "leetcode_id": 329,
+    "difficulty": "Hard",
+    "frequency": "Medium",
+    "problem": "Longest Increasing Path In a Matrix",
+    "leetcode": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
+    "requirements": "DFS with memoization",
+    "article_url": "https://neetcode.io/solutions/longest-increasing-path-in-a-matrix",
+    "video_url": "https://neetcode.io/solutions/longest-increasing-path-in-a-matrix"
+  },
+  {
+    "id": 118,
+    "leetcode_id": 115,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Distinct Subsequences",
+    "leetcode": "https://leetcode.com/problems/distinct-subsequences/",
+    "requirements": "Dynamic programming with string matching",
+    "article_url": "https://neetcode.io/solutions/distinct-subsequences",
+    "video_url": "https://neetcode.io/solutions/distinct-subsequences"
+  },
+  {
+    "id": 119,
+    "leetcode_id": 72,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Edit Distance",
+    "leetcode": "https://leetcode.com/problems/edit-distance/",
+    "requirements": "Dynamic programming with string operations",
+    "article_url": "https://neetcode.io/solutions/edit-distance",
+    "video_url": "https://neetcode.io/solutions/edit-distance"
+  },
+  {
+    "id": 120,
+    "leetcode_id": 312,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Burst Balloons",
+    "leetcode": "https://leetcode.com/problems/burst-balloons/",
+    "requirements": "Dynamic programming with divide and conquer",
+    "article_url": "https://neetcode.io/solutions/burst-balloons",
+    "video_url": "https://neetcode.io/solutions/burst-balloons"
+  },
+  {
+    "id": 121,
+    "leetcode_id": 10,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Regular Expression Matching",
+    "leetcode": "https://leetcode.com/problems/regular-expression-matching/",
+    "requirements": "Dynamic programming with pattern matching",
+    "article_url": "https://neetcode.io/solutions/regular-expression-matching",
+    "video_url": "https://neetcode.io/solutions/regular-expression-matching"
+  },
+  {
+    "id": 122,
+    "leetcode_id": 53,
+    "difficulty": "Medium",
+    "frequency": "High",
+    "problem": "Maximum Subarray",
+    "leetcode": "https://leetcode.com/problems/maximum-subarray/",
+    "requirements": "Kadane's algorithm",
+    "article_url": "https://neetcode.io/solutions/maximum-subarray",
+    "video_url": "https://neetcode.io/solutions/maximum-subarray"
+  },
+  {
+    "id": 123,
+    "leetcode_id": 55,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Jump Game",
+    "leetcode": "https://leetcode.com/problems/jump-game/",
+    "requirements": "Greedy approach with reachability",
+    "article_url": "https://neetcode.io/solutions/jump-game",
+    "video_url": "https://neetcode.io/solutions/jump-game"
+  },
+  {
+    "id": 124,
+    "leetcode_id": 45,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Jump Game II",
+    "leetcode": "https://leetcode.com/problems/jump-game-ii/",
+    "requirements": "Greedy approach with BFS",
+    "article_url": "https://neetcode.io/solutions/jump-game-ii",
+    "video_url": "https://neetcode.io/solutions/jump-game-ii"
+  },
+  {
+    "id": 125,
+    "leetcode_id": 134,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Gas Station",
+    "leetcode": "https://leetcode.com/problems/gas-station/",
+    "requirements": "Greedy approach with circular array",
+    "article_url": "https://neetcode.io/solutions/gas-station",
+    "video_url": "https://neetcode.io/solutions/gas-station"
+  },
+  {
+    "id": 126,
+    "leetcode_id": 846,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Hand of Straights",
+    "leetcode": "https://leetcode.com/problems/hand-of-straights/",
+    "requirements": "Greedy approach with sorted groups",
+    "article_url": "https://neetcode.io/solutions/hand-of-straights",
+    "video_url": "https://neetcode.io/solutions/hand-of-straights"
+  },
+  {
+    "id": 127,
+    "leetcode_id": 1899,
+    "difficulty": "Medium",
+    "frequency": "Low",
+    "problem": "Merge Triplets to Form Target Triplet",
+    "leetcode": "https://leetcode.com/problems/merge-triplets-to-form-target-triplet/",
+    "requirements": "Greedy approach with triplet selection",
+    "article_url": "https://neetcode.io/solutions/merge-triplets-to-form-target-triplet",
+    "video_url": "https://neetcode.io/solutions/merge-triplets-to-form-target-triplet"
+  },
+  {
+    "id": 128,
+    "leetcode_id": 763,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Partition Labels",
+    "leetcode": "https://leetcode.com/problems/partition-labels/",
+    "requirements": "Greedy approach with character intervals",
+    "article_url": "https://neetcode.io/solutions/partition-labels",
+    "video_url": "https://neetcode.io/solutions/partition-labels"
+  },
+  {
+    "id": 129,
+    "leetcode_id": 678,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Valid Parenthesis String",
+    "leetcode": "https://leetcode.com/problems/valid-parenthesis-string/",
+    "requirements": "Greedy approach with balance ranges",
+    "article_url": "https://neetcode.io/solutions/valid-parenthesis-string",
+    "video_url": "https://neetcode.io/solutions/valid-parenthesis-string"
+  },
+  {
+    "id": 130,
+    "leetcode_id": 57,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Insert Interval",
+    "leetcode": "https://leetcode.com/problems/insert-interval/",
+    "requirements": "Interval merging with insertion",
+    "article_url": "https://neetcode.io/solutions/insert-interval",
+    "video_url": "https://neetcode.io/solutions/insert-interval"
+  },
+  {
+    "id": 131,
+    "leetcode_id": 56,
+    "difficulty": "Medium",
+    "frequency": "High",
+    "problem": "Merge Intervals",
+    "leetcode": "https://leetcode.com/problems/merge-intervals/",
+    "requirements": "Sorting and merging intervals",
+    "article_url": "https://neetcode.io/solutions/merge-intervals",
+    "video_url": "https://neetcode.io/solutions/merge-intervals"
+  },
+  {
+    "id": 132,
+    "leetcode_id": 435,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Non Overlapping Intervals",
+    "leetcode": "https://leetcode.com/problems/non-overlapping-intervals/",
+    "requirements": "Greedy approach with interval selection",
+    "article_url": "https://neetcode.io/solutions/non-overlapping-intervals",
+    "video_url": "https://neetcode.io/solutions/non-overlapping-intervals"
+  },
+  {
+    "id": 133,
+    "leetcode_id": 252,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Meeting Rooms",
+    "leetcode": "https://leetcode.com/problems/meeting-rooms/",
+    "requirements": "Interval overlap detection",
+    "article_url": "https://neetcode.io/solutions/meeting-rooms",
+    "video_url": "https://neetcode.io/solutions/meeting-rooms"
+  },
+  {
+    "id": 134,
+    "leetcode_id": 253,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Meeting Rooms II",
+    "leetcode": "https://leetcode.com/problems/meeting-rooms-ii/",
+    "requirements": "Heap for minimum rooms required",
+    "article_url": "https://neetcode.io/solutions/meeting-rooms-ii",
+    "video_url": "https://neetcode.io/solutions/meeting-rooms-ii"
+  },
+  {
+    "id": 135,
+    "leetcode_id": 1851,
+    "difficulty": "Hard",
+    "frequency": "Low",
+    "problem": "Minimum Interval to Include Each Query",
+    "leetcode": "https://leetcode.com/problems/minimum-interval-to-include-each-query/",
+    "requirements": "Sorting and heap for interval queries",
+    "article_url": "https://neetcode.io/solutions/minimum-interval-to-include-each-query",
+    "video_url": "https://neetcode.io/solutions/minimum-interval-to-include-each-query"
+  },
+  {
+    "id": 136,
+    "leetcode_id": 48,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Rotate Image",
+    "leetcode": "https://leetcode.com/problems/rotate-image/",
+    "requirements": "Matrix rotation in-place",
+    "article_url": "https://neetcode.io/solutions/rotate-image",
+    "video_url": "https://neetcode.io/solutions/rotate-image"
+  },
+  {
+    "id": 137,
+    "leetcode_id": 54,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Spiral Matrix",
+    "leetcode": "https://leetcode.com/problems/spiral-matrix/",
+    "requirements": "Matrix traversal with direction change",
+    "article_url": "https://neetcode.io/solutions/spiral-matrix",
+    "video_url": "https://neetcode.io/solutions/spiral-matrix"
+  },
+  {
+    "id": 138,
+    "leetcode_id": 73,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Set Matrix Zeroes",
+    "leetcode": "https://leetcode.com/problems/set-matrix-zeroes/",
+    "requirements": "Matrix modification with O(1) space",
+    "article_url": "https://neetcode.io/solutions/set-matrix-zeroes",
+    "video_url": "https://neetcode.io/solutions/set-matrix-zeroes"
+  },
+  {
+    "id": 139,
+    "leetcode_id": 202,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Happy Number",
+    "leetcode": "https://leetcode.com/problems/happy-number/",
+    "requirements": "Cycle detection with digit sums",
+    "article_url": "https://neetcode.io/solutions/happy-number",
+    "video_url": "https://neetcode.io/solutions/happy-number"
+  },
+  {
+    "id": 140,
+    "leetcode_id": 66,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Plus One",
+    "leetcode": "https://leetcode.com/problems/plus-one/",
+    "requirements": "Array digit manipulation",
+    "article_url": "https://neetcode.io/solutions/plus-one",
+    "video_url": "https://neetcode.io/solutions/plus-one"
+  },
+  {
+    "id": 141,
+    "leetcode_id": 50,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Pow(x, n)",
+    "leetcode": "https://leetcode.com/problems/powx-n/",
+    "requirements": "Fast power algorithm",
+    "article_url": "https://neetcode.io/solutions/powx-n",
+    "video_url": "https://neetcode.io/solutions/powx-n"
+  },
+  {
+    "id": 142,
+    "leetcode_id": 43,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Multiply Strings",
+    "leetcode": "https://leetcode.com/problems/multiply-strings/",
+    "requirements": "String multiplication without built-in functions",
+    "article_url": "https://neetcode.io/solutions/multiply-strings",
+    "video_url": "https://neetcode.io/solutions/multiply-strings"
+  },
+  {
+    "id": 143,
+    "leetcode_id": 2013,
+    "difficulty": "Medium",
+    "frequency": "Low",
+    "problem": "Detect Squares",
+    "leetcode": "https://leetcode.com/problems/detect-squares/",
+    "requirements": "Point counting and square detection",
+    "article_url": "https://neetcode.io/solutions/detect-squares",
+    "video_url": "https://neetcode.io/solutions/detect-squares"
+  },
+  {
+    "id": 144,
+    "leetcode_id": 136,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Single Number",
+    "leetcode": "https://leetcode.com/problems/single-number/",
+    "requirements": "XOR for finding unique element",
+    "article_url": "https://neetcode.io/solutions/single-number",
+    "video_url": "https://neetcode.io/solutions/single-number"
+  },
+  {
+    "id": 145,
+    "leetcode_id": 191,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Number of 1 Bits",
+    "leetcode": "https://leetcode.com/problems/number-of-1-bits/",
+    "requirements": "Bit manipulation for counting",
+    "article_url": "https://neetcode.io/solutions/number-of-1-bits",
+    "video_url": "https://neetcode.io/solutions/number-of-1-bits"
+  },
+  {
+    "id": 146,
+    "leetcode_id": 338,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Counting Bits",
+    "leetcode": "https://leetcode.com/problems/counting-bits/",
+    "requirements": "Dynamic programming with bit patterns",
+    "article_url": "https://neetcode.io/solutions/counting-bits",
+    "video_url": "https://neetcode.io/solutions/counting-bits"
+  },
+  {
+    "id": 147,
+    "leetcode_id": 190,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Reverse Bits",
+    "leetcode": "https://leetcode.com/problems/reverse-bits/",
+    "requirements": "Bit manipulation for reversing",
+    "article_url": "https://neetcode.io/solutions/reverse-bits",
+    "video_url": "https://neetcode.io/solutions/reverse-bits"
+  },
+  {
+    "id": 148,
+    "leetcode_id": 268,
+    "difficulty": "Easy",
+    "frequency": "Medium",
+    "problem": "Missing Number",
+    "leetcode": "https://leetcode.com/problems/missing-number/",
+    "requirements": "XOR or math formula for finding missing",
+    "article_url": "https://neetcode.io/solutions/missing-number",
+    "video_url": "https://neetcode.io/solutions/missing-number"
+  },
+  {
+    "id": 149,
+    "leetcode_id": 371,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Sum of Two Integers",
+    "leetcode": "https://leetcode.com/problems/sum-of-two-integers/",
+    "requirements": "Bit manipulation for addition without +",
+    "article_url": "https://neetcode.io/solutions/sum-of-two-integers",
+    "video_url": "https://neetcode.io/solutions/sum-of-two-integers"
+  },
+  {
+    "id": 150,
+    "leetcode_id": 7,
+    "difficulty": "Medium",
+    "frequency": "Medium",
+    "problem": "Reverse Integer",
+    "leetcode": "https://leetcode.com/problems/reverse-integer/",
+    "requirements": "Integer manipulation with overflow handling",
+    "article_url": "https://neetcode.io/solutions/reverse-integer",
+    "video_url": "https://neetcode.io/solutions/reverse-integer"
+  }]
   },
   "Arrays": {
     "tip": "Arrays are the most fundamental data structure. Focus on understanding basic operations like traversal, insertion, deletion, and in-place manipulation. Look for problems involving direct array access, traversal, and simple transformations without specialized algorithms.",
@@ -1751,7 +2050,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Best Time to Buy and Sell Stock",
     "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-    "requirements": "Array traversal and tracking maximum difference"
+    "requirements": "Array traversal and tracking maximum difference",
+    "article_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
+    "video_url":"https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
   },
   {
     "id": 2,
@@ -1868,7 +2169,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Valid Sudoku",
     "leetcode": "https://leetcode.com/problems/valid-sudoku/",
-    "requirements": "2D array validation"
+    "requirements": "2D array validation",
+    "article_url": "https://neetcode.io/solutions/valid-sudoku",
+    "video_url":"https://neetcode.io/solutions/valid-sudoku",
   },
   {
     "id": 15,
@@ -1891,7 +2194,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Product of Array Except Self",
     "leetcode": "https://leetcode.com/problems/product-of-array-except-self/",
-    "requirements": "Prefix and suffix products (multiplicative variant)"
+    "requirements": "Prefix and suffix products (multiplicative variant)",
+    "article_url": "https://neetcode.io/solutions/product-of-array-except-self",
+    "video_url":"https://neetcode.io/solutions/product-of-array-except-self",
   },
   {
     "id": 2,
@@ -2031,7 +2336,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Two Sum",
     "leetcode": "https://leetcode.com/problems/two-sum/",
-    "requirements": "Using hashmap to find complement elements"
+    "requirements": "Using hashmap to find complement elements",
+    "article_url": "https://neetcode.io/solutions/two-sum",
+    "video_url":"https://neetcode.io/solutions/two-sum"   
   },
   {
     "id": 2,
@@ -2040,7 +2347,10 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Valid Anagram",
     "leetcode": "https://leetcode.com/problems/valid-anagram/",
-    "requirements": "Character frequency counting with hashmap"
+    "requirements": "Character frequency counting with hashmap",
+    "article_url": "https://neetcode.io/solutions/valid-anagram",
+    "video_url":"https://neetcode.io/solutions/valid-anagram"
+    
   },
   {
     "id": 3,
@@ -2049,7 +2359,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Contains Duplicate",
     "leetcode": "https://leetcode.com/problems/contains-duplicate/",
-    "requirements": "Using hashset to track seen elements"
+    "requirements": "Using hashset to track seen elements",
+    "article_url": "https://neetcode.io/solutions/contains-duplicate",
+    "video_url":"https://neetcode.io/solutions/contains-duplicate"   
   },
   {
     "id": 4,
@@ -2058,7 +2370,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Group Anagrams",
     "leetcode": "https://leetcode.com/problems/group-anagrams/",
-    "requirements": "Using hashmap with custom key"
+    "requirements": "Using hashmap with custom key",
+    "article_url": "https://neetcode.io/solutions/group-anagrams",
+    "video_url":"https://neetcode.io/solutions/group-anagrams"   
   },
   {
     "id": 5,
@@ -2067,7 +2381,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Top K Frequent Elements",
     "leetcode": "https://leetcode.com/problems/top-k-frequent-elements/",
-    "requirements": "Using hashmap for frequency counting"
+    "requirements": "Using hashmap for frequency counting",
+    "article_url": "https://neetcode.io/solutions/top-k-frequent-elements",
+    "video_url":"https://neetcode.io/solutions/top-k-frequent-elements"
   },
   {
     "id": 6,
@@ -2103,7 +2419,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Valid Sudoku",
     "leetcode": "https://leetcode.com/problems/valid-sudoku/",
-    "requirements": "Using hashsets to validate uniqueness"
+    "requirements": "Using hashsets to validate uniqueness",
+     "article_url": "https://neetcode.io/solutions/valid-sudoku",
+    "video_url":"https://neetcode.io/solutions/valid-sudoku",
   },
   {
     "id": 10,
@@ -2234,7 +2552,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Valid Palindrome",
     "leetcode": "https://leetcode.com/problems/valid-palindrome/",
-    "requirements": "Two pointers from opposite ends"
+    "requirements": "Two pointers from opposite ends",
+    "article_url": "https://neetcode.io/solutions/valid-palindrome",
+    "video_url":"https://neetcode.io/solutions/valid-palindrome",
   },
   {
     "id": 4,
@@ -2243,7 +2563,10 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "3Sum",
     "leetcode": "https://leetcode.com/problems/3sum/",
-    "requirements": "Two pointers with sorting"
+    "requirements": "Two pointers with sorting",
+    "article_url": "https://neetcode.io/solutions/3sum",
+    "video_url":"https://neetcode.io/solutions/3sum",
+    
   },
   {
     "id": 5,
@@ -2252,7 +2575,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Container With Most Water",
     "leetcode": "https://leetcode.com/problems/container-with-most-water/",
-    "requirements": "Two pointers from opposite ends"
+    "requirements": "Two pointers from opposite ends",
+    "article_url": "https://neetcode.io/solutions/container-with-most-water",
+    "video_url":"https://neetcode.io/solutions/container-with-most-water",
   },
   {
     "id": 6,
@@ -2288,7 +2613,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Two Sum II - Input Array Is Sorted",
     "leetcode": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
-    "requirements": "Two pointers from opposite ends"
+    "requirements": "Two pointers from opposite ends",
+    "article_url": "https://neetcode.io/solutions/two-sum-ii-input-array-is-sorted",
+    "video_url":"https://neetcode.io/solutions/two-sum-ii-input-array-is-sorted",
   },
   {
     "id": 10,
@@ -2365,7 +2692,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Longest Substring Without Repeating Characters",
     "leetcode": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
-    "requirements": "Variable-size sliding window with hashset"
+    "requirements": "Variable-size sliding window with hashset",
+    "article_url": "https://neetcode.io/solutions/longest-substring-without-repeating-characters",
+    "video_url":"https://neetcode.io/solutions/longest-substring-without-repeating-characters",
   },
   {
     "id": 2,
@@ -2428,7 +2757,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Longest Repeating Character Replacement",
     "leetcode": "https://leetcode.com/problems/longest-repeating-character-replacement/",
-    "requirements": "Variable-size sliding window with character replacement"
+    "requirements": "Variable-size sliding window with character replacement",
+    "article_url": "https://neetcode.io/solutions/longest-repeating-character-replacement",
+    "video_url":"https://neetcode.io/solutions/longest-repeating-character-replacement",
   },
   {
     "id": 9,
@@ -2758,7 +3089,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Valid Sudoku",
     "leetcode": "https://leetcode.com/problems/valid-sudoku/",
-    "requirements": "Grid validation with hash sets"
+    "requirements": "Grid validation with hash sets",
+    "article_url": "https://neetcode.io/solutions/valid-sudoku",
+    "video_url":"https://neetcode.io/solutions/valid-sudoku",
   },
   {
     "id": 5,
@@ -4345,7 +4678,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Top K Frequent Elements",
         "leetcode": "https://leetcode.com/problems/top-k-frequent-elements/",
-        "requirements": "Find k most frequent elements using heap"
+        "requirements": "Find k most frequent elements using heap",
+        "article_url": "https://neetcode.io/solutions/top-k-frequent-elements",
+        "video_url":"https://neetcode.io/solutions/top-k-frequent-elements",
     },
     {
         "id": 3,
@@ -5018,7 +5353,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Longest Consecutive Sequence",
         "leetcode": "https://leetcode.com/problems/longest-consecutive-sequence/",
-        "requirements": "Finding longest consecutive elements sequence with Union Find"
+        "requirements": "Finding longest consecutive elements sequence with Union Find",
+        "article_url": "https://neetcode.io/solutions/longest-consecutive-sequence",
+        "video_url":"https://neetcode.io/solutions/longest-consecutive-sequence",
     },
     {
         "id": 6,
@@ -5683,7 +6020,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Best Time to Buy and Sell Stock",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-        "requirements": "Find maximum profit from a single transaction"
+        "requirements": "Find maximum profit from a single transaction",
+        "article_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
+        "video_url":"https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
     },
     {
         "id": 8,
