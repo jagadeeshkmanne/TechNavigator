@@ -2586,7 +2586,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Trapping Rain Water",
     "leetcode": "https://leetcode.com/problems/trapping-rain-water/",
-    "requirements": "Two pointers from opposite ends"
+    "requirements": "Two pointers from opposite ends",
+    "article_url": "https://neetcode.io/solutions/trapping-rain-water",
+    "video_url": "https://neetcode.io/solutions/trapping-rain-water"
   },
   {
     "id": 7,
@@ -2845,7 +2847,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Binary Search",
     "leetcode": "https://leetcode.com/problems/binary-search/",
-    "requirements": "Classic binary search in a sorted array"
+    "requirements": "Classic binary search in a sorted array",
+    "article_url": "https://neetcode.io/solutions/binary-search",
+    "video_url": "https://neetcode.io/solutions/binary-search"
   },
   {
     "id": 2,
@@ -2881,7 +2885,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Search in Rotated Sorted Array",
     "leetcode": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
-    "requirements": "Binary search in rotated sorted array"
+    "requirements": "Binary search in rotated sorted array",
+    "article_url": "https://neetcode.io/solutions/search-in-rotated-sorted-array",
+    "video_url": "https://neetcode.io/solutions/search-in-rotated-sorted-array"
   },
   {
     "id": 6,
@@ -2899,7 +2905,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Search a 2D Matrix",
     "leetcode": "https://leetcode.com/problems/search-a-2d-matrix/",
-    "requirements": "Binary search on 2D matrix"
+    "requirements": "Binary search on 2D matrix",
+    "article_url": "https://neetcode.io/solutions/search-a-2d-matrix",
+    "video_url": "https://neetcode.io/solutions/search-a-2d-matrix"
   },
   {
     "id": 8,
@@ -2908,7 +2916,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Find Minimum in Rotated Sorted Array",
     "leetcode": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
-    "requirements": "Binary search in rotated sorted array"
+    "requirements": "Binary search in rotated sorted array",
+    "article_url": "https://neetcode.io/solutions/find-minimum-in-rotated-sorted-array",
+    "video_url": "https://neetcode.io/solutions/find-minimum-in-rotated-sorted-array"
   },
   {
     "id": 9,
@@ -2917,7 +2927,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Median of Two Sorted Arrays",
     "leetcode": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
-    "requirements": "Binary search on smaller array to find partition point"
+    "requirements": "Binary search on smaller array to find partition point",
+    "article_url": "https://neetcode.io/solutions/median-of-two-sorted-arrays",
+    "video_url": "https://neetcode.io/solutions/median-of-two-sorted-arrays"
   },
   {
     "id": 10,
@@ -2926,7 +2938,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Koko Eating Bananas",
     "leetcode": "https://leetcode.com/problems/koko-eating-bananas/",
-    "requirements": "Binary search on answer space"
+    "requirements": "Binary search on answer space",
+    "article_url": "https://neetcode.io/solutions/koko-eating-bananas",
+    "video_url": "https://neetcode.io/solutions/koko-eating-bananas"
   },
   {
     "id": 11,
@@ -3012,7 +3026,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Find the Duplicate Number",
         "leetcode": "https://leetcode.com/problems/find-the-duplicate-number/",
-        "requirements": "Find duplicate in range [1,n] with O(1) space"
+        "requirements": "Find duplicate in range [1,n] with O(1) space",
+        "article_url": "https://neetcode.io/solutions/find-the-duplicate-number",
+        "video_url": "https://neetcode.io/solutions/find-the-duplicate-number"  
       },
       {
         "id": 184,
@@ -3100,7 +3116,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Search a 2D Matrix",
     "leetcode": "https://leetcode.com/problems/search-a-2d-matrix/",
-    "requirements": "Binary search in matrix"
+    "requirements": "Binary search in matrix",
+    "article_url": "https://neetcode.io/solutions/search-a-2d-matrix",
+    "video_url": "https://neetcode.io/solutions/search-a-2d-matrix"
   },
   {
     "id": 6,
@@ -3204,7 +3222,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Valid Parentheses",
     "leetcode": "https://leetcode.com/problems/valid-parentheses/",
-    "requirements": "Check valid nested parentheses using stack"
+    "requirements": "Check valid nested parentheses using stack",
+    "article_url": "https://neetcode.io/solutions/valid-parentheses",
+    "video_url": "https://neetcode.io/solutions/valid-parentheses"
   },
   {
     "id": 2,
@@ -3213,7 +3233,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Min Stack",
     "leetcode": "https://leetcode.com/problems/min-stack/",
-    "requirements": "Stack with constant time minimum element retrieval"
+    "requirements": "Stack with constant time minimum element retrieval",
+    "article_url": "https://neetcode.io/solutions/min-stack",
+    "video_url": "https://neetcode.io/solutions/min-stack"
   },
   {
     "id": 3,
@@ -3240,7 +3262,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Evaluate Reverse Polish Notation",
     "leetcode": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
-    "requirements": "Evaluate postfix expression using stack"
+    "requirements": "Evaluate postfix expression using stack",
+    "article_url": "https://neetcode.io/solutions/evaluate-reverse-polish-notation",
+    "video_url": "https://neetcode.io/solutions/evaluate-reverse-polish-notation"
   },
   {
     "id": 6,
@@ -3249,7 +3273,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Daily Temperatures",
     "leetcode": "https://leetcode.com/problems/daily-temperatures/",
-    "requirements": "Find next warmer temperature using stack"
+    "requirements": "Find next warmer temperature using stack",
+    "article_url": "https://neetcode.io/solutions/daily-temperatures",
+    "video_url": "https://neetcode.io/solutions/daily-temperatures"
   },
   {
     "id": 7,
@@ -3267,7 +3293,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Largest Rectangle in Histogram",
     "leetcode": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
-    "requirements": "Find largest rectangle area using stack"
+    "requirements": "Find largest rectangle area using stack",
+    "article_url": "https://neetcode.io/solutions/largest-rectangle-in-histogram",
+    "video_url": "https://neetcode.io/solutions/largest-rectangle-in-histogram"
   },
   {
     "id": 9,
@@ -3276,7 +3304,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Trapping Rain Water",
     "leetcode": "https://leetcode.com/problems/trapping-rain-water/",
-    "requirements": "Calculate trapped water using stack approach"
+    "requirements": "Calculate trapped water using stack approach",
+    "article_url": "https://neetcode.io/solutions/trapping-rain-water",
+    "video_url": "https://neetcode.io/solutions/trapping-rain-water"
   },
   {
     "id": 10,
@@ -3344,7 +3374,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Daily Temperatures",
     "leetcode": "https://leetcode.com/problems/daily-temperatures/",
-    "requirements": "Find next warmer day using monotonic decreasing stack"
+    "requirements": "Find next warmer day using monotonic decreasing stack",
+    "article_url": "https://neetcode.io/solutions/daily-temperatures",
+    "video_url": "https://neetcode.io/solutions/daily-temperatures"
   },
   {
     "id": 2,
@@ -3362,7 +3394,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Largest Rectangle in Histogram",
     "leetcode": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
-    "requirements": "Find largest rectangle area using monotonic increasing stack"
+    "requirements": "Find largest rectangle area using monotonic increasing stack",
+    "article_url": "https://neetcode.io/solutions/largest-rectangle-in-histogram",
+    "video_url": "https://neetcode.io/solutions/largest-rectangle-in-histogram"
   },
   {
     "id": 4,
@@ -3371,7 +3405,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Trapping Rain Water",
     "leetcode": "https://leetcode.com/problems/trapping-rain-water/",
-    "requirements": "Calculate trapped water using monotonic stack"
+    "requirements": "Calculate trapped water using monotonic stack",
+    "article_url": "https://neetcode.io/solutions/trapping-rain-water",
+    "video_url": "https://neetcode.io/solutions/trapping-rain-water"
   },
   {
     "id": 5,
@@ -3484,7 +3520,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Reverse Linked List",
     "leetcode": "https://leetcode.com/problems/reverse-linked-list/",
-    "requirements": "Basic linked list reversal"
+    "requirements": "Basic linked list reversal",
+    "article_url": "https://neetcode.io/solutions/reverse-linked-list",
+    "video_url": "https://neetcode.io/solutions/reverse-linked-list"
   },
   {
     "id": 2,
@@ -3493,7 +3531,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Merge Two Sorted Lists",
     "leetcode": "https://leetcode.com/problems/merge-two-sorted-lists/",
-    "requirements": "Merge sorted linked lists"
+    "requirements": "Merge sorted linked lists",
+    "article_url": "https://neetcode.io/solutions/merge-two-sorted-lists",
+    "video_url": "https://neetcode.io/solutions/merge-two-sorted-lists"
   },
   {
     "id": 3,
@@ -3502,7 +3542,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Linked List Cycle",
     "leetcode": "https://leetcode.com/problems/linked-list-cycle/",
-    "requirements": "Detect cycle using fast/slow pointers"
+    "requirements": "Detect cycle using fast/slow pointers",
+    "article_url": "https://neetcode.io/solutions/linked-list-cycle",
+    "video_url": "https://neetcode.io/solutions/linked-list-cycle"  
   },
   {
     "id": 4,
@@ -3511,7 +3553,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Remove Nth Node From End of List",
     "leetcode": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
-    "requirements": "Remove node with single pass using two pointers"
+    "requirements": "Remove node with single pass using two pointers",
+    "article_url": "https://neetcode.io/solutions/remove-nth-node-from-end-of-list",
+    "video_url": "https://neetcode.io/solutions/remove-nth-node-from-end-of-list"  
   },
   {
     "id": 5,
@@ -3520,7 +3564,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Add Two Numbers",
     "leetcode": "https://leetcode.com/problems/add-two-numbers/",
-    "requirements": "Add numbers represented by linked lists"
+    "requirements": "Add numbers represented by linked lists",
+    "article_url": "https://neetcode.io/solutions/add-two-numbers",
+    "video_url": "https://neetcode.io/solutions/add-two-numbers"
   },
   {
     "id": 6,
@@ -3574,7 +3620,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Copy List with Random Pointer",
     "leetcode": "https://leetcode.com/problems/copy-list-with-random-pointer/",
-    "requirements": "Deep copy list with additional pointer"
+    "requirements": "Deep copy list with additional pointer",
+    "article_url": "https://neetcode.io/solutions/copy-list-with-random-pointer",
+    "video_url": "https://neetcode.io/solutions/copy-list-with-random-pointer"
   },
   {
     "id": 12,
@@ -3592,7 +3640,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Merge k Sorted Lists",
     "leetcode": "https://leetcode.com/problems/merge-k-sorted-lists/",
-    "requirements": "Merge k sorted linked lists"
+    "requirements": "Merge k sorted linked lists",
+    "article_url": "https://neetcode.io/solutions/merge-k-sorted-lists",
+    "video_url": "https://neetcode.io/solutions/merge-k-sorted-lists"  
   },
   {
     "id": 14,
@@ -3610,7 +3660,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "LRU Cache",
     "leetcode": "https://leetcode.com/problems/lru-cache/",
-    "requirements": "Implement LRU cache using hashmap and linked list"
+    "requirements": "Implement LRU cache using hashmap and linked list",
+    "article_url": "https://neetcode.io/solutions/lru-cache",
+    "video_url": "https://neetcode.io/solutions/lru-cache"  
   }
 ]
   },
@@ -3624,7 +3676,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Linked List Cycle",
     "leetcode": "https://leetcode.com/problems/linked-list-cycle/",
-    "requirements": "Detect if linked list has a cycle"
+    "requirements": "Detect if linked list has a cycle",
+    "article_url": "https://neetcode.io/solutions/linked-list-cycle",
+    "video_url": "https://neetcode.io/solutions/linked-list-cycle"
   },
   {
     "id": 2,
@@ -3660,7 +3714,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Find the Duplicate Number",
     "leetcode": "https://leetcode.com/problems/find-the-duplicate-number/",
-    "requirements": "Find duplicate in array using cycle detection"
+    "requirements": "Find duplicate in array using cycle detection",
+    "article_url": "https://neetcode.io/solutions/find-the-duplicate-number",
+    "video_url": "https://neetcode.io/solutions/find-the-duplicate-number"  
   },
   {
     "id": 6,
@@ -3669,7 +3725,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Remove Nth Node From End of List",
     "leetcode": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
-    "requirements": "Remove nth node from end using offset pointers"
+    "requirements": "Remove nth node from end using offset pointers",
+    "article_url": "https://neetcode.io/solutions/remove-nth-node-from-end-of-list",
+    "video_url": "https://neetcode.io/solutions/remove-nth-node-from-end-of-list"  
   },
   {
     "id": 7,
@@ -3678,7 +3736,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Reorder List",
     "leetcode": "https://leetcode.com/problems/reorder-list/",
-    "requirements": "Reorder list using middle finding and reversal"
+    "requirements": "Reorder list using middle finding and reversal",
+    "article_url": "https://neetcode.io/solutions/reorder-list",
+    "video_url": "https://neetcode.io/solutions/reorder-list"  
   },
   {
     "id": 8,
@@ -3737,7 +3797,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Reverse Linked List",
         "leetcode": "https://leetcode.com/problems/reverse-linked-list/",
-        "requirements": "Reverse entire linked list (iterative and recursive)"
+        "requirements": "Reverse entire linked list (iterative and recursive)",
+        "article_url": "https://neetcode.io/solutions/reverse-linked-list",
+        "video_url": "https://neetcode.io/solutions/reverse-linked-list"
       },
       {
         "id": 2,
@@ -3755,7 +3817,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Reverse Nodes in k-Group",
         "leetcode": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
-        "requirements": "Reverse nodes in groups of k"
+        "requirements": "Reverse nodes in groups of k",
+        "article_url": "https://neetcode.io/solutions/reverse-nodes-in-k-group",
+        "video_url": "https://neetcode.io/solutions/reverse-nodes-in-k-group"  
       },
       {
         "id": 4,
@@ -3782,7 +3846,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Reorder List",
         "leetcode": "https://leetcode.com/problems/reorder-list/",
-        "requirements": "Reorder list by reversing second half and merging"
+        "requirements": "Reorder list by reversing second half and merging",
+        "article_url": "https://neetcode.io/solutions/reorder-list",
+        "video_url": "https://neetcode.io/solutions/reorder-list"  
       },
       {
         "id": 7,
@@ -3832,7 +3898,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Reverse Linked List",
         "leetcode": "https://leetcode.com/problems/reverse-linked-list/",
-        "requirements": "Reverse a singly linked list iteratively or recursively"
+        "requirements": "Reverse a singly linked list iteratively or recursively",
+        "article_url": "https://neetcode.io/solutions/reverse-linked-list",
+        "video_url": "https://neetcode.io/solutions/reverse-linked-list"
     },
     {
         "id": 2,
@@ -3841,7 +3909,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Merge Two Sorted Lists",
         "leetcode": "https://leetcode.com/problems/merge-two-sorted-lists/",
-        "requirements": "Merge two sorted linked lists into one sorted list"
+        "requirements": "Merge two sorted linked lists into one sorted list",
+        "article_url": "https://neetcode.io/solutions/merge-two-sorted-lists",
+        "video_url": "https://neetcode.io/solutions/merge-two-sorted-lists"
     },
     {
         "id": 3,
@@ -3895,7 +3965,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Reverse Nodes in k-Group",
         "leetcode": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
-        "requirements": "Reverse nodes in groups of k"
+        "requirements": "Reverse nodes in groups of k",
+        "article_url": "https://neetcode.io/solutions/reverse-nodes-in-k-group",
+        "video_url": "https://neetcode.io/solutions/reverse-nodes-in-k-group"
     },
     {
         "id": 9,
@@ -3922,7 +3994,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Add Two Numbers",
         "leetcode": "https://leetcode.com/problems/add-two-numbers/",
-        "requirements": "Add two numbers represented by linked lists"
+        "requirements": "Add two numbers represented by linked lists",
+        "article_url": "https://neetcode.io/solutions/add-two-numbers",
+        "video_url": "https://neetcode.io/solutions/add-two-numbers"
     },
     {
         "id": 12,
@@ -3931,7 +4005,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Remove Nth Node From End of List",
         "leetcode": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
-        "requirements": "Remove the nth node from the end of the list"
+        "requirements": "Remove the nth node from the end of the list",
+        "article_url": "https://neetcode.io/solutions/remove-nth-node-from-end-of-list",
+        "video_url": "https://neetcode.io/solutions/remove-nth-node-from-end-of-list"
     },
     {
         "id": 13,
@@ -3958,7 +4034,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Reorder List",
         "leetcode": "https://leetcode.com/problems/reorder-list/",
-        "requirements": "Reorder list to L0 → Ln → L1 → Ln-1 → L2 → Ln-2 →…"
+        "requirements": "Reorder list to L0 → Ln → L1 → Ln-1 → L2 → Ln-2 →…",
+        "article_url": "https://neetcode.io/solutions/reorder-list",
+        "video_url": "https://neetcode.io/solutions/reorder-list"
     },
     {
         "id": 16,
@@ -3990,7 +4068,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Invert Binary Tree",
         "leetcode": "https://leetcode.com/problems/invert-binary-tree/",
-        "requirements": "Swap left and right children for all nodes"
+        "requirements": "Swap left and right children for all nodes",
+        "article_url": "https://neetcode.io/solutions/invert-binary-tree",
+        "video_url": "https://neetcode.io/solutions/invert-binary-tree"
     },
     {
         "id": 2,
@@ -3999,7 +4079,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Maximum Depth of Binary Tree",
         "leetcode": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
-        "requirements": "Find the maximum depth of the tree"
+        "requirements": "Find the maximum depth of the tree",
+        "article_url": "https://neetcode.io/solutions/maximum-depth-of-binary-tree",
+        "video_url": "https://neetcode.io/solutions/maximum-depth-of-binary-tree"
     },
     {
         "id": 3,
@@ -4008,7 +4090,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Same Tree",
         "leetcode": "https://leetcode.com/problems/same-tree/",
-        "requirements": "Check if two trees are identical"
+        "requirements": "Check if two trees are identical",
+        "article_url": "https://neetcode.io/solutions/same-tree",
+        "video_url": "https://neetcode.io/solutions/same-tree"
     },
     {
         "id": 4,
@@ -4116,7 +4200,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Balanced Binary Tree",
         "leetcode": "https://leetcode.com/problems/balanced-binary-tree/",
-        "requirements": "Check if a binary tree is height-balanced"
+        "requirements": "Check if a binary tree is height-balanced",
+        "article_url": "https://neetcode.io/solutions/balanced-binary-tree",
+        "video_url": "https://neetcode.io/solutions/balanced-binary-tree"
     },
     {
         "id": 16,
@@ -4125,7 +4211,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Diameter of Binary Tree",
         "leetcode": "https://leetcode.com/problems/diameter-of-binary-tree/",
-        "requirements": "Find the longest path between any two nodes"
+        "requirements": "Find the longest path between any two nodes",
+        "article_url": "https://neetcode.io/solutions/diameter-of-binary-tree",
+        "video_url": "https://neetcode.io/solutions/diameter-of-binary-tree"
     }
 ]
   },
@@ -4210,7 +4298,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Diameter of Binary Tree",
         "leetcode": "https://leetcode.com/problems/diameter-of-binary-tree/",
-        "requirements": "Find the longest path between any two nodes"
+        "requirements": "Find the longest path between any two nodes",
+        "article_url": "https://neetcode.io/solutions/diameter-of-binary-tree",
+        "video_url": "https://neetcode.io/solutions/diameter-of-binary-tree"
     },
     {
         "id": 11,
@@ -4218,7 +4308,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Balanced Binary Tree",
         "leetcode": "https://leetcode.com/problems/balanced-binary-tree/",
-        "requirements": "Check if a tree is height-balanced using DFS"
+        "requirements": "Check if a tree is height-balanced using DFS",
+        "article_url": "https://neetcode.io/solutions/balanced-binary-tree",
+        "video_url": "https://neetcode.io/solutions/balanced-binary-tree"
     },
     {
         "id": 12,
@@ -4303,7 +4395,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Maximum Depth of Binary Tree",
         "leetcode": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
-        "requirements": "Find depth of tree using BFS"
+        "requirements": "Find depth of tree using BFS",
+        "article_url": "https://neetcode.io/solutions/maximum-depth-of-binary-tree",
+        "video_url": "https://neetcode.io/solutions/maximum-depth-of-binary-tree"
     },
     {
         "id": 6,
@@ -4436,7 +4530,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Median of Two Sorted Arrays",
         "leetcode": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
-        "requirements": "Find median efficiently without merging"
+        "requirements": "Find median efficiently without merging",
+        "article_url": "https://neetcode.io/solutions/median-of-two-sorted-arrays",
+        "video_url": "https://neetcode.io/solutions/median-of-two-sorted-arrays"
     },
     {
         "id": 6,
@@ -4444,7 +4540,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Search in Rotated Sorted Array",
         "leetcode": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
-        "requirements": "Find target in rotated array using modified binary search"
+        "requirements": "Find target in rotated array using modified binary search",
+        "article_url": "https://neetcode.io/solutions/search-in-rotated-sorted-array",
+        "video_url": "https://neetcode.io/solutions/search-in-rotated-sorted-array"
     },
     {
         "id": 7,
@@ -4460,7 +4558,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Merge k Sorted Lists",
         "leetcode": "https://leetcode.com/problems/merge-k-sorted-lists/",
-        "requirements": "Merge k sorted linked lists efficiently"
+        "requirements": "Merge k sorted linked lists efficiently",
+        "article_url": "https://neetcode.io/solutions/merge-k-sorted-lists",
+        "video_url": "https://neetcode.io/solutions/merge-k-sorted-lists"
     },
     {
         "id": 9,
@@ -4569,7 +4669,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Generate Parentheses",
         "leetcode": "https://leetcode.com/problems/generate-parentheses/",
-        "requirements": "Generate all valid parentheses combinations"
+        "requirements": "Generate all valid parentheses combinations",
+        "article_url": "https://neetcode.io/solutions/generate-parentheses",
+        "video_url": "https://neetcode.io/solutions/generate-parentheses"
     },
     {
         "id": 6,
@@ -4688,7 +4790,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Merge k Sorted Lists",
         "leetcode": "https://leetcode.com/problems/merge-k-sorted-lists/",
-        "requirements": "Merge k sorted linked lists using priority queue"
+        "requirements": "Merge k sorted linked lists using priority queue",
+        "article_url": "https://neetcode.io/solutions/merge-k-sorted-lists",
+        "video_url": "https://neetcode.io/solutions/merge-k-sorted-lists"
     },
     {
         "id": 4,
