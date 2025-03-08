@@ -3929,7 +3929,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/climbing-stairs/",
-        "requirements": "Calculate number of distinct ways to climb n stairs"
+        "requirements": "Calculate number of distinct ways to climb n stairs",
+         "article_url": "https://neetcode.io/solutions/climbing-stairs",
+    "video_url": "https://neetcode.io/solutions/climbing-stairs"
     },
     {
         "id": 5,
@@ -4155,7 +4157,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Validate Binary Search Tree",
         "leetcode": "https://leetcode.com/problems/validate-binary-search-tree/",
-        "requirements": "Check if a tree follows BST properties"
+        "requirements": "Check if a tree follows BST properties",
+        "article_url": "https://neetcode.io/solutions/validate-binary-search-tree",
+        "video_url": "https://neetcode.io/solutions/validate-binary-search-tree"
     },
     {
         "id": 11,
@@ -4173,7 +4177,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Lowest Common Ancestor of a Binary Search Tree",
         "leetcode": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
-        "requirements": "Find the lowest common ancestor in a BST"
+        "requirements": "Find the lowest common ancestor in a BST",
+        "article_url": "https://neetcode.io/solutions/lowest-common-ancestor-of-a-binary-search-tree",
+        "video_url": "https://neetcode.io/solutions/lowest-common-ancestor-of-a-binary-search-tree"
     },
     {
         "id": 13,
@@ -4191,7 +4197,9 @@ const CATEGORIES_DATA = {
         "frequency": "Medium",
         "problem": "Kth Smallest Element in a BST",
         "leetcode": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
-        "requirements": "Find the kth smallest element in a BST"
+        "requirements": "Find the kth smallest element in a BST",
+        "article_url": "https://neetcode.io/solutions/kth-smallest-element-in-a-bst",
+        "video_url": "https://neetcode.io/solutions/kth-smallest-element-in-a-bst"
     },
     {
         "id": 15,
@@ -4250,7 +4258,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Validate Binary Search Tree",
         "leetcode": "https://leetcode.com/problems/validate-binary-search-tree/",
-        "requirements": "Check if a binary tree is a valid BST using DFS"
+        "requirements": "Check if a binary tree is a valid BST using DFS",
+        "article_url": "https://neetcode.io/solutions/validate-binary-search-tree",
+        "video_url": "https://neetcode.io/solutions/validate-binary-search-tree"
     },
     {
         "id": 5,
@@ -4290,7 +4300,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Binary Tree Maximum Path Sum",
         "leetcode": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
-        "requirements": "Find the path with the maximum sum using DFS"
+        "requirements": "Find the path with the maximum sum using DFS",
+         "article_url": "https://neetcode.io/solutions/binary-tree-maximum-path-sum",
+    "video_url": "https://neetcode.io/solutions/binary-tree-maximum-path-sum"
     },
     {
         "id": 10,
@@ -4318,7 +4330,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Construct Binary Tree from Preorder and Inorder Traversal",
         "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
-        "requirements": "Build a binary tree from given traversal sequences"
+        "requirements": "Build a binary tree from given traversal sequences",
+         "article_url": "https://neetcode.io/solutions/construct-binary-tree-from-preorder-and-inorder-traversal",
+    "video_url": "https://neetcode.io/solutions/construct-binary-tree-from-preorder-and-inorder-traversal"
     },
     {
         "id": 13,
@@ -4350,7 +4364,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Serialize and Deserialize Binary Tree",
         "leetcode": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
-        "requirements": "Convert a tree to a string and back"
+        "requirements": "Convert a tree to a string and back",
+        "article_url": "https://neetcode.io/solutions/serialize-and-deserialize-binary-tree",
+    "video_url": "https://neetcode.io/solutions/serialize-and-deserialize-binary-tree"
     }
 ]
   },
@@ -4363,7 +4379,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Binary Tree Level Order Traversal",
         "leetcode": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
-        "requirements": "Return nodes level by level from top to bottom"
+        "requirements": "Return nodes level by level from top to bottom",
+        "article_url": "https://neetcode.io/solutions/binary-tree-level-order-traversal",
+        "video_url": "https://neetcode.io/solutions/binary-tree-level-order-traversal"
     },
     {
         "id": 2,
@@ -4387,7 +4405,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Binary Tree Right Side View",
         "leetcode": "https://leetcode.com/problems/binary-tree-right-side-view/",
-        "requirements": "Return rightmost node at each level"
+        "requirements": "Return rightmost node at each level",
+        "article_url": "https://neetcode.io/solutions/binary-tree-right-side-view",
+        "video_url": "https://neetcode.io/solutions/binary-tree-right-side-view"
     },
     {
         "id": 5,
@@ -4514,7 +4534,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Kth Largest Element in an Array",
         "leetcode": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
-        "requirements": "Find kth largest element using quickselect"
+        "requirements": "Find kth largest element using quickselect",
+        "article_url": "https://neetcode.io/solutions/kth-largest-element-in-an-array",
+    "video_url": "https://neetcode.io/solutions/kth-largest-element-in-an-array"
     },
     {
         "id": 4,
@@ -4576,7 +4598,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Construct Binary Tree from Preorder and Inorder Traversal",
         "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
-        "requirements": "Build tree from traversal sequences"
+        "requirements": "Build tree from traversal sequences",
+         "article_url": "https://neetcode.io/solutions/construct-binary-tree-from-preorder-and-inorder-traversal",
+    "video_url": "https://neetcode.io/solutions/construct-binary-tree-from-preorder-and-inorder-traversal"
     },
     {
         "id": 11,
@@ -4624,7 +4648,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "K Closest Points to Origin",
         "leetcode": "https://leetcode.com/problems/k-closest-points-to-origin/",
-        "requirements": "Find k closest points using quickselect"
+        "requirements": "Find k closest points using quickselect",
+        "article_url": "https://neetcode.io/solutions/k-closest-points-to-origin",
+    "video_url": "https://neetcode.io/solutions/k-closest-points-to-origin"
     }
 ]
   },
@@ -4637,7 +4663,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Permutations",
         "leetcode": "https://leetcode.com/problems/permutations/",
-        "requirements": "Generate all possible permutations of an array"
+        "requirements": "Generate all possible permutations of an array",
+        "article_url": "https://neetcode.io/solutions/permutations",
+    "video_url": "https://neetcode.io/solutions/permutations"
     },
     {
         "id": 2,
@@ -4645,7 +4673,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Subsets",
         "leetcode": "https://leetcode.com/problems/subsets/",
-        "requirements": "Generate all possible subsets of an array"
+        "requirements": "Generate all possible subsets of an array",
+         "article_url": "https://neetcode.io/solutions/subsets",
+        "video_url": "https://neetcode.io/solutions/subsets"
     },
     {
         "id": 3,
@@ -4653,7 +4683,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Combination Sum",
         "leetcode": "https://leetcode.com/problems/combination-sum/",
-        "requirements": "Find all unique combinations that sum to target"
+        "requirements": "Find all unique combinations that sum to target",
+        "article_url": "https://neetcode.io/solutions/combination-sum",
+    "video_url": "https://neetcode.io/solutions/combination-sum"
     },
     {
         "id": 4,
@@ -4661,7 +4693,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Letter Combinations of a Phone Number",
         "leetcode": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
-        "requirements": "Generate all letter combinations from phone digits"
+        "requirements": "Generate all letter combinations from phone digits",
+        "article_url": "https://neetcode.io/solutions/letter-combinations-of-a-phone-number",
+    "video_url": "https://neetcode.io/solutions/letter-combinations-of-a-phone-number"
     },
     {
         "id": 5,
@@ -4679,7 +4713,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Word Search",
         "leetcode": "https://leetcode.com/problems/word-search/",
-        "requirements": "Search for word in 2D board of characters"
+        "requirements": "Search for word in 2D board of characters",
+        "article_url": "https://neetcode.io/solutions/word-search",
+    "video_url": "https://neetcode.io/solutions/word-search"
     },
     {
         "id": 7,
@@ -4687,7 +4723,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "N-Queens",
         "leetcode": "https://leetcode.com/problems/n-queens/",
-        "requirements": "Place N queens on NxN chessboard without attacking"
+        "requirements": "Place N queens on NxN chessboard without attacking",
+        "article_url": "https://neetcode.io/solutions/n-queens",
+    "video_url": "https://neetcode.io/solutions/n-queens"
     },
     {
         "id": 8,
@@ -4703,7 +4741,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Palindrome Partitioning",
         "leetcode": "https://leetcode.com/problems/palindrome-partitioning/",
-        "requirements": "Partition string into palindrome substrings"
+        "requirements": "Partition string into palindrome substrings",
+        "article_url": "https://neetcode.io/solutions/palindrome-partitioning",
+    "video_url": "https://neetcode.io/solutions/palindrome-partitioning"
     },
     {
         "id": 10,
@@ -4719,7 +4759,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Combination Sum II",
         "leetcode": "https://leetcode.com/problems/combination-sum-ii/",
-        "requirements": "Find combinations that sum to target with no repeated elements"
+        "requirements": "Find combinations that sum to target with no repeated elements",
+        "article_url": "https://neetcode.io/solutions/combination-sum-ii",
+    "video_url": "https://neetcode.io/solutions/combination-sum-ii"
     },
     {
         "id": 12,
@@ -4735,7 +4777,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Subsets II",
         "leetcode": "https://leetcode.com/problems/subsets-ii/",
-        "requirements": "Generate all subsets of array with duplicates"
+        "requirements": "Generate all subsets of array with duplicates",
+         "article_url": "https://neetcode.io/solutions/subsets-ii",
+    "video_url": "https://neetcode.io/solutions/subsets-ii"
     },
     {
         "id": 14,
@@ -4772,7 +4816,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Kth Largest Element in an Array",
         "leetcode": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
-        "requirements": "Find kth largest element using min heap"
+        "requirements": "Find kth largest element using min heap",
+        "article_url": "https://neetcode.io/solutions/kth-largest-element-in-an-array",
+    "video_url": "https://neetcode.io/solutions/kth-largest-element-in-an-array"
     },
     {
         "id": 2,
@@ -4800,7 +4846,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Find Median from Data Stream",
         "leetcode": "https://leetcode.com/problems/find-median-from-data-stream/",
-        "requirements": "Design data structure for median with heaps"
+        "requirements": "Design data structure for median with heaps",
+        "article_url": "https://neetcode.io/solutions/find-median-from-data-stream",
+        "video_url": "https://neetcode.io/solutions/find-median-from-data-stream"
     },
     {
         "id": 5,
@@ -4808,7 +4856,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "K Closest Points to Origin",
         "leetcode": "https://leetcode.com/problems/k-closest-points-to-origin/",
-        "requirements": "Find k closest points using max heap"
+        "requirements": "Find k closest points using max heap",
+        "article_url": "https://neetcode.io/solutions/k-closest-points-to-origin",
+    "video_url": "https://neetcode.io/solutions/k-closest-points-to-origin"
     },
     {
         "id": 6,
@@ -4816,7 +4866,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Kth Largest Element in a Stream",
         "leetcode": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
-        "requirements": "Design class to find kth largest element"
+        "requirements": "Design class to find kth largest element",
+        "article_url": "https://neetcode.io/solutions/kth-largest-element-in-a-stream",
+        "video_url": "https://neetcode.io/solutions/kth-largest-element-in-a-stream"
     },
     {
         "id": 7,
@@ -4840,7 +4892,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Task Scheduler",
         "leetcode": "https://leetcode.com/problems/task-scheduler/",
-        "requirements": "Schedule tasks with cooling periods"
+        "requirements": "Schedule tasks with cooling periods",
+         "article_url": "https://neetcode.io/solutions/task-scheduler",
+    "video_url": "https://neetcode.io/solutions/task-scheduler"
     },
     {
         "id": 10,
@@ -4901,7 +4955,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Implement Trie (Prefix Tree)",
         "leetcode": "https://leetcode.com/problems/implement-trie-prefix-tree/",
-        "requirements": "Implement a basic trie with insert, search, and startsWith operations"
+        "requirements": "Implement a basic trie with insert, search, and startsWith operations",
+        "article_url": "https://neetcode.io/solutions/implement-trie-prefix-tree",
+    "video_url": "https://neetcode.io/solutions/implement-trie-prefix-tree"
     },
     {
         "id": 2,
@@ -4909,7 +4965,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Design Add and Search Words Data Structure",
         "leetcode": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
-        "requirements": "Design trie supporting wildcard search"
+        "requirements": "Design trie supporting wildcard search",
+        "article_url": "https://neetcode.io/solutions/design-add-and-search-words-data-structure",
+    "video_url": "https://neetcode.io/solutions/design-add-and-search-words-data-structure"
     },
     {
         "id": 3,
@@ -4917,7 +4975,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Word Search II",
         "leetcode": "https://leetcode.com/problems/word-search-ii/",
-        "requirements": "Find words from dictionary in a board using trie"
+        "requirements": "Find words from dictionary in a board using trie",
+        "article_url": "https://neetcode.io/solutions/word-search-ii",
+    "video_url": "https://neetcode.io/solutions/word-search-ii"
     },
     {
         "id": 4,
@@ -5034,7 +5094,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Clone Graph",
         "leetcode": "https://leetcode.com/problems/clone-graph/",
-        "requirements": "Create deep copy of graph using DFS/BFS"
+        "requirements": "Create deep copy of graph using DFS/BFS",
+        "article_url": "https://neetcode.io/solutions/clone-graph",
+    "video_url": "https://neetcode.io/solutions/clone-graph"
     },
     {
         "id": 2,
@@ -5042,7 +5104,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Max Area of Island",
         "leetcode": "https://leetcode.com/problems/max-area-of-island/",
-        "requirements": "Find largest connected component in grid"
+        "requirements": "Find largest connected component in grid",
+        "article_url": "https://neetcode.io/solutions/max-area-of-island",
+    "video_url": "https://neetcode.io/solutions/max-area-of-island"
     },
     {
         "id": 3,
@@ -5159,7 +5223,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Number of Islands",
         "leetcode": "https://leetcode.com/problems/number-of-islands/",
-        "requirements": "Count connected land cells in grid using DFS"
+        "requirements": "Count connected land cells in grid using DFS",
+        "article_url": "https://neetcode.io/solutions/number-of-islands",
+    "video_url": "https://neetcode.io/solutions/number-of-islands"
     },
     {
         "id": 2,
@@ -5167,7 +5233,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Clone Graph",
         "leetcode": "https://leetcode.com/problems/clone-graph/",
-        "requirements": "Create deep copy of graph using DFS"
+        "requirements": "Create deep copy of graph using DFS",
+        "article_url": "https://neetcode.io/solutions/clone-graph",
+    "video_url": "https://neetcode.io/solutions/clone-graph"
     },
     {
         "id": 3,
@@ -5175,7 +5243,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Max Area of Island",
         "leetcode": "https://leetcode.com/problems/max-area-of-island/",
-        "requirements": "Find largest connected component in grid using DFS"
+        "requirements": "Find largest connected component in grid using DFS",
+        "article_url": "https://neetcode.io/solutions/max-area-of-island",
+    "video_url": "https://neetcode.io/solutions/max-area-of-island"
     },
     {
         "id": 4,
@@ -5223,7 +5293,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Word Search",
         "leetcode": "https://leetcode.com/problems/word-search/",
-        "requirements": "Search for word in grid using DFS"
+        "requirements": "Search for word in grid using DFS",
+        "article_url": "https://neetcode.io/solutions/word-search",
+    "video_url": "https://neetcode.io/solutions/word-search"
     },
     {
         "id": 10,
@@ -5231,7 +5303,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Surrounded Regions",
         "leetcode": "https://leetcode.com/problems/surrounded-regions/",
-        "requirements": "Capture regions surrounded by X using DFS"
+        "requirements": "Capture regions surrounded by X using DFS",
+         "article_url": "https://neetcode.io/solutions/surrounded-regions",
+    "video_url": "https://neetcode.io/solutions/surrounded-regions"
     },
     {
         "id": 11,
@@ -5239,7 +5313,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Pacific Atlantic Water Flow",
         "leetcode": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
-        "requirements": "Find cells with paths to both oceans using DFS"
+        "requirements": "Find cells with paths to both oceans using DFS",
+        "article_url": "https://neetcode.io/solutions/pacific-atlantic-water-flow",
+    "video_url": "https://neetcode.io/solutions/pacific-atlantic-water-flow"
     },
     {
         "id": 12,
@@ -5292,7 +5368,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Clone Graph",
         "leetcode": "https://leetcode.com/problems/clone-graph/",
-        "requirements": "Create deep copy of graph using BFS"
+        "requirements": "Create deep copy of graph using BFS",
+        "article_url": "https://neetcode.io/solutions/clone-graph",
+    "video_url": "https://neetcode.io/solutions/clone-graph"
     },
     {
         "id": 2,
@@ -5300,7 +5378,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Rotting Oranges",
         "leetcode": "https://leetcode.com/problems/rotting-oranges/",
-        "requirements": "Find minimum time for all oranges to rot using BFS"
+        "requirements": "Find minimum time for all oranges to rot using BFS",
+        "article_url": "https://neetcode.io/solutions/rotting-oranges",
+    "video_url": "https://neetcode.io/solutions/rotting-oranges"
     },
     {
         "id": 3,
@@ -5332,7 +5412,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Word Ladder",
         "leetcode": "https://leetcode.com/problems/word-ladder/",
-        "requirements": "Find shortest transformation sequence using BFS"
+        "requirements": "Find shortest transformation sequence using BFS",
+        "article_url": "https://neetcode.io/solutions/word-ladder",
+    "video_url": "https://neetcode.io/solutions/word-ladder"
     },
     {
         "id": 7,
@@ -5380,7 +5462,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Walls and Gates",
         "leetcode": "https://leetcode.com/problems/walls-and-gates/",
-        "requirements": "Fill rooms with distance to nearest gate using BFS"
+        "requirements": "Fill rooms with distance to nearest gate using BFS",
+        "article_url": "https://neetcode.io/solutions/walls-and-gates",
+    "video_url": "https://neetcode.io/solutions/walls-and-gates"
     },
     {
         "id": 13,
@@ -5433,7 +5517,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Number of Islands",
         "leetcode": "https://leetcode.com/problems/number-of-islands/",
-        "requirements": "Finding connected land cells in grid using Union Find"
+        "requirements": "Finding connected land cells in grid using Union Find",
+        "article_url": "https://neetcode.io/solutions/number-of-islands",
+    "video_url": "https://neetcode.io/solutions/number-of-islands"
     },
     {
         "id": 3,
@@ -5441,7 +5527,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Redundant Connection",
         "leetcode": "https://leetcode.com/problems/redundant-connection/",
-        "requirements": "Finding edges that form cycles in undirected graph"
+        "requirements": "Finding edges that form cycles in undirected graph",
+        "article_url": "https://neetcode.io/solutions/redundant-connection",
+    "video_url": "https://neetcode.io/solutions/redundant-connection"
     },
     {
         "id": 4,
@@ -5449,7 +5537,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Number of Connected Components in an Undirected Graph",
         "leetcode": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
-        "requirements": "Counting distinct connected components in a graph"
+        "requirements": "Counting distinct connected components in a graph",
+         "article_url": "https://neetcode.io/solutions/number-of-connected-components-in-an-undirected-graph",
+    "video_url": "https://neetcode.io/solutions/number-of-connected-components-in-an-undirected-graph"
     },
     {
         "id": 5,
@@ -5507,7 +5597,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Max Area of Island",
         "leetcode": "https://leetcode.com/problems/max-area-of-island/",
-        "requirements": "Finding largest connected component in grid using Union Find"
+        "requirements": "Finding largest connected component in grid using Union Find",
+        "article_url": "https://neetcode.io/solutions/max-area-of-island",
+    "video_url": "https://neetcode.io/solutions/max-area-of-island"
     },
     {
         "id": 12,
@@ -5523,7 +5615,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Graph Valid Tree",
         "leetcode": "https://leetcode.com/problems/graph-valid-tree/",
-        "requirements": "Checking if a graph forms a valid tree"
+        "requirements": "Checking if a graph forms a valid tree",
+        "article_url": "https://neetcode.io/solutions/graph-valid-tree",
+    "video_url": "https://neetcode.io/solutions/graph-valid-tree"
     },
     {
         "id": 14,
@@ -5560,7 +5654,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Course Schedule",
         "leetcode": "https://leetcode.com/problems/course-schedule/",
-        "requirements": "Determine if it's possible to finish all courses given prerequisites"
+        "requirements": "Determine if it's possible to finish all courses given prerequisites",
+        "article_url": "https://neetcode.io/solutions/course-schedule",
+    "video_url": "https://neetcode.io/solutions/course-schedule"
     },
     {
         "id": 2,
@@ -5568,7 +5664,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Course Schedule II",
         "leetcode": "https://leetcode.com/problems/course-schedule-ii/",
-        "requirements": "Return the ordering of courses to take to finish all courses"
+        "requirements": "Return the ordering of courses to take to finish all courses",
+        "article_url": "https://neetcode.io/solutions/course-schedule-ii",
+    "video_url": "https://neetcode.io/solutions/course-schedule-ii"
     },
     {
         "id": 3,
@@ -5576,7 +5674,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Hard",
         "problem": "Alien Dictionary",
         "leetcode": "https://leetcode.com/problems/alien-dictionary/",
-        "requirements": "Determine the order of characters in an alien language"
+        "requirements": "Determine the order of characters in an alien language",
+        "article_url": "https://neetcode.io/solutions/alien-dictionary",
+    "video_url": "https://neetcode.io/solutions/alien-dictionary"
     },
     {
         "id": 4,
@@ -5693,7 +5793,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Network Delay Time",
         "leetcode": "https://leetcode.com/problems/network-delay-time/",
-        "requirements": "Find time for all nodes to receive a signal using Dijkstra's algorithm"
+        "requirements": "Find time for all nodes to receive a signal using Dijkstra's algorithm",
+        "article_url": "https://neetcode.io/solutions/network-delay-time",
+    "video_url": "https://neetcode.io/solutions/network-delay-time"
     },
     {
         "id": 2,
@@ -5709,7 +5811,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Cheapest Flights Within K Stops",
         "leetcode": "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
-        "requirements": "Find cheapest price from source to destination with at most k stops"
+        "requirements": "Find cheapest price from source to destination with at most k stops",
+         "article_url": "https://neetcode.io/solutions/cheapest-flights-within-k-stops",
+    "video_url": "https://neetcode.io/solutions/cheapest-flights-within-k-stops"
     },
     {
         "id": 4,
@@ -5866,7 +5970,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Medium",
         "problem": "Task Scheduler",
         "leetcode": "https://leetcode.com/problems/task-scheduler/",
-        "requirements": "Find minimum time to execute tasks with cooling periods"
+        "requirements": "Find minimum time to execute tasks with cooling periods",
+         "article_url": "https://neetcode.io/solutions/task-scheduler",
+    "video_url": "https://neetcode.io/solutions/task-scheduler"
     },
     {
         "id": 7,
@@ -5951,7 +6057,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/climbing-stairs/",
-        "requirements": "Count ways to climb stairs using 1 or 2 steps at a time"
+        "requirements": "Count ways to climb stairs using 1 or 2 steps at a time",
+         "article_url": "https://neetcode.io/solutions/climbing-stairs",
+    "video_url": "https://neetcode.io/solutions/climbing-stairs"
     },
     {
         "id": 2,
@@ -6076,7 +6184,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/climbing-stairs/",
-        "requirements": "Count ways to climb stairs using 1 or 2 steps at a time"
+        "requirements": "Count ways to climb stairs using 1 or 2 steps at a time",
+         "article_url": "https://neetcode.io/solutions/climbing-stairs",
+    "video_url": "https://neetcode.io/solutions/climbing-stairs"
     },
     {
         "id": 2,
@@ -6084,7 +6194,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Min Cost Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/min-cost-climbing-stairs/",
-        "requirements": "Find minimum cost to climb stairs"
+        "requirements": "Find minimum cost to climb stairs",
+        "article_url": "https://neetcode.io/solutions/min-cost-climbing-stairs",
+    "video_url": "https://neetcode.io/solutions/min-cost-climbing-stairs"
     },
     {
         "id": 3,
@@ -6203,7 +6315,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/climbing-stairs/",
-        "requirements": "Count ways to climb stairs using 1 or 2 steps at a time"
+        "requirements": "Count ways to climb stairs using 1 or 2 steps at a time",
+         "article_url": "https://neetcode.io/solutions/climbing-stairs",
+    "video_url": "https://neetcode.io/solutions/climbing-stairs"
     },
     {
         "id": 2,
@@ -6243,7 +6357,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Min Cost Climbing Stairs",
         "leetcode": "https://leetcode.com/problems/min-cost-climbing-stairs/",
-        "requirements": "Find minimum cost to climb stairs"
+        "requirements": "Find minimum cost to climb stairs",
+        "article_url": "https://neetcode.io/solutions/min-cost-climbing-stairs",
+    "video_url": "https://neetcode.io/solutions/min-cost-climbing-stairs"
     },
     {
         "id": 7,
@@ -6818,7 +6934,9 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Subsets",
         "leetcode": "https://leetcode.com/problems/subsets/",
-        "requirements": "Generate all subsets using bit manipulation"
+        "requirements": "Generate all subsets using bit manipulation",
+           "article_url": "https://neetcode.io/solutions/subsets",
+    "video_url": "https://neetcode.io/solutions/subsets"
       },
       {
         "id": 13,
