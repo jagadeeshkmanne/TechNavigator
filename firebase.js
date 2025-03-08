@@ -2061,7 +2061,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Find All Numbers Disappeared in an Array",
     "leetcode": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/",
-    "requirements": "Basic array traversal and element marking"
+    "requirements": "Basic array traversal and element marking",
+    "article_url": "https://neetcode.io/solutions/find-all-numbers-disappeared-in-an-array",
+    "video_url":"https://neetcode.io/solutions/find-all-numbers-disappeared-in-an-array",
   },
   {
     "id": 3,
@@ -2079,7 +2081,10 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Majority Element",
     "leetcode": "https://leetcode.com/problems/majority-element/",
-    "requirements": "Basic array traversal and counting"
+    "requirements": "Basic array traversal and counting",
+     "article_url": "https://neetcode.io/solutions/majority-element",
+    "video_url":"https://neetcode.io/solutions/majority-element" 
+      
   },
   {
     "id": 5,
@@ -2088,7 +2093,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Max Consecutive Ones",
     "leetcode": "https://leetcode.com/problems/max-consecutive-ones/",
-    "requirements": "Basic array traversal and counting"
+    "requirements": "Basic array traversal and counting",
+      "article_url": "https://neetcode.io/solutions/majority-element",
+    "video_url":"https://neetcode.io/solutions/majority-element"
   },
   {
     "id": 6,
@@ -2108,7 +2115,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Remove Element",
     "leetcode": "https://leetcode.com/problems/remove-element/",
-    "requirements": "Basic in-place array element removal"
+    "requirements": "Basic in-place array element removal",
+    "article_url": "https://neetcode.io/solutions/remove-element",
+    "video_url": "https://neetcode.io/solutions/remove-element"
   },
   {
     "id": 8,
@@ -2118,7 +2127,7 @@ const CATEGORIES_DATA = {
     "problem": "Rotate Image",
     "leetcode": "https://leetcode.com/problems/rotate-image/",
     "requirements": "2D array in-place rotation",
-      "article_url": "https://neetcode.io/solutions/rotate-image",
+    "article_url": "https://neetcode.io/solutions/rotate-image",
     "video_url": "https://neetcode.io/solutions/rotate-image"
   },
   {
@@ -2148,7 +2157,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Shuffle the Array",
     "leetcode": "https://leetcode.com/problems/shuffle-the-array/",
-    "requirements": "Array reorganization with specific pattern"
+    "requirements": "Array reorganization with specific pattern",
+       "article_url": "https://neetcode.io/solutions/shuffle-the-array",
+    "video_url": "https://neetcode.io/solutions/shuffle-the-array"
   },
   {
     "id": 12,
@@ -2168,7 +2179,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Squares of a Sorted Array",
     "leetcode": "https://leetcode.com/problems/squares-of-a-sorted-array/",
-    "requirements": "Basic array transformation"
+    "requirements": "Basic array transformation",
+    "article_url": "https://neetcode.io/solutions/squares-of-a-sorted-array",
+    "video_url": "https://neetcode.io/solutions/squares-of-a-sorted-array"
   },
   {
     "id": 14,
@@ -2188,7 +2201,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Transpose Matrix",
     "leetcode": "https://leetcode.com/problems/transpose-matrix/",
-    "requirements": "Basic 2D array manipulation"
+    "requirements": "Basic 2D array manipulation",
+    "article_url": "https://neetcode.io/solutions/transpose-matrix",
+    "video_url":"https://neetcode.io/solutions/transpose-matrix"
   }
 ]
   },
@@ -2204,7 +2219,7 @@ const CATEGORIES_DATA = {
     "leetcode": "https://leetcode.com/problems/product-of-array-except-self/",
     "requirements": "Prefix and suffix products (multiplicative variant)",
     "article_url": "https://neetcode.io/solutions/product-of-array-except-self",
-    "video_url":"https://neetcode.io/solutions/product-of-array-except-self",
+    "video_url":"https://neetcode.io/solutions/product-of-array-except-self"
   },
   {
     "id": 2,
@@ -2213,7 +2228,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Range Sum Query 2D - Immutable",
     "leetcode": "https://leetcode.com/problems/range-sum-query-2d-immutable/",
-    "requirements": "2D prefix sum for rectangle queries"
+    "requirements": "2D prefix sum for rectangle queries",
+    "article_url": "https://www.youtube.com/watch?v=KE8MQuwE2yA",
+    "video_url":"https://www.youtube.com/watch?v=KE8MQuwE2yA"
   },
   {
     "id": 3,
@@ -2222,7 +2239,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Find Pivot Index",
     "leetcode": "https://leetcode.com/problems/find-pivot-index/",
-    "requirements": "Prefix sum to find a balance point"
+    "requirements": "Prefix sum to find a balance point",
+    "article_url": "https://neetcode.io/solutions/find-pivot-index",
+    "video_url":"https://neetcode.io/solutions/find-pivot-index"
   },
   {
     "id": 4,
@@ -2231,7 +2250,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Maximum Points You Can Obtain from Cards",
     "leetcode": "https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/",
-    "requirements": "Prefix sum from both ends"
+    "requirements": "Prefix sum from both ends",
+    "article_url": "https://neetcode.io/solutions/maximum-points-you-can-obtain-from-cards",
+    "video_url":"https://neetcode.io/solutions/maximum-points-you-can-obtain-from-cards"
   },
   {
     "id": 5,
@@ -2249,7 +2270,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Sum of Absolute Differences in a Sorted Array",
     "leetcode": "https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/",
-    "requirements": "Prefix sum for calculating absolute differences"
+    "requirements": "Prefix sum for calculating absolute differences",
+     "article_url": "https://neetcode.io/solutions/sum-of-absolute-differences-in-a-sorted-array",
+    "video_url":"https://neetcode.io/solutions/sum-of-absolute-differences-in-a-sorted-array"
   },
   {
     "id": 7,
@@ -2258,7 +2281,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Range Sum Query - Immutable",
     "leetcode": "https://leetcode.com/problems/range-sum-query-immutable/",
-    "requirements": "Pure prefix sum for range queries"
+    "requirements": "Pure prefix sum for range queries",
+     "article_url": "https://neetcode.io/solutions/range-sum-query-immutable",
+    "video_url":"https://neetcode.io/solutions/range-sum-query-immutable"
   },
   {
     "id": 8,
@@ -2614,7 +2639,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Squares of a Sorted Array",
     "leetcode": "https://leetcode.com/problems/squares-of-a-sorted-array/",
-    "requirements": "Two pointers from opposite ends"
+    "requirements": "Two pointers from opposite ends",
+    "article_url": "https://neetcode.io/solutions/squares-of-a-sorted-array",
+    "video_url": "https://neetcode.io/solutions/squares-of-a-sorted-array"
   },
   {
     "id": 9,
@@ -2652,7 +2679,9 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Remove Element",
     "leetcode": "https://leetcode.com/problems/remove-element/",
-    "requirements": "Two pointers for in-place element removal"
+    "requirements": "Two pointers for in-place element removal",
+    "article_url": "https://neetcode.io/solutions/remove-element",
+    "video_url": "https://neetcode.io/solutions/remove-element"
   },
   {
     "id": 13,
@@ -3179,7 +3208,9 @@ const CATEGORIES_DATA = {
     "frequency": "Medium",
     "problem": "Transpose Matrix",
     "leetcode": "https://leetcode.com/problems/transpose-matrix/",
-    "requirements": "Basic matrix transformation"
+    "requirements": "Basic matrix transformation",
+    "article_url": "https://neetcode.io/solutions/transpose-matrix",
+    "video_url":"https://neetcode.io/solutions/transpose-matrix"
   },
   {
     "id": 11,
@@ -4538,7 +4569,9 @@ const CATEGORIES_DATA = {
         "difficulty": "Easy",
         "problem": "Majority Element",
         "leetcode": "https://leetcode.com/problems/majority-element/",
-        "requirements": "Find element appearing more than n/2 times"
+        "requirements": "Find element appearing more than n/2 times",
+        "article_url": "https://neetcode.io/solutions/majority-element",
+    "video_url":"https://neetcode.io/solutions/majority-element",  
     },
     {
         "id": 2,
