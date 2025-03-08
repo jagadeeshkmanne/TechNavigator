@@ -6906,7 +6906,9 @@ for (const category in CATEGORIES_DATA) {
       leetcode: problem.leetcode,
       leetcode_id: problem.leetcode_id,
       requirements: problem.requirements,
-      categories: categories
+      categories: categories,
+      article_url: problem.article_url,
+      video_url: problem.video_url
     });
   });
 }
