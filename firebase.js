@@ -7593,35 +7593,26 @@ function initializeGrid(category) {
     : []; // Omit column if not logged in
   
   // Video column - only shown if video data exists
-  const videoColumn = [{
+ // Editorial column - replaces video and article columns
+  const editorialColumn = [{
     headerName: '',
-    field: 'video_url',
+    field: 'article_url', // Reuse existing field for blog articles
     width: 50,
     cellRenderer: (params) => {
+      // Check if article_url exists, otherwise return empty cell
       if (!params.value) return '';
-      // Using YouTube icon (play button icon)
-      return `<a href="${params.value}" target="_blank" title="Watch Video Solution" class="grid-icon youtube-icon">&#9654;&#65039;</a>`;
-    },
-    suppressSizeToFit: true,
-    headerClass: 'ag-center-header',
-    filter: {
-      valueGetter: params => !!params.data.video_url,
-      filterParams: {
-        values: [true, false],
-        cellRenderer: params => params.value ? 'Has Video' : 'No Video'
-      }
-    }
-  }];
-  
-  // Article column - only shown if article data exists
-  const articleColumn = [{
-    headerName: '',
-    field: 'article_url',
-    width: 50,
-    cellRenderer: (params) => {
-      if (!params.value) return '';
-      // Using document icon
-      return `<a href="${params.value}" target="_blank" title="Read Article Solution" class="grid-icon article-icon">&#128196;</a>`;
+      
+      // Create editorial icon with link
+      return `<a href="${params.value}" target="_blank" title="Read Editorial" class="grid-icon editorial-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </a>`;
     },
     suppressSizeToFit: true,
     headerClass: 'ag-center-header',
@@ -7629,7 +7620,7 @@ function initializeGrid(category) {
       valueGetter: params => !!params.data.article_url,
       filterParams: {
         values: [true, false],
-        cellRenderer: params => params.value ? 'Has Article' : 'No Article'
+        cellRenderer: params => params.value ? 'Has Editorial' : 'No Editorial'
       }
     }
   }];
@@ -7655,8 +7646,7 @@ function initializeGrid(category) {
   
   const columnDefs = [
     ...statusColumn,
-    ...videoColumn,
-    ...articleColumn,
+    ...editorialColumn,
     ...revisionColumn, // Add the revision column here
     {
       headerName: 'Problem',
