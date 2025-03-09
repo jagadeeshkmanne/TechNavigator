@@ -2071,7 +2071,8 @@ const CATEGORIES_DATA = {
     "frequency": "High",
     "problem": "Kids With the Greatest Number of Candies",
     "leetcode": "https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/",
-    "requirements": "Simple array comparison and boolean array creation"
+    "requirements": "Simple array comparison and boolean array creation",
+    "article_url": "https://blog.technavigator.io/2025/03/leetcode-143-kids-with-greatest-number.html"
   },
   {
     "id": 4,
