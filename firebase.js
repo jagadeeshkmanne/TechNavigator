@@ -551,8 +551,8 @@ const CATEGORIES_DATA = {
     "problem": "Best Time to Buy And Sell Stock",
     "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
     "requirements": "One-pass algorithm tracking minimum price",
-    "article_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
-    "video_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock"
+    "article_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html",
+    "video_url": "https://www.youtube.com/watch?v=1pkOgXD63yU"
   },
   {
     "id": 16,
@@ -2051,8 +2051,8 @@ const CATEGORIES_DATA = {
     "problem": "Best Time to Buy and Sell Stock",
     "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
     "requirements": "Array traversal and tracking maximum difference",
-    "article_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
-    "video_url":"https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
+    "article_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html",
+    "video_url": "https://www.youtube.com/watch?v=1pkOgXD63yU"
   },
   {
     "id": 2,
@@ -6330,8 +6330,8 @@ const CATEGORIES_DATA = {
         "problem": "Best Time to Buy and Sell Stock",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
         "requirements": "Find maximum profit from a single transaction",
-        "article_url": "https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
-        "video_url":"https://neetcode.io/solutions/best-time-to-buy-and-sell-stock",
+        "article_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html",
+        "video_url": "https://www.youtube.com/watch?v=1pkOgXD63yU"
     },
     {
         "id": 8,
