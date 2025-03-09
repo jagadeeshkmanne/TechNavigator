@@ -2062,8 +2062,7 @@ const CATEGORIES_DATA = {
     "problem": "Find All Numbers Disappeared in an Array",
     "leetcode": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/",
     "requirements": "Basic array traversal and element marking",
-    "article_url": "https://neetcode.io/solutions/find-all-numbers-disappeared-in-an-array",
-    "video_url":"https://neetcode.io/solutions/find-all-numbers-disappeared-in-an-array",
+    "article_url": "https://blog.technavigator.io/2025/03/leetcode-448-find-all-numbers.html"
   },
   {
     "id": 3,
@@ -3056,7 +3055,8 @@ const CATEGORIES_DATA = {
         "frequency": "High",
         "problem": "Find All Numbers Disappeared in an Array",
         "leetcode": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/",
-        "requirements": "Find all missing numbers in range [1,n]"
+        "requirements": "Find all missing numbers in range [1,n]",
+        "article_url": "https://blog.technavigator.io/2025/03/leetcode-448-find-all-numbers.html"
       },
       {
         "id": 183,
@@ -6330,8 +6330,7 @@ const CATEGORIES_DATA = {
         "problem": "Best Time to Buy and Sell Stock",
         "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
         "requirements": "Find maximum profit from a single transaction",
-        "article_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html",
-        "video_url": "https://www.youtube.com/watch?v=1pkOgXD63yU"
+        "article_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html"
     },
     {
         "id": 8,
