@@ -4559,6 +4559,7 @@ const CATEGORIES_DATA = {
   },
   "Divide and Conquer": {
     "tip": "Divide and Conquer is an algorithmic paradigm where a problem is broken into smaller subproblems, solved independently, and then combined to form the solution to the original problem. This approach is most effective for problems that can be naturally split into similar subproblems, such as searching, sorting, and computational geometry. Look for problems where dividing the input and solving smaller parts independently leads to an efficient solution.",
+   "problems": [
     {
         "id": 2,
         "leetcode_id": 53,
