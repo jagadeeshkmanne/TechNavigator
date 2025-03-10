@@ -7253,8 +7253,7 @@ for (const category in CATEGORIES_DATA) {
       leetcode_id: problem.leetcode_id,
       requirements: problem.requirements,
       categories: categories,
-      article_url: problem.article_url,
-      video_url: problem.video_url
+      editorial_url: problem.editorial_url
     });
   });
 }
