@@ -551,8 +551,7 @@ const CATEGORIES_DATA = {
     "problem": "Best Time to Buy And Sell Stock",
     "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
     "requirements": "One-pass algorithm tracking minimum price",
-    "article_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html",
-    "video_url": "https://www.youtube.com/watch?v=1pkOgXD63yU"
+    "editorial_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html",
   },
   {
     "id": 16,
@@ -2051,8 +2050,7 @@ const CATEGORIES_DATA = {
     "problem": "Best Time to Buy and Sell Stock",
     "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
     "requirements": "Array traversal and tracking maximum difference",
-    "article_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html",
-    "video_url": "https://www.youtube.com/watch?v=1pkOgXD63yU"
+    "editorial_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html"
   },
   {
     "id": 2,
@@ -2062,7 +2060,7 @@ const CATEGORIES_DATA = {
     "problem": "Find All Numbers Disappeared in an Array",
     "leetcode": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/",
     "requirements": "Basic array traversal and element marking",
-    "article_url": "https://blog.technavigator.io/2025/03/leetcode-448-find-all-numbers.html"
+    "editorial_url": "https://blog.technavigator.io/2025/03/leetcode-448-find-all-numbers.html"
   },
   {
     "id": 3,
@@ -2072,7 +2070,7 @@ const CATEGORIES_DATA = {
     "problem": "Kids With the Greatest Number of Candies",
     "leetcode": "https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/",
     "requirements": "Simple array comparison and boolean array creation",
-    "article_url": "https://blog.technavigator.io/2025/03/leetcode-143-kids-with-greatest-number.html"
+    "editorial_url": "https://blog.technavigator.io/2025/03/leetcode-143-kids-with-greatest-number.html"
   },
   {
     "id": 4,
@@ -2082,9 +2080,7 @@ const CATEGORIES_DATA = {
     "problem": "Majority Element",
     "leetcode": "https://leetcode.com/problems/majority-element/",
     "requirements": "Basic array traversal and counting",
-     "article_url": "https://neetcode.io/solutions/majority-element",
-    "video_url":"https://neetcode.io/solutions/majority-element" 
-      
+     "editorial_url": "https://blog.technavigator.io/2025/03/leetcode-169-majority-element.html"      
   },
   {
     "id": 5,
@@ -3047,7 +3043,7 @@ const CATEGORIES_DATA = {
         "leetcode": "https://leetcode.com/problems/missing-number/",
         "requirements": "Find the missing number in range [0,n]",
           "article_url": "https://neetcode.io/solutions/missing-number",
-    "video_url": "https://neetcode.io/solutions/missing-number"
+        "video_url": "https://neetcode.io/solutions/missing-number"
       },
       {
         "id": 182,
@@ -3057,7 +3053,7 @@ const CATEGORIES_DATA = {
         "problem": "Find All Numbers Disappeared in an Array",
         "leetcode": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/",
         "requirements": "Find all missing numbers in range [1,n]",
-        "article_url": "https://blog.technavigator.io/2025/03/leetcode-448-find-all-numbers.html"
+        "editorial_url": "https://blog.technavigator.io/2025/03/leetcode-448-find-all-numbers.html"
       },
       {
         "id": 183,
@@ -4563,17 +4559,6 @@ const CATEGORIES_DATA = {
   },
   "Divide and Conquer": {
     "tip": "Divide and Conquer is an algorithmic paradigm where a problem is broken into smaller subproblems, solved independently, and then combined to form the solution to the original problem. This approach is most effective for problems that can be naturally split into similar subproblems, such as searching, sorting, and computational geometry. Look for problems where dividing the input and solving smaller parts independently leads to an efficient solution.",
-    "problems": [
-    {
-        "id": 1,
-        "leetcode_id": 169,
-        "difficulty": "Easy",
-        "problem": "Majority Element",
-        "leetcode": "https://leetcode.com/problems/majority-element/",
-        "requirements": "Find element appearing more than n/2 times",
-        "article_url": "https://neetcode.io/solutions/majority-element",
-    "video_url":"https://neetcode.io/solutions/majority-element",  
-    },
     {
         "id": 2,
         "leetcode_id": 53,
@@ -6325,15 +6310,6 @@ const CATEGORIES_DATA = {
         "requirements": "Maximize points with element deletion constraints"
     },
     {
-        "id": 7,
-        "leetcode_id": 121,
-        "difficulty": "Easy",
-        "problem": "Best Time to Buy and Sell Stock",
-        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-        "requirements": "Find maximum profit from a single transaction",
-        "article_url": "https://blog.technavigator.io/2025/03/best-time-to-buy-and-sell-stock.html"
-    },
-    {
         "id": 8,
         "leetcode_id": 122,
         "difficulty": "Medium",
@@ -7617,7 +7593,7 @@ function initializeGrid(category) {
     suppressSizeToFit: true,
     headerClass: 'ag-center-header',
     filter: {
-      valueGetter: params => !!params.data.article_url,
+      valueGetter: params => !!params.data.editorial_url,
       filterParams: {
         values: [true, false],
         cellRenderer: params => params.value ? 'Has Editorial' : 'No Editorial'
