@@ -7573,7 +7573,7 @@ function initializeGrid(category) {
  // Editorial column - replaces video and article columns
   const editorialColumn = [{
     headerName: '',
-    field: 'article_url', // Reuse existing field for blog articles
+    field: 'editorial_url', // Reuse existing field for blog articles
     width: 50,
     cellRenderer: (params) => {
       // Check if article_url exists, otherwise return empty cell
