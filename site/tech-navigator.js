@@ -751,7 +751,11 @@ function toggleRevision(problemId, revision) {
   // Update Firebase if user is logged in and function exists
   if (window.currentUser && typeof toggleRevisionInFirebase === 'function') {
     console.log("Updating revision status in Firebase");
-    toggleRevisionInFirebase(problemId, revision);
+    try {
+      toggleRevisionInFirebase(problemId, revision);
+    } catch (error) {
+      console.error("Error updating Firebase:", error);
+    }
   } else {
     console.warn("Could not update revision in Firebase: ", typeof toggleRevisionInFirebase !== 'function' ? 
                 "toggleRevisionInFirebase function not found" : "User not logged in");
@@ -866,35 +870,33 @@ function updateRevisionUi(problemId, revision) {
   console.log("Updating revision UI for problem", problemId, "revision:", revision);
   
   try {
-    // Update in category view
-    const categoryRow = document.querySelector(`#categories-container .problem-row[data-id="${problemId}"]`);
-    if (categoryRow) {
-      const starSvg = categoryRow.querySelector('.revision-star');
-      if (starSvg) {
-        if (revision) {
-          starSvg.setAttribute('fill', 'currentColor');
-          starSvg.classList.add('marked');
-        } else {
-          starSvg.setAttribute('fill', 'none');
-          starSvg.classList.remove('marked');
-        }
-      }
-    }
+    // Update all revision stars for this problem across all views
+    const allStars = document.querySelectorAll(`.problem-row[data-id="${problemId}"] .revision-star`);
     
-    // Update in list view
-    const listRow = document.querySelector(`#list-container .problem-row[data-id="${problemId}"]`);
-    if (listRow) {
-      const starSvg = listRow.querySelector('.revision-star');
-      if (starSvg) {
-        if (revision) {
-          starSvg.setAttribute('fill', 'currentColor');
-          starSvg.classList.add('marked');
-        } else {
-          starSvg.setAttribute('fill', 'none');
-          starSvg.classList.remove('marked');
-        }
+    allStars.forEach(starSvg => {
+      if (revision) {
+        starSvg.setAttribute('fill', 'currentColor');
+        starSvg.classList.add('marked');
+      } else {
+        starSvg.setAttribute('fill', 'none');
+        starSvg.classList.remove('marked');
       }
-    }
+    });
+    
+    // Also update the onclick attributes for the wrapper elements
+    const allWrappers = document.querySelectorAll(`.problem-row[data-id="${problemId}"] .revision-star-wrapper`);
+    
+    allWrappers.forEach(wrapper => {
+      // Update the onclick attribute to toggle to the opposite state
+      if (wrapper.closest('#revision-container')) {
+        // In revision view, clicking should remove from revision
+        wrapper.setAttribute('onclick', `removeFromRevision(${problemId})`);
+      } else {
+        // In other views, clicking should toggle revision
+        wrapper.setAttribute('onclick', `toggleRevision(${problemId}, ${!revision})`);
+      }
+    });
+    
   } catch (error) {
     console.error("Error updating revision UI:", error);
   }
@@ -960,6 +962,7 @@ function toggleAccordion(accordionElement) {
 }
 
 // Show login required modal
+// In tech-navigator.js, modify the showLoginRequiredModal function:
 function showLoginRequiredModal(message) {
   console.log("Showing login required modal:", message);
   
@@ -974,7 +977,16 @@ function showLoginRequiredModal(message) {
     modalMessage.textContent = message || 'Please sign in to continue.';
   }
   
+  // Add these lines to ensure the modal is centered
   modal.style.display = 'flex';
+  modal.style.justifyContent = 'center';
+  modal.style.alignItems = 'center';
+  modal.style.position = 'fixed';
+  modal.style.top = '0';
+  modal.style.left = '0';
+  modal.style.right = '0';
+  modal.style.bottom = '0';
+  modal.style.zIndex = '10000';
 }
 
 // Initialize view toggle buttons
