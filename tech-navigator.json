@@ -1875,7 +1875,7 @@
    "id": 157,
    "LeetCode_ID": 1823,
    "Name": "Find the Winner of the Circular Game",
-   "Category": "Recursion",
+   "Category": "Dynamic Programming",
    "Difficulty": "Medium",
    "Problem Name": "Find the Winner of the Circular Game",
    "Leetcode URL": "https://leetcode.com/problems/find-the-winner-of-the-circular-game/",
