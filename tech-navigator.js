@@ -30,7 +30,6 @@ auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     console.error("Error setting persistence:", error);
   });
 // Global variables
-let currentUser = null;
 let currentView = 'category';
 let problemsData = [];
 
