@@ -11,10 +11,15 @@ const firebaseConfig = {
   measurementId: "G-FSXMH7L0ES"
 };
 
+// Global variables
+let currentUser = null;
+
 // Initialize Firebase Authentication
 function initializeFirebase() {
-  // Initialize Firebase App
-  firebase.initializeApp(firebaseConfig);
+  // Initialize Firebase App if not already initialized
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
   
   // Get Firebase services
   const auth = firebase.auth();
@@ -31,14 +36,18 @@ function initializeFirebase() {
 
   // Authentication State Observer
   auth.onAuthStateChanged(function(user) {
-    // Set both local and window-level user variables
-    window.currentUser = user; // This is the critical line missing before
+    // This is critical - set both local and window-level user variables
+    currentUser = user;
+    window.currentUser = user;
+    
     updateAuthUI(user);
     
     if (user) {
       // User is signed in
       console.log("User signed in:", user.displayName || user.email);
-      loadUserData(user.uid);
+      if (typeof loadUserData === 'function') {
+        loadUserData(user.uid);
+      }
     } else {
       // User is signed out
       console.log("User signed out");
@@ -92,6 +101,8 @@ function updateAuthUI(user) {
   const userImg = document.getElementById('user-img');
   const userName = document.getElementById('user-name');
 
+  if (!authContainer) return;
+
   if (user) {
     // User is signed in
     authContainer.classList.add('signed-in');
@@ -116,98 +127,6 @@ function updateAuthUI(user) {
       userName.textContent = '';
     }
   }
-}
-
-// Load user data from Firebase
-function loadUserData(userId) {
-  if (!firebase.firestore) {
-    console.error("Firestore not initialized");
-    return;
-  }
-  
-  const db = firebase.firestore();
-  
-  // Get user's problem status data
-  db.collection('users').doc(userId).collection('problems')
-    .get()
-    .then((snapshot) => {
-      if (snapshot.empty) {
-        console.log('No saved problem data found.');
-        return;
-      }
-      
-      // Update problem status in memory
-      snapshot.forEach(doc => {
-        const problemData = doc.data();
-        if (window.problemsData) {
-          const problem = window.problemsData.find(p => p.id == doc.id);
-          if (problem) {
-            problem.status = problemData.status || false;
-            problem.revision = problemData.revision || false;
-          }
-        }
-      });
-      
-      // Refresh UI
-      if (typeof loadProblems === 'function' && window.problemsData) {
-        loadProblems(window.problemsData);
-      }
-      
-      if (typeof populateListView === 'function' && window.problemsData) {
-        populateListView(window.problemsData);
-      }
-      
-      // Update counts
-      if (typeof updateCounts === 'function' && window.problemsData) {
-        updateCounts(window.problemsData);
-      }
-      
-      console.log('User data loaded successfully.');
-    })
-    .catch((error) => {
-      console.error('Error loading user data:', error);
-    });
-}
-
-// Add these Firebase update functions that were missing
-// Update problem status in Firebase
-function updateProblemStatusInFirebase(problemId, status) {
-  if (!window.currentUser) return;
-  
-  const db = firebase.firestore();
-  const userId = window.currentUser.uid;
-  
-  db.collection('users').doc(userId).collection('problems').doc(problemId.toString()).set({
-    status: status,
-    revision: window.problemsData.find(p => p.id == problemId)?.revision || false,
-    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-  }, { merge: true })
-  .then(() => {
-    console.log('Problem status updated in Firebase');
-  })
-  .catch((error) => {
-    console.error('Error updating problem status:', error);
-  });
-}
-
-// Toggle revision status in Firebase
-function toggleRevisionInFirebase(problemId, revision) {
-  if (!window.currentUser) return;
-  
-  const db = firebase.firestore();
-  const userId = window.currentUser.uid;
-  
-  db.collection('users').doc(userId).collection('problems').doc(problemId.toString()).set({
-    revision: revision,
-    status: window.problemsData.find(p => p.id == problemId)?.status || false,
-    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-  }, { merge: true })
-  .then(() => {
-    console.log('Revision status updated in Firebase');
-  })
-  .catch((error) => {
-    console.error('Error updating revision status:', error);
-  });
 }
 
 // Reset App State when User Signs Out
@@ -249,8 +168,7 @@ function showErrorModal(message) {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeFirebase);
 
-// Expose functions globally if needed
+// Expose functions globally
 window.signInWithGoogle = signInWithGoogle;
 window.signOut = signOut;
-window.updateProblemStatusInFirebase = updateProblemStatusInFirebase;
-window.toggleRevisionInFirebase = toggleRevisionInFirebase;
+window.currentUser = currentUser;  // Make currentUser accessible globally
