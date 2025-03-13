@@ -100,8 +100,9 @@ async function loadUserData(userId) {
       populateListView(window.problemsData);
     }
     
+    // Fix: Pass problemsData to loadRevisionList to avoid the error
     if (typeof loadRevisionList === 'function') {
-      loadRevisionList();
+      loadRevisionList(window.problemsData);
     }
     
     // Return to the current view
@@ -136,11 +137,15 @@ function extractCategories(problems) {
 
 // Update problem status in Firebase
 function updateProblemStatusInFirebase(problemId, status) {
-  if (!firebase.auth().currentUser) return;
+  // Check for current user
+  if (!window.currentUser) {
+    console.error("Cannot update problem status: User not logged in");
+    return;
+  }
 
   firebase.firestore()
     .collection('users')
-    .doc(firebase.auth().currentUser.uid)
+    .doc(window.currentUser.uid)
     .collection('problems')
     .doc(problemId.toString())
     .set({
@@ -156,11 +161,15 @@ function updateProblemStatusInFirebase(problemId, status) {
 
 // Toggle revision status in Firebase
 function toggleRevisionInFirebase(problemId, revision) {
-  if (!firebase.auth().currentUser) return;
+  // Check for current user
+  if (!window.currentUser) {
+    console.error("Cannot update revision status: User not logged in");
+    return;
+  }
 
   firebase.firestore()
     .collection('users')
-    .doc(firebase.auth().currentUser.uid)
+    .doc(window.currentUser.uid)
     .collection('problems')
     .doc(problemId.toString())
     .set({
