@@ -37,7 +37,13 @@ document.querySelector('#login-required-modal .modal-overlay').addEventListener(
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
-
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(() => {
+    console.log("Firebase persistence set to LOCAL");
+  })
+  .catch((error) => {
+    console.error("Error setting persistence:", error);
+  });
 // Global variables
 let currentUser = null;
 let currentView = 'category';
