@@ -378,7 +378,17 @@ function populateListView(problems) {
 
 // Revision list view
 function loadRevisionList(problems) {
+  if (!problems) {
+    console.error("No problems data provided to loadRevisionList");
+    return;
+  }
+  
   const tbody = document.getElementById('revision-problems');
+  if (!tbody) {
+    console.error("Revision problems container not found");
+    return;
+  }
+  
   tbody.innerHTML = '';
   
   // Filter problems marked for revision
@@ -491,12 +501,7 @@ function loadRevisionList(problems) {
 
 // Toggle view between category, list, and revision
 function toggleView(view) {
-  // Prevent revision view if not logged in
-  if (!window.currentUser && view === 'revision') {
-    showLoginRequiredModal('Please sign in to access your revision list.');
-    return;
-  } 
-  
+  // Store the current view type
   window.currentView = view;
   
   const categoryContainer = document.getElementById('categories-container');
@@ -507,6 +512,12 @@ function toggleView(view) {
   const listBtn = document.getElementById('list-view-btn');
   const revisionBtn = document.getElementById('revision-view-btn');
   
+  // Check if user is logged in before showing revision view
+  if (view === 'revision' && !window.currentUser) {
+    showLoginRequiredModal('Please sign in to access your revision list.');
+    return;
+  }
+  
   // Hide all containers and remove active class
   categoryContainer.style.display = 'none';
   listContainer.style.display = 'none';
@@ -515,6 +526,9 @@ function toggleView(view) {
   categoryBtn.classList.remove('active');
   listBtn.classList.remove('active');
   revisionBtn.classList.remove('active');
+  
+  // Make sure category view button is visible for all views
+  categoryBtn.style.display = ''; // Reset to default display value
   
   // Show selected view
   switch(view) {
@@ -537,10 +551,25 @@ function toggleView(view) {
 
 // Update problem status
 function updateProblemStatus(problemId, status) {
+  console.log("updateProblemStatus called for problem:", problemId, "status:", status);
+  console.log("Current user state:", window.currentUser ? "Logged in" : "Not logged in");
+  
+  // Check login status before allowing update
   if (!window.currentUser) {
+    console.log("User not logged in, showing login modal");
     showLoginRequiredModal('Please sign in to update problem status.');
+    
+    // Reset the checkbox state
+    const checkbox = document.getElementById(`list-status-${problemId}`) || 
+                    document.getElementById(`status-${problemId}`) ||
+                    document.getElementById(`revision-status-${problemId}`);
+    
+    if (checkbox) {
+      checkbox.checked = !status; // Revert the checkbox
+    }
+    
     return;
-  } 
+  }
   
   // Find and update problem in local data
   const problemIndex = window.problemsData.findIndex(p => p.id == problemId);
@@ -558,15 +587,24 @@ function updateProblemStatus(problemId, status) {
   // Update global counts
   updateCounts(window.problemsData);
   
-  // Update Firebase if user is logged in
-  if (window.currentUser) {
+  // Update Firebase if user is logged in and function exists
+  if (window.currentUser && typeof updateProblemStatusInFirebase === 'function') {
+    console.log("Updating problem status in Firebase");
     updateProblemStatusInFirebase(problemId, status);
+  } else {
+    console.warn("Could not update Firebase: ", typeof updateProblemStatusInFirebase !== 'function' ? 
+                "updateProblemStatusInFirebase function not found" : "User not logged in");
   }
 }
 
 // Toggle revision status
 function toggleRevision(problemId, revision) {
+  console.log("toggleRevision called for problem:", problemId, "revision:", revision);
+  console.log("Current user state:", window.currentUser ? "Logged in" : "Not logged in");
+  
+  // Check login status before allowing update
   if (!window.currentUser) {
+    console.log("User not logged in, showing login modal");
     showLoginRequiredModal('Please sign in to mark problems for revision.');
     return;
   }
@@ -586,21 +624,37 @@ function toggleRevision(problemId, revision) {
   
   // Update revision count
   const revisionCount = window.problemsData.filter(p => p.revision).length;
-  document.getElementById('revision-count').textContent = revisionCount;
+  const revisionCountElement = document.getElementById('revision-count');
+  if (revisionCountElement) {
+    revisionCountElement.textContent = revisionCount;
+  }
   
   // If current view is revision, reload revision list
   if (window.currentView === 'revision') {
     loadRevisionList(window.problemsData);
   }
   
-  // Update Firebase if user is logged in
-  if (window.currentUser) {
+  // Update Firebase if user is logged in and function exists
+  if (window.currentUser && typeof toggleRevisionInFirebase === 'function') {
+    console.log("Updating revision status in Firebase");
     toggleRevisionInFirebase(problemId, revision);
+  } else {
+    console.warn("Could not update revision in Firebase: ", typeof toggleRevisionInFirebase !== 'function' ? 
+                "toggleRevisionInFirebase function not found" : "User not logged in");
   }
 }
 
 // Remove problem from revision list
 function removeFromRevision(problemId) {
+  console.log("removeFromRevision called for problem:", problemId);
+  
+  // Check if user is logged in
+  if (!window.currentUser) {
+    console.log("User not logged in, showing login modal");
+    showLoginRequiredModal('Please sign in to update your revision list.');
+    return;
+  }
+  
   // Find and update problem in local data
   const problemIndex = window.problemsData.findIndex(p => p.id == problemId);
   if (problemIndex === -1) {
@@ -613,7 +667,10 @@ function removeFromRevision(problemId) {
   
   // Update revision count
   const revisionCount = window.problemsData.filter(p => p.revision).length;
-  document.getElementById('revision-count').textContent = revisionCount;
+  const revisionCountElement = document.getElementById('revision-count');
+  if (revisionCountElement) {
+    revisionCountElement.textContent = revisionCount;
+  }
   
   // Update UI
   updateRevisionUi(problemId, false);
@@ -621,92 +678,111 @@ function removeFromRevision(problemId) {
   // Reload revision list
   loadRevisionList(window.problemsData);
   
-  // Update Firebase if user is logged in
-  if (window.currentUser) {
+  // Update Firebase if user is logged in and function exists
+  if (window.currentUser && typeof toggleRevisionInFirebase === 'function') {
+    console.log("Updating revision status in Firebase");
     toggleRevisionInFirebase(problemId, false);
+  } else {
+    console.warn("Could not update revision in Firebase: ", typeof toggleRevisionInFirebase !== 'function' ? 
+                "toggleRevisionInFirebase function not found" : "User not logged in");
   }
 }
 
 // Update problem status UI across views
 function updateProblemStatusUi(problemId, status) {
-  // Update checkbox in category view
-  const categoryCheckbox = document.getElementById(`status-${problemId}`);
-  if (categoryCheckbox) {
-    categoryCheckbox.checked = status;
-  }
+  console.log("Updating UI for problem", problemId, "status:", status);
   
-  // Update checkbox in list view
-  const listCheckbox = document.getElementById(`list-status-${problemId}`);
-  if (listCheckbox) {
-    listCheckbox.checked = status;
-  }
-  
-  // Update checkbox in revision view
-  const revisionCheckbox = document.getElementById(`revision-status-${problemId}`);
-  if (revisionCheckbox) {
-    revisionCheckbox.checked = status;
-  }
-  
-  // Update category stats if in category view
-  if (window.currentView === 'category') {
-    const categoryRow = document.querySelector(`.problem-row[data-id="${problemId}"]`);
-    if (categoryRow) {
-      const category = categoryRow.closest('.accordion-category');
-      if (category) {
-        const categoryName = category.querySelector('.category-title').textContent.trim();
-        
-        // Get all problems in this category
-        const categoryProblems = window.problemsData.filter(p => p.category === categoryName);
-        
-        // Update category stats
-        const totalProblems = categoryProblems.length;
-        const completedProblems = categoryProblems.filter(p => p.status).length;
-        const percentComplete = Math.round((completedProblems / totalProblems) * 100);
-        
-        const progressBar = category.querySelector('.category-progress-bar');
-        if (progressBar) {
-          progressBar.style.width = `${percentComplete}%`;
-        }
-        
-        const statsText = category.querySelector('.category-stats span');
-        if (statsText) {
-          statsText.textContent = `${completedProblems}/${totalProblems} (${percentComplete}%)`;
+  try {
+    // Update checkbox in category view
+    const categoryCheckbox = document.getElementById(`status-${problemId}`);
+    if (categoryCheckbox) {
+      categoryCheckbox.checked = status;
+    }
+    
+    // Update checkbox in list view
+    const listCheckbox = document.getElementById(`list-status-${problemId}`);
+    if (listCheckbox) {
+      listCheckbox.checked = status;
+    }
+    
+    // Update checkbox in revision view
+    const revisionCheckbox = document.getElementById(`revision-status-${problemId}`);
+    if (revisionCheckbox) {
+      revisionCheckbox.checked = status;
+    }
+    
+    // Update category stats if in category view
+    if (window.currentView === 'category') {
+      const categoryRow = document.querySelector(`.problem-row[data-id="${problemId}"]`);
+      if (categoryRow) {
+        const category = categoryRow.closest('.accordion-category');
+        if (category) {
+          const categoryTitle = category.querySelector('.category-title');
+          if (categoryTitle) {
+            const categoryName = categoryTitle.textContent.trim();
+            
+            // Get all problems in this category
+            const categoryProblems = window.problemsData.filter(p => p.category === categoryName);
+            
+            // Update category stats
+            const totalProblems = categoryProblems.length;
+            const completedProblems = categoryProblems.filter(p => p.status).length;
+            const percentComplete = Math.round((completedProblems / totalProblems) * 100);
+            
+            const progressBar = category.querySelector('.category-progress-bar');
+            if (progressBar) {
+              progressBar.style.width = `${percentComplete}%`;
+            }
+            
+            const statsText = category.querySelector('.category-stats span');
+            if (statsText) {
+              statsText.textContent = `${completedProblems}/${totalProblems} (${percentComplete}%)`;
+            }
+          }
         }
       }
     }
+  } catch (error) {
+    console.error("Error updating problem status UI:", error);
   }
 }
 
 // Update revision UI across views
 function updateRevisionUi(problemId, revision) {
-  // Update in category view
-  const categoryRow = document.querySelector(`#categories-container .problem-row[data-id="${problemId}"]`);
-  if (categoryRow) {
-    const starSvg = categoryRow.querySelector('.revision-star');
-    if (starSvg) {
-      if (revision) {
-        starSvg.setAttribute('fill', 'currentColor');
-        starSvg.classList.add('marked');
-      } else {
-        starSvg.setAttribute('fill', 'none');
-        starSvg.classList.remove('marked');
-      }
-    }
-  }
+  console.log("Updating revision UI for problem", problemId, "revision:", revision);
   
-  // Update in list view
-  const listRow = document.querySelector(`#list-container .problem-row[data-id="${problemId}"]`);
-  if (listRow) {
-    const starSvg = listRow.querySelector('.revision-star');
-    if (starSvg) {
-      if (revision) {
-        starSvg.setAttribute('fill', 'currentColor');
-        starSvg.classList.add('marked');
-      } else {
-        starSvg.setAttribute('fill', 'none');
-        starSvg.classList.remove('marked');
+  try {
+    // Update in category view
+    const categoryRow = document.querySelector(`#categories-container .problem-row[data-id="${problemId}"]`);
+    if (categoryRow) {
+      const starSvg = categoryRow.querySelector('.revision-star');
+      if (starSvg) {
+        if (revision) {
+          starSvg.setAttribute('fill', 'currentColor');
+          starSvg.classList.add('marked');
+        } else {
+          starSvg.setAttribute('fill', 'none');
+          starSvg.classList.remove('marked');
+        }
       }
     }
+    
+    // Update in list view
+    const listRow = document.querySelector(`#list-container .problem-row[data-id="${problemId}"]`);
+    if (listRow) {
+      const starSvg = listRow.querySelector('.revision-star');
+      if (starSvg) {
+        if (revision) {
+          starSvg.setAttribute('fill', 'currentColor');
+          starSvg.classList.add('marked');
+        } else {
+          starSvg.setAttribute('fill', 'none');
+          starSvg.classList.remove('marked');
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error updating revision UI:", error);
   }
 }
 
@@ -721,28 +797,47 @@ function updateCounts(problems) {
   const completedHard = problems.filter(p => p.difficulty === 'Hard' && p.status).length;
   
   // Update status counts
-  document.getElementById('easy-count').textContent = `Easy: ${completedEasy}/${totalEasy}`;
-  document.getElementById('medium-count').textContent = `Medium: ${completedMedium}/${totalMedium}`;
-  document.getElementById('hard-count').textContent = `Hard: ${completedHard}/${totalHard}`;
+  const easyCountElement = document.getElementById('easy-count');
+  if (easyCountElement) {
+    easyCountElement.textContent = `Easy: ${completedEasy}/${totalEasy}`;
+  }
+  
+  const mediumCountElement = document.getElementById('medium-count');
+  if (mediumCountElement) {
+    mediumCountElement.textContent = `Medium: ${completedMedium}/${totalMedium}`;
+  }
+  
+  const hardCountElement = document.getElementById('hard-count');
+  if (hardCountElement) {
+    hardCountElement.textContent = `Hard: ${completedHard}/${totalHard}`;
+  }
   
   // Update overall progress
   const totalProblems = problems.length;
   const completedProblems = problems.filter(p => p.status).length;
   const progressPercentage = totalProblems > 0 ? Math.round((completedProblems / totalProblems) * 100) : 0;
   
-  document.getElementById('overall-progress-text').textContent = `${progressPercentage}% Completed`;
+  const progressTextElement = document.getElementById('overall-progress-text');
+  if (progressTextElement) {
+    progressTextElement.textContent = `${progressPercentage}% Completed`;
+  }
   
   // Update the circular progress bar
   const circle = document.getElementById('overall-progress');
-  const radius = circle.r.baseVal.value;
-  const circumference = radius * 2 * Math.PI;
-  
-  circle.style.strokeDasharray = `${circumference} ${circumference}`;
-  circle.style.strokeDashoffset = `${circumference - (progressPercentage / 100) * circumference}`;
+  if (circle) {
+    const radius = circle.r.baseVal.value;
+    const circumference = radius * 2 * Math.PI;
+    
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = `${circumference - (progressPercentage / 100) * circumference}`;
+  }
   
   // Update revision count
   const revisionCount = problems.filter(p => p.revision).length;
-  document.getElementById('revision-count').textContent = revisionCount;
+  const revisionCountElement = document.getElementById('revision-count');
+  if (revisionCountElement) {
+    revisionCountElement.textContent = revisionCount;
+  }
 }
 
 // Toggle accordion open/close
@@ -752,9 +847,15 @@ function toggleAccordion(accordionElement) {
 
 // Show login required modal
 function showLoginRequiredModal(message) {
-  const modal = document.getElementById('login-required-modal');
-  const modalMessage = modal.querySelector('.modal-message');
+  console.log("Showing login required modal:", message);
   
+  const modal = document.getElementById('login-required-modal');
+  if (!modal) {
+    console.error("Login modal element not found");
+    return;
+  }
+  
+  const modalMessage = modal.querySelector('.modal-message');
   if (modalMessage) {
     modalMessage.textContent = message || 'Please sign in to continue.';
   }
@@ -786,6 +887,10 @@ function initializeViewToggleButtons() {
 // Close login required modal
 function initializeLoginModal() {
   const modal = document.getElementById('login-required-modal');
+  if (!modal) {
+    console.error("Login modal element not found");
+    return;
+  }
   
   // Close button
   const closeBtn = modal.querySelector('.modal-close-btn');
