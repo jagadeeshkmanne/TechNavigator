@@ -95,6 +95,8 @@ function populateSidebar(problems) {
 }
 
 // Category filter function
+// Fix for sidebar.js - Updated filterListByCategory function
+
 function filterListByCategory(category, problems) {
   // Ensure we're in list view
   window.currentView = 'list';
@@ -104,8 +106,10 @@ function filterListByCategory(category, problems) {
   const listBtn = document.getElementById('list-view-btn');
   const revisionBtn = document.getElementById('revision-view-btn');
   
-  // Hide/show buttons based on category
-  categoryBtn.style.display = category === 'all' ? '' : 'none';
+  // Show category button for "all" category
+  if (categoryBtn) {
+    categoryBtn.style.display = 'inline-block'; // Always show the category button
+  }
   
   // Hide all containers
   document.getElementById('categories-container').style.display = 'none';
@@ -113,12 +117,17 @@ function filterListByCategory(category, problems) {
   document.getElementById('list-container').style.display = 'block';
   
   // Update active button classes
-  categoryBtn.classList.remove('active');
-  listBtn.classList.add('active');
-  revisionBtn.classList.remove('active');
+  if (categoryBtn) categoryBtn.classList.remove('active');
+  if (listBtn) listBtn.classList.add('active');
+  if (revisionBtn) revisionBtn.classList.remove('active');
   
   // Get the list container
   const tbody = document.getElementById('list-problems');
+  if (!tbody) {
+    console.error("List problems container not found");
+    return;
+  }
+  
   tbody.innerHTML = '';
   
   // Update content title
