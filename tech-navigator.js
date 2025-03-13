@@ -19,15 +19,40 @@ let currentView = 'category';
 let problemsData = [];
 
 // Category order definition
+// Category order definition
 const categoryOrder = [
-  'Arrays', 'Prefix Sum', 'HashMap/HashSet', 'Two Pointers', 'Sliding Window', 
-  'Binary Search', 'Cyclic Sort', 'Matrix Traversal', 'Stacks & Queues', 
-  'Monotonic Stack/Queue', 'Linked Lists', 'Fast & Slow Pointers', 
-  'Linked List Reversal', 'Recursion', 'Trees', 'Tree DFS', 'Tree BFS', 
-  'Divide and Conquer', 'Backtracking', 'Heap/Priority Queue', 'Tries', 
-  'Graphs', 'Graph DFS', 'Graph BFS', 'Union Find', 'Topological Sort', 
-  'Shortest Path', 'Greedy', 'Dynamic Programming', 'Segment Trees', 
-  'Intervals', 'Bit Manipulation', 'Math & Geometry'
+  'Arrays',
+  'Prefix Sum',
+  'HashMap/HashSet',
+  'Two Pointers',
+  'Sliding Window',
+  'Binary Search',
+  'Cyclic Sort',
+  'Matrix Traversal',
+  'Stacks & Queues',
+  'Monotonic Stack/Queue',
+  'Linked Lists',
+  'Recursion',
+  'Trees',
+  'Tree DFS',
+  'Tree BFS',
+  'Divide and Conquer',
+  'Backtracking',
+  'Heap/Priority Queue',
+  'Tries',
+  'Graphs',
+  'Graph DFS',
+  'Graph BFS',
+  'Union Find',
+  'Topological Sort',
+  'Shortest Path',
+  'Greedy',
+  'Dynamic Programming',
+  'Segment Trees',
+  'Intervals',
+  'Bit Manipulation',
+  'Math & Geometry',
+  'Design'
 ];
 
 async function getProblems() {
