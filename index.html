@@ -5,39 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Navigator</title>
   
-  <!-- Import ag-Grid Resources -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/styles/ag-grid.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/styles/ag-theme-alpine.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.5/ag-grid-community.min.js"></script>
+  <!-- Import External Resources -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
   <!-- Import Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --professional-orange: #F97316;
       --professional-orange-hover: #EA580C;
       --secondary-color: #f9fafb;
-      --border-color: #e5e7eb;
+      --border-color: #334155;  /* Darker border color for dark theme */
       --header-bg: #1e293b;
-      --sidebar-bg: #f1f5f9;
-      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --sidebar-bg: #0f172a;    /* Darker sidebar background */
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
       --easy-color: #22c55e;
       --medium-color: #f59e0b;
       --hard-color: #ef4444;
-      --text-muted: #64748b;
-      --text-color: #0f172a;
-      --bg-color: #f8fafc;
-      --card-bg: #ffffff;
+      --text-muted: #94a3b8;
+      --text-color: #f1f5f9;
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
       --primary-color: var(--professional-orange);
       --primary-hover: var(--professional-orange-hover);
+      --accordion-header-bg: #1e293b;  /* Accordion header background */
+      --accordion-content-bg: #0f172a; /* Accordion content background */
     }
     
     /* Rotation Animation */
@@ -63,18 +62,6 @@
       gap: 4px;
     }
     
-    /* Dark Mode */
-    body.dark-mode {
-      --secondary-color: #1e293b;
-      --border-color: #334155;
-      --sidebar-bg: #0f172a;
-      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
-      --text-muted: #94a3b8;
-      --text-color: #f1f5f9;
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
-    }
-    
     /* Base Reset & Typography */
     * {
       margin: 0;
@@ -87,7 +74,6 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.5;
-      transition: background-color 0.3s, color 0.3s;
     }
     
     /* Layout */
@@ -110,32 +96,6 @@
       padding: 0 1.5rem;
       z-index: 50;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 9999px;
-      padding: 0.25rem;
-      cursor: pointer;
-      margin-left: auto;
-      margin-right: 1rem;
-    }
-    
-    .theme-icon {
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      padding: 0.25rem;
-      transition: background-color 0.2s;
-    }
-    
-    .theme-icon.active {
-      background-color: rgba(255, 255, 255, 0.2);
     }
     
     .header-stats {
@@ -180,64 +140,11 @@
       transition: stroke-dashoffset 0.3s;
     }
     
-    /* Sidebar */
-    .sidebar {
-      width: 300px;
-      background-color: var(--sidebar-bg);
-      border-right: 1px solid var(--border-color);
-      position: fixed;
-      top: 64px;
-      height: calc(100vh - 64px);
-      overflow-y: auto;
-      padding: 1rem 0;
-      z-index: 40;
-    }
-    
-    .sidebar-nav {
-      list-style-type: none;
-    }
-    
-    .sidebar-nav-item {
-      margin-bottom: 0.25rem;
-    }
-    
-    .sidebar-nav-link {
-      display: flex;
-      align-items: center;
-      padding: 10px 1.5rem;
-      color: var(--text-color);
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 500;
-      border-left: 3px solid transparent;
-      transition: background-color 0.2s, border-left-color 0.2s, color 0.2s;
-      cursor: pointer;
-      justify-content: space-between;
-    }
-    
-    .sidebar-nav-link:hover {
-      background-color: rgba(0,0,0,0.05);
-    }
-    
-    .sidebar-nav-link.active {
-      border-left-color: var(--primary-color);
-      background-color: rgba(37, 99, 235, 0.08);
-      color: var(--primary-color);
-      font-weight: 600;
-    }
-    
-    .nav-progress {
-      margin-left: auto;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-    
     /* Main Content */
     .main-content {
-      margin-left: 300px;
       margin-top: 64px;
       padding: 1.5rem;
-      width: calc(100% - 300px);
+      width: 100%;
     }
     
     .content-header {
@@ -260,132 +167,7 @@
       width: 100%;
     }
     
-    .progress-pill {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      background: var(--header-bg);
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
-      color: white;
-      font-size: 0.875rem;
-    }
-    
-    /* Filter Section */
-    .filter-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      background-color: var(--card-bg);
-      border-radius: 0.5rem;
-      box-shadow: var(--card-shadow);
-      border: 1px solid rgba(249, 115, 22, 0.1);
-    }
-    
-    .filters {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    
-    .filter-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    
-    .filter-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-    
-    .filter-select {
-      padding: 0.5rem;
-      border-radius: 0.375rem;
-      border: 1px solid var(--border-color);
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      font-size: 0.875rem;
-      min-width: 160px;
-    }
-    
-    /* Problem Grid */
-    .problem-grid {
-      background-color: var(--card-bg);
-      box-shadow: var(--card-shadow);
-      overflow: hidden;
-      height: 600px;
-    }
-    
-    /* ag-Grid Customization */
-    .ag-theme-alpine {
-      --ag-header-height: 38px;
-      --ag-row-height: 42px;
-      --ag-font-size: 14px;
-      --ag-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --ag-header-background-color: var(--card-bg);
-      --ag-header-foreground-color: var(--text-color);
-      --ag-header-cell-hover-background-color: var(--sidebar-bg);
-      --ag-row-border-color: var(--border-color);
-      --ag-row-hover-color: var(--sidebar-bg);
-      --ag-cell-horizontal-padding: 1rem;
-      --ag-selected-row-background-color: rgba(37, 99, 235, 0.08);
-      --ag-background-color: var(--card-bg);
-      --ag-foreground-color: var(--text-color);
-      --ag-odd-row-background-color: var(--card-bg);
-    }
-    
-    .ag-header-cell-label {
-      font-weight: 600;
-      font-size: 0.875rem;
-    }
-    
-    /* Difficulty Tags */
-    .difficulty-tag {
-      display: inline-flex;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    
-    .difficulty-tag.easy {
-      background-color: rgba(34, 197, 94, 0.1);
-      color: var(--easy-color);
-    }
-    
-    .difficulty-tag.medium {
-      background-color: rgba(245, 158, 11, 0.1);
-      color: var(--medium-color);
-    }
-    
-    .difficulty-tag.hard {
-      background-color: rgba(239, 68, 68, 0.1);
-      color: var(--hard-color);
-    }
-    
-    /* Action Buttons */
-    .problem-link {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.375rem 0.75rem;
-      background-color: var(--primary-color);
-      color: white;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background-color 0.2s;
-    }
-    
-    .problem-link:hover {
-      background-color: var(--primary-hover);
-    }
-    
-    /* Difficulty Status Info */
+    /* Problem Status Info */
     .problem-status-info {
       display: flex;
       justify-content: space-between;
@@ -444,404 +226,822 @@
       transition: width 0.3s;
     }
     
-    /* Responsive Adjustments */
-    @media (max-width: 1024px) {
-      .sidebar {
-        width: 200px;
-      }
-      .main-content {
-        margin-left: 200px;
-        width: calc(100% - 200px);
-      }
+    /* App Logo */
+    .app-logo h1 {
+      display: flex;
+      align-items: center;
+      gap: 0px;
+      margin: 0;
+      font-size: 1.2rem;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #ffffff;
     }
     
+    /* Compass icon animations */
+    .compass-icon {
+      animation: rotate 4s linear infinite;
+      transform-origin: 50% 50%;
+    }
+    
+    .compass-icon svg {
+      animation: colorChange 4s linear infinite;
+      display: block;
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes colorChange {
+      0% { stroke: #f97316; }
+      25% { stroke: #22c55e; }
+      50% { stroke: #3b82f6; }
+      75% { stroke: #facc15; }
+      100% { stroke: #f97316; }
+    }
+    
+    /* Navbar links styling */
+    .nav-link {
+      background-color: #333;
+      color: #ddd;
+      border: 1px solid #555;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+    
+    .nav-link:hover {
+      background-color: #444;
+    }
+    
+    /* Auth Container */
+    .auth-container {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .auth-container .user-info {
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .auth-container.signed-in .user-info {
+      display: flex;
+    }
+    
+    .auth-container.signed-in #login-btn {
+      display: none;
+    }
+    
+    .auth-btn {
+      background-color: #333;
+      color: #ddd;
+      border: 1px solid #555;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .auth-btn:hover {
+      background-color: #444;
+    }
+    
+    .auth-btn.logout {
+      background-color: #555;
+      color: white;
+      border: none;
+    }
+    
+    .auth-btn.logout:hover {
+      background-color: #333;
+    }
+    
+    .user-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    /* Revision star styles */
+    .revision-star {
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    
+    .revision-star.marked {
+      fill: var(--professional-orange);
+      color: var(--professional-orange);
+    }
+    
+    .revision-star-wrapper:hover .revision-star {
+      color: var(--professional-orange);
+    }
+    
+    /* Counter badge in the header */
+    .revision-count {
+      background-color: var(--professional-orange);
+      color: white;
+      border-radius: 9999px;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-left: 4px;
+    }
+    
+    /* Hover effect for revision link */
+    #revision-link {
+      position: relative;
+    }
+    
+    #revision-link:hover svg {
+      color: var(--professional-orange);
+    }
+    
+    /* Animation for the star when marked */
+    @keyframes star-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    
+    .revision-star.marked {
+      animation: star-pulse 0.3s ease-in-out;
+    }
+    
+    .editorial-icon svg {
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    
+    .editorial-icon:hover svg {
+      color: var(--professional-orange);
+    }
+    
+    /* Difficulty Tags */
+    .difficulty-tag {
+      display: inline-flex;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .difficulty-tag.easy {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--easy-color);
+    }
+    
+    .difficulty-tag.medium {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--medium-color);
+    }
+    
+    .difficulty-tag.hard {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--hard-color);
+    }
+    
+    /* Accordion Category Styles */
+    .accordion-container {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    
+    .accordion-category {
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+    }
+    
+    .accordion-header {
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--accordion-header-bg);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s;
+    }
+    
+    .accordion-header:hover {
+      background-color: rgba(249, 115, 22, 0.05);
+    }
+    
+    .category-title {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      color: var(--professional-orange);
+      font-size: 1rem;
+    }
+    
+    .category-title-icon {
+      margin-right: 0.75rem;
+      transition: transform 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .accordion-category.expanded .category-title-icon svg {
+      transform: rotate(90deg);
+    }
+    
+    .category-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    
+    .category-progress {
+      width: 100px;
+      height: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .category-progress-bar {
+      height: 100%;
+      background-color: var(--professional-orange);
+      transition: width 0.3s;
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background-color: var(--accordion-content-bg);
+    }
+    
+    .accordion-category.expanded .accordion-content {
+      max-height: 2000px; /* Arbitrary large value */
+    }
+    
+    .problem-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .problem-table th {
+      text-align: left;
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--accordion-header-bg);
+    }
+    
+    .problem-table td {
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .problem-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .problem-row:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    .problem-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .problem-link:hover {
+      color: var(--professional-orange);
+    }
+    
+    .status-checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .status-checkbox input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: var(--professional-orange);
+    }
+    
+    .revision-star-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .editorial-icon {
+      display: flex;
+      justify-content: center;
+    }
+    
+    /* Loading spinner */
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top: 4px solid var(--professional-orange);
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Editorial icon styling */
+    .editorial-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .editorial-icon {
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    
+    .editorial-icon.marked {
+      fill: var(--professional-orange);
+      color: var(--professional-orange);
+    }
+    
+    .editorial-wrapper:hover .editorial-icon {
+      color: var(--professional-orange);
+    }
+    
+    /* Animation for marking */
+    @keyframes icon-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    
+    .editorial-icon.marked {
+      animation: icon-pulse 0.3s ease-in-out;
+    }
+    
+    /* Disable hover effect when no editorial link exists */
+    .editorial-wrapper:not([onclick]) {
+      cursor: default;
+    }
+    
+    .editorial-wrapper:not([onclick]):hover .editorial-icon {
+      color: var(--text-muted);
+    }
+    
+    /* Reduce accordion header padding */
+    .accordion-header {
+      padding: 0.6rem 1.5rem;
+    }
+    
+    /* Reduce table cell padding */
+    .problem-table th,
+    .problem-table td {
+      padding: 0.6rem 1rem;
+    }
+    
+    /* Reduce overall row height */
+    .problem-row {
+      height: 38px;
+    }
+    
+    /* Make the icons slightly smaller */
+    .problem-link svg,
+    .revision-star-wrapper svg,
+    .editorial-wrapper svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* Reduce the size of the difficulty tags */
+    .difficulty-tag {
+      padding: 0.15rem 0.4rem;
+      font-size: 0.7rem;
+    }
+    
+    /* Make the progress bar in category header a bit thinner */
+    .category-progress {
+      height: 5px;
+    }
+    
+    /* View toggle styles */
+    .view-toggle-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+    }
+    
+    .view-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    
+    .view-toggle-btn:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
+    
+    .view-toggle-btn:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    
+    .view-toggle-btn.active {
+      background-color: var(--professional-orange);
+      color: white;
+    }
+    
+    .view-toggle-btn:hover:not(.active) {
+      background-color: var(--sidebar-bg);
+    }
+    
+    /* Container for the list view */
+    #list-container {
+      display: none;
+      width: 100%;
+      margin-bottom: 2rem;
+      background-color: var(--card-bg);
+      border-radius: 0.5rem;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+    }
+    
+    /* List view table styles */
+    .list-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .list-table th {
+      position: sticky;
+      top: 0;
+      text-align: left;
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--accordion-header-bg);
+      z-index: 10;
+    }
+    
+    .list-table td {
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .list-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .list-table tr:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    /* Column width adjustments for both views */
+    .problem-table th:nth-child(1), 
+    .problem-table td:nth-child(1),
+    .list-table th:nth-child(1), 
+    .list-table td:nth-child(1) {
+      width: 25px;
+      max-width: 25px;
+    }
+    
+    .problem-table th:nth-child(2), 
+    .problem-table td:nth-child(2),
+    .list-table th:nth-child(2), 
+    .list-table td:nth-child(2) {
+      width: 25px;
+      max-width: 25px;
+    }
+    
+    .problem-table th:nth-child(3), 
+    .problem-table td:nth-child(3),
+    .list-table th:nth-child(3), 
+    .list-table td:nth-child(3) {
+      width: 25px;
+      max-width: 25px;
+    }
+    
+    .problem-table th:nth-child(4), 
+    .problem-table td:nth-child(4),
+    .list-table th:nth-child(4), 
+    .list-table td:nth-child(4) {
+      width: 300px;
+      max-width: 300px;
+    }
+    
+    .problem-table th:nth-child(5), 
+    .problem-table td:nth-child(5),
+    .list-table th:nth-child(5), 
+    .list-table td:nth-child(5) {
+      width: 120px;
+      max-width: 120px;
+    }
+    
+    .problem-table th:nth-child(6), 
+    .problem-table td:nth-child(6),
+    .list-table th:nth-child(6), 
+    .list-table td:nth-child(6) {
+      width: 80px;
+      max-width: 80px;
+    }
+    
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      .app-container {
+      .category-stats {
         flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
       }
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        top: 64px;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: 1rem 0;
+      
+      .problem-table {
+        font-size: 0.75rem;
       }
-      .main-content {
-        margin-left: 0;
-        margin-top: 0;
-        width: 100%;
+      
+      .problem-table th, 
+      .problem-table td {
+        padding: 0.5rem;
       }
-      .filters {
-        flex-direction: column;
-        gap: 0.5rem;
+      
+      .difficulty-tag {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.35rem;
+      }
+      
+      .problem-status-info {
+        flex-wrap: wrap;
+        gap: 0.75rem;
       }
     }
-      /* Add this CSS to your style section */
-.video-link {
-  padding: 4px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.video-link:hover {
-  background-color: rgba(239, 68, 68, 0.1);
-}
-
-.problem-link {
-  color: var(--professional-orange);
-  background: none;
-  padding: 0;
-  font-weight: 500;
-}
-
-.problem-link:hover {
-  background: none;
-  text-decoration: underline;
-}
-      /* Problem Link Styling */
-.ag-cell .problem-link {
+      .view-toggle-container {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-color);
-  text-decoration: none;
-  transition: color 0.2s;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
 }
 
-.ag-cell .problem-link:hover {
-  color: var(--professional-orange);
+/* Style for revision view button */
+#revision-view-btn svg {
+  margin-right: 4px;
 }
 
-/* Video Link Styling */
-.video-link {
-  padding: 4px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
+#revision-view-btn.active svg {
+  fill: white;
 }
 
-.video-link:hover {
-  background-color: rgba(255, 0, 0, 0.08);
+/* Hover effect for remove star */
+#revision-list .revision-star-wrapper:hover .revision-star {
+  fill: var(--hard-color);
+  stroke: var(--hard-color);
 }
 
-/* Tooltip styles */
-.tooltip {
-  position: relative;
-  display: inline-block;
+/* Animation for removing star */
+@keyframes star-pulse-out {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
 }
 
-.tooltip .tooltip-content {
-  visibility: hidden;
-  width: 240px;
+#revision-list .revision-star-wrapper:active .revision-star {
+  animation: star-pulse-out 0.3s ease-in-out forwards;
+}
+
+/* Empty state improvements */
+.empty-state {
+  padding: 3rem 1.5rem;
   background-color: var(--card-bg);
-  color: var(--text-color);
-  text-align: left;
-  border-radius: 6px;
-  padding: 12px;
-  position: absolute;
-  z-index: 100;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -120px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  font-size: 0.75rem;
-  line-height: 1.5;
+  border-radius: 0.5rem;
+  text-align: center;
   border: 1px solid var(--border-color);
+  margin-top: 1rem;
 }
 
-.tooltip:hover .tooltip-content {
-  visibility: visible;
-  opacity: 1;
+.empty-state svg {
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
 }
 
-/* Category tip box */
-.category-tip {
-  padding: 1rem;
+.empty-state h3 {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Add subtle highlight to revision items */
+#revision-list .problem-row {
+  position: relative;
+}
+
+#revision-list .problem-row:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--professional-orange);
+  opacity: 0.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .view-toggle-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .view-toggle-btn {
+    flex: 1 1 auto;
+    min-width: 120px;
+  }
+}
+      /* Revision List Specific Styles */
+#revision-container .empty-state {
+  padding: 3rem 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+#revision-container .empty-state svg {
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+#revision-container .empty-state h3 {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+}
+
+#revision-container .empty-state p {
+  color: var(--text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Hover effect for remove star */
+#revision-problems .revision-star-wrapper:hover .revision-star {
+  fill: var(--hard-color);
+  stroke: var(--hard-color);
+}
+
+/* Animation for removing star */
+@keyframes star-pulse-out {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+#revision-problems .revision-star-wrapper:active .revision-star {
+  animation: star-pulse-out 0.3s ease-in-out forwards;
+}
+      /* Make sure revision-container has the same styling as list-container */
+#revision-container {
+  width: 100%;
+  margin-bottom: 2rem;
   background-color: var(--card-bg);
   border-radius: 0.5rem;
   box-shadow: var(--card-shadow);
-  margin-bottom: 1rem;
-  border-left: 4px solid var(--primary-color);
+  overflow: hidden;
 }
 
-.category-tip h3 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: var(--primary-color);
+/* Ensure revision list table has the same styling as list table */
+#revision-container .list-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.category-tip p {
+#revision-container .list-table th {
+  position: sticky;
+  top: 0;
+  text-align: left;
+  padding: 0.6rem 1rem;
   font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--text-color);
-}
-
-/* Frequency tags */
-.frequency-tag {
-  display: inline-flex;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.frequency-tag.high {
-  background-color: rgba(34, 197, 94, 0.1);
-  color: var(--easy-color);
-}
-
-.frequency-tag.medium {
-  background-color: rgba(245, 158, 11, 0.1);
-  color: var(--medium-color);
-}
-
-.frequency-tag.low {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: var(--hard-color);
-}
-      /* Auth Container */
-.auth-container {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.auth-container .user-info {
-  display: none;
-  align-items: center;
-  gap: 10px;
-}
-
-.auth-container.signed-in .user-info {
-  display: flex;
-}
-
-.auth-container.signed-in #login-btn {
-  display: none;
-}
-
-.auth-btn {
-  background-color: #fff;
-  color: #555;
-  border: 1px solid #ddd;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-}
-
-.auth-btn:hover {
-  background-color: #f5f5f5;
-}
-
-.auth-btn.logout {
-  background-color: #555;
-  color: white;
-  border: none;
-}
-
-.auth-btn.logout:hover {
-  background-color: #333;
-}
-
-.user-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Dark Mode Adjustments */
-.dark-mode .auth-btn {
-  background-color: #333;
-  color: #ddd;
-  border-color: #555;
-}
-
-.dark-mode .auth-btn:hover {
-  background-color: #444;
-}
-.app-logo h1 {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  font-size: 1.2rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--primary-color);
-}
-
-
-.app-logo h1 {
-  display: flex;
-  align-items: center;
-  gap: 0px; /* Adjust spacing as needed */
-  margin: 0;
-  font-size: 1.2rem; /* Smaller, compact font size */
-  font-family: 'Roboto Mono', monospace; /* Use a technical, monospaced font */
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #ffffff;
-}
-
-/* Rotate the container (or you could apply both animations to the SVG) */
-.compass-icon {
-  animation: rotate 4s linear infinite;
-  transform-origin: 50% 50%;
-}
-
-/* Animate the stroke color on the SVG element */
-.compass-icon svg {
-  animation: colorChange 4s linear infinite;
-  display: block;
-}
-
-/* Rotation keyframes */
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Color change keyframes - cycle through several colors */
-@keyframes colorChange {
-  0% { stroke: #f97316; }    /* Orange */
-  25% { stroke: #22c55e; }   /* Green */
-  50% { stroke: #3b82f6; }   /* Blue */
-  75% { stroke: #facc15; }   /* Yellow */
-  100% { stroke: #f97316; }  /* Back to Orange */
-}
-
-/* Navbar links styling */
-.nav-link {
-  background-color: #fff;
-  color: #555;
-  border: 1px solid #ddd;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  margin-right: 10px;
-}
-
-.nav-link:hover {
-  background-color: #f5f5f5;
-}
-
-/* Dark Mode Adjustments for nav links */
-.dark-mode .nav-link {
-  background-color: #333;
-  color: #ddd;
-  border-color: #555;
-}
-
-.dark-mode .nav-link:hover {
-  background-color: #444;
-}
-.ag-theme-alpine, 
-.ag-theme-alpine-dark {
-  font-size: 13px !important;
-}
-
-.ag-header-cell-text {
-  font-size: 13px !important;
-}
-
-.ag-cell {
-  font-size: 13px !important;
-}
-
-.ag-cell-value {
-  font-size: 13px !important;
-}
-
-.ag-row {
-  font-size: 13px !important;
-}
-
-/* Make sure problem title links also have consistent font size */
-.ag-cell a {
-  font-size: 13px !important;
-}
-    /* Add these styles to your stylesheet */
-
-/* Revision star styles */
-.revision-star {
   color: var(--text-muted);
-  transition: all 0.2s;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--accordion-header-bg);
+  z-index: 10;
 }
 
-.revision-star.marked {
-  fill: var(--professional-orange);
-  color: var(--professional-orange);
+#revision-container .list-table td {
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.revision-star-wrapper:hover .revision-star {
-  color: var(--professional-orange);
+#revision-container .list-table tr:last-child td {
+  border-bottom: none;
 }
 
-/* Counter badge in the header */
-.revision-count {
-  background-color: var(--professional-orange);
-  color: white;
-  border-radius: 9999px;
-  padding: 2px 6px;
-  font-size: 10px;
-  font-weight: bold;
-  margin-left: 4px;
+#revision-container .list-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
-/* Hover effect for revision link */
-#revision-link {
-  position: relative;
+/* Apply column width adjustments for both views */
+#revision-container .list-table th:nth-child(1), 
+#revision-container .list-table td:nth-child(1) {
+  width: 25px;
+  max-width: 25px;
 }
 
-#revision-link:hover svg {
-  color: var(--professional-orange);
+#revision-container .list-table th:nth-child(2), 
+#revision-container .list-table td:nth-child(2) {
+  width: 25px;
+  max-width: 25px;
 }
 
-/* Animation for the star when marked */
-@keyframes star-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+#revision-container .list-table th:nth-child(3), 
+#revision-container .list-table td:nth-child(3) {
+  width: 25px;
+  max-width: 25px;
 }
 
-.revision-star.marked {
-  animation: star-pulse 0.3s ease-in-out;
+#revision-container .list-table th:nth-child(4), 
+#revision-container .list-table td:nth-child(4) {
+  width: 300px;
+  max-width: 300px;
 }
-    .editorial-icon svg {
-    color: var(--text-muted);
-    transition: color 0.2s;
-  }
-  
-  .editorial-icon:hover svg {
-    color: var(--professional-orange);
-  }
+
+#revision-container .list-table th:nth-child(5), 
+#revision-container .list-table td:nth-child(5) {
+  width: 120px;
+  max-width: 120px;
+}
+
+#revision-container .list-table th:nth-child(6), 
+#revision-container .list-table td:nth-child(6) {
+  width: 80px;
+  max-width: 80px;
+}
   </style>
-  
-<script src="firebase.js"></script>
-
-   
 </head>
 
-<body class="dark-mode">
+<body>
   <!-- Main Container -->
   <div class="app-container">
     <!-- Header -->
@@ -860,16 +1060,6 @@
       </div>
       
       <div id="auth-container" class="auth-container">
-        <div class="progress-pill" id="overall-progress-pill">
-          <div class="circle-progress">
-            <svg viewBox="0 0 36 36">
-              <circle class="circle-bg" cx="18" cy="18" r="15"></circle>
-              <circle id="overall-progress" class="circle-progress-bar" cx="18" cy="18" r="15"></circle>
-            </svg>
-          </div>
-          <span id="overall-progress-text">0% Completed</span>
-        </div>
-        <!-- Add this revision link -->
         <a class="nav-link" href="javascript:void(0);" id="revision-link">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -883,9 +1073,15 @@
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
           </svg>
-          <span>Articles</span>
+          <span>Basics</span>
         </a>
-        
+        <a class="nav-link" href="https://technavigator.io/">
+            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span>Practice</span>
+        </a>
         <button id="login-btn" class="auth-btn">
           <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 8px;">
           Sign in
@@ -898,63 +1094,120 @@
         </div>
       </div>
     </header>
-  
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-      <ul class="sidebar-nav">
-        <!-- Sidebar items will be generated dynamically -->
-      </ul>
-    </aside>
     
     <!-- Main Content -->
     <main class="main-content">
-      <div class="content-header">
-        <div class="title-progress-wrapper">
-          <h2 class="content-title" id="category-title">
-            <span class="category-name">Category</span>
-            <span class="problem-count" id="problem-count">(0/0)</span>
-          </h2>
-          <div class="progress-pill" id="category-counter">
-            <div class="circle-progress">
-              <svg viewBox="0 0 36 36">
-                <circle class="circle-bg" cx="18" cy="18" r="15"></circle>
-                <circle class="circle-progress-bar" cx="18" cy="18" r="15"></circle>
-              </svg>
-            </div>
-            <span id="category-percentage">0% Completed</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Category Tips -->
-      <div class="category-tip" id="category-tip" style="display: none;">
-        <h3>Tips for Arrays</h3>
-        <p>Arrays are the most fundamental data structure. Focus on understanding basic operations like traversal, insertion, deletion, and in-place manipulation. Look for problems involving direct array access, traversal, and simple transformations without specialized algorithms.</p>
-      </div>
-      
-     
-      <!-- Difficulty & Completion Info -->
+      <!-- Statistics Info -->
       <div class="problem-status-info">
         <div class="status-group">
           <span class="status-dot easy"></span>
-          <span class="status-count" id="easy-count">Easy: 0/0</span>
+          <span class="status-count" id="easy-count">Easy: 0/8</span>
         </div>
         <div class="status-group">
           <span class="status-dot medium"></span>
-          <span class="status-count" id="medium-count">Medium: 0/0</span>
+          <span class="status-count" id="medium-count">Medium: 0/9</span>
         </div>
         <div class="status-group">
           <span class="status-dot hard"></span>
-          <span class="status-count" id="hard-count">Hard: 0/0</span>
+          <span class="status-count" id="hard-count">Hard: 0/4</span>
         </div>
         <div class="status-group">
-          <span class="status-count" id="completion-time">Est. completion time: 0 hrs</span>
+          <div class="progress-pill" id="overall-progress-pill">
+            <div class="circle-progress">
+              <svg viewBox="0 0 36 36">
+                <circle class="circle-bg" cx="18" cy="18" r="15"></circle>
+                <circle id="overall-progress" class="circle-progress-bar" cx="18" cy="18" r="15" style="stroke-dasharray: 94.2478, 94.2478; stroke-dashoffset: 94.2478;"></circle>
+              </svg>
+</div>
+            <span id="overall-progress-text">0% Completed</span>
+          </div>
         </div>
       </div>
+
+      <!-- View Toggle Buttons -->
+      <div class="view-toggle-container">
+      <button id="list-view-btn" class="view-toggle-btn active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 6h13"></path>
+          <path d="M8 12h13"></path>
+          <path d="M8 18h13"></path>
+          <path d="M3 6h.01"></path>
+          <path d="M3 12h.01"></path>
+          <path d="M3 18h.01"></path>
+        </svg>
+        List View
+      </button>      
+      <button id="category-view-btn" class="view-toggle-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6h18"></path>
+          <path d="M3 12h18"></path>
+          <path d="M3 18h18"></path>
+        </svg>
+        Category View
+      </button>
+      <button id="revision-view-btn" class="view-toggle-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        Revision List
+      </button>
+    </div>
       
-      <!-- Problem Grid -->
-      <div id="problem-grid" class="problem-grid ag-theme-alpine"></div>
+      <!-- Loading Spinner -->
+      <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+      
+      <!-- Accordion Categories Container -->
+      <div class="accordion-container" id="categories-container">
+        <!-- Will be populated by JavaScript -->
+      </div>
+      
+      <!-- List View Container -->
+      <div id="list-container">
+        <table class="list-table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Review</th>
+              <th>Editorial</th>
+              <th>Problem</th>
+              <th>Category</th>
+              <th>Difficulty</th>
+            </tr>
+          </thead>
+          <tbody id="list-problems">
+            <!-- Will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    
+      <!-- Revision List Container -->
+    <!-- Revision List Container -->
+    <div id="revision-container" style="display: none;">
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Review</th>
+            <th>Editorial</th>
+            <th>Problem</th>
+            <th>Category</th>
+            <th>Difficulty</th>
+          </tr>
+        </thead>
+        <tbody id="revision-problems">
+          <!-- Will be populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
     </main>
   </div>
+ 
+ <script src="https://jagadeeshkmanne.github.io/TechNavigator/tech-navigator.js"></script>
+   
+     
+
 </body>
 </html>
