@@ -106,11 +106,13 @@ function populateSidebar(problems) {
   dsaBasicsItem.className = 'sidebar-nav-item';
   dsaBasicsItem.innerHTML = `
     <div class="sidebar-nav-link main-category">
-      <span>DSA Basics</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="9 18 15 12 9 6"></polyline>
+      <svg fill='none' height='16' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2'/>
+        <rect x='9' y='2' width='6' height='4' rx='1'/>
+        <path d='M9 12h6'/>
+        <path d='M12 9v6'/>
       </svg>
+      <span>DSA Basics</span>
     </div>
     <ul class="sidebar-subnav" id="dsa-basics-subnav"></ul>
   `;
@@ -146,11 +148,15 @@ function populateSidebar(problems) {
   dsaProblemsItem.className = 'sidebar-nav-item';
   dsaProblemsItem.innerHTML = `
     <div class="sidebar-nav-link main-category">
-      <span>DSA Problems</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="9 18 15 12 9 6"></polyline>
+      <svg fill='none' height='16' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'>
+        <rect x='3' y='3' width='18' height='18' rx='2'/>
+        <path d='M3 9h18'/>
+        <path d='M9 3v18'/>
+        <path d='M12 9v6'/>
+        <path d='M16 12h2'/>
+        <path d='M6 12h2'/>
       </svg>
+      <span>DSA Problems</span>
     </div>
     <ul class="sidebar-subnav" id="dsa-problems-subnav"></ul>
   `;
@@ -181,15 +187,18 @@ function populateSidebar(problems) {
     this.classList.add('active');
 
     const currentURL = window.location.pathname;
+    
     if (currentURL.includes('dsa-problem') || currentURL.includes('dsa-basics')) {
       // Navigate to dashboard with category=all parameter
       window.location.href = '/p/dashboard.html?category=all';
     } else {
-      // We're already in dashboard, just toggle the view
+      // Ensure the view is set to list
       toggleView('list');
+      
+      // Explicitly populate all problems
       populateListView(window.problemsData);
       
-      // Update URL
+      // Update URL to reflect 'all' category
       history.pushState(null, '', `${window.location.pathname}?category=all`);
     }
   });
@@ -218,11 +227,13 @@ function populateSidebar(problems) {
   sdItem.className = 'sidebar-nav-item';
   sdItem.innerHTML = `
     <div class="sidebar-nav-link main-category">
-      <span>System Design</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="9 18 15 12 9 6"></polyline>
+      <svg fill='none' height='16' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M4 14 L4 20 C4 21.1 4.9 22 6 22 L18 22 C19.1 22 20 21.1 20 20 L20 14'/>
+        <path d='M4 10 L4 4 C4 2.9 4.9 2 6 2 L18 2 C19.1 2 20 2.9 20 4 L20 10'/>
+        <path d='M12 15 L12 9'/>
+        <path d='M8 12 L16 12'/>
       </svg>
+      <span>System Design</span>
     </div>
     <ul class="sidebar-subnav" id="system-design-subnav"></ul>
   `;
@@ -279,17 +290,22 @@ function populateSidebar(problems) {
       link.classList.remove('active');
     });
 
-    if (categoryParam === 'all') {
-      toggleView('list');
-      populateListView(window.problemsData);
-    } else {
-      filterListByCategory(categoryParam, window.problemsData);
-    }
-    
-    // Highlight the active category in the sidebar
+    // Find and activate the correct link
     const activeLink = document.querySelector(`.sidebar-subnav-link[data-category="${categoryParam}"]`);
     if (activeLink) {
       activeLink.classList.add('active');
+    }
+
+    // Ensure the view is switched to list
+    toggleView('list');
+
+    // Handle different category scenarios
+    if (categoryParam === 'all') {
+      // Explicitly populate all problems
+      populateListView(window.problemsData);
+    } else {
+      // Filter for specific category
+      filterListByCategory(categoryParam, window.problemsData);
     }
   }
   
