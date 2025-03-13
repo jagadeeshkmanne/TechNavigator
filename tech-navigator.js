@@ -32,6 +32,7 @@ document.querySelector('#login-required-modal .modal-close-btn').addEventListene
 document.querySelector('#login-required-modal .modal-overlay').addEventListener('click', function() {
   document.getElementById('login-required-modal').style.display = 'none';
 });
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
@@ -895,6 +896,49 @@ function updateCounts(problems) {
   document.getElementById('revision-count').textContent = revisionCount;
 }
 
+async function loadUserData(userId) {
+    try {
+        console.log('Loading user data from Firebase...');
+        const snapshot = await db.collection('users').doc(userId).collection('problems').get();
+        
+        if (snapshot.empty) {
+            console.log('No user data found in Firebase');
+            return;
+        }
+        
+        // Update local problem data with Firebase data
+        snapshot.forEach(doc => {
+            const problemId = parseInt(doc.id);
+            const problemData = doc.data();
+            
+            // Find the problem in the local data
+            const problemIndex = problemsData.findIndex(p => p.id === problemId);
+            if (problemIndex !== -1) {
+                // Update local data with Firebase data
+                if (problemData.status !== undefined) {
+                    problemsData[problemIndex].status = problemData.status;
+                }
+                if (problemData.revision !== undefined) {
+                    problemsData[problemIndex].revision = problemData.revision;
+                }
+            }
+        });
+        
+        console.log('User data loaded from Firebase');
+        
+        // Refresh UI with loaded data
+        loadProblems(problemsData);
+        populateListView();
+        loadRevisionList();
+        
+        // Return to the current view
+        toggleView(currentView);
+        
+    } catch (error) {
+        console.error('Error loading user data from Firebase:', error);
+    }
+}
+
 // Document Ready Function
 document.addEventListener('DOMContentLoaded', async function() {
   console.log('Document loaded, initializing app...');
@@ -924,25 +968,42 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
   
   // Set up Firebase auth state changes
-  auth.onAuthStateChanged(function(user) {
-    console.log('Auth state changed', user ? 'User signed in' : 'No user');
-    currentUser = user;
-    const authContainer = document.getElementById('auth-container');
+  // Set up Firebase auth state changes
+auth.onAuthStateChanged(function(user) {
+  console.log('Auth state changed', user ? 'User signed in' : 'No user');
+  currentUser = user;
+  const authContainer = document.getElementById('auth-container');
+  
+  if (user) {
+    // User is signed in
+    authContainer.classList.add('signed-in');
+    const userImg = document.getElementById('user-img');
+    const userName = document.getElementById('user-name');
     
-    if (user) {
-      // User is signed in
-      authContainer.classList.add('signed-in');
-      const userImg = document.getElementById('user-img');
-      const userName = document.getElementById('user-name');
-      
-      userImg.src = user.photoURL || 'default-avatar.png';
-      userImg.style.display = 'block';
-      userName.textContent = user.displayName || user.email;
-    } else {
-      // User is signed out
-      authContainer.classList.remove('signed-in');
-    }
-  });
+    userImg.src = user.photoURL || 'default-avatar.png';
+    userImg.style.display = 'block';
+    userName.textContent = user.displayName || user.email;
+    
+    // Load user data from Firebase
+    loadUserData(user.uid);
+  } else {
+    // User is signed out
+    authContainer.classList.remove('signed-in');
+    
+    // Reset problem data to default (all unchecked)
+    problemsData.forEach(problem => {
+      problem.status = false;
+      problem.revision = false;
+    });
+    
+    // Refresh UI with reset data
+    loadProblems(problemsData);
+    populateListView();
+    
+    // Return to the current view
+    toggleView(currentView);
+  }
+});
 
   // Set up login button
   document.getElementById('login-btn').addEventListener('click', function() {
