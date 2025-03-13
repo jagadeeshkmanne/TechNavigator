@@ -178,30 +178,33 @@ function populateSidebar(problems) {
   
   // Add click event for "All Problems"
   allProblemsItem.querySelector('.sidebar-subnav-link').addEventListener('click', function() {
-    // Remove active class from all sidebar links
-    document.querySelectorAll('.sidebar-subnav-link').forEach(link => {
-      link.classList.remove('active');
-    });
-    
-    // Add active class to "All Problems" link
-    this.classList.add('active');
-
-    const currentURL = window.location.pathname;
-    
-    if (currentURL.includes('dsa-problem') || currentURL.includes('dsa-basics')) {
-      // Navigate to dashboard with category=all parameter
-      window.location.href = '/p/dashboard.html?category=all';
-    } else {
-      // Ensure the view is set to list
-      toggleView('list');
-      
-      // Explicitly populate all problems
-      populateListView(window.problemsData);
-      
-      // Update URL to reflect 'all' category
-      history.pushState(null, '', `${window.location.pathname}?category=all`);
-    }
+  // Remove active class from all sidebar links
+  document.querySelectorAll('.sidebar-subnav-link').forEach(link => {
+    link.classList.remove('active');
   });
+  
+  // Add active class to "All Problems" link
+  this.classList.add('active');
+
+  const currentURL = window.location.pathname;
+  
+  if (currentURL.includes('dsa-problem') || currentURL.includes('dsa-basics')) {
+    // Navigate to dashboard with category=all parameter
+    window.location.href = '/p/dashboard.html?category=all';
+  } else {
+    // Force URL update to 'all' category
+    history.pushState(null, '', `${window.location.pathname}?category=all`);
+    
+    // Ensure the view is set to list
+    toggleView('list');
+    
+    // Force a slight delay to ensure DOM is updated
+    setTimeout(() => {
+      console.log('Forcing population of ALL problems');
+      populateListView(window.problemsData);
+    }, 50);
+  }
+});
   
   // Add categories
   categoryData.orderedCategories.forEach(category => {
