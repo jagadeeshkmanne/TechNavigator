@@ -9,6 +9,29 @@ const firebaseConfig = {
   measurementId: "G-FSXMH7L0ES"
 }
 
+function showLoginRequiredModal(customMessage = null) {
+  const modal = document.getElementById('login-required-modal');
+  const messageElement = document.getElementById('login-modal-message');
+  
+  // Use custom message if provided, otherwise use default
+  if (customMessage) {
+    messageElement.textContent = customMessage;
+  } else {
+    messageElement.textContent = 'Please sign in to access this feature and track your progress across all your devices.';
+  }
+  
+  modal.style.display = 'block';
+}
+
+// Close modal event listener
+document.querySelector('#login-required-modal .modal-close-btn').addEventListener('click', function() {
+  document.getElementById('login-required-modal').style.display = 'none';
+});
+
+// Optional: Close modal when clicking on overlay
+document.querySelector('#login-required-modal .modal-overlay').addEventListener('click', function() {
+  document.getElementById('login-required-modal').style.display = 'none';
+});
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
@@ -581,6 +604,10 @@ function loadRevisionList() {
 
 // Toggle between views (category, list, and revision)
 function toggleView(view) {
+  if (!currentUser && view === 'revision') {
+    showLoginRequiredModal('Please sign in to access your revision list.');
+    return;
+  } 
   currentView = view;
   
   const categoryContainer = document.getElementById('categories-container');
@@ -661,6 +688,11 @@ function toggleAccordion(accordionElement) {
 
 // Update problem status
 function updateProblemStatus(problemId, status) {
+  if (!currentUser) {
+    // Optional: You can pass a custom message here
+    showLoginRequiredModal('Please sign in to update problem status.');
+    return;
+  } 
   console.log('Updating problem status', problemId, status);
   
   // Find the problem in the local data
@@ -748,7 +780,12 @@ function updateProblemStatusUi(problemId, status) {
 // Toggle revision state
 function toggleRevision(problemId, revision) {
   console.log('Toggling revision', problemId, revision);
-  
+  if (!currentUser) {
+    // Optional: You can pass a custom message here
+    showLoginRequiredModal('Please sign in to mark problems for revision.');
+    return;
+  }
+
   // Find the problem in the local data
   const problemIndex = problemsData.findIndex(p => p.id == problemId);
   if (problemIndex === -1) {
