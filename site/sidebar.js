@@ -454,7 +454,67 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log("DOM content loaded - initializing sidebar");
   initializeURLBasedControls();
 });
+// Add this to your sidebar.js file
 
+// Keep track of the currently applied category filter
+window.currentCategoryFilter = null;
+
+// Modify the initializeURLBasedControls function
+function initializeURLBasedControls() {
+  console.log("Initializing URL-based controls - Version 1.2");
+  
+  // Control initial menu visibility
+  controlMenuVisibilityByURL();
+  
+  // Handle URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('category');
+  
+  if (categoryParam) {
+    console.log("Category parameter detected:", categoryParam);
+    window.currentCategoryFilter = categoryParam; // Save the current filter
+    
+    // Wait for problems data to be loaded
+    const checkDataInterval = setInterval(() => {
+      if (window.problemsData && window.problemsData.length > 0) {
+        clearInterval(checkDataInterval);
+        
+        console.log("Problems data loaded, applying category filter:", categoryParam);
+        
+        if (categoryParam === 'all') {
+          console.log("Showing all problems");
+          toggleView('list');
+          populateListView(window.problemsData);
+        } else {
+          console.log("Filtering to category:", categoryParam);
+          filterListByCategory(categoryParam, window.problemsData);
+        }
+      }
+    }, 100);
+    
+    // Add a timeout to prevent infinite waiting
+    setTimeout(() => {
+      clearInterval(checkDataInterval);
+      console.log("Timed out waiting for problems data");
+    }, 10000);
+  }
+}
+
+// Override the populateListView function to respect the current category filter
+const originalPopulateListView = window.populateListView;
+window.populateListView = function(problems) {
+  console.log("Modified populateListView called with current filter:", window.currentCategoryFilter);
+  
+  // If we have an active category filter, use it instead of showing all problems
+  if (window.currentCategoryFilter && window.currentCategoryFilter !== 'all') {
+    console.log("Applying saved category filter instead of showing all problems");
+    filterListByCategory(window.currentCategoryFilter, problems);
+    return;
+  }
+  
+  // Otherwise, proceed with normal list view
+  originalPopulateListView(problems);
+};
 // Expose functions globally
 window.populateSidebar = populateSidebar;
 window.filterListByCategory = filterListByCategory;
