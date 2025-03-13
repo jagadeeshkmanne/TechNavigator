@@ -1,16 +1,5 @@
 // Sidebar Population and Interaction Script
 
-// Category order for consistent sorting
-const categoryOrder = [
-  'Arrays', 'Prefix Sum', 'HashMap/HashSet', 'Two Pointers', 
-  'Sliding Window', 'Binary Search', 'Cyclic Sort', 'Matrix Traversal',
-  'Stacks & Queues', 'Monotonic Stack/Queue', 'Linked Lists', 'Recursion',
-  'Trees', 'Tree DFS', 'Tree BFS', 'Divide and Conquer', 
-  'Backtracking', 'Heap/Priority Queue', 'Tries', 'Graphs',
-  'Graph DFS', 'Graph BFS', 'Union Find', 'Topological Sort',
-  'Shortest Path', 'Greedy', 'Dynamic Programming', 'Segment Trees',
-  'Intervals', 'Bit Manipulation', 'Math & Geometry', 'Design'
-];
 
 // Function to control menu visibility based on URL
 function controlMenuVisibilityByURL() {
