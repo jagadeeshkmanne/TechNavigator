@@ -466,6 +466,7 @@ function populateListView() {
 }
 
 // Function to load problems marked for revision
+// Modify the loadRevisionList function to handle empty states
 function loadRevisionList() {
   const tbody = document.getElementById('revision-problems');
   tbody.innerHTML = '';
@@ -473,12 +474,14 @@ function loadRevisionList() {
   // Filter problems marked for revision
   const revisionProblems = problemsData.filter(problem => problem.revision);
   
+  console.log('Revision problems:', revisionProblems); // Debug log
+  
   if (revisionProblems.length === 0) {
     // No revision problems found
     tbody.innerHTML = `
       <tr>
         <td colspan="6">
-          <div class="empty-state">
+          <div class="empty-state" style="text-align: center; padding: 20px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" 
                  stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
@@ -521,7 +524,8 @@ function loadRevisionList() {
     // If same difficulty, sort by name
     return a.name.localeCompare(b.name);
   });
-// Add rows for each problem
+  
+  // Add rows for each problem
   sortedProblems.forEach(problem => {
     const row = document.createElement('tr');
     row.className = 'problem-row';
@@ -615,7 +619,6 @@ function toggleView(view) {
   }
 }
 
-// Modify the removeFromRevision function to work correctly
 function removeFromRevision(problemId) {
   // Find the problem in the local data
   const problemIndex = problemsData.findIndex(p => p.id == problemId);
@@ -627,12 +630,12 @@ function removeFromRevision(problemId) {
   // Update local data
   problemsData[problemIndex].revision = false;
   
-  // Update UI in both views
-  updateRevisionUi(problemId, false);
-  
   // Update revision count
   const revisionCount = problemsData.filter(p => p.revision).length;
   document.getElementById('revision-count').textContent = revisionCount;
+  
+  // Update UI
+  updateRevisionUi(problemId, false);
   
   // Reload revision list
   loadRevisionList();
@@ -756,12 +759,17 @@ function toggleRevision(problemId, revision) {
   // Update local data
   problemsData[problemIndex].revision = revision;
   
-  // Update UI in both views
+  // Update UI in all views
   updateRevisionUi(problemId, revision);
   
   // Update revision count
   const revisionCount = problemsData.filter(p => p.revision).length;
   document.getElementById('revision-count').textContent = revisionCount;
+  
+  // If current view is revision, reload revision list
+  if (currentView === 'revision') {
+    loadRevisionList();
+  }
   
   // Update Firebase if user is logged in
   if (currentUser) {
