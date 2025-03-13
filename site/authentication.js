@@ -165,6 +165,10 @@ function showErrorModal(message) {
   modal.style.display = 'flex';
 }
 
+function getCurrentUser() {
+  return firebase.auth().currentUser;
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeFirebase);
 
@@ -172,3 +176,5 @@ document.addEventListener('DOMContentLoaded', initializeFirebase);
 window.signInWithGoogle = signInWithGoogle;
 window.signOut = signOut;
 window.currentUser = currentUser;  // Make currentUser accessible globally
+window.getCurrentUser = getCurrentUser;
+
