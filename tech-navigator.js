@@ -667,19 +667,19 @@ function removeFromRevision(problemId) {
   // Reload revision list
   loadRevisionList();
   
-  // Update Firebase if user is logged in
-  if (currentUser) {
-    db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
-      .update({
-        revision: false
-      })
-      .then(() => {
-        console.log('Problem removed from revision in Firebase');
-      })
-      .catch(error => {
-        console.error("Error removing problem from revision in Firebase:", error);
-      });
-  }
+    // Update Firebase if user is logged in
+   if (currentUser) {
+     db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
+       .set({
+         revision: false
+       }, { merge: true })
+       .then(() => {
+         console.log('Problem removed from revision in Firebase');
+       })
+       .catch(error => {
+         console.error("Error removing problem from revision in Firebase:", error);
+       });
+   }
 }
     // Toggle accordion open/close
 function toggleAccordion(accordionElement) {
@@ -712,18 +712,19 @@ function updateProblemStatus(problemId, status) {
   updateCounts(problemsData);
   
   // Update Firebase if user is logged in
-  if (currentUser) {
-    db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
-      .update({
-        status: status
-      })
-      .then(() => {
-        console.log('Problem status updated in Firebase');
-      })
-      .catch(error => {
-        console.error("Error updating problem status in Firebase:", error);
-      });
-  }
+  // Update Firebase if user is logged in
+   if (currentUser) {
+     db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
+       .set({
+         status: status
+       }, { merge: true })
+       .then(() => {
+         console.log('Problem status updated in Firebase');
+       })
+       .catch(error => {
+         console.error("Error updating problem status in Firebase:", error);
+       });
+   }
 }
 
 // Update problem status UI in all views
@@ -809,18 +810,19 @@ function toggleRevision(problemId, revision) {
   }
   
   // Update Firebase if user is logged in
-  if (currentUser) {
-    db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
-      .update({
-        revision: revision
-      })
-      .then(() => {
-        console.log('Problem revision status updated in Firebase');
-      })
-      .catch(error => {
-        console.error("Error updating revision status in Firebase:", error);
-      });
-  }
+  // Update Firebase if user is logged in
+   if (currentUser) {
+     db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
+       .set({
+         revision: revision
+       }, { merge: true })
+       .then(() => {
+         console.log('Problem revision status updated in Firebase');
+       })
+       .catch(error => {
+         console.error("Error updating revision status in Firebase:", error);
+       });
+   }
 }
 
 // Update revision UI in all views
