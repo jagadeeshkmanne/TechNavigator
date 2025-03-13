@@ -49,7 +49,7 @@ async function getProblems() {
       leetcode_url: problem['Leetcode URL'],
       status: false,
       revision: false,
-      editorial_url: problem.editorial_url`
+      editorial_url: problem.editorial_url
     }));
   } catch (error) {
     console.error('Error fetching problems:', error);
@@ -66,42 +66,7 @@ async function getProblems() {
     // Prevent further execution
     throw error;
   }
-}');
-    
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    
-    const problems = await response.json();
-    
-    // Transform problems to match the required structure
-    return problems.map(problem => ({
-      id: problem.id,
-      name: problem.Name || problem['Problem Name'],
-      category: problem.Category,
-      difficulty: problem.Difficulty,
-      leetcode_url: problem['Leetcode URL'],
-      status: false,
-      revision: false,
-      editorial_url: problem.editorial_url || 
-        `https://blog.technavigator.io/${problem.Name.toLowerCase().replace(/\s+/g, '-')}`
-    }));
-  } catch (error) {
-    console.error('Error fetching problems:', error);
-    
-    // If fetch fails, show an error message
-    document.getElementById('loading-spinner').innerHTML = `
-      <div style="text-align: center; color: red;">
-        <h2>Failed to Load Problems</h2>
-        <p>Unable to retrieve problem list. Please check your internet connection.</p>
-      </div>
-    `;
-    
-    // Prevent further execution
-    throw error;
-  }
 }
-
 // Helper function to check if a problem has a valid editorial URL
 function hasValidEditorialUrl(problem) {
   return problem && 
