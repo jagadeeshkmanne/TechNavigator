@@ -280,7 +280,18 @@ function loadProblems(problems) {
 }
 
 // Populate the list view
+// Replace or modify the existing populateListView function with this implementation
 function populateListView(problems) {
+  // Check URL parameters for category filter
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('category');
+  
+  // If a category parameter exists and it's not 'all', filter by that category
+  if (categoryParam && categoryParam !== 'all') {
+    filterListByCategory(categoryParam, problems);
+    return;
+  }
+  
   const tbody = document.getElementById('list-problems');
   tbody.innerHTML = '';
   
@@ -290,6 +301,7 @@ function populateListView(problems) {
     contentTitle.textContent = 'All Problems';
   }
   
+  // Rest of the existing populateListView implementation
   // First sort by category according to categoryOrder, then by difficulty and name
   const sortedProblems = [...problems].sort((a, b) => {
     // First sort by category according to categoryOrder
@@ -320,7 +332,7 @@ function populateListView(problems) {
     return a.name.localeCompare(b.name);
   });
   
-  // Add rows for each problem
+  // Add rows for each problem (existing implementation)
   sortedProblems.forEach(problem => {
     const row = document.createElement('tr');
     row.className = 'problem-row';
@@ -375,7 +387,6 @@ function populateListView(problems) {
     tbody.appendChild(row);
   });
 }
-
 // Revision list view
 function loadRevisionList(problems) {
   if (!problems) {
@@ -539,7 +550,16 @@ function toggleView(view) {
     case 'list':
       listContainer.style.display = 'block';
       listBtn.classList.add('active');
-      populateListView(window.problemsData);
+      
+      // Check URL for category parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoryParam = urlParams.get('category');
+      
+      if (categoryParam && categoryParam !== 'all') {
+        filterListByCategory(categoryParam, window.problemsData);
+      } else {
+        populateListView(window.problemsData);
+      }
       break;
     case 'revision':
       revisionContainer.style.display = 'block';
@@ -548,6 +568,94 @@ function toggleView(view) {
       break;
   }
 }
+// Add a new function to filter list by category
+function filterListByCategory(category, problems) {
+  console.log("Filtering problems by category:", category);
+  
+  // Filter problems
+  const filteredProblems = category === 'all' 
+    ? problems 
+    : problems.filter(problem => problem.category === category);
+  
+  const tbody = document.getElementById('list-problems');
+  tbody.innerHTML = '';
+  
+  // Update content title
+  const contentTitle = document.querySelector('.content-title');
+  if (contentTitle) {
+    contentTitle.textContent = category === 'all' 
+      ? 'All Problems' 
+      : `${category} Problems`;
+  }
+  
+  // Sort filtered problems
+  const sortedProblems = [...filteredProblems].sort((a, b) => {
+    const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+    const diffComp = difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+    
+    if (diffComp !== 0) return diffComp;
+    
+    return a.name.localeCompare(b.name);
+  });
+  
+  // Add rows for filtered problems
+  sortedProblems.forEach(problem => {
+    const row = document.createElement('tr');
+    row.className = 'problem-row';
+    row.dataset.id = problem.id;
+    
+    // Check if the problem has a valid editorial URL
+    const hasEditorial = problem.editorial_url && 
+                         typeof problem.editorial_url === 'string' && 
+                         problem.editorial_url.trim() !== '';
+    
+    row.innerHTML = `
+      <td>
+        <div class="status-checkbox">
+          <input type="checkbox" id="list-status-${problem.id}" 
+            ${problem.status ? 'checked' : ''} 
+            onchange="updateProblemStatus(${problem.id}, this.checked)">
+        </div>
+      </td>
+      <td>
+        <div class="revision-star-wrapper" onclick="toggleRevision(${problem.id}, ${!problem.revision})">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${problem.revision ? 'currentColor' : 'none'}" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="revision-star ${problem.revision ? 'marked' : ''}">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="editorial-wrapper" ${hasEditorial ? `onclick="window.open('${problem.editorial_url}', '_blank')"` : ''}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${hasEditorial ? 'currentColor' : 'none'}" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="editorial-icon ${hasEditorial ? 'marked' : ''}">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+      </td>
+      <td>
+        <a href="${problem.leetcode_url}" target="_blank" class="problem-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          ${problem.name}
+        </a>
+      </td>
+      <td>${problem.category}</td>
+      <td>
+        <span class="difficulty-tag ${problem.difficulty.toLowerCase()}">${problem.difficulty}</span>
+      </td>
+    `;
+    
+    tbody.appendChild(row);
+  });
+}
+
+// Expose the filterListByCategory function globally
+window.filterListByCategory = filterListByCategory;
 
 // Update problem status
 function updateProblemStatus(problemId, status) {
