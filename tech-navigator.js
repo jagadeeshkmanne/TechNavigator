@@ -923,7 +923,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   // Setup revision link
-  document.getElementById('revision-link').addEventListener('click', function() {
+  document.getElementById('revision-view-btn').addEventListener('click', function() {
     toggleView('revision');
   });
   
