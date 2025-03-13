@@ -64,6 +64,8 @@ async function getProblems() {
     }
     
     const problems = await response.json();
+
+     
     
     // Transform problems to match the required structure
     return problems.map(problem => ({
@@ -601,10 +603,8 @@ function toggleView(view) {
     listContainer.style.display = 'block';
     listBtn.classList.add('active');
     
-    // Populate list view if not already populated
-    if (document.getElementById('list-problems').children.length === 0) {
-      populateListView();
-    }
+    // Always populate list view
+    populateListView();
   } else if (view === 'revision') {
     revisionContainer.style.display = 'block';
     revisionBtn.classList.add('active');
@@ -614,13 +614,41 @@ function toggleView(view) {
   }
 }
 
-// Remove a problem from revision list
+// Modify the removeFromRevision function to work correctly
 function removeFromRevision(problemId) {
-  // Update problem revision status
-  toggleRevision(problemId, false);
+  // Find the problem in the local data
+  const problemIndex = problemsData.findIndex(p => p.id == problemId);
+  if (problemIndex === -1) {
+    console.error('Problem not found in local data:', problemId);
+    return;
+  }
+  
+  // Update local data
+  problemsData[problemIndex].revision = false;
+  
+  // Update UI in both views
+  updateRevisionUi(problemId, false);
+  
+  // Update revision count
+  const revisionCount = problemsData.filter(p => p.revision).length;
+  document.getElementById('revision-count').textContent = revisionCount;
   
   // Reload revision list
   loadRevisionList();
+  
+  // Update Firebase if user is logged in
+  if (currentUser) {
+    db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
+      .update({
+        revision: false
+      })
+      .then(() => {
+        console.log('Problem removed from revision in Firebase');
+      })
+      .catch(error => {
+        console.error("Error removing problem from revision in Firebase:", error);
+      });
+  }
 }
     // Toggle accordion open/close
 function toggleAccordion(accordionElement) {
@@ -836,6 +864,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     // Load problems to UI
     loadProblems(problems);
+     // Populate list view by default
+    populateListView();
+    
+    // Set default view to list
+    toggleView('list');
+     
   } catch (error) {
     console.error('Failed to initialize app:', error);
     return;
