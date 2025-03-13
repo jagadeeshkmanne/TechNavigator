@@ -30,11 +30,9 @@ const categoryOrder = [
   'Intervals', 'Bit Manipulation', 'Math & Geometry'
 ];
 
-// Function to get problems from remote JSON
 async function getProblems() {
   try {
     const response = await fetch('./tech-navigator.json');
-
     
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -45,18 +43,19 @@ async function getProblems() {
     // Transform problems to match the required structure
     return problems.map(problem => ({
       id: problem.id,
-      name: problem.Name || problem.name,
-      category: problem.Category || problem.category,
-      difficulty: problem.Difficulty || problem.difficulty,
-      leetcode_url: problem['Leetcode URL'] || problem.leetcode_url,
+      name: problem.Name || problem['Problem Name'],
+      category: problem.Category,
+      difficulty: problem.Difficulty,
+      leetcode_url: problem['Leetcode URL'],
       status: false,
       revision: false,
-      editorial_url: problem.editorial_url || `https://blog.technavigator.io/${problem.Name?.toLowerCase().replace(/\s+/g, '-') || ''}`
+      editorial_url: problem.editorial_url || 
+        `https://blog.technavigator.io/${problem.Name.toLowerCase().replace(/\s+/g, '-')}`
     }));
   } catch (error) {
     console.error('Error fetching problems:', error);
     
-    // If fetch fails, show an error message and prevent further app initialization
+    // If fetch fails, show an error message
     document.getElementById('loading-spinner').innerHTML = `
       <div style="text-align: center; color: red;">
         <h2>Failed to Load Problems</h2>
