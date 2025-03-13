@@ -1,0 +1,2732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Navigator</title>
+  
+  <!-- Import External Resources -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <!-- Import Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --professional-orange: #F97316;
+      --professional-orange-hover: #EA580C;
+      --secondary-color: #f9fafb;
+      --border-color: #334155;  /* Darker border color for dark theme */
+      --header-bg: #1e293b;
+      --sidebar-bg: #0f172a;    /* Darker sidebar background */
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+      --easy-color: #22c55e;
+      --medium-color: #f59e0b;
+      --hard-color: #ef4444;
+      --text-muted: #94a3b8;
+      --text-color: #f1f5f9;
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --primary-color: var(--professional-orange);
+      --primary-hover: var(--professional-orange-hover);
+      --accordion-header-bg: #1e293b;  /* Accordion header background */
+      --accordion-content-bg: #0f172a; /* Accordion content background */
+    }
+    
+    /* Rotation Animation */
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .compass-icon {
+      display: inline-block;
+      margin: 0 8px;
+      animation: rotate 4s linear infinite;
+      transform-origin: center;
+    }
+    
+    .compass-icon svg {
+      stroke: var(--professional-orange);
+    }
+    
+    .app-logo h1 {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    /* Base Reset & Typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+    }
+    
+    /* Layout */
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Header */
+    .app-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background-color: var(--header-bg);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .header-stats {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .progress-pill {
+      background-color: #334155;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .circle-progress {
+      width: 24px;
+      height: 24px;
+      position: relative;
+    }
+    
+    .circle-progress svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    
+    .circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 3;
+    }
+    
+    .circle-progress-bar {
+      fill: none;
+      stroke: var(--primary-color);
+      stroke-width: 3;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.3s;
+    }
+    
+    /* Main Content */
+    .main-content {
+      margin-top: 64px;
+      padding: 1.5rem;
+      width: 100%;
+    }
+    
+    .content-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    
+    .content-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color) !important;
+    }
+    
+    .title-progress-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    
+    /* Problem Status Info */
+    .problem-status-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: var(--card-bg);
+      border-radius: 0.5rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 1rem;
+    }
+    
+    .status-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .status-dot.easy {
+      background-color: var(--easy-color);
+    }
+    
+    .status-dot.medium {
+      background-color: var(--medium-color);
+    }
+    
+    .status-dot.hard {
+      background-color: var(--hard-color);
+    }
+    
+    .status-count {
+      font-size: 0.875rem;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+    
+    /* Progress mini bar */
+    .progress-mini {
+      width: 60px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .progress-mini-bar {
+      height: 100%;
+      background: var(--professional-orange);
+      transition: width 0.3s;
+    }
+    
+    /* App Logo */
+    .app-logo h1 {
+      display: flex;
+      align-items: center;
+      gap: 0px;
+      margin: 0;
+      font-size: 1.2rem;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+    
+    /* Compass icon animations */
+    .compass-icon {
+      animation: rotate 4s linear infinite;
+      transform-origin: 50% 50%;
+    }
+    
+    .compass-icon svg {
+      animation: colorChange 4s linear infinite;
+      display: block;
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes colorChange {
+      0% { stroke: #f97316; }
+      25% { stroke: #22c55e; }
+      50% { stroke: #3b82f6; }
+      75% { stroke: #facc15; }
+      100% { stroke: #f97316; }
+    }
+    
+    /* Navbar links styling */
+    .nav-link {
+      background-color: #333;
+      color: #ddd;
+      border: 1px solid #555;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+    
+    .nav-link:hover {
+      background-color: #444;
+    }
+    
+    /* Auth Container */
+    .auth-container {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .auth-container .user-info {
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .auth-container.signed-in .user-info {
+      display: flex;
+    }
+    
+    .auth-container.signed-in #login-btn {
+      display: none;
+    }
+    
+    .auth-btn {
+      background-color: #333;
+      color: #ddd;
+      border: 1px solid #555;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .auth-btn:hover {
+      background-color: #444;
+    }
+    
+    .auth-btn.logout {
+      background-color: #555;
+      color: white;
+      border: none;
+    }
+    
+    .auth-btn.logout:hover {
+      background-color: #333;
+    }
+    
+    .user-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    /* Revision star styles */
+    .revision-star {
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    
+    .revision-star.marked {
+      fill: var(--professional-orange);
+      color: var(--professional-orange);
+    }
+    
+    .revision-star-wrapper:hover .revision-star {
+      color: var(--professional-orange);
+    }
+    
+    /* Counter badge in the header */
+    .revision-count {
+      background-color: var(--professional-orange);
+      color: white;
+      border-radius: 9999px;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-left: 4px;
+    }
+    
+    /* Hover effect for revision link */
+    #revision-link {
+      position: relative;
+    }
+    
+    #revision-link:hover svg {
+      color: var(--professional-orange);
+    }
+    
+    /* Animation for the star when marked */
+    @keyframes star-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    
+    .revision-star.marked {
+      animation: star-pulse 0.3s ease-in-out;
+    }
+    
+    .editorial-icon svg {
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    
+    .editorial-icon:hover svg {
+      color: var(--professional-orange);
+    }
+    
+    /* Difficulty Tags */
+    .difficulty-tag {
+      display: inline-flex;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .difficulty-tag.easy {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--easy-color);
+    }
+    
+    .difficulty-tag.medium {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--medium-color);
+    }
+    
+    .difficulty-tag.hard {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--hard-color);
+    }
+    
+    /* Accordion Category Styles */
+    .accordion-container {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    
+    .accordion-category {
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+    }
+    
+    .accordion-header {
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--accordion-header-bg);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s;
+    }
+    
+    .accordion-header:hover {
+      background-color: rgba(249, 115, 22, 0.05);
+    }
+    
+    .category-title {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      color: var(--professional-orange);
+      font-size: 1rem;
+    }
+    
+    .category-title-icon {
+      margin-right: 0.75rem;
+      transition: transform 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .accordion-category.expanded .category-title-icon svg {
+      transform: rotate(90deg);
+    }
+    
+    .category-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    
+    .category-progress {
+      width: 100px;
+      height: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .category-progress-bar {
+      height: 100%;
+      background-color: var(--professional-orange);
+      transition: width 0.3s;
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background-color: var(--accordion-content-bg);
+    }
+    
+    .accordion-category.expanded .accordion-content {
+      max-height: 2000px; /* Arbitrary large value */
+    }
+    
+    .problem-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .problem-table th {
+      text-align: left;
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--accordion-header-bg);
+    }
+    
+    .problem-table td {
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .problem-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .problem-row:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    .problem-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .problem-link:hover {
+      color: var(--professional-orange);
+    }
+    
+    .status-checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .status-checkbox input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: var(--professional-orange);
+    }
+    
+    .revision-star-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .editorial-icon {
+      display: flex;
+      justify-content: center;
+    }
+    
+    /* Loading spinner */
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top: 4px solid var(--professional-orange);
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Editorial icon styling */
+    .editorial-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .editorial-icon {
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    
+    .editorial-icon.marked {
+      fill: var(--professional-orange);
+      color: var(--professional-orange);
+    }
+    
+    .editorial-wrapper:hover .editorial-icon {
+      color: var(--professional-orange);
+    }
+    
+    /* Animation for marking */
+    @keyframes icon-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    
+    .editorial-icon.marked {
+      animation: icon-pulse 0.3s ease-in-out;
+    }
+    
+    /* Disable hover effect when no editorial link exists */
+    .editorial-wrapper:not([onclick]) {
+      cursor: default;
+    }
+    
+    .editorial-wrapper:not([onclick]):hover .editorial-icon {
+      color: var(--text-muted);
+    }
+    
+    /* Reduce accordion header padding */
+    .accordion-header {
+      padding: 0.6rem 1.5rem;
+    }
+    
+    /* Reduce table cell padding */
+    .problem-table th,
+    .problem-table td {
+      padding: 0.6rem 1rem;
+    }
+    
+    /* Reduce overall row height */
+    .problem-row {
+      height: 38px;
+    }
+    
+    /* Make the icons slightly smaller */
+    .problem-link svg,
+    .revision-star-wrapper svg,
+    .editorial-wrapper svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* Reduce the size of the difficulty tags */
+    .difficulty-tag {
+      padding: 0.15rem 0.4rem;
+      font-size: 0.7rem;
+    }
+    
+    /* Make the progress bar in category header a bit thinner */
+    .category-progress {
+      height: 5px;
+    }
+    
+    /* View toggle styles */
+    .view-toggle-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+    }
+    
+    .view-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    
+    .view-toggle-btn:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
+    
+    .view-toggle-btn:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    
+    .view-toggle-btn.active {
+      background-color: var(--professional-orange);
+      color: white;
+    }
+    
+    .view-toggle-btn:hover:not(.active) {
+      background-color: var(--sidebar-bg);
+    }
+    
+    /* Container for the list view */
+    #list-container {
+      display: none;
+      width: 100%;
+      margin-bottom: 2rem;
+      background-color: var(--card-bg);
+      border-radius: 0.5rem;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+    }
+    
+    /* List view table styles */
+    .list-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .list-table th {
+      position: sticky;
+      top: 0;
+      text-align: left;
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--accordion-header-bg);
+      z-index: 10;
+    }
+    
+    .list-table td {
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .list-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .list-table tr:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    /* Column width adjustments for both views */
+    .problem-table th:nth-child(1), 
+    .problem-table td:nth-child(1),
+    .list-table th:nth-child(1), 
+    .list-table td:nth-child(1) {
+      width: 25px;
+      max-width: 25px;
+    }
+    
+    .problem-table th:nth-child(2), 
+    .problem-table td:nth-child(2),
+    .list-table th:nth-child(2), 
+    .list-table td:nth-child(2) {
+      width: 25px;
+      max-width: 25px;
+    }
+    
+    .problem-table th:nth-child(3), 
+    .problem-table td:nth-child(3),
+    .list-table th:nth-child(3), 
+    .list-table td:nth-child(3) {
+      width: 25px;
+      max-width: 25px;
+    }
+    
+    .problem-table th:nth-child(4), 
+    .problem-table td:nth-child(4),
+    .list-table th:nth-child(4), 
+    .list-table td:nth-child(4) {
+      width: 300px;
+      max-width: 300px;
+    }
+    
+    .problem-table th:nth-child(5), 
+    .problem-table td:nth-child(5),
+    .list-table th:nth-child(5), 
+    .list-table td:nth-child(5) {
+      width: 120px;
+      max-width: 120px;
+    }
+    
+    .problem-table th:nth-child(6), 
+    .problem-table td:nth-child(6),
+    .list-table th:nth-child(6), 
+    .list-table td:nth-child(6) {
+      width: 80px;
+      max-width: 80px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .category-stats {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+      }
+      
+      .problem-table {
+        font-size: 0.75rem;
+      }
+      
+      .problem-table th, 
+      .problem-table td {
+        padding: 0.5rem;
+      }
+      
+      .difficulty-tag {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.35rem;
+      }
+      
+      .problem-status-info {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+    }
+      .view-toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+/* Style for revision view button */
+#revision-view-btn svg {
+  margin-right: 4px;
+}
+
+#revision-view-btn.active svg {
+  fill: white;
+}
+
+/* Hover effect for remove star */
+#revision-list .revision-star-wrapper:hover .revision-star {
+  fill: var(--hard-color);
+  stroke: var(--hard-color);
+}
+
+/* Animation for removing star */
+@keyframes star-pulse-out {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+#revision-list .revision-star-wrapper:active .revision-star {
+  animation: star-pulse-out 0.3s ease-in-out forwards;
+}
+
+/* Empty state improvements */
+.empty-state {
+  padding: 3rem 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  margin-top: 1rem;
+}
+
+.empty-state svg {
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Add subtle highlight to revision items */
+#revision-list .problem-row {
+  position: relative;
+}
+
+#revision-list .problem-row:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--professional-orange);
+  opacity: 0.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .view-toggle-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .view-toggle-btn {
+    flex: 1 1 auto;
+    min-width: 120px;
+  }
+}
+      /* Revision List Specific Styles */
+#revision-container .empty-state {
+  padding: 3rem 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+#revision-container .empty-state svg {
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+#revision-container .empty-state h3 {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+}
+
+#revision-container .empty-state p {
+  color: var(--text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Hover effect for remove star */
+#revision-problems .revision-star-wrapper:hover .revision-star {
+  fill: var(--hard-color);
+  stroke: var(--hard-color);
+}
+
+/* Animation for removing star */
+@keyframes star-pulse-out {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+#revision-problems .revision-star-wrapper:active .revision-star {
+  animation: star-pulse-out 0.3s ease-in-out forwards;
+}
+      /* Make sure revision-container has the same styling as list-container */
+#revision-container {
+  width: 100%;
+  margin-bottom: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+/* Ensure revision list table has the same styling as list table */
+#revision-container .list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#revision-container .list-table th {
+  position: sticky;
+  top: 0;
+  text-align: left;
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--accordion-header-bg);
+  z-index: 10;
+}
+
+#revision-container .list-table td {
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+#revision-container .list-table tr:last-child td {
+  border-bottom: none;
+}
+
+#revision-container .list-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Apply column width adjustments for both views */
+#revision-container .list-table th:nth-child(1), 
+#revision-container .list-table td:nth-child(1) {
+  width: 25px;
+  max-width: 25px;
+}
+
+#revision-container .list-table th:nth-child(2), 
+#revision-container .list-table td:nth-child(2) {
+  width: 25px;
+  max-width: 25px;
+}
+
+#revision-container .list-table th:nth-child(3), 
+#revision-container .list-table td:nth-child(3) {
+  width: 25px;
+  max-width: 25px;
+}
+
+#revision-container .list-table th:nth-child(4), 
+#revision-container .list-table td:nth-child(4) {
+  width: 300px;
+  max-width: 300px;
+}
+
+#revision-container .list-table th:nth-child(5), 
+#revision-container .list-table td:nth-child(5) {
+  width: 120px;
+  max-width: 120px;
+}
+
+#revision-container .list-table th:nth-child(6), 
+#revision-container .list-table td:nth-child(6) {
+  width: 80px;
+  max-width: 80px;
+}
+  </style>
+</head>
+
+<body>
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-logo">
+        <h1>
+          <span>Tech</span>
+          <div class="compass-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/>
+            </svg>
+          </div>
+          <span>Navigator</span>
+        </h1>
+      </div>
+      
+      <div id="auth-container" class="auth-container">
+        <a class="nav-link" href="javascript:void(0);" id="revision-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>Revision List</span>
+          <span class="revision-count" id="revision-count">0</span>
+        </a>
+        <a class="nav-link" href="https://blog.technavigator.io/">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>Basics</span>
+        </a>
+        <a class="nav-link" href="https://technavigator.io/">
+            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span>Practice</span>
+        </a>
+        <button id="login-btn" class="auth-btn">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 8px;">
+          Sign in
+        </button>
+        
+        <div class="user-info">
+          <img id="user-img" class="user-avatar" alt="Profile" style="display: none;">
+          <span id="user-name"></span>
+          <button id="logout-btn" class="btn auth-btn logout">Sign Out</button>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Statistics Info -->
+      <div class="problem-status-info">
+        <div class="status-group">
+          <span class="status-dot easy"></span>
+          <span class="status-count" id="easy-count">Easy: 0/8</span>
+        </div>
+        <div class="status-group">
+          <span class="status-dot medium"></span>
+          <span class="status-count" id="medium-count">Medium: 0/9</span>
+        </div>
+        <div class="status-group">
+          <span class="status-dot hard"></span>
+          <span class="status-count" id="hard-count">Hard: 0/4</span>
+        </div>
+        <div class="status-group">
+          <div class="progress-pill" id="overall-progress-pill">
+            <div class="circle-progress">
+              <svg viewBox="0 0 36 36">
+                <circle class="circle-bg" cx="18" cy="18" r="15"></circle>
+                <circle id="overall-progress" class="circle-progress-bar" cx="18" cy="18" r="15" style="stroke-dasharray: 94.2478, 94.2478; stroke-dashoffset: 94.2478;"></circle>
+              </svg>
+</div>
+            <span id="overall-progress-text">0% Completed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- View Toggle Buttons -->
+      <div class="view-toggle-container">
+      <button id="list-view-btn" class="view-toggle-btn active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 6h13"></path>
+          <path d="M8 12h13"></path>
+          <path d="M8 18h13"></path>
+          <path d="M3 6h.01"></path>
+          <path d="M3 12h.01"></path>
+          <path d="M3 18h.01"></path>
+        </svg>
+        List View
+      </button>      
+      <button id="category-view-btn" class="view-toggle-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6h18"></path>
+          <path d="M3 12h18"></path>
+          <path d="M3 18h18"></path>
+        </svg>
+        Category View
+      </button>
+      <button id="revision-view-btn" class="view-toggle-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        Revision List
+      </button>
+    </div>
+      
+      <!-- Loading Spinner -->
+      <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+      
+      <!-- Accordion Categories Container -->
+      <div class="accordion-container" id="categories-container">
+        <!-- Will be populated by JavaScript -->
+      </div>
+      
+      <!-- List View Container -->
+      <div id="list-container">
+        <table class="list-table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Review</th>
+              <th>Editorial</th>
+              <th>Problem</th>
+              <th>Category</th>
+              <th>Difficulty</th>
+            </tr>
+          </thead>
+          <tbody id="list-problems">
+            <!-- Will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    
+      <!-- Revision List Container -->
+    <!-- Revision List Container -->
+    <div id="revision-container" style="display: none;">
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Review</th>
+            <th>Editorial</th>
+            <th>Problem</th>
+            <th>Category</th>
+            <th>Difficulty</th>
+          </tr>
+        </thead>
+        <tbody id="revision-problems">
+          <!-- Will be populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+    </main>
+  </div>
+  
+  <script>
+    // Initialize Firebase
+const firebaseConfig = {
+  // Add your Firebase config here
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+// Global variables
+let currentUser = null;
+let currentView = 'category';
+let problemsData = [];
+
+// Category order definition
+const categoryOrder = [
+  'Arrays',
+  'Prefix Sum',
+  'HashMap/HashSet',
+  'Two Pointers',
+  'Sliding Window',
+  'Binary Search',
+  'Cyclic Sort',
+  'Matrix Traversal',
+  'Stacks & Queues',
+  'Monotonic Stack/Queue',
+  'Linked Lists',
+  'Fast & Slow Pointers',
+  'Linked List Reversal',
+  'Recursion',
+  'Trees',
+  'Tree DFS',
+  'Tree BFS',
+  'Divide and Conquer',
+  'Backtracking',
+  'Heap/Priority Queue',
+  'Tries',
+  'Graphs',
+  'Graph DFS',
+  'Graph BFS',
+  'Union Find',
+  'Topological Sort',
+  'Shortest Path',
+  'Greedy',
+  'Dynamic Programming',
+  'Segment Trees',
+  'Intervals',
+  'Bit Manipulation',
+  'Math & Geometry'
+];
+
+// LocalStorage key
+const LOCAL_STORAGE_KEY = 'techNavigator_problems';
+
+// Document Ready Function
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Document loaded, initializing app...');
+  
+  // Show loading spinner
+  document.getElementById('loading-spinner').style.display = 'flex';
+  document.getElementById('categories-container').style.display = 'none';
+  
+  // Set up Firebase auth state changes
+  auth.onAuthStateChanged(function(user) {
+    console.log('Auth state changed', user ? 'User signed in' : 'No user');
+    currentUser = user;
+    const authContainer = document.getElementById('auth-container');
+    
+    if (user) {
+      // User is signed in
+      authContainer.classList.add('signed-in');
+      const userImg = document.getElementById('user-img');
+      const userName = document.getElementById('user-name');
+      
+      userImg.src = user.photoURL || 'default-avatar.png';
+      userImg.style.display = 'block';
+      userName.textContent = user.displayName || user.email;
+      
+      // Fetch problems for the user
+      fetchProblems(user.uid);
+    } else {
+      // User is signed out
+      authContainer.classList.remove('signed-in');
+      
+      // Load problems from localStorage
+      loadProblemsFromLocalStorage();
+    }
+  });
+
+  // Set up login button
+  document.getElementById('login-btn').addEventListener('click', function() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).catch(function(error) {
+      console.error('Error signing in:', error);
+      alert('Failed to sign in: ' + error.message);
+    });
+  });
+
+  // Set up logout button
+  document.getElementById('logout-btn').addEventListener('click', function() {
+    auth.signOut().catch(function(error) {
+      console.error('Error signing out:', error);
+      alert('Failed to sign out: ' + error.message);
+    });
+  });
+
+  // Setup revision link in header
+  document.getElementById('revision-link').addEventListener('click', function() {
+    // Switch to revision view when the header link is clicked
+    toggleView('revision');
+  });
+  
+  // Setup view toggle buttons
+  document.getElementById('category-view-btn').addEventListener('click', function() {
+    toggleView('category');
+  });
+  
+  document.getElementById('list-view-btn').addEventListener('click', function() {
+    toggleView('list');
+  });
+  
+  // Setup revision view button
+  document.getElementById('revision-view-btn').addEventListener('click', function() {
+    toggleView('revision');
+  });
+});
+
+// Load problems from localStorage
+function loadProblemsFromLocalStorage() {
+  console.log('Loading problems from localStorage');
+  
+  // Try to get problems from localStorage
+  const storedProblems = localStorage.getItem(LOCAL_STORAGE_KEY);
+  
+  if (storedProblems) {
+    try {
+      const problems = JSON.parse(storedProblems);
+      console.log('Found problems in localStorage:', problems.length);
+      
+      // Store problems data globally
+      problemsData = problems;
+      
+      // Load problems to UI
+      loadProblems(problems);
+    } catch (error) {
+      console.error('Error parsing localStorage data:', error);
+      useDefaultProblems();
+    }
+  } else {
+    // No localStorage data, use defaults
+    useDefaultProblems();
+  }
+}
+
+// Use default problems and save to localStorage
+function useDefaultProblems() {
+  console.log('Using default problems');
+  const defaultProblems = getDefaultProblems();
+  problemsData = defaultProblems;
+  
+  // Save to localStorage
+  saveToLocalStorage(defaultProblems);
+  
+  // Load problems to UI
+  loadProblems(defaultProblems);
+}
+
+// Save problems to localStorage
+function saveToLocalStorage(problems) {
+  try {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(problems));
+    console.log('Saved problems to localStorage');
+  } catch (error) {
+    console.error('Error saving to localStorage:', error);
+  }
+}
+
+// Fetch problems from Firebase
+function fetchProblems(userId) {
+  console.log('Fetching problems for user', userId);
+  document.getElementById('loading-spinner').style.display = 'flex';
+  document.getElementById('categories-container').style.display = 'none';
+  
+  db.collection('users').doc(userId).collection('problems')
+    .get()
+    .then(function(querySnapshot) {
+      let problems = [];
+      querySnapshot.forEach(function(doc) {
+        console.log('Got problem doc:', doc.id);
+        problems.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+      
+      // If user has no problems, check localStorage first
+      if (problems.length === 0) {
+        console.log('No existing problems found in Firebase, checking localStorage');
+        
+        // Try to get problems from localStorage
+        const storedProblems = localStorage.getItem(LOCAL_STORAGE_KEY);
+        
+        if (storedProblems) {
+          try {
+            problems = JSON.parse(storedProblems);
+            console.log('Using problems from localStorage:', problems.length);
+            
+            // Save to Firebase (in batch)
+            const batch = db.batch();
+            problems.forEach(problem => {
+              const docRef = db.collection('users').doc(userId).collection('problems').doc(problem.id.toString());
+              batch.set(docRef, problem);
+            });
+            
+            batch.commit()
+              .then(() => {
+                console.log('Problems from localStorage saved to Firebase');
+              })
+              .catch(error => {
+                console.error("Error adding localStorage problems to Firebase:", error);
+              });
+          } catch (error) {
+            console.error('Error parsing localStorage data:', error);
+            problems = getDefaultProblems();
+          }
+        } else {
+          // No localStorage data, use defaults
+          console.log('No localStorage data, using defaults');
+          problems = getDefaultProblems();
+          
+          // Save default problems to user's collection (in batch)
+          const batch = db.batch();
+          problems.forEach(problem => {
+            const docRef = db.collection('users').doc(userId).collection('problems').doc(problem.id.toString());
+            batch.set(docRef, problem);
+          });
+          
+          batch.commit()
+            .then(() => {
+              console.log('Default problems saved to Firebase');
+            })
+            .catch(error => {
+              console.error("Error adding default problems in batch:", error);
+            });
+        }
+      }
+      
+      // Also save to localStorage for offline use
+      saveToLocalStorage(problems);
+      
+      // Store problems data globally
+      problemsData = problems;
+      
+      // Load problems to UI
+      loadProblems(problems);
+    })
+    .catch(function(error) {
+      console.error("Error getting problems from Firebase:", error);
+      
+      // Fall back to localStorage if Firebase fails
+      loadProblemsFromLocalStorage();
+    });
+}
+
+// Helper function to check if a problem has a valid editorial URL
+function hasValidEditorialUrl(problem) {
+  return problem && 
+         problem.editorial_url && 
+         typeof problem.editorial_url === 'string' && 
+         problem.editorial_url.trim() !== '';
+}
+
+// Load problems into UI
+function loadProblems(problems) {
+  console.log('Loading problems into UI', problems.length);
+  
+  // Group problems by category
+  const groupedProblems = {};
+  problems.forEach(problem => {
+    if (!groupedProblems[problem.category]) {
+      groupedProblems[problem.category] = [];
+    }
+    groupedProblems[problem.category].push(problem);
+  });
+  
+  // Get container
+  const container = document.getElementById('categories-container');
+  container.innerHTML = '';
+  
+  // Create accordions for ALL categories in the order specified, even if they have no problems yet
+  categoryOrder.forEach(category => {
+    // Get problems for this category, or empty array if none
+    const categoryProblems = groupedProblems[category] || [];
+    const totalProblems = categoryProblems.length;
+    const completedProblems = categoryProblems.filter(p => p.status).length;
+    const percentComplete = totalProblems > 0 ? Math.round((completedProblems / totalProblems) * 100) : 0;
+    
+    // Create accordion element
+    const accordionElement = document.createElement('div');
+    accordionElement.className = 'accordion-category';
+    
+    // Create header
+    const headerElement = document.createElement('div');
+    headerElement.className = 'accordion-header';
+    headerElement.innerHTML = `
+      <div class="category-title">
+        <span class="category-title-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </span>
+        ${category}
+      </div>
+      <div class="category-stats">
+        <div class="category-progress">
+          <div class="category-progress-bar" style="width: ${percentComplete}%"></div>
+        </div>
+        <span>${completedProblems}/${totalProblems} (${percentComplete}%)</span>
+      </div>
+    `;
+    
+    // Create content
+    const contentElement = document.createElement('div');
+    contentElement.className = 'accordion-content';
+    
+    // Create problem table
+    const tableElement = document.createElement('table');
+    tableElement.className = 'problem-table';
+    
+    // Add table header
+    tableElement.innerHTML = `
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Review</th>
+          <th>Editorial</th>
+          <th>Problem</th>
+          <th>Difficulty</th>
+        </tr>
+      </thead>
+      <tbody id="category-${category.replace(/\s+|[/&]/g, '-')}-problems"></tbody>
+    `;
+    
+    contentElement.appendChild(tableElement);
+    accordionElement.appendChild(headerElement);
+    accordionElement.appendChild(contentElement);
+    container.appendChild(accordionElement);
+    
+    // Add problems to table (if any)
+    if (categoryProblems.length > 0) {
+      const tbody = document.getElementById(`category-${category.replace(/\s+|[/&]/g, '-')}-problems`);
+      categoryProblems.forEach(problem => {
+        const row = document.createElement('tr');
+        row.className = 'problem-row';
+        row.dataset.id = problem.id;
+        
+        // Check if the problem has a valid editorial URL
+        const hasEditorial = hasValidEditorialUrl(problem);
+        
+        row.innerHTML = `
+          <td>
+            <div class="status-checkbox">
+              <input type="checkbox" id="status-${problem.id}" 
+                ${problem.status ? 'checked' : ''} 
+                onchange="updateProblemStatus(${problem.id}, this.checked)">
+            </div>
+          </td>
+          <td>
+            <div class="revision-star-wrapper" onclick="toggleRevision(${problem.id}, ${!problem.revision})">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${problem.revision ? 'currentColor' : 'none'}" 
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="revision-star ${problem.revision ? 'marked' : ''}">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+          </td>
+          <td>
+            <div class="editorial-wrapper" ${hasEditorial ? `onclick="window.open('${problem.editorial_url}', '_blank')"` : ''}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${hasEditorial ? 'currentColor' : 'none'}" 
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="editorial-icon ${hasEditorial ? 'marked' : ''}">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+          </td>
+          <td>
+            <a href="${problem.leetcode_url}" target="_blank" class="problem-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              ${problem.name}
+            </a>
+          </td>
+          <td>
+            <span class="difficulty-tag ${problem.difficulty.toLowerCase()}">${problem.difficulty}</span>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+    
+    // Add click event to header
+    headerElement.addEventListener('click', function() {
+      toggleAccordion(accordionElement);
+    });
+  });
+  
+  // Check for any additional categories not in the ordered list
+  Object.keys(groupedProblems).forEach(category => {
+    if (!categoryOrder.includes(category)) {
+      const categoryProblems = groupedProblems[category];
+      const totalProblems = categoryProblems.length;
+      const completedProblems = categoryProblems.filter(p => p.status).length;
+      const percentComplete = Math.round((completedProblems / totalProblems) * 100);
+      
+      // Create accordion element
+      const accordionElement = document.createElement('div');
+      accordionElement.className = 'accordion-category';
+      
+      // Create header
+      const headerElement = document.createElement('div');
+      headerElement.className = 'accordion-header';
+      headerElement.innerHTML = `
+        <div class="category-title">
+          <span class="category-title-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </span>
+          ${category}
+        </div>
+        <div class="category-stats">
+          <div class="category-progress">
+            <div class="category-progress-bar" style="width: ${percentComplete}%"></div>
+          </div>
+          <span>${completedProblems}/${totalProblems} (${percentComplete}%)</span>
+        </div>
+      `;
+      
+      // Create content
+      const contentElement = document.createElement('div');
+      contentElement.className = 'accordion-content';
+      
+      // Create problem table
+      const tableElement = document.createElement('table');
+      tableElement.className = 'problem-table';
+      
+      // Add table header
+      tableElement.innerHTML = `
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Review</th>
+            <th>Editorial</th>
+            <th>Problem</th>
+            <th>Difficulty</th>
+          </tr>
+        </thead>
+        <tbody id="category-${category.replace(/\s+|[/&]/g, '-')}-problems"></tbody>
+      `;
+      
+      contentElement.appendChild(tableElement);
+      accordionElement.appendChild(headerElement);
+      accordionElement.appendChild(contentElement);
+      container.appendChild(accordionElement);
+      
+      // Add problems to table
+      const tbody = document.getElementById(`category-${category.replace(/\s+|[/&]/g, '-')}-problems`);
+      categoryProblems.forEach(problem => {
+        const row = document.createElement('tr');
+        row.className = 'problem-row';
+        row.dataset.id = problem.id;
+        
+        // Check if the problem has a valid editorial URL
+        const hasEditorial = hasValidEditorialUrl(problem);
+        
+        row.innerHTML = `
+          <td>
+            <div class="status-checkbox">
+              <input type="checkbox" id="status-${problem.id}" 
+                ${problem.status ? 'checked' : ''} 
+                onchange="updateProblemStatus(${problem.id}, this.checked)">
+            </div>
+          </td>
+          <td>
+            <div class="revision-star-wrapper" onclick="toggleRevision(${problem.id}, ${!problem.revision})">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${problem.revision ? 'currentColor' : 'none'}" 
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="revision-star ${problem.revision ? 'marked' : ''}">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+          </td>
+          <td>
+            <div class="editorial-wrapper" ${hasEditorial ? `onclick="window.open('${problem.editorial_url}', '_blank')"` : ''}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${hasEditorial ? 'currentColor' : 'none'}" 
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="editorial-icon ${hasEditorial ? 'marked' : ''}">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+          </td>
+          <td>
+            <a href="${problem.leetcode_url}" target="_blank" class="problem-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              ${problem.name}
+            </a>
+          </td>
+          <td>
+            <span class="difficulty-tag ${problem.difficulty.toLowerCase()}">${problem.difficulty}</span>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+      
+      // Add click event to header
+      headerElement.addEventListener('click', function() {
+        toggleAccordion(accordionElement);
+      });
+    }
+  });
+  
+  // Update counts
+  updateCounts(problems);
+  
+  // Expand first category by default
+  const firstCategory = document.querySelector('.accordion-category');
+  if (firstCategory) {
+    toggleAccordion(firstCategory);
+  }
+  
+  // Hide loading spinner
+  document.getElementById('loading-spinner').style.display = 'none';
+  document.getElementById('categories-container').style.display = 'block';
+  
+  // Initialize list view if we're in list view
+    populateListView();
+    toggleView('list');
+  
+}
+
+// Toggle accordion open/close
+function toggleAccordion(accordionElement) {
+  accordionElement.classList.toggle('expanded');
+}
+
+// Toggle between views (category, list, and revision)
+function toggleView(view) {
+  currentView = view;
+  
+  const categoryContainer = document.getElementById('categories-container');
+  const listContainer = document.getElementById('list-container');
+  const revisionContainer = document.getElementById('revision-container');
+  
+  const categoryBtn = document.getElementById('category-view-btn');
+  const listBtn = document.getElementById('list-view-btn');
+  const revisionBtn = document.getElementById('revision-view-btn');
+  
+  // First, hide all containers and remove active class from all buttons
+  categoryContainer.style.display = 'none';
+  listContainer.style.display = 'none';
+  revisionContainer.style.display = 'none';
+  
+  categoryBtn.classList.remove('active');
+  listBtn.classList.remove('active');
+  revisionBtn.classList.remove('active');
+  
+  // Show the selected view
+  if (view === 'category') {
+    categoryContainer.style.display = 'block';
+    categoryBtn.classList.add('active');
+  } else if (view === 'list') {
+    listContainer.style.display = 'block';
+    listBtn.classList.add('active');
+    
+    // Populate list view if not already populated
+    if (document.getElementById('list-problems').children.length === 0) {
+      populateListView();
+    }
+  } else if (view === 'revision') {
+    revisionContainer.style.display = 'block';
+    revisionBtn.classList.add('active');
+    
+    // Load the revision list
+    loadRevisionList();
+  }
+}
+
+// Populate the list view
+function populateListView() {
+  const tbody = document.getElementById('list-problems');
+  tbody.innerHTML = '';
+  
+  // First sort by category according to categoryOrder, then by difficulty and name
+  const sortedProblems = [...problemsData].sort((a, b) => {
+    // First sort by category according to categoryOrder
+    const categoryA = a.category;
+    const categoryB = b.category;
+    const indexA = categoryOrder.indexOf(categoryA);
+    const indexB = categoryOrder.indexOf(categoryB);
+    
+    // If both categories are in the categoryOrder array
+    if (indexA !== -1 && indexB !== -1) {
+      return indexA - indexB;
+    }
+    
+    // If only one is in the array, prioritize the one in the array
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+    
+    // If neither is in the array, sort alphabetically
+    if (categoryA !== categoryB) return categoryA.localeCompare(categoryB);
+    
+    // If same category, sort by difficulty
+    const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+    const diffComp = difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+    
+    if (diffComp !== 0) return diffComp;
+    
+    // If same difficulty, sort by name
+    return a.name.localeCompare(b.name);
+  });
+  
+  // Add rows for each problem
+  sortedProblems.forEach(problem => {
+    const row = document.createElement('tr');
+    row.className = 'problem-row';
+    row.dataset.id = problem.id;
+    
+    // Check if the problem has a valid editorial URL
+    const hasEditorial = hasValidEditorialUrl(problem);
+    
+    row.innerHTML = `
+      <td>
+        <div class="status-checkbox">
+          <input type="checkbox" id="list-status-${problem.id}" 
+            ${problem.status ? 'checked' : ''} 
+            onchange="updateProblemStatus(${problem.id}, this.checked)">
+        </div>
+      </td>
+      <td>
+        <div class="revision-star-wrapper" onclick="toggleRevision(${problem.id}, ${!problem.revision})">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${problem.revision ? 'currentColor' : 'none'}" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="revision-star ${problem.revision ? 'marked' : ''}">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="editorial-wrapper" ${hasEditorial ? `onclick="window.open('${problem.editorial_url}', '_blank')"` : ''}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${hasEditorial ? 'currentColor' : 'none'}" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="editorial-icon ${hasEditorial ? 'marked' : ''}">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+      </td>
+      <td>
+        <a href="${problem.leetcode_url}" target="_blank" class="problem-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          ${problem.name}
+        </a>
+      </td>
+      <td>${problem.category}</td>
+      <td>
+        <span class="difficulty-tag ${problem.difficulty.toLowerCase()}">${problem.difficulty}</span>
+      </td>
+    `;
+    
+    tbody.appendChild(row);
+  });
+}
+
+// Function to load problems marked for revision
+function loadRevisionList() {
+  const tbody = document.getElementById('revision-problems');
+  tbody.innerHTML = '';
+  
+  // Filter problems marked for revision
+  const revisionProblems = problemsData.filter(problem => problem.revision);
+  
+  if (revisionProblems.length === 0) {
+    // No revision problems found
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6">
+          <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" 
+                 stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <h3>No problems marked for revision</h3>
+            <p>Mark problems for revision by clicking the star icon next to problems in the category or list view.</p>
+          </div>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+  
+  // Sort problems the same way as in list view
+  const sortedProblems = [...revisionProblems].sort((a, b) => {
+    // First sort by category according to categoryOrder
+    const categoryA = a.category;
+    const categoryB = b.category;
+    const indexA = categoryOrder.indexOf(categoryA);
+    const indexB = categoryOrder.indexOf(categoryB);
+    
+    // If both categories are in the categoryOrder array
+    if (indexA !== -1 && indexB !== -1) {
+      return indexA - indexB;
+    }
+    
+    // If only one is in the array, prioritize the one in the array
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+    
+    // If neither is in the array, sort alphabetically
+    if (categoryA !== categoryB) return categoryA.localeCompare(categoryB);
+    
+    // If same category, sort by difficulty
+    const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+    const diffComp = difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+    
+    if (diffComp !== 0) return diffComp;
+    
+    // If same difficulty, sort by name
+    return a.name.localeCompare(b.name);
+  });
+  
+  // Add rows for each problem
+  sortedProblems.forEach(problem => {
+    const row = document.createElement('tr');
+    row.className = 'problem-row';
+    row.dataset.id = problem.id;
+    
+    // Check if the problem has a valid editorial URL
+    const hasEditorial = hasValidEditorialUrl(problem);
+    
+    row.innerHTML = `
+      <td>
+        <div class="status-checkbox">
+          <input type="checkbox" id="revision-status-${problem.id}" 
+            ${problem.status ? 'checked' : ''} 
+            onchange="updateProblemStatus(${problem.id}, this.checked)">
+        </div>
+      </td>
+      <td>
+        <div class="revision-star-wrapper" onclick="removeFromRevision(${problem.id})">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="revision-star marked">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="editorial-wrapper" ${hasEditorial ? `onclick="window.open('${problem.editorial_url}', '_blank')"` : ''}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${hasEditorial ? 'currentColor' : 'none'}" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="editorial-icon ${hasEditorial ? 'marked' : ''}">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+      </td>
+      <td>
+        <a href="${problem.leetcode_url}" target="_blank" class="problem-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          ${problem.name}
+        </a>
+      </td>
+      <td>${problem.category}</td>
+      <td>
+        <span class="difficulty-tag ${problem.difficulty.toLowerCase()}">${problem.difficulty}</span>
+      </td>
+    `;
+    
+    tbody.appendChild(row);
+  });
+}
+
+// Function to remove a problem from revision list
+function removeFromRevision(problemId) {
+  // Update problem revision status
+  toggleRevision(problemId, false);
+  
+  // Reload revision list
+  loadRevisionList();
+}
+
+// Update problem status
+function updateProblemStatus(problemId, status) {
+  console.log('Updating problem status', problemId, status);
+  
+  // Find the problem in the local data
+  const problemIndex = problemsData.findIndex(p => p.id == problemId);
+  if (problemIndex === -1) {
+    console.error('Problem not found in local data:', problemId);
+    return;
+  }
+  
+  // Update local data
+  problemsData[problemIndex].status = status;
+  
+  // Save to localStorage immediately
+  saveToLocalStorage(problemsData);
+  
+  // Update UI in all views
+  updateProblemStatusUi(problemId, status);
+  
+  // Update global counts
+  updateCounts(problemsData);
+  
+  // Update Firebase if user is logged in
+  if (currentUser) {
+    db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
+      .update({
+        status: status
+      })
+      .then(() => {
+        console.log('Problem status updated in Firebase');
+      })
+      .catch(error => {
+        console.error("Error updating problem status in Firebase:", error);
+      });
+  }
+}
+
+// Update problem status UI in all views
+function updateProblemStatusUi(problemId, status) {
+  // Update checkbox in category view
+  const categoryCheckbox = document.getElementById(`status-${problemId}`);
+  if (categoryCheckbox) {
+    categoryCheckbox.checked = status;
+  }
+  
+  // Update checkbox in list view
+  const listCheckbox = document.getElementById(`list-status-${problemId}`);
+  if (listCheckbox) {
+    listCheckbox.checked = status;
+  }
+  
+  // Update checkbox in revision view
+  const revisionCheckbox = document.getElementById(`revision-status-${problemId}`);
+  if (revisionCheckbox) {
+    revisionCheckbox.checked = status;
+  }
+  
+  // Update category stats if in category view
+  if (currentView === 'category') {
+    const categoryRow = document.querySelector(`.problem-row[data-id="${problemId}"]`);
+    if (categoryRow) {
+      // Find the category of this problem
+      const category = categoryRow.closest('.accordion-category');
+      if (category) {
+        const categoryName = category.querySelector('.category-title').textContent.trim();
+        
+        // Get all problems in this category
+        const categoryProblems = problemsData.filter(p => p.category === categoryName);
+        
+        // Update category stats
+        const totalProblems = categoryProblems.length;
+        const completedProblems = categoryProblems.filter(p => p.status).length;
+        const percentComplete = Math.round((completedProblems / totalProblems) * 100);
+        
+        const progressBar = category.querySelector('.category-progress-bar');
+        if (progressBar) {
+          progressBar.style.width = `${percentComplete}%`;
+        }
+        
+        const statsText = category.querySelector('.category-stats span');
+        if (statsText) {
+          statsText.textContent = `${completedProblems}/${totalProblems} (${percentComplete}%)`;
+        }
+      }
+    }
+  }
+}
+
+// Toggle revision state
+function toggleRevision(problemId, revision) {
+  console.log('Toggling revision', problemId, revision);
+  
+  // Find the problem in the local data
+  const problemIndex = problemsData.findIndex(p => p.id == problemId);
+  if (problemIndex === -1) {
+    console.error('Problem not found in local data:', problemId);
+    return;
+  }
+  
+  // Update local data
+  problemsData[problemIndex].revision = revision;
+  
+  // Save to localStorage immediately
+  saveToLocalStorage(problemsData);
+  
+  // Update UI in both views
+  updateRevisionUi(problemId, revision);
+  
+  // Update revision count
+  const revisionCount = problemsData.filter(p => p.revision).length;
+  document.getElementById('revision-count').textContent = revisionCount;
+  
+  // Update Firebase if user is logged in
+  if (currentUser) {
+    db.collection('users').doc(currentUser.uid).collection('problems').doc(problemId.toString())
+      .update({
+        revision: revision
+      })
+      .then(() => {
+        console.log('Problem revision status updated in Firebase');
+      })
+      .catch(error => {
+        console.error("Error updating revision status in Firebase:", error);
+      });
+  }
+}
+
+// Update revision UI in all views
+function updateRevisionUi(problemId, revision) {
+  // Update in category view
+  const categoryRow = document.querySelector(`#categories-container .problem-row[data-id="${problemId}"]`);
+  if (categoryRow) {
+    const starSvg = categoryRow.querySelector('.revision-star');
+    if (starSvg) {
+      if (revision) {
+        starSvg.setAttribute('fill', 'currentColor');
+        starSvg.classList.add('marked');
+      } else {
+        starSvg.setAttribute('fill', 'none');
+        starSvg.classList.remove('marked');
+      }
+    }
+  }
+  
+  // Update in list view
+  const listRow = document.querySelector(`#list-container .problem-row[data-id="${problemId}"]`);
+  if (listRow) {
+    const starSvg = listRow.querySelector('.revision-star');
+    if (starSvg) {
+      if (revision) {
+        starSvg.setAttribute('fill', 'currentColor');
+        starSvg.classList.add('marked');
+      } else {
+        starSvg.setAttribute('fill', 'none');
+        starSvg.classList.remove('marked');
+      }
+    }
+  }
+  
+  // If we're in revision view and removing an item, the row will be removed by loadRevisionList()
+}
+
+// Update counts and progress
+function updateCounts(problems) {
+  const totalEasy = problems.filter(p => p.difficulty === 'Easy').length;
+  const totalMedium = problems.filter(p => p.difficulty === 'Medium').length;
+  const totalHard = problems.filter(p => p.difficulty === 'Hard').length;
+  
+  const completedEasy = problems.filter(p => p.difficulty === 'Easy' && p.status).length;
+  const completedMedium = problems.filter(p => p.difficulty === 'Medium' && p.status).length;
+  const completedHard = problems.filter(p => p.difficulty === 'Hard' && p.status).length;
+  
+  // Update status counts
+  document.getElementById('easy-count').textContent = `Easy: ${completedEasy}/${totalEasy}`;
+  document.getElementById('medium-count').textContent = `Medium: ${completedMedium}/${totalMedium}`;
+  document.getElementById('hard-count').textContent = `Hard: ${completedHard}/${totalHard}`;
+  
+  // Update overall progress
+  const totalProblems = problems.length;
+  const completedProblems = problems.filter(p => p.status).length;
+  const progressPercentage = totalProblems > 0 ? Math.round((completedProblems / totalProblems) * 100) : 0;
+  
+  document.getElementById('overall-progress-text').textContent = `${progressPercentage}% Completed`;
+  
+  // Update the circular progress bar
+  const circle = document.getElementById('overall-progress');
+  const radius = circle.r.baseVal.value;
+  const circumference = radius * 2 * Math.PI;
+  
+  circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  circle.style.strokeDashoffset = `${circumference - (progressPercentage / 100) * circumference}`;
+  
+  // Update revision count
+  const revisionCount = problems.filter(p => p.revision).length;
+  document.getElementById('revision-count').textContent = revisionCount;
+}
+
+// Get default problems 
+function getDefaultProblems() {
+  // Return an expanded default set of problems with the specified categories
+  return [
+    // Arrays
+    {
+      id: 1,
+      leetcode_id: 121,
+      name: "Best Time to Buy and Sell Stock",
+      category: "Arrays",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/best-time-to-buy-and-sell-stock"
+    },
+    {
+      id: 2,
+      leetcode_id: 1,
+      name: "Two Sum",
+      category: "Arrays",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/two-sum/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/two-sum"
+    },
+    
+    // Strings
+    {
+      id: 3,
+      leetcode_id: 5,
+      name: "Longest Palindromic Substring",
+      category: "Strings",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/longest-palindromic-substring/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/longest-palindromic-substring"
+    },
+    
+    // Prefix Sum
+    {
+      id: 4,
+      leetcode_id: 560,
+      name: "Subarray Sum Equals K",
+      category: "Prefix Sum",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/subarray-sum-equals-k/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/subarray-sum-equals-k"
+    },
+    
+    // HashMap/HashSet
+    {
+      id: 5, 
+      leetcode_id: 217,
+      name: "Contains Duplicate",
+      category: "HashMap/HashSet",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/contains-duplicate/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/contains-duplicate"
+    },
+    
+    // Two Pointers
+    {
+      id: 6,
+      leetcode_id: 15,
+      name: "3Sum",
+      category: "Two Pointers",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/3sum/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/3sum"
+    },
+    
+    // Sliding Window
+    {
+      id: 7,
+      leetcode_id: 3,
+      name: "Longest Substring Without Repeating Characters",
+      category: "Sliding Window",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/longest-substring-without-repeating-characters"
+    },
+    
+    // Binary Search
+    {
+      id: 8,
+      leetcode_id: 704,
+      name: "Binary Search",
+      category: "Binary Search",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/binary-search/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/binary-search"
+    },
+    {
+      id: 9,
+      leetcode_id: 33,
+      name: "Search in Rotated Sorted Array",
+      category: "Binary Search",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/search-in-rotated-sorted-array"
+    },
+    
+    // Cyclic Sort
+    {
+      id: 10,
+      leetcode_id: 287,
+      name: "Find the Duplicate Number",
+      category: "Cyclic Sort",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/find-the-duplicate-number/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/find-the-duplicate-number"
+    },
+    
+    // Matrix Traversal
+    {
+      id: 11,
+      leetcode_id: 200,
+      name: "Number of Islands",
+      category: "Matrix Traversal",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/number-of-islands/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/number-of-islands"
+    },
+    
+    // Stacks & Queues
+    {
+      id: 12,
+      leetcode_id: 20,
+      name: "Valid Parentheses",
+      category: "Stacks & Queues",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/valid-parentheses/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/valid-parentheses"
+    },
+    {
+      id: 13,
+      leetcode_id: 155,
+      name: "Min Stack",
+      category: "Stacks & Queues",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/min-stack/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/min-stack"
+    },
+    
+    // Monotonic Stack/Queue
+    {
+      id: 14,
+      leetcode_id: 739,
+      name: "Daily Temperatures",
+      category: "Monotonic Stack/Queue",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/daily-temperatures/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/daily-temperatures"
+    },
+    
+    // Linked Lists
+    {
+      id: 15,
+      leetcode_id: 206,
+      name: "Reverse Linked List",
+      category: "Linked Lists",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/reverse-linked-list/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/reverse-linked-list"
+    },
+    {
+      id: 16,
+      leetcode_id: 21,
+      name: "Merge Two Sorted Lists",
+      category: "Linked Lists",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/merge-two-sorted-lists/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/merge-two-sorted-lists"
+    },
+    
+    // Recursion
+    {
+      id: 17,
+      leetcode_id: 70,
+      name: "Climbing Stairs",
+      category: "Recursion",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/climbing-stairs/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/climbing-stairs"
+    },
+    
+    // Trees
+    {
+      id: 18,
+      leetcode_id: 226,
+      name: "Invert Binary Tree",
+      category: "Trees",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/invert-binary-tree/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/invert-binary-tree"
+    },
+    
+    // Tree DFS
+    {
+      id: 19,
+      leetcode_id: 124,
+      name: "Binary Tree Maximum Path Sum",
+      category: "Tree DFS",
+      difficulty: "Hard",
+      leetcode_url: "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/binary-tree-maximum-path-sum"
+    },
+    
+    // Tree BFS
+    {
+      id: 20,
+      leetcode_id: 102,
+      name: "Binary Tree Level Order Traversal",
+      category: "Tree BFS",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/binary-tree-level-order-traversal"
+    },
+    
+    // Divide and Conquer
+    {
+      id: 21,
+      leetcode_id: 215,
+      name: "Kth Largest Element in an Array",
+      category: "Divide and Conquer",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/kth-largest-element-in-an-array"
+    },
+    
+    // Backtracking
+    {
+      id: 22,
+      leetcode_id: 46,
+      name: "Permutations",
+      category: "Backtracking",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/permutations/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/permutations"
+    },
+    
+    // Heap/Priority Queue
+    {
+      id: 23,
+      leetcode_id: 23,
+      name: "Merge k Sorted Lists",
+      category: "Heap/Priority Queue",
+      difficulty: "Hard",
+      leetcode_url: "https://leetcode.com/problems/merge-k-sorted-lists/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/merge-k-sorted-lists"
+    },
+    
+    // Tries
+    {
+      id: 24,
+      leetcode_id: 208,
+      name: "Implement Trie (Prefix Tree)",
+      category: "Tries",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/implement-trie-prefix-tree/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/implement-trie-prefix-tree"
+    },
+    
+    // Graphs
+    {
+      id: 25,
+      leetcode_id: 133,
+      name: "Clone Graph",
+      category: "Graphs",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/clone-graph/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/clone-graph"
+    },
+    
+    // Graph DFS
+    {
+      id: 26,
+      leetcode_id: 417,
+      name: "Pacific Atlantic Water Flow",
+      category: "Graph DFS",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/pacific-atlantic-water-flow"
+    },
+    
+    // Graph BFS
+    {
+      id: 27,
+      leetcode_id: 127,
+      name: "Word Ladder",
+      category: "Graph BFS",
+      difficulty: "Hard",
+      leetcode_url: "https://leetcode.com/problems/word-ladder/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/word-ladder"
+    },
+    
+    // Union Find
+    {
+      id: 28,
+      leetcode_id: 323,
+      name: "Number of Connected Components in an Undirected Graph",
+      category: "Union Find",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/number-of-connected-components"
+    },
+    
+    // Topological Sort
+    {
+      id: 29,
+      leetcode_id: 210,
+      name: "Course Schedule II",
+      category: "Topological Sort",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/course-schedule-ii/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/course-schedule-ii"
+    },
+    
+    // Shortest Path
+    {
+      id: 30,
+      leetcode_id: 743,
+      name: "Network Delay Time",
+      category: "Shortest Path",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/network-delay-time/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/network-delay-time"
+    },
+    
+    // Greedy
+    {
+      id: 31,
+      leetcode_id: 55,
+      name: "Jump Game",
+      category: "Greedy",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/jump-game/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/jump-game"
+    },
+    
+    // Dynamic Programming
+    {
+      id: 32,
+      leetcode_id: 300,
+      name: "Longest Increasing Subsequence",
+      category: "Dynamic Programming",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/longest-increasing-subsequence/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/longest-increasing-subsequence"
+    },
+    {
+      id: 33,
+      leetcode_id: 322,
+      name: "Coin Change",
+      category: "Dynamic Programming",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/coin-change/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/coin-change"
+    },
+    {
+      id: 34,
+      leetcode_id: 72,
+      name: "Edit Distance",
+      category: "Dynamic Programming",
+      difficulty: "Hard",
+      leetcode_url: "https://leetcode.com/problems/edit-distance/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/edit-distance"
+    },
+    
+    // Segment Trees
+    {
+      id: 35,
+      leetcode_id: 307,
+      name: "Range Sum Query - Mutable",
+      category: "Segment Trees",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/range-sum-query-mutable/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/range-sum-query-mutable"
+    },
+    
+    // Intervals
+    {
+      id: 36,
+      leetcode_id: 56,
+      name: "Merge Intervals",
+      category: "Intervals",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/merge-intervals/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/merge-intervals"
+    },
+    
+    // Bit Manipulation
+    {
+      id: 37,
+      leetcode_id: 191,
+      name: "Number of 1 Bits",
+      category: "Bit Manipulation",
+      difficulty: "Easy",
+      leetcode_url: "https://leetcode.com/problems/number-of-1-bits/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/number-of-1-bits"
+    },
+    
+    // Math & Geometry
+    {
+      id: 38,
+      leetcode_id: 50,
+      name: "Pow(x, n)",
+      category: "Math & Geometry",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/powx-n/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/powx-n"
+    },
+    {
+      id: 39,
+      leetcode_id: 43,
+      name: "Multiply Strings",
+      category: "Math & Geometry",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/multiply-strings/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/multiply-strings"
+    },
+    
+    // Design
+    {
+      id: 40,
+      leetcode_id: 146,
+      name: "LRU Cache",
+      category: "Design",
+      difficulty: "Medium",
+      leetcode_url: "https://leetcode.com/problems/lru-cache/",
+      status: false,
+      revision: false,
+      editorial_url: "https://blog.technavigator.io/lru-cache"
+    }
+  ];
+}
+  </script>
+</body>
+</html>
