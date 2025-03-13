@@ -1,29 +1,23 @@
-
-
-function showLoginRequiredModal(customMessage = null) {
-  const modal = document.getElementById('login-required-modal');
-  const messageElement = document.getElementById('login-modal-message');
-  
-  // Use custom message if provided, otherwise use default
-  if (customMessage) {
-    messageElement.textContent = customMessage;
-  } else {
-    messageElement.textContent = 'Please sign in to access this feature and track your progress across all your devices.';
+function initializeLoginModal() {
+  const modalCloseBtn = document.querySelector('#login-required-modal .modal-close-btn');
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', function() {
+      document.getElementById('login-required-modal').style.display = 'none';
+    });
   }
-  
-  modal.style.display = 'block';
+
+  const modalOverlay = document.querySelector('#login-required-modal .modal-overlay');
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', function() {
+      document.getElementById('login-required-modal').style.display = 'none';
+    });
+  }
 }
 
-// Close modal event listener
-document.querySelector('#login-required-modal .modal-close-btn').addEventListener('click', function() {
-  document.getElementById('login-required-modal').style.display = 'none';
+// Call this function after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initializeLoginModal();
 });
-
-// Optional: Close modal when clicking on overlay
-document.querySelector('#login-required-modal .modal-overlay').addEventListener('click', function() {
-  document.getElementById('login-required-modal').style.display = 'none';
-});
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
