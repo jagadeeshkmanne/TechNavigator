@@ -282,16 +282,9 @@ function loadProblems(problems) {
 // Populate the list view
 // Replace or modify the existing populateListView function with this implementation
 function populateListView(problems) {
-  // Check URL parameters for category filter
-  const urlParams = new URLSearchParams(window.location.search);
-  const categoryParam = urlParams.get('category');
+  console.log('Populating list view with ALL problems:', problems.length);
   
-  // If a category parameter exists and it's not 'all', filter by that category
-  if (categoryParam && categoryParam !== 'all') {
-    filterListByCategory(categoryParam, problems);
-    return;
-  }
-  
+  // Ensure we're clearing any previous content
   const tbody = document.getElementById('list-problems');
   tbody.innerHTML = '';
   
@@ -301,7 +294,6 @@ function populateListView(problems) {
     contentTitle.textContent = 'All Problems';
   }
   
-  // Rest of the existing populateListView implementation
   // First sort by category according to categoryOrder, then by difficulty and name
   const sortedProblems = [...problems].sort((a, b) => {
     // First sort by category according to categoryOrder
@@ -332,7 +324,7 @@ function populateListView(problems) {
     return a.name.localeCompare(b.name);
   });
   
-  // Add rows for each problem (existing implementation)
+  // Add rows for each problem
   sortedProblems.forEach(problem => {
     const row = document.createElement('tr');
     row.className = 'problem-row';
@@ -551,14 +543,28 @@ function toggleView(view) {
       listContainer.style.display = 'block';
       listBtn.classList.add('active');
       
-      // Check URL for category parameter
-      const urlParams = new URLSearchParams(window.location.search);
-      const categoryParam = urlParams.get('category');
-      
-      if (categoryParam && categoryParam !== 'all') {
-        filterListByCategory(categoryParam, window.problemsData);
+      // Always ensure problems are loaded
+      if (window.problemsData) {
+        // Check URL for category parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+        
+        console.log('Toggling list view - Category Param:', categoryParam);
+        
+        // Force population of problems
+        setTimeout(() => {
+          if (categoryParam === 'all') {
+            console.log('Forcing population of ALL problems');
+            populateListView(window.problemsData);
+          } else if (categoryParam) {
+            filterListByCategory(categoryParam, window.problemsData);
+          } else {
+            // Default to populating all problems
+            populateListView(window.problemsData);
+          }
+        }, 0);
       } else {
-        populateListView(window.problemsData);
+        console.error('Problems data not loaded');
       }
       break;
     case 'revision':
