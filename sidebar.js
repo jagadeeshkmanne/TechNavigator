@@ -20,7 +20,8 @@ function populateSidebar() {
   sidebar.innerHTML = '';
   
   // The URL for the DSA practice page
-  const dsaPracticePage = '/p/dsa-practice.html'; // Change this to your actual page URL
+ // Change this line in sidebar.js
+const dsaPracticePage = '/p/practice.html'; // Update to match your actual page URL
   
   // Create DSA main category
   const dsaItem = document.createElement('li');
