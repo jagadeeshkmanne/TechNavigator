@@ -1,5 +1,51 @@
 // Sidebar Population and Interaction Script
 
+// Function to control menu visibility based on URL
+function controlMenuVisibilityByURL() {
+  const currentURL = window.location.pathname;
+  const isDSAProblemsPage = currentURL.includes('dsa-problem') || 
+                           currentURL.includes('/p/dashboard.html');
+  const isDSABasicsPage = currentURL.includes('dsa-basics');
+  const isSystemDesignPage = currentURL.includes('system-design');
+  
+  console.log("Current URL:", currentURL);
+  console.log("Is DSA Problems page:", isDSAProblemsPage);
+  console.log("Is DSA Basics page:", isDSABasicsPage);
+  console.log("Is System Design page:", isSystemDesignPage);
+  
+  // Find all menu items
+  const menuItems = document.querySelectorAll('.sidebar-nav-item');
+  
+  // Control visibility for each menu item
+  menuItems.forEach(item => {
+    const menuText = item.textContent.trim();
+    
+    if (menuText.includes('DSA Problems')) {
+      item.style.display = isDSAProblemsPage ? 'block' : 'none';
+    } 
+    else if (menuText.includes('DSA Basics')) {
+      item.style.display = isDSABasicsPage ? 'block' : 'none';
+    }
+    else if (menuText.includes('System Design')) {
+      item.style.display = isSystemDesignPage ? 'block' : 'none';
+    }
+  });
+}
+
+// Helper function for category click handlers
+function addCategoryClickHandlers(element, category) {
+  element.addEventListener('click', function() {
+    const currentURL = window.location.pathname;
+    if (currentURL.includes('dsa-problem') || currentURL.includes('dsa-basics')) {
+      // Navigate to dashboard with category parameter
+      window.location.href = `/p/dashboard.html?category=${encodeURIComponent(category)}`;
+    } else {
+      // We're already in dashboard, just filter
+      filterListByCategory(category, window.problemsData);
+    }
+  });
+}
+
 // Populate sidebar with categories
 function populateSidebar(problems) {
   const sidebar = document.querySelector('.sidebar-nav');
@@ -10,12 +56,27 @@ function populateSidebar(problems) {
   // Categorize problems
   const categoryData = extractCategories(problems);
   
-  // Create DSA main category
-  const dsaItem = document.createElement('li');
-  dsaItem.className = 'sidebar-nav-item';
-  dsaItem.innerHTML = `
+  // 1. Create DSA Basics menu item
+  const dsaBasicsItem = document.createElement('li');
+  dsaBasicsItem.className = 'sidebar-nav-item';
+  dsaBasicsItem.innerHTML = `
+    <a href="https://technavigator.io/dsa-basics/" class="sidebar-nav-link">
+      <span>DSA Basics</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="7" y1="17" x2="17" y2="7"></line>
+        <polyline points="7 7 17 7 17 17"></polyline>
+      </svg>
+    </a>
+  `;
+  sidebar.appendChild(dsaBasicsItem);
+  
+  // 2. Create DSA Problems main category
+  const dsaProblemsItem = document.createElement('li');
+  dsaProblemsItem.className = 'sidebar-nav-item';
+  dsaProblemsItem.innerHTML = `
     <div class="sidebar-nav-link main-category">
-      <span>Data Structures & Algorithms</span>
+      <span>DSA Problems</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="9 18 15 12 9 6"></polyline>
@@ -23,7 +84,7 @@ function populateSidebar(problems) {
     </div>
     <ul class="sidebar-subnav" id="dsa-subnav"></ul>
   `;
-  sidebar.appendChild(dsaItem);
+  sidebar.appendChild(dsaProblemsItem);
   
   // Add all DSA categories as subitems
   const dsaSubnav = document.getElementById('dsa-subnav');
@@ -39,10 +100,17 @@ function populateSidebar(problems) {
   `;
   dsaSubnav.appendChild(allProblemsItem);
   
-  // Add click event for "All Problems"
+  // Add click event for "All Problems" with URL awareness
   allProblemsItem.querySelector('.sidebar-subnav-link').addEventListener('click', function() {
-    toggleView('list');
-    populateListView(window.problemsData);
+    const currentURL = window.location.pathname;
+    if (currentURL.includes('dsa-problem') || currentURL.includes('dsa-basics')) {
+      // Navigate to dashboard with category=all parameter
+      window.location.href = '/p/dashboard.html?category=all';
+    } else {
+      // We're already in dashboard, just toggle the view
+      toggleView('list');
+      populateListView(window.problemsData);
+    }
   });
   
   // Add categories
@@ -59,13 +127,12 @@ function populateSidebar(problems) {
     `;
     dsaSubnav.appendChild(subItem);
     
-    // Add click event to filter list by category
-    subItem.querySelector('.sidebar-subnav-link').addEventListener('click', function() {
-      filterListByCategory(category, window.problemsData);
-    });
+    // Add click event to filter list by category, with URL awareness
+    const categoryLink = subItem.querySelector('.sidebar-subnav-link');
+    addCategoryClickHandlers(categoryLink, category);
   });
   
-  // Add System Design link
+  // 3. Add System Design link
   const sdItem = document.createElement('li');
   sdItem.className = 'sidebar-nav-item';
   sdItem.innerHTML = `
@@ -80,8 +147,8 @@ function populateSidebar(problems) {
   `;
   sidebar.appendChild(sdItem);
   
-  // Add toggle functionality to DSA menu
-  const dsaMainCategory = document.querySelector('.sidebar-nav-item:first-child .sidebar-nav-link');
+  // Add toggle functionality to DSA Problems menu
+  const dsaMainCategory = document.querySelector('.sidebar-nav-item:nth-child(2) .sidebar-nav-link');
   if (dsaMainCategory) {
     dsaMainCategory.addEventListener('click', function(e) {
       e.preventDefault();
@@ -89,14 +156,33 @@ function populateSidebar(problems) {
       parentItem.classList.toggle('expanded');
     });
     
-    // Expand DSA section by default
+    // Expand DSA Problems section by default
     dsaMainCategory.closest('.sidebar-nav-item').classList.add('expanded');
   }
+  
+  // Check URL parameters and apply filter if needed
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('category');
+  if (categoryParam) {
+    if (categoryParam === 'all') {
+      toggleView('list');
+      populateListView(window.problemsData);
+    } else {
+      filterListByCategory(categoryParam, window.problemsData);
+    }
+    
+    // Highlight the active category in the sidebar
+    const activeLink = document.querySelector(`.sidebar-subnav-link[data-category="${categoryParam}"]`);
+    if (activeLink) {
+      activeLink.classList.add('active');
+    }
+  }
+  
+  // Apply URL-based visibility
+  controlMenuVisibilityByURL();
 }
 
 // Category filter function
-// Fix for sidebar.js - Updated filterListByCategory function
-
 function filterListByCategory(category, problems) {
   // Ensure we're in list view
   window.currentView = 'list';
@@ -243,6 +329,39 @@ function filterListByCategory(category, problems) {
   }
 }
 
+// Add a function to initialize URL-based controls
+function initializeURLBasedControls() {
+  // Control initial menu visibility
+  controlMenuVisibilityByURL();
+  
+  // Handle URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('category');
+  
+  if (categoryParam) {
+    console.log("Category parameter detected:", categoryParam);
+    
+    // Wait for problems data to be loaded
+    const checkDataInterval = setInterval(() => {
+      if (window.problemsData && window.problemsData.length > 0) {
+        clearInterval(checkDataInterval);
+        
+        if (categoryParam === 'all') {
+          toggleView('list');
+          populateListView(window.problemsData);
+        } else {
+          filterListByCategory(categoryParam, window.problemsData);
+        }
+      }
+    }, 100);
+  }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeURLBasedControls);
+
 // Expose functions globally
 window.populateSidebar = populateSidebar;
 window.filterListByCategory = filterListByCategory;
+window.controlMenuVisibilityByURL = controlMenuVisibilityByURL;
+window.initializeURLBasedControls = initializeURLBasedControls;
