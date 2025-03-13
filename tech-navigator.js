@@ -32,8 +32,6 @@ const categoryOrder = [
 
 async function getProblems() {
   try {
-    const response = await fetch('async function getProblems() {
-  try {
     const response = await fetch('https://cdn.jsdelivr.net/gh/jagadeeshkmanne/TechNavigator@main/tech-navigator.json');
     
     if (!response.ok) {
