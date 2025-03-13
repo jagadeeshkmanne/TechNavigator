@@ -1,13 +1,4 @@
-   // Firebase Configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDrGGDDax_OpD6NSP6R5SznVy9ThAIohBo",
-  authDomain: "technavigator-226d0.firebaseapp.com",
-  projectId: "technavigator-226d0",
-  storageBucket: "technavigator-226d0.firebasestorage.app",
-  messagingSenderId: "1057850023813",
-  appId: "1:1057850023813:web:bfcf67f80bc27fe22b2eec",
-  measurementId: "G-FSXMH7L0ES"
-}
+
 
 function showLoginRequiredModal(customMessage = null) {
   const modal = document.getElementById('login-required-modal');
