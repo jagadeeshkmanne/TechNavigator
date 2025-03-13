@@ -3,6 +3,14 @@
 // Helper function for category click handlers
 function addCategoryClickHandlers(element, category) {
   element.addEventListener('click', function() {
+    // Remove active class from all sidebar links
+    document.querySelectorAll('.sidebar-subnav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    // Add active class to the clicked link
+    element.classList.add('active');
+
     const currentURL = window.location.pathname;
     if (currentURL.includes('dsa-problem') || currentURL.includes('dsa-basics')) {
       // Navigate to dashboard with category parameter
@@ -164,6 +172,14 @@ function populateSidebar(problems) {
   
   // Add click event for "All Problems"
   allProblemsItem.querySelector('.sidebar-subnav-link').addEventListener('click', function() {
+    // Remove active class from all sidebar links
+    document.querySelectorAll('.sidebar-subnav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    // Add active class to "All Problems" link
+    this.classList.add('active');
+
     const currentURL = window.location.pathname;
     if (currentURL.includes('dsa-problem') || currentURL.includes('dsa-basics')) {
       // Navigate to dashboard with category=all parameter
@@ -257,6 +273,12 @@ function populateSidebar(problems) {
   
   if (categoryParam) {
     console.log("Found category param:", categoryParam);
+    
+    // Remove active class from all sidebar links
+    document.querySelectorAll('.sidebar-subnav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+
     if (categoryParam === 'all') {
       toggleView('list');
       populateListView(window.problemsData);
@@ -296,6 +318,11 @@ function initializeURLBasedControls() {
         
         console.log("Problems data loaded, applying category filter:", categoryParam);
         
+        // Remove active class from all sidebar links
+        document.querySelectorAll('.sidebar-subnav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+        
         if (categoryParam === 'all') {
           console.log("Showing all problems");
           toggleView('list');
@@ -306,10 +333,6 @@ function initializeURLBasedControls() {
         }
         
         // Highlight the active category in the sidebar
-        document.querySelectorAll('.sidebar-subnav-link').forEach(link => {
-          link.classList.remove('active');
-        });
-        
         const activeLink = document.querySelector(`.sidebar-subnav-link[data-category="${categoryParam}"]`);
         if (activeLink) {
           activeLink.classList.add('active');
