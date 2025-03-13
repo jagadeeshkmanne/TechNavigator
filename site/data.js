@@ -7,7 +7,7 @@ window.problemsData = [];
 const categoryOrder = [
   'Arrays', 'Prefix Sum', 'HashMap/HashSet', 'Two Pointers', 
   'Sliding Window', 'Binary Search', 'Cyclic Sort', 'Matrix Traversal',
-  'Stacks & Queues', 'Monotonic Stack/Queue', 'Linked Lists', 'Recursion',
+  'Stacks & Queues', 'Monotonic Stack/Queue', 'Linked Lists',
   'Trees', 'Tree DFS', 'Tree BFS', 'Divide and Conquer', 
   'Backtracking', 'Heap/Priority Queue', 'Tries', 'Graphs',
   'Graph DFS', 'Graph BFS', 'Union Find', 'Topological Sort',
