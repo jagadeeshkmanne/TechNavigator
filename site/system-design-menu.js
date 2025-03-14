@@ -3,7 +3,7 @@ const systemDesignData = {
   "basics": {
     "title": "Basics",
     "items": [
-      {"name": "Fundamentals", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+      {"name": "System Design Fundamentals", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "Networking", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "API Design", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "Caching", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
@@ -201,19 +201,21 @@ function createSystemDesignMenu() {
     // Current URL for matching links
     const currentURL = window.location.href.toLowerCase();
     
-    // Determine which tab should be active
-    // Default to the first tab, but check if URL contains clues
-    let activeTabId = 'basics';
+    // Determine which tab should be active based on the active menu item
+    let activeTabId = 'basics'; // Default to basics tab
     
-    // Check URL for keywords that might indicate which tab to show
-    if (currentURL.includes('design') || 
-        currentURL.includes('twitter') || 
-        currentURL.includes('shortener') ||
-        currentURL.includes('limiter') ||
-        currentURL.includes('queue') ||
-        currentURL.includes('chat') ||
-        currentURL.includes('streaming') ||
-        currentURL.includes('booking')) {
+    // Function to check if a URL is in the current page
+    const isUrlActive = (url) => {
+      return currentURL.includes(url.toLowerCase());
+    };
+    
+    // Check if any item in realWorldSystems is active
+    const isRealWorldSystemActive = systemDesignData.realWorldSystems.items.some(item => 
+      isUrlActive(item.url) || currentURL.includes(item.name.toLowerCase().replace(/[^a-z0-9]/g, '-'))
+    );
+    
+    // If a real world system item is active, set the active tab
+    if (isRealWorldSystemActive) {
       activeTabId = 'realWorldSystems';
     }
     
@@ -262,8 +264,8 @@ function createSystemDesignMenu() {
       // Add items to the panel
       let panelContent = '';
       category.items.forEach(item => {
-        // Check if this menu item should be active
-        const isActive = currentURL.includes(item.name.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+        // Check if this menu item should be active based on its href
+        const isActive = currentURL.includes(item.url.toLowerCase());
         
         panelContent += `
           <div class="sd-menu-item">
