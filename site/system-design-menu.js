@@ -64,44 +64,74 @@ function addSystemDesignMenuStyles() {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     
-    .sd-menu-section {
-      margin-bottom: 15px;
-    }
-    
-    .sd-menu-section.active .sd-menu-title {
-      background-color: rgba(249, 115, 22, 0.2);
-      color: #f97316;
-    }
-    
-    .sd-menu-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #eee;
-      margin-bottom: 10px;
-      padding: 8px 10px;
-      border-left: 3px solid #f97316;
-      background-color: rgba(249, 115, 22, 0.1);
-      transition: all 0.2s;
-    }
-    
-    .sd-menu-items {
+    .sd-tabs {
       list-style: none;
-      padding-left: 15px;
+      padding: 0;
       margin: 0;
+      display: flex;
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 4px 4px 0 0;
+    }
+    
+    .sd-tab {
+      flex: 1;
+      position: relative;
+    }
+    
+    .sd-tab-link {
+      display: block;
+      padding: 10px 12px;
+      text-align: center;
+      color: #888;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-radius: 4px 4px 0 0;
+    }
+    
+    .sd-tab.active .sd-tab-link {
+      color: #f97316;
+      background-color: #1e1e1e;
+      font-weight: 600;
+    }
+    
+    .sd-tab.active .sd-tab-link:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #f97316;
+    }
+    
+    .sd-tab-panels {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 5px;
+    }
+    
+    .sd-tab-panel {
+      display: none;
+      padding: 5px 0;
+    }
+    
+    .sd-tab-panel.active {
+      display: block;
     }
     
     .sd-menu-item {
-      margin: 6px 0;
+      margin-bottom: 4px;
     }
     
     .sd-menu-link {
       display: block;
-      padding: 6px 10px;
-      font-size: 14px;
+      padding: 6px 12px;
       color: #888;
       text-decoration: none;
+      font-size: 13px;
       border-radius: 4px;
-      transition: all 0.2s;
+      transition: background-color 0.2s;
     }
     
     .sd-menu-link:hover {
@@ -117,18 +147,14 @@ function addSystemDesignMenuStyles() {
     
     /* Mobile Responsiveness */
     @media (max-width: 768px) {
-      .sd-menu-section {
-        margin-bottom: 10px;
-      }
-      
-      .sd-menu-title {
-        font-size: 14px;
-        padding: 6px 8px;
+      .sd-tab-link {
+        padding: 8px 6px;
+        font-size: 12px;
       }
       
       .sd-menu-link {
         padding: 5px 8px;
-        font-size: 13px;
+        font-size: 12px;
       }
     }
   `;
@@ -175,96 +201,116 @@ function createSystemDesignMenu() {
     // Current URL for matching links
     const currentURL = window.location.href.toLowerCase();
     
-    // Determine which section should be active based on URL
-    let activeSection = null;
-    let activeItem = null;
+    // Determine which tab should be active
+    // Default to the first tab, but check if URL contains clues
+    let activeTabId = 'basics';
     
-    // First pass: find the active item
-    Object.keys(systemDesignData).forEach(sectionKey => {
-      const section = systemDesignData[sectionKey];
-      
-      section.items.forEach(item => {
-        // Extract topic from URL if present
-        const urlParams = new URLSearchParams(window.location.search);
-        const topicParam = urlParams.get('topic');
-        
-        // Check if this item should be active
-        const itemNameInUrl = item.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-        
-        if (
-          // Direct URL match
-          currentURL.includes(itemNameInUrl) ||
-          // Topic parameter match
-          (topicParam && topicParam.toLowerCase() === item.name.toLowerCase()) ||
-          // Path segment match
-          currentURL.split('/').some(segment => segment.toLowerCase() === itemNameInUrl)
-        ) {
-          activeItem = item;
-          activeSection = sectionKey;
-        }
-      });
-    });
-    
-    // If no specific item is active but we're on a system design page,
-    // determine the section based on URL segments
-    if (!activeSection && currentURL.includes('system-design')) {
-      if (currentURL.includes('basics') || currentURL.split('/').some(segment => systemDesignData.basics.items.some(item => 
-        segment.toLowerCase() === item.name.toLowerCase().replace(/[^a-z0-9]/g, '-')))) {
-        activeSection = 'basics';
-      } else if (currentURL.includes('design') || currentURL.split('/').some(segment => systemDesignData.realWorldSystems.items.some(item => 
-        segment.toLowerCase() === item.name.toLowerCase().replace(/[^a-z0-9]/g, '-')))) {
-        activeSection = 'realWorldSystems';
-      } else {
-        // Default to basics if no matching content
-        activeSection = 'basics';
-      }
+    // Check URL for keywords that might indicate which tab to show
+    if (currentURL.includes('design') || 
+        currentURL.includes('twitter') || 
+        currentURL.includes('shortener') ||
+        currentURL.includes('limiter') ||
+        currentURL.includes('queue') ||
+        currentURL.includes('chat') ||
+        currentURL.includes('streaming') ||
+        currentURL.includes('booking')) {
+      activeTabId = 'realWorldSystems';
     }
     
-    // Generate menu content
-    let menuContent = '';
-    
-    // Add each category
-    Object.keys(systemDesignData).forEach(sectionKey => {
-      const section = systemDesignData[sectionKey];
-      const isSectionActive = sectionKey === activeSection;
-      
-      menuContent += `
-        <div class="sd-menu-section ${isSectionActive ? 'active' : ''}">
-          <div class="sd-menu-title">${section.title}</div>
-          <ul class="sd-menu-items">
-      `;
-      
-      // Add items
-      section.items.forEach(item => {
-        const isItemActive = activeItem && item.name === activeItem.name;
-        
-        menuContent += `
-          <li class="sd-menu-item">
-            <a href="${item.url}" class="sd-menu-link ${isItemActive ? 'active' : ''}" 
-               data-name="${item.name.toLowerCase()}">${item.name}</a>
-          </li>
-        `;
-      });
-      
-      menuContent += `
-          </ul>
-        </div>
-      `;
-    });
-    
-    // Set the menu content
-    sdMenuContainer.innerHTML = menuContent;
+    // Create menu structure
+    sdMenuContainer.innerHTML = `
+      <div class="sd-tabs-container">
+        <ul class="sd-tabs" id="sd-tabs"></ul>
+        <div class="sd-tab-panels" id="sd-tab-panels"></div>
+      </div>
+    `;
     
     // Append to sidebar
     const menuItem = document.createElement('li');
     menuItem.className = 'sidebar-nav-item expanded';
     menuItem.appendChild(sdMenuContainer);
     sidebar.appendChild(menuItem);
-
+    
+    // Populate tabs
+    const tabsContainer = document.getElementById('sd-tabs');
+    const tabPanelsContainer = document.getElementById('sd-tab-panels');
+    
+    if (!tabsContainer || !tabPanelsContainer) {
+      console.error("Tab containers not found");
+      return;
+    }
+    
+    // Create tabs
+    Object.keys(systemDesignData).forEach(categoryKey => {
+      const category = systemDesignData[categoryKey];
+      
+      // Create the tab
+      const tab = document.createElement('li');
+      tab.className = `sd-tab ${categoryKey === activeTabId ? 'active' : ''}`; 
+      tab.innerHTML = `
+        <a href="javascript:void(0)" class="sd-tab-link" data-tab="${categoryKey}">
+          ${category.title}
+        </a>
+      `;
+      tabsContainer.appendChild(tab);
+      
+      // Create the tab panel
+      const tabPanel = document.createElement('div');
+      tabPanel.className = `sd-tab-panel ${categoryKey === activeTabId ? 'active' : ''}`;
+      tabPanel.id = `${categoryKey}-panel`;
+      
+      // Add items to the panel
+      let panelContent = '';
+      category.items.forEach(item => {
+        // Check if this menu item should be active
+        const isActive = currentURL.includes(item.name.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+        
+        panelContent += `
+          <div class="sd-menu-item">
+            <a href="${item.url}" class="sd-menu-link ${isActive ? 'active' : ''}" data-name="${item.name.toLowerCase()}">
+              ${item.name}
+            </a>
+          </div>
+        `;
+      });
+      
+      tabPanel.innerHTML = panelContent;
+      tabPanelsContainer.appendChild(tabPanel);
+    });
+    
+    // Add tab click handlers
+    addTabClickHandlers();
+    
     console.log("System Design Menu created successfully");
   } catch (error) {
     console.error("Error creating System Design menu:", error);
   }
+}
+
+// Add tab click handlers
+function addTabClickHandlers() {
+  document.querySelectorAll('.sd-tab-link').forEach(tabLink => {
+    tabLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Get the tab ID
+      const tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.sd-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.sd-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
+      
+      // Show the corresponding panel
+      document.getElementById(`${tabId}-panel`).classList.add('active');
+    });
+  });
 }
 
 // Override the original functions
