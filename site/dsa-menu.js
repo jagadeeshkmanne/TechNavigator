@@ -223,13 +223,30 @@ function createDsaBasicsSidebar() {
     return;
   }
 
+  // Fix sidebar container to ensure scrollability
+  const sidebarContainer = document.querySelector('.sidebar');
+  if (sidebarContainer) {
+    // Set scrollable styles directly on the container
+    sidebarContainer.style.maxHeight = '85vh';
+    sidebarContainer.style.overflowY = 'auto';
+    sidebarContainer.style.display = 'flex';
+    sidebarContainer.style.flexDirection = 'column';
+    
+    // Also fix any parent element that might be constraining the height
+    const sidebarParent = sidebarContainer.parentElement;
+    if (sidebarParent) {
+      sidebarParent.style.height = 'auto';
+      sidebarParent.style.maxHeight = 'none';
+      sidebarParent.style.overflow = 'visible';
+    }
+  }
+
   // Get the sidebar
   let sidebar = document.querySelector('.sidebar-nav');
   if (!sidebar) {
     console.error("Sidebar not found, creating new one");
     sidebar = document.createElement('ul');
     sidebar.className = 'sidebar-nav';
-    const sidebarContainer = document.querySelector('.sidebar');
     if (sidebarContainer) {
       sidebarContainer.innerHTML = ''; // Clear the container
       sidebarContainer.appendChild(sidebar);
@@ -381,7 +398,36 @@ function addDsaBasicsStyles() {
   const styleElement = document.createElement('style');
   styleElement.id = 'dsa-basics-styles';
   styleElement.textContent = `
+    /* Scrollable sidebar fix */
+    .scrollable-sidebar {
+      max-height: 85vh !important;
+      overflow-y: auto !important;
+      scrollbar-width: thin;
+      padding-right: 5px;
+    }
+
     /* DSA Basics Menu Styles */
+    /* Make the main sidebar container scrollable */
+    .sidebar {
+      max-height: 85vh;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    /* Custom scrollbar styles */
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+    
+    .sidebar::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    
     .sidebar-nested-nav, .sidebar-deep-nav, .sidebar-extra-nav {
       list-style: none;
       padding-left: 15px;
@@ -393,7 +439,7 @@ function addDsaBasicsStyles() {
     .sidebar-subnav-item.expanded > .sidebar-nested-nav,
     .sidebar-nested-item.expanded > .sidebar-deep-nav,
     .sidebar-deep-item.expanded > .sidebar-extra-nav {
-      max-height: 1000px; /* Large enough to show all content */
+      max-height: none !important; /* Allow unlimited height */
     }
     
     .category-header {
@@ -601,11 +647,53 @@ window.highlightDsaMenuItem = function(itemUrl) {
   };
 })();
 
+// Function to ensure the sidebar is properly scrollable
+function ensureSidebarScrollable() {
+  const sidebar = document.querySelector('.sidebar');
+  if (!sidebar) return;
+  
+  // Apply styles directly
+  sidebar.style.maxHeight = '85vh';
+  sidebar.style.overflowY = 'auto';
+  sidebar.style.position = 'relative';
+  
+  // Check if we need to add the scrollable class
+  if (!sidebar.classList.contains('scrollable-sidebar')) {
+    sidebar.classList.add('scrollable-sidebar');
+  }
+  
+  // Fix parent containers too if they exist
+  const parents = [];
+  let parentElement = sidebar.parentElement;
+  
+  while (parentElement) {
+    parents.push(parentElement);
+    parentElement = parentElement.parentElement;
+    
+    // Don't go too far up the DOM tree
+    if (parents.length > 5) break;
+  }
+  
+  // Apply fixes to immediate parent elements
+  parents.slice(0, 3).forEach(parent => {
+    parent.style.height = 'auto';
+    parent.style.maxHeight = 'none';
+    parent.style.overflow = 'visible';
+  });
+  
+  // Force browser reflow to apply the changes
+  sidebar.offsetHeight;
+  
+  console.log("Applied scrollability fixes to sidebar");
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   // Check if we're on a DSA Basics page and create our sidebar if needed
   if (isDsaBasicsPage()) {
     createDsaBasicsSidebar();
+    // Wait a short time for rendering
+    setTimeout(ensureSidebarScrollable, 100);
   }
 });
 
@@ -615,6 +703,10 @@ window.addEventListener('load', function() {
   if (isDsaBasicsPage()) {
     createDsaBasicsSidebar();
     highlightActivePath();
+    ensureSidebarScrollable();
+    
+    // Try again after a longer delay to catch any layout shifts
+    setTimeout(ensureSidebarScrollable, 500);
   }
 });
 
@@ -622,5 +714,9 @@ window.addEventListener('load', function() {
 window.addEventListener('hashchange', function() {
   if (isDsaBasicsPage()) {
     highlightActivePath();
+    ensureSidebarScrollable();
   }
 });
+
+// Expose scrollability function globally
+window.ensureSidebarScrollable = ensureSidebarScrollable;
