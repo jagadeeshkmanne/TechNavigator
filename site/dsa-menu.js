@@ -1,4 +1,4 @@
-// DSA Basics Menu Data Structure
+// DSA Basics Menu Data Structure - Simplified to two main tabs
 const dsaBasicsData = {
   "dataStructures": {
     "title": "Data Structures",
@@ -26,90 +26,31 @@ const dsaBasicsData = {
       },
       {
         "name": "Hash Tables",
-        "url": "https://www.technavigator.io/dsa-basics/hash-tables",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/hash-tables/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/hash-tables/basic-operations"},
-          {"name": "Collision Handling", "url": "https://www.technavigator.io/dsa-basics/hash-tables/collision-handling"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/hash-tables/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/hash-tables/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/hash-tables"
       },
       {
         "name": "Stacks",
-        "url": "https://www.technavigator.io/dsa-basics/stacks",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/stacks/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/stacks/basic-operations"},
-          {"name": "Applications", "url": "https://www.technavigator.io/dsa-basics/stacks/applications"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/stacks/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/stacks/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/stacks"
       },
       {
         "name": "Queues",
-        "url": "https://www.technavigator.io/dsa-basics/queues",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/queues/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/queues/basic-operations"},
-          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/queues/types"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/queues/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/queues/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/queues"
       },
       {
         "name": "Trees",
-        "url": "https://www.technavigator.io/dsa-basics/trees",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/trees/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/trees/basic-operations"},
-          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/trees/types"},
-          {
-            "name": "Traversal",
-            "url": "https://www.technavigator.io/dsa-basics/trees/traversal",
-            "subitems": [
-              {"name": "Inorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/inorder"},
-              {"name": "Preorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/preorder"},
-              {"name": "Postorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/postorder"},
-              {"name": "Level Order Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/level-order"}
-            ]
-          },
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/trees/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/trees/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/trees"
       },
       {
         "name": "Heaps",
-        "url": "https://www.technavigator.io/dsa-basics/heaps",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/heaps/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/heaps/basic-operations"},
-          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/heaps/types"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/heaps/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/heaps/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/heaps"
       },
       {
         "name": "Tries",
-        "url": "https://www.technavigator.io/dsa-basics/tries",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/tries/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/tries/basic-operations"},
-          {"name": "Applications", "url": "https://www.technavigator.io/dsa-basics/tries/applications"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/tries/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/tries/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/tries"
       },
       {
         "name": "Graphs",
-        "url": "https://www.technavigator.io/dsa-basics/graphs",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/graphs/introduction"},
-          {"name": "Representations", "url": "https://www.technavigator.io/dsa-basics/graphs/representations"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/graphs/basic-operations"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/graphs/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/graphs/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/graphs"
       }
     ]
   },
@@ -118,83 +59,23 @@ const dsaBasicsData = {
     "items": [
       {
         "name": "Searching Algorithms",
-        "url": "https://www.technavigator.io/dsa-basics/searching-algorithms",
-        "subitems": [
-          {"name": "Linear Search", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/linear-search"},
-          {"name": "Binary Search", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/binary-search"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/searching-algorithms"
       },
       {
         "name": "Sorting Algorithms",
-        "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms",
-        "subitems": [
-          {"name": "Bubble Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/bubble-sort"},
-          {"name": "Selection Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/selection-sort"},
-          {"name": "Insertion Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/insertion-sort"},
-          {"name": "Merge Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/merge-sort"},
-          {"name": "Quick Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/quick-sort"},
-          {"name": "Heap Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/heap-sort"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms"
       },
       {
         "name": "Graph Algorithms",
-        "url": "https://www.technavigator.io/dsa-basics/graph-algorithms",
-        "subitems": [
-          {"name": "Depth-First Search (DFS)", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/dfs"},
-          {"name": "Breadth-First Search (BFS)", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/bfs"},
-          {
-            "name": "Shortest Path Algorithms",
-            "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path",
-            "subitems": [
-              {"name": "Dijkstra's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/dijkstra"},
-              {"name": "Bellman-Ford Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/bellman-ford"},
-              {"name": "Floyd-Warshall Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/floyd-warshall"}
-            ]
-          },
-          {
-            "name": "Minimum Spanning Tree",
-            "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/minimum-spanning-tree",
-            "subitems": [
-              {"name": "Kruskal's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/minimum-spanning-tree/kruskal"},
-              {"name": "Prim's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/minimum-spanning-tree/prim"}
-            ]
-          },
-          {"name": "Topological Sort", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/topological-sort"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/graph-algorithms"
       },
       {
         "name": "Algorithm Techniques",
-        "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques",
-        "subitems": [
-          {"name": "Two Pointers", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/two-pointers"},
-          {"name": "Sliding Window", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/sliding-window"},
-          {"name": "Prefix Sum", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/prefix-sum"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques"
       },
       {
         "name": "Advanced Algorithms",
-        "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms",
-        "subitems": [
-          {"name": "Divide and Conquer", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/divide-and-conquer"},
-          {"name": "Greedy Algorithms", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/greedy"},
-          {"name": "Backtracking", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/backtracking"},
-          {
-            "name": "Dynamic Programming",
-            "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming",
-            "subitems": [
-              {"name": "1D Dynamic Programming", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/1d"},
-              {"name": "2D Dynamic Programming", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/2d"},
-              {"name": "State Compression", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/state-compression"}
-            ]
-          },
-          {"name": "Union Find", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/union-find"},
-          {"name": "Monotonic Stack/Queue", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/monotonic-stack-queue"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/practice"}
-        ]
+        "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms"
       }
     ]
   }
@@ -216,29 +97,23 @@ function isDsaBasicsPage() {
            currentURL.includes('/sort')));
 }
 
-// Create our own sidebar for DSA Basics
-function createDsaBasicsSidebar() {
+// Function to determine if a URL is related to data structures
+function isDataStructuresURL(url) {
+  url = url.toLowerCase();
+  return url.includes('datastructure-basics') || url.includes('data-structure-basics');
+}
+
+// Function to determine if a URL is related to algorithms
+function isAlgorithmsURL(url) {
+  url = url.toLowerCase();
+  return url.includes('algorithm-basics') || url.includes('algorithms-basics');
+}
+
+// Create simplified sidebar with just two tabs
+function createSimplifiedSidebar() {
   // Only run on DSA Basics pages
   if (!isDsaBasicsPage()) {
     return;
-  }
-
-  // Fix sidebar container to ensure scrollability
-  const sidebarContainer = document.querySelector('.sidebar');
-  if (sidebarContainer) {
-    // Set scrollable styles directly on the container
-    sidebarContainer.style.maxHeight = '85vh';
-    sidebarContainer.style.overflowY = 'auto';
-    sidebarContainer.style.display = 'flex';
-    sidebarContainer.style.flexDirection = 'column';
-    
-    // Also fix any parent element that might be constraining the height
-    const sidebarParent = sidebarContainer.parentElement;
-    if (sidebarParent) {
-      sidebarParent.style.height = 'auto';
-      sidebarParent.style.maxHeight = 'none';
-      sidebarParent.style.overflow = 'visible';
-    }
   }
 
   // Get the sidebar
@@ -247,6 +122,7 @@ function createDsaBasicsSidebar() {
     console.error("Sidebar not found, creating new one");
     sidebar = document.createElement('ul');
     sidebar.className = 'sidebar-nav';
+    const sidebarContainer = document.querySelector('.sidebar');
     if (sidebarContainer) {
       sidebarContainer.innerHTML = ''; // Clear the container
       sidebarContainer.appendChild(sidebar);
@@ -255,7 +131,7 @@ function createDsaBasicsSidebar() {
       return;
     }
   } else {
-    // Clear existing sidebar - this is intentional for DSA Basics pages
+    // Clear existing sidebar
     sidebar.innerHTML = '';
   }
 
@@ -272,340 +148,155 @@ function createDsaBasicsSidebar() {
       </svg>
       <span>DSA Basics</span>
     </div>
-    <ul class="sidebar-subnav" id="dsa-basics-subnav"></ul>
+    <ul class="sidebar-tabs" id="dsa-basics-tabs"></ul>
   `;
   sidebar.appendChild(dsaBasicsItem);
 
-  // Get the subnav container
-  const dsaBasicsSubnav = document.getElementById('dsa-basics-subnav');
+  // Add styles for the simplified sidebar
+  addSimplifiedStyles();
 
-  // Add CSS styles for nested menus
-  addDsaBasicsStyles();
+  // Get the tabs container
+  const tabsContainer = document.getElementById('dsa-basics-tabs');
 
-  // Add each category section
-  Object.keys(dsaBasicsData).forEach(categoryKey => {
-    const category = dsaBasicsData[categoryKey];
-    
-    // Add category header
-    const categoryHeader = document.createElement('li');
-    categoryHeader.className = 'sidebar-subnav-item expanded'; // Expanded by default
-    categoryHeader.innerHTML = `
-      <a href="javascript:void(0)" class="sidebar-subnav-link category-header">
-        <span>${category.title}</span>
-        <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </a>
-      <ul class="sidebar-nested-nav"></ul>
-    `;
-    dsaBasicsSubnav.appendChild(categoryHeader);
-    
-    // Get the nested nav container
-    const nestedNav = categoryHeader.querySelector('.sidebar-nested-nav');
-    
-    // Add items for this category
-    category.items.forEach(item => {
-      const hasSubitems = item.subitems && item.subitems.length > 0;
-      
-      const itemElement = document.createElement('li');
-      itemElement.className = hasSubitems ? 'sidebar-nested-item expanded' : 'sidebar-nested-item'; // Expanded by default if has subitems
-      
-      if (hasSubitems) {
-        itemElement.innerHTML = `
-          <a href="${item.url}" class="sidebar-nested-link">
-            <span>${item.name}</span>
-            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" 
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </a>
-          <ul class="sidebar-deep-nav"></ul>
-        `;
-        
-        // Get the deep nav container
-        const deepNav = itemElement.querySelector('.sidebar-deep-nav');
-        
-        // Add subitems
-        item.subitems.forEach(subitem => {
-          const hasDeepSubitems = subitem.subitems && subitem.subitems.length > 0;
-          
-          const subitemElement = document.createElement('li');
-          subitemElement.className = hasDeepSubitems ? 'sidebar-deep-item expanded' : 'sidebar-deep-item'; // Expanded by default if has deep subitems
-          
-          if (hasDeepSubitems) {
-            subitemElement.innerHTML = `
-              <a href="${subitem.url}" class="sidebar-deep-link">
-                <span>${subitem.name}</span>
-                <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" 
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </a>
-              <ul class="sidebar-extra-nav"></ul>
-            `;
-            
-            // Get the extra nav container
-            const extraNav = subitemElement.querySelector('.sidebar-extra-nav');
-            
-            // Add deep subitems
-            subitem.subitems.forEach(extraItem => {
-              const extraItemElement = document.createElement('li');
-              extraItemElement.className = 'sidebar-extra-item';
-              extraItemElement.innerHTML = `
-                <a href="${extraItem.url}" class="sidebar-extra-link">
-                  <span>${extraItem.name}</span>
-                </a>
-              `;
-              extraNav.appendChild(extraItemElement);
-            });
-          } else {
-            subitemElement.innerHTML = `
-              <a href="${subitem.url}" class="sidebar-deep-link">
-                <span>${subitem.name}</span>
-              </a>
-            `;
-          }
-          
-          deepNav.appendChild(subitemElement);
-        });
-      } else {
-        itemElement.innerHTML = `
-          <a href="${item.url}" class="sidebar-nested-link">
-            <span>${item.name}</span>
-          </a>
-        `;
-      }
-      
-      nestedNav.appendChild(itemElement);
-    });
+  // Current URL for highlighting the active tab
+  const currentURL = window.location.href.toLowerCase();
+  
+  // Determine which tab should be active
+  const isDataStructures = isDataStructuresURL(currentURL);
+  const isAlgorithms = isAlgorithmsURL(currentURL);
+
+  // Create Data Structures tab
+  const dsTab = document.createElement('li');
+  dsTab.className = 'sidebar-tab' + (isDataStructures ? ' active' : '');
+  dsTab.innerHTML = `
+    <a href="javascript:void(0)" class="sidebar-tab-link" data-category="dataStructures">
+      <span>Data Structures</span>
+    </a>
+    <div class="sidebar-tab-content" id="data-structures-content"></div>
+  `;
+  tabsContainer.appendChild(dsTab);
+
+  // Create Algorithms tab
+  const algoTab = document.createElement('li');
+  algoTab.className = 'sidebar-tab' + (isAlgorithms ? ' active' : '');
+  algoTab.innerHTML = `
+    <a href="javascript:void(0)" class="sidebar-tab-link" data-category="algorithms">
+      <span>Algorithms</span>
+    </a>
+    <div class="sidebar-tab-content" id="algorithms-content"></div>
+  `;
+  tabsContainer.appendChild(algoTab);
+
+  // Populate Data Structures content
+  const dsContent = document.getElementById('data-structures-content');
+  dsContent.innerHTML = '';
+  dsaBasicsData.dataStructures.items.forEach(item => {
+    const itemElement = document.createElement('div');
+    itemElement.className = 'sidebar-item';
+    itemElement.innerHTML = `<a href="${item.url}" class="sidebar-item-link">${item.name}</a>`;
+    dsContent.appendChild(itemElement);
   });
 
-  // Add click handlers for menu toggling
-  addMenuToggleHandlers();
-  
-  // Highlight active menu items based on URL
-  highlightActivePath();
+  // Populate Algorithms content
+  const algoContent = document.getElementById('algorithms-content');
+  algoContent.innerHTML = '';
+  dsaBasicsData.algorithms.items.forEach(item => {
+    const itemElement = document.createElement('div');
+    itemElement.className = 'sidebar-item';
+    itemElement.innerHTML = `<a href="${item.url}" class="sidebar-item-link">${item.name}</a>`;
+    algoContent.appendChild(itemElement);
+  });
+
+  // Add tab click handlers
+  addTabHandlers();
 }
 
-// Add CSS styles
-function addDsaBasicsStyles() {
+// Add styles for the simplified sidebar
+function addSimplifiedStyles() {
   // Check if styles already exist
-  if (document.getElementById('dsa-basics-styles')) {
+  if (document.getElementById('dsa-simplified-styles')) {
     return;
   }
   
   const styleElement = document.createElement('style');
-  styleElement.id = 'dsa-basics-styles';
+  styleElement.id = 'dsa-simplified-styles';
   styleElement.textContent = `
-    /* Scrollable sidebar fix */
-    .scrollable-sidebar {
-      max-height: 85vh !important;
-      overflow-y: auto !important;
-      scrollbar-width: thin;
-      padding-right: 5px;
-    }
-
-    /* DSA Basics Menu Styles */
-    /* Make the main sidebar container scrollable */
-    .sidebar {
-      max-height: 85vh;
-      overflow-y: auto;
-      padding-right: 5px;
-    }
-
-    /* Custom scrollbar styles */
-    .sidebar::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    .sidebar::-webkit-scrollbar-thumb {
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 3px;
-    }
-    
-    .sidebar::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-    
-    .sidebar-nested-nav, .sidebar-deep-nav, .sidebar-extra-nav {
+    /* Simplified DSA Tabs Styles */
+    .sidebar-tabs {
       list-style: none;
-      padding-left: 15px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    
-    .sidebar-subnav-item.expanded > .sidebar-nested-nav,
-    .sidebar-nested-item.expanded > .sidebar-deep-nav,
-    .sidebar-deep-item.expanded > .sidebar-extra-nav {
-      max-height: none !important; /* Allow unlimited height */
-    }
-    
-    .category-header {
-      font-weight: 600;
-      color: var(--text-color);
-      opacity: 0.8;
-    }
-    
-    .sidebar-nested-link, .sidebar-deep-link, .sidebar-extra-link {
+      padding: 0;
+      margin: 0;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .sidebar-tab {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .sidebar-tab-link {
+      display: block;
+      padding: 10px;
+      color: var(--text-muted, #888);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .sidebar-tab.active .sidebar-tab-link {
+      color: var(--primary-color, #f97316);
+      border-bottom: 2px solid var(--primary-color, #f97316);
+    }
+    
+    .sidebar-tab-content {
+      display: none;
+      padding: 10px 0;
+    }
+    
+    .sidebar-tab.active .sidebar-tab-content {
+      display: block;
+    }
+    
+    .sidebar-item {
+      margin-bottom: 6px;
+    }
+    
+    .sidebar-item-link {
+      display: block;
+      padding: 6px 12px;
+      color: var(--text-muted, #888);
       text-decoration: none;
       font-size: 12px;
       border-radius: 4px;
-      transition: background-color 0.2s, color 0.2s;
+      transition: background-color 0.2s;
     }
     
-    .sidebar-nested-link:hover, .sidebar-deep-link:hover, .sidebar-extra-link:hover {
+    .sidebar-item-link:hover {
       background-color: rgba(255, 255, 255, 0.05);
-      color: var(--text-color);
-    }
-    
-    .sidebar-nested-link.active, .sidebar-deep-link.active, .sidebar-extra-link.active {
-      background-color: rgba(249, 115, 22, 0.1);
-      color: var(--primary-color, #f97316);
-      font-weight: 500;
-    }
-    
-    .sidebar-deep-link {
-      font-size: 12px;
-    }
-    
-    .sidebar-extra-link {
-      font-size: 12px;
-    }
-    
-    .toggle-icon {
-      transition: transform 0.3s;
-    }
-    
-    .sidebar-subnav-item.expanded > .sidebar-subnav-link .toggle-icon,
-    .sidebar-nested-item.expanded > .sidebar-nested-link .toggle-icon,
-    .sidebar-deep-item.expanded > .sidebar-deep-link .toggle-icon {
-      transform: rotate(90deg);
+      color: var(--text-color, #fff);
     }
   `;
   document.head.appendChild(styleElement);
 }
 
-// Add click handlers for expandable menu items
-function addMenuToggleHandlers() {
-  // Category headers
-  document.querySelectorAll('.sidebar-subnav-link.category-header').forEach(link => {
-    link.addEventListener('click', function(e) {
+// Add tab click handlers
+function addTabHandlers() {
+  document.querySelectorAll('.sidebar-tab-link').forEach(tabLink => {
+    tabLink.addEventListener('click', function(e) {
       e.preventDefault();
-      const parent = this.parentElement;
-      parent.classList.toggle('expanded');
-    });
-  });
-  
-  // Items with subitems
-  document.querySelectorAll('.sidebar-nested-link .toggle-icon').forEach(icon => {
-    icon.parentElement.addEventListener('click', function(e) {
-      if (e.target === icon || e.target.closest('.toggle-icon') === icon) {
-        e.preventDefault();
-        const parent = this.parentElement;
-        parent.classList.toggle('expanded');
-      }
-    });
-  });
-  
-  // Deep items with extra subitems
-  document.querySelectorAll('.sidebar-deep-link .toggle-icon').forEach(icon => {
-    icon.parentElement.addEventListener('click', function(e) {
-      if (e.target === icon || e.target.closest('.toggle-icon') === icon) {
-        e.preventDefault();
-        const parent = this.parentElement;
-        parent.classList.toggle('expanded');
-      }
+      
+      // Remove active class from all tabs
+      document.querySelectorAll('.sidebar-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
     });
   });
 }
-
-// Highlight the active path and expand parent items
-function highlightActivePath() {
-  const currentUrl = window.location.href;
-  
-  // Clear any existing highlights
-  document.querySelectorAll('.sidebar-nested-link.active, .sidebar-deep-link.active, .sidebar-extra-link.active')
-    .forEach(link => link.classList.remove('active'));
-  
-  // Find all links
-  const allLinks = [
-    ...document.querySelectorAll('.sidebar-nested-link'),
-    ...document.querySelectorAll('.sidebar-deep-link'),
-    ...document.querySelectorAll('.sidebar-extra-link')
-  ];
-  
-  // Find an exact match for the current URL
-  let activeLink = null;
-  for (const link of allLinks) {
-    const href = link.getAttribute('href');
-    if (href === currentUrl) {
-      activeLink = link;
-      break;
-    }
-  }
-  
-  // If we found a match, highlight it and expand parents
-  if (activeLink) {
-    activeLink.classList.add('active');
-    
-    // Expand all parent containers
-    let parent = activeLink.parentElement;
-    while (parent) {
-      if (parent.classList.contains('sidebar-nested-item') || 
-          parent.classList.contains('sidebar-deep-item') ||
-          parent.classList.contains('sidebar-subnav-item')) {
-        parent.classList.add('expanded');
-      }
-      parent = parent.parentElement;
-    }
-  }
-}
-
-// Expose global function to highlight a specific menu item
-window.highlightDsaMenuItem = function(itemUrl) {
-  // Clear any existing highlights
-  document.querySelectorAll('.sidebar-nested-link.active, .sidebar-deep-link.active, .sidebar-extra-link.active')
-    .forEach(link => link.classList.remove('active'));
-  
-  // Find the specified link
-  const allLinks = [
-    ...document.querySelectorAll('.sidebar-nested-link'),
-    ...document.querySelectorAll('.sidebar-deep-link'),
-    ...document.querySelectorAll('.sidebar-extra-link')
-  ];
-  
-  let found = false;
-  for (const link of allLinks) {
-    const href = link.getAttribute('href');
-    if (href === itemUrl) {
-      // Add active class
-      link.classList.add('active');
-      
-      // Expand parent items
-      let parent = link.parentElement;
-      while (parent) {
-        if (parent.classList.contains('sidebar-nested-item') || 
-            parent.classList.contains('sidebar-deep-item') ||
-            parent.classList.contains('sidebar-subnav-item')) {
-          parent.classList.add('expanded');
-        }
-        parent = parent.parentElement;
-      }
-      
-      found = true;
-      break;
-    }
-  }
-  
-  return found;
-};
 
 // Fix the original populateSidebar function to handle DSA Basics pages
 (function() {
@@ -616,8 +307,8 @@ window.highlightDsaMenuItem = function(itemUrl) {
   window.populateSidebar = function(problems) {
     // Check if we're on a DSA Basics page
     if (isDsaBasicsPage()) {
-      // If on a DSA Basics page, use our custom sidebar
-      createDsaBasicsSidebar();
+      // If on a DSA Basics page, use our simplified sidebar
+      createSimplifiedSidebar();
     } else {
       // Otherwise, call the original function for other pages
       if (typeof originalPopulateSidebar === 'function') {
@@ -636,8 +327,8 @@ window.highlightDsaMenuItem = function(itemUrl) {
   window.controlMenuVisibilityByURL = function() {
     // Check if we're on a DSA Basics page
     if (isDsaBasicsPage()) {
-      // If on a DSA Basics page, use our custom sidebar
-      createDsaBasicsSidebar();
+      // If on a DSA Basics page, use our simplified sidebar
+      createSimplifiedSidebar();
     } else {
       // Otherwise, call the original function for other pages
       if (typeof originalControlMenuVisibilityByURL === 'function') {
@@ -647,53 +338,11 @@ window.highlightDsaMenuItem = function(itemUrl) {
   };
 })();
 
-// Function to ensure the sidebar is properly scrollable
-function ensureSidebarScrollable() {
-  const sidebar = document.querySelector('.sidebar');
-  if (!sidebar) return;
-  
-  // Apply styles directly
-  sidebar.style.maxHeight = '85vh';
-  sidebar.style.overflowY = 'auto';
-  sidebar.style.position = 'relative';
-  
-  // Check if we need to add the scrollable class
-  if (!sidebar.classList.contains('scrollable-sidebar')) {
-    sidebar.classList.add('scrollable-sidebar');
-  }
-  
-  // Fix parent containers too if they exist
-  const parents = [];
-  let parentElement = sidebar.parentElement;
-  
-  while (parentElement) {
-    parents.push(parentElement);
-    parentElement = parentElement.parentElement;
-    
-    // Don't go too far up the DOM tree
-    if (parents.length > 5) break;
-  }
-  
-  // Apply fixes to immediate parent elements
-  parents.slice(0, 3).forEach(parent => {
-    parent.style.height = 'auto';
-    parent.style.maxHeight = 'none';
-    parent.style.overflow = 'visible';
-  });
-  
-  // Force browser reflow to apply the changes
-  sidebar.offsetHeight;
-  
-  console.log("Applied scrollability fixes to sidebar");
-}
-
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   // Check if we're on a DSA Basics page and create our sidebar if needed
   if (isDsaBasicsPage()) {
-    createDsaBasicsSidebar();
-    // Wait a short time for rendering
-    setTimeout(ensureSidebarScrollable, 100);
+    createSimplifiedSidebar();
   }
 });
 
@@ -701,22 +350,6 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', function() {
   // Check again after full page load
   if (isDsaBasicsPage()) {
-    createDsaBasicsSidebar();
-    highlightActivePath();
-    ensureSidebarScrollable();
-    
-    // Try again after a longer delay to catch any layout shifts
-    setTimeout(ensureSidebarScrollable, 500);
+    createSimplifiedSidebar();
   }
 });
-
-// Also check when window hash changes (for single-page applications)
-window.addEventListener('hashchange', function() {
-  if (isDsaBasicsPage()) {
-    highlightActivePath();
-    ensureSidebarScrollable();
-  }
-});
-
-// Expose scrollability function globally
-window.ensureSidebarScrollable = ensureSidebarScrollable;
