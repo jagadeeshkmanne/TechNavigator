@@ -1,13 +1,5 @@
-// DSA Menu data structure in JSON format
+// DSA Basics Menu Data Structure
 const dsaBasicsData = {
-  "fundamentals": {
-    "title": "Fundamentals",
-    "items": [
-      {"name": "Introduction to DSA", "url": "/dsa-basics/introduction-to-dsa"},
-      {"name": "Big O Notation", "url": "/dsa-basics/big-o-notation"},
-      {"name": "Memory Concepts", "url": "/dsa-basics/memory-concepts"}
-    ]
-  },
   "dataStructures": {
     "title": "Data Structures",
     "items": [
@@ -208,11 +200,166 @@ const dsaBasicsData = {
   }
 };
 
-// Add CSS styles for nested menus (will work with your existing CSS)
-function addDsaMenuStyles() {
-  const styleEl = document.createElement('style');
-  styleEl.innerHTML = `
-    /* DSA Menu Styles */
+// Create our own sidebar for DSA Basics
+function createDsaBasicsSidebar() {
+  // Only run on DSA Basics pages
+  if (!window.location.pathname.includes('/dsa-basics/')) {
+    return;
+  }
+
+  // Create or get sidebar
+  let sidebar = document.querySelector('.sidebar-nav');
+  if (!sidebar) {
+    console.error("Sidebar not found, creating new one");
+    sidebar = document.createElement('ul');
+    sidebar.className = 'sidebar-nav';
+    const sidebarContainer = document.querySelector('.sidebar');
+    if (sidebarContainer) {
+      sidebarContainer.innerHTML = '';
+      sidebarContainer.appendChild(sidebar);
+    } else {
+      console.error("Sidebar container not found");
+      return;
+    }
+  } else {
+    // Clear existing sidebar
+    sidebar.innerHTML = '';
+  }
+
+  // Create main DSA Basics menu item
+  const dsaBasicsItem = document.createElement('li');
+  dsaBasicsItem.className = 'sidebar-nav-item expanded';
+  dsaBasicsItem.innerHTML = `
+    <div class="sidebar-nav-link main-category">
+      <svg fill='none' height='16' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2'/>
+        <rect x='9' y='2' width='6' height='4' rx='1'/>
+        <path d='M9 12h6'/>
+        <path d='M12 9v6'/>
+      </svg>
+      <span>DSA Basics</span>
+    </div>
+    <ul class="sidebar-subnav" id="dsa-basics-subnav"></ul>
+  `;
+  sidebar.appendChild(dsaBasicsItem);
+
+  // Get the subnav container
+  const dsaBasicsSubnav = document.getElementById('dsa-basics-subnav');
+
+  // Add CSS styles for nested menus
+  addDsaBasicsStyles();
+
+  // Add each category section
+  Object.keys(dsaBasicsData).forEach(categoryKey => {
+    const category = dsaBasicsData[categoryKey];
+    
+    // Add category header
+    const categoryHeader = document.createElement('li');
+    categoryHeader.className = 'sidebar-subnav-item';
+    categoryHeader.innerHTML = `
+      <a href="javascript:void(0)" class="sidebar-subnav-link category-header">
+        <span>${category.title}</span>
+        <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+      <ul class="sidebar-nested-nav"></ul>
+    `;
+    dsaBasicsSubnav.appendChild(categoryHeader);
+    
+    // Get the nested nav container
+    const nestedNav = categoryHeader.querySelector('.sidebar-nested-nav');
+    
+    // Add items for this category
+    category.items.forEach(item => {
+      const hasSubitems = item.subitems && item.subitems.length > 0;
+      
+      const itemElement = document.createElement('li');
+      itemElement.className = 'sidebar-nested-item';
+      
+      if (hasSubitems) {
+        itemElement.innerHTML = `
+          <a href="${item.url}" class="sidebar-nested-link">
+            <span>${item.name}</span>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" 
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+          <ul class="sidebar-deep-nav"></ul>
+        `;
+        
+        // Get the deep nav container
+        const deepNav = itemElement.querySelector('.sidebar-deep-nav');
+        
+        // Add subitems
+        item.subitems.forEach(subitem => {
+          const hasDeepSubitems = subitem.subitems && subitem.subitems.length > 0;
+          
+          const subitemElement = document.createElement('li');
+          subitemElement.className = 'sidebar-deep-item';
+          
+          if (hasDeepSubitems) {
+            subitemElement.innerHTML = `
+              <a href="${subitem.url}" class="sidebar-deep-link">
+                <span>${subitem.name}</span>
+                <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" 
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <ul class="sidebar-extra-nav"></ul>
+            `;
+            
+            // Get the extra nav container
+            const extraNav = subitemElement.querySelector('.sidebar-extra-nav');
+            
+            // Add deep subitems
+            subitem.subitems.forEach(extraItem => {
+              const extraItemElement = document.createElement('li');
+              extraItemElement.className = 'sidebar-extra-item';
+              extraItemElement.innerHTML = `
+                <a href="${extraItem.url}" class="sidebar-extra-link">
+                  <span>${extraItem.name}</span>
+                </a>
+              `;
+              extraNav.appendChild(extraItemElement);
+            });
+          } else {
+            subitemElement.innerHTML = `
+              <a href="${subitem.url}" class="sidebar-deep-link">
+                <span>${subitem.name}</span>
+              </a>
+            `;
+          }
+          
+          deepNav.appendChild(subitemElement);
+        });
+      } else {
+        itemElement.innerHTML = `
+          <a href="${item.url}" class="sidebar-nested-link">
+            <span>${item.name}</span>
+          </a>
+        `;
+      }
+      
+      nestedNav.appendChild(itemElement);
+    });
+  });
+
+  // Add click handlers for menu toggling
+  addMenuToggleHandlers();
+  
+  // Highlight active menu items
+  highlightActivePath();
+}
+
+// Add CSS styles
+function addDsaBasicsStyles() {
+  const styleElement = document.createElement('style');
+  styleElement.textContent = `
+    /* DSA Basics Menu Styles */
     .sidebar-nested-nav, .sidebar-deep-nav, .sidebar-extra-nav {
       list-style: none;
       padding-left: 15px;
@@ -225,6 +372,12 @@ function addDsaMenuStyles() {
     .sidebar-nested-item.expanded > .sidebar-deep-nav,
     .sidebar-deep-item.expanded > .sidebar-extra-nav {
       max-height: 1000px; /* Large enough to show all content */
+    }
+    
+    .category-header {
+      font-weight: 600;
+      color: var(--text-color);
+      opacity: 0.8;
     }
     
     .sidebar-nested-link, .sidebar-deep-link, .sidebar-extra-link {
@@ -250,8 +403,16 @@ function addDsaMenuStyles() {
       font-weight: 500;
     }
     
+    .sidebar-deep-link {
+      font-size: 11px;
+    }
+    
+    .sidebar-extra-link {
+      font-size: 10px;
+    }
+    
     .toggle-icon {
-      transition: transform 0.2s;
+      transition: transform 0.3s;
     }
     
     .sidebar-subnav-item.expanded > .sidebar-subnav-link .toggle-icon,
@@ -260,153 +421,13 @@ function addDsaMenuStyles() {
       transform: rotate(90deg);
     }
   `;
-  document.head.appendChild(styleEl);
-}
-
-// Function to replace the DSA Basics menu content
-function updateDsaBasicsMenu() {
-  // Only run this function on DSA basics pages
-  if (!window.location.pathname.includes('/dsa-basics/')) {
-    return;
-  }
-
-  // Find the DSA Basics subnav
-  const dsaBasicsSubnav = document.getElementById('dsa-basics-subnav');
-  if (!dsaBasicsSubnav) {
-    console.error("DSA Basics subnav not found");
-    return;
-  }
-
-  // Clear existing content
-  dsaBasicsSubnav.innerHTML = '';
-
-  // Add Fundamentals section
-  addCategorySection(dsaBasicsSubnav, dsaBasicsData.fundamentals);
-  
-  // Add Data Structures section
-  addCategorySection(dsaBasicsSubnav, dsaBasicsData.dataStructures);
-  
-  // Add Algorithms section
-  addCategorySection(dsaBasicsSubnav, dsaBasicsData.algorithms);
-
-  // Add click handlers for expandable menu items
-  addMenuToggleHandlers();
-  
-  // Highlight and expand active item's parents
-  highlightActivePath();
-}
-
-// Helper function to add a category section
-function addCategorySection(container, categoryData) {
-  // Create the category header
-  const categoryItem = document.createElement('li');
-  categoryItem.className = 'sidebar-subnav-item';
-  categoryItem.innerHTML = `
-    <a href="javascript:void(0)" class="sidebar-subnav-link main-category">
-      <span>${categoryData.title}</span>
-      <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </a>
-    <ul class="sidebar-nested-nav"></ul>
-  `;
-  container.appendChild(categoryItem);
-  
-  // Add items for this category
-  const nestedNav = categoryItem.querySelector('.sidebar-nested-nav');
-  categoryData.items.forEach(item => {
-    addNestedItem(nestedNav, item);
-  });
-}
-
-// Helper function to add a nested item
-function addNestedItem(container, itemData) {
-  const hasSubitems = itemData.subitems && itemData.subitems.length > 0;
-  
-  const listItem = document.createElement('li');
-  listItem.className = 'sidebar-nested-item';
-  
-  // Create the item HTML
-  if (hasSubitems) {
-    listItem.innerHTML = `
-      <a href="${itemData.url}" class="sidebar-nested-link">
-        <span>${itemData.name}</span>
-        <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" 
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </a>
-      <ul class="sidebar-deep-nav"></ul>
-    `;
-  } else {
-    listItem.innerHTML = `
-      <a href="${itemData.url}" class="sidebar-nested-link">
-        <span>${itemData.name}</span>
-      </a>
-    `;
-  }
-  
-  container.appendChild(listItem);
-  
-  // If it has subitems, add them
-  if (hasSubitems) {
-    const deepNav = listItem.querySelector('.sidebar-deep-nav');
-    itemData.subitems.forEach(subitem => {
-      addDeepItem(deepNav, subitem);
-    });
-  }
-}
-
-// Helper function to add a deep item
-function addDeepItem(container, itemData) {
-  const hasSubitems = itemData.subitems && itemData.subitems.length > 0;
-  
-  const listItem = document.createElement('li');
-  listItem.className = 'sidebar-deep-item';
-  
-  // Create the item HTML
-  if (hasSubitems) {
-    listItem.innerHTML = `
-      <a href="${itemData.url}" class="sidebar-deep-link">
-        <span>${itemData.name}</span>
-        <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" 
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </a>
-      <ul class="sidebar-extra-nav"></ul>
-    `;
-  } else {
-    listItem.innerHTML = `
-      <a href="${itemData.url}" class="sidebar-deep-link">
-        <span>${itemData.name}</span>
-      </a>
-    `;
-  }
-  
-  container.appendChild(listItem);
-  
-  // If it has subitems, add them
-  if (hasSubitems) {
-    const extraNav = listItem.querySelector('.sidebar-extra-nav');
-    itemData.subitems.forEach(subitem => {
-      const extraItem = document.createElement('li');
-      extraItem.className = 'sidebar-extra-item';
-      extraItem.innerHTML = `
-        <a href="${subitem.url}" class="sidebar-extra-link">
-          <span>${subitem.name}</span>
-        </a>
-      `;
-      extraNav.appendChild(extraItem);
-    });
-  }
+  document.head.appendChild(styleElement);
 }
 
 // Add click handlers for expandable menu items
 function addMenuToggleHandlers() {
   // Category headers
-  document.querySelectorAll('.sidebar-subnav-link.main-category').forEach(link => {
+  document.querySelectorAll('.sidebar-subnav-link.category-header').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const parent = this.parentElement;
@@ -416,21 +437,23 @@ function addMenuToggleHandlers() {
   
   // Items with subitems
   document.querySelectorAll('.sidebar-nested-link .toggle-icon').forEach(icon => {
-    icon.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const parent = this.closest('.sidebar-nested-item');
-      parent.classList.toggle('expanded');
+    icon.parentElement.addEventListener('click', function(e) {
+      if (e.target === icon || e.target.closest('.toggle-icon') === icon) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        parent.classList.toggle('expanded');
+      }
     });
   });
   
   // Deep items with extra subitems
   document.querySelectorAll('.sidebar-deep-link .toggle-icon').forEach(icon => {
-    icon.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const parent = this.closest('.sidebar-deep-item');
-      parent.classList.toggle('expanded');
+    icon.parentElement.addEventListener('click', function(e) {
+      if (e.target === icon || e.target.closest('.toggle-icon') === icon) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        parent.classList.toggle('expanded');
+      }
     });
   });
 }
@@ -469,53 +492,54 @@ function highlightActivePath() {
   }
 }
 
-// Initialize the menu
-function initializeDsaMenu() {
-  // Add the CSS styles
-  addDsaMenuStyles();
-  
-  // Run on DSA basics pages
-  if (window.location.pathname.includes('/dsa-basics/')) {
-    // Make the DSA Basics menu item visible and expanded
-    const dsaBasicsItems = document.querySelectorAll('.sidebar-nav-item');
-    dsaBasicsItems.forEach(item => {
-      if (item.textContent.includes('DSA Basics')) {
-        item.style.display = 'block';
-        item.classList.add('expanded');
-      }
-    });
-    
-    // Update the menu content
-    updateDsaBasicsMenu();
-  }
-}
-
-// Hook into existing sidebar.js script
+// Fix the original populateSidebar function to remove DSA Basics
 (function() {
-  // Store original controlMenuVisibilityByURL function
+  // Store the original function
+  const originalPopulateSidebar = window.populateSidebar;
+  
+  // Replace with our version
+  window.populateSidebar = function(problems) {
+    // Call the original function
+    if (typeof originalPopulateSidebar === 'function') {
+      originalPopulateSidebar(problems);
+    }
+    
+    // On DSA Basics pages, create our sidebar
+    if (window.location.pathname.includes('/dsa-basics/')) {
+      createDsaBasicsSidebar();
+    } else {
+      // On other pages, make sure to remove the DSA Basics menu item
+      const dsaBasicsItem = document.querySelector('.sidebar-nav-item');
+      if (dsaBasicsItem && dsaBasicsItem.textContent.includes('DSA Basics')) {
+        dsaBasicsItem.style.display = 'none';
+      }
+    }
+  };
+})();
+
+// Fix the controlMenuVisibilityByURL function
+(function() {
+  // Store the original function
   const originalControlMenuVisibilityByURL = window.controlMenuVisibilityByURL;
   
-  // Override with our version
+  // Replace with our version
   window.controlMenuVisibilityByURL = function() {
     // Call the original function
     if (typeof originalControlMenuVisibilityByURL === 'function') {
       originalControlMenuVisibilityByURL();
     }
     
-    // If on a DSA basics page, update the menu
+    // On DSA Basics pages, create our sidebar
     if (window.location.pathname.includes('/dsa-basics/')) {
-      const dsaBasicsItems = document.querySelectorAll('.sidebar-nav-item');
-      dsaBasicsItems.forEach(item => {
-        if (item.textContent.includes('DSA Basics')) {
-          item.style.display = 'block';
-          item.classList.add('expanded');
-        }
-      });
-      
-      updateDsaBasicsMenu();
+      createDsaBasicsSidebar();
     }
   };
 })();
 
-// Run when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeDsaMenu);
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // On DSA Basics pages, create our sidebar
+  if (window.location.pathname.includes('/dsa-basics/')) {
+    createDsaBasicsSidebar();
+  }
+});
