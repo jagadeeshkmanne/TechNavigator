@@ -6,99 +6,99 @@ const dsaBasicsData = {
       {
         "name": "Arrays",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/arrays/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/arrays/basic-operations"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/arrays/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/arrays/practice"}
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Linked Lists",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/linked-lists/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/linked-lists/basic-operations"},
-          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/linked-lists/types"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/linked-lists/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/linked-lists/practice"}
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Types", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Hash Tables",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/hash-tables/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/hash-tables/basic-operations"},
-          {"name": "Collision Handling", "url": "https://www.technavigator.io/dsa-basics/hash-tables/collision-handling"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/hash-tables/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/hash-tables/practice"}
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Collision Handling", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Stacks",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/stacks/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/stacks/basic-operations"},
-          {"name": "Applications", "url": "https://www.technavigator.io/dsa-basics/stacks/applications"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/stacks/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/stacks/practice"}
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Applications", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Queues",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/queues/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/queues/basic-operations"},
-          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/queues/types"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/queues/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/queues/practice"}
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Types", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Trees",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/trees/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/trees/basic-operations"},
-          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/trees/types"},
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Types", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
           {
             "name": "Traversal",
             "subitems": [
-              {"name": "Inorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/inorder"},
-              {"name": "Preorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/preorder"},
-              {"name": "Postorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/postorder"},
-              {"name": "Level Order Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/level-order"}
+              {"name": "Inorder Traversal", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+              {"name": "Preorder Traversal", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+              {"name": "Postorder Traversal", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+              {"name": "Level Order Traversal", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
             ]
           },
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/trees/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/trees/practice"}
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Heaps",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/heaps/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/heaps/basic-operations"},
-          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/heaps/types"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/heaps/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/heaps/practice"}
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Types", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Tries",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/tries/introduction"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/tries/basic-operations"},
-          {"name": "Applications", "url": "https://www.technavigator.io/dsa-basics/tries/applications"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/tries/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/tries/practice"}
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Applications", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Graphs",
         "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/graphs/introduction"},
-          {"name": "Representations", "url": "https://www.technavigator.io/dsa-basics/graphs/representations"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/graphs/basic-operations"},
-          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/graphs/videos"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/graphs/practice"}
+          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Representations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       }
     ]
@@ -109,73 +109,73 @@ const dsaBasicsData = {
       {
         "name": "Searching Algorithms",
         "subitems": [
-          {"name": "Linear Search", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/linear-search"},
-          {"name": "Binary Search", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/binary-search"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/practice"}
+          {"name": "Linear Search", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Binary Search", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Sorting Algorithms",
         "subitems": [
-          {"name": "Bubble Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/bubble-sort"},
-          {"name": "Selection Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/selection-sort"},
-          {"name": "Insertion Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/insertion-sort"},
-          {"name": "Merge Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/merge-sort"},
-          {"name": "Quick Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/quick-sort"},
-          {"name": "Heap Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/heap-sort"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/practice"}
+          {"name": "Bubble Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Selection Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Insertion Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Merge Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Quick Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Heap Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Graph Algorithms",
         "subitems": [
-          {"name": "Depth-First Search (DFS)", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/dfs"},
-          {"name": "Breadth-First Search (BFS)", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/bfs"},
+          {"name": "Depth-First Search (DFS)", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Breadth-First Search (BFS)", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
           {
             "name": "Shortest Path Algorithms",
             "subitems": [
-              {"name": "Dijkstra's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/dijkstra"},
-              {"name": "Bellman-Ford Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/bellman-ford"},
-              {"name": "Floyd-Warshall Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/floyd-warshall"}
+              {"name": "Dijkstra's Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+              {"name": "Bellman-Ford Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+              {"name": "Floyd-Warshall Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
             ]
           },
           {
             "name": "Minimum Spanning Tree",
             "subitems": [
-              {"name": "Kruskal's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/minimum-spanning-tree/kruskal"},
-              {"name": "Prim's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/minimum-spanning-tree/prim"}
+              {"name": "Kruskal's Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+              {"name": "Prim's Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
             ]
           },
-          {"name": "Topological Sort", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/topological-sort"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/practice"}
+          {"name": "Topological Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Algorithm Techniques",
         "subitems": [
-          {"name": "Two Pointers", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/two-pointers"},
-          {"name": "Sliding Window", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/sliding-window"},
-          {"name": "Prefix Sum", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/prefix-sum"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/practice"}
+          {"name": "Two Pointers", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Sliding Window", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Prefix Sum", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       },
       {
         "name": "Advanced Algorithms",
         "subitems": [
-          {"name": "Divide and Conquer", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/divide-and-conquer"},
-          {"name": "Greedy Algorithms", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/greedy"},
-          {"name": "Backtracking", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/backtracking"},
+          {"name": "Divide and Conquer", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Greedy Algorithms", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Backtracking", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
           {
             "name": "Dynamic Programming",
             "subitems": [
-              {"name": "1D Dynamic Programming", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/1d"},
-              {"name": "2D Dynamic Programming", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/2d"},
-              {"name": "State Compression", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/state-compression"}
+              {"name": "1D Dynamic Programming", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+              {"name": "2D Dynamic Programming", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+              {"name": "State Compression", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
             ]
           },
-          {"name": "Union Find", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/union-find"},
-          {"name": "Monotonic Stack/Queue", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/monotonic-stack-queue"},
-          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/practice"}
+          {"name": "Union Find", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Monotonic Stack/Queue", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
         ]
       }
     ]
@@ -188,7 +188,8 @@ function isDsaBasicsPage() {
   return currentURL.includes('datastructure-basics') || 
          currentURL.includes('data-structure-basics') ||
          currentURL.includes('algorithm-basics') || 
-         currentURL.includes('algorithms-basics');
+         currentURL.includes('algorithms-basics') ||
+         currentURL.includes('/2025/03/coming-soon.html');
 }
 
 // Function to determine if a URL is related to data structures
@@ -332,6 +333,27 @@ function addDsaMenuStyles() {
     
     .dsa-submenu-item, .dsa-deep-submenu-item {
       margin: 2px 0;
+    }
+    
+    .dsa-submenu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding: 4px 12px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      color: #888;
+      font-size: 12px;
+    }
+    
+    .dsa-submenu-header:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #eee;
+    }
+    
+    .dsa-submenu-title {
+      font-weight: 400;
     }
     
     .dsa-submenu-link, .dsa-deep-submenu-link {
@@ -709,5 +731,20 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', function() {
   if (isDsaBasicsPage()) {
     createDsaMenu();
+    
+    // If we're on the coming soon page, check if this is called from the menu
+    if (window.location.href.toLowerCase().includes('/2025/03/coming-soon.html')) {
+      // Make sure the menu is always visible on this page
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar) {
+        sidebar.style.display = 'block';
+      }
+      
+      // Force the sidebar to be visible
+      const sidebarToggle = document.querySelector('.sidebar-toggle');
+      if (sidebarToggle) {
+        sidebarToggle.classList.add('active');
+      }
+    }
   }
 });
