@@ -3,7 +3,7 @@ const systemDesignData = {
   "basics": {
     "title": "Basics",
     "items": [
-      {"name": "System Design Fundamentals", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+      {"name": "Fundamentals", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "Networking", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "API Design", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "Caching", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
