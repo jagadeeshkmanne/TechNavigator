@@ -82,7 +82,7 @@ function addSystemDesignMenuStyles() {
       display: block;
       padding: 10px 12px;
       text-align: center;
-      color: #888;
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 13px;
       font-weight: 500;
@@ -114,6 +114,7 @@ function addSystemDesignMenuStyles() {
     .sd-tab-panel {
       display: none;
       padding: 5px 0;
+      margin-left:1.5rem;
     }
     
     .sd-tab-panel.active {
