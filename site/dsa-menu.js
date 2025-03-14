@@ -1,11 +1,10 @@
-// DSA Basics Menu Data Structure - Simplified to two main tabs
+// DSA Basics Menu Data Structure - Structured according to requirements
 const dsaBasicsData = {
   "dataStructures": {
     "title": "Data Structures",
     "items": [
       {
         "name": "Arrays",
-        "url": "https://www.technavigator.io/dsa-basics/arrays",
         "subitems": [
           {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/arrays/introduction"},
           {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/arrays/basic-operations"},
@@ -15,7 +14,6 @@ const dsaBasicsData = {
       },
       {
         "name": "Linked Lists",
-        "url": "https://www.technavigator.io/dsa-basics/linked-lists",
         "subitems": [
           {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/linked-lists/introduction"},
           {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/linked-lists/basic-operations"},
@@ -26,31 +24,82 @@ const dsaBasicsData = {
       },
       {
         "name": "Hash Tables",
-        "url": "https://www.technavigator.io/dsa-basics/hash-tables"
+        "subitems": [
+          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/hash-tables/introduction"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/hash-tables/basic-operations"},
+          {"name": "Collision Handling", "url": "https://www.technavigator.io/dsa-basics/hash-tables/collision-handling"},
+          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/hash-tables/videos"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/hash-tables/practice"}
+        ]
       },
       {
         "name": "Stacks",
-        "url": "https://www.technavigator.io/dsa-basics/stacks"
+        "subitems": [
+          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/stacks/introduction"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/stacks/basic-operations"},
+          {"name": "Applications", "url": "https://www.technavigator.io/dsa-basics/stacks/applications"},
+          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/stacks/videos"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/stacks/practice"}
+        ]
       },
       {
         "name": "Queues",
-        "url": "https://www.technavigator.io/dsa-basics/queues"
+        "subitems": [
+          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/queues/introduction"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/queues/basic-operations"},
+          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/queues/types"},
+          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/queues/videos"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/queues/practice"}
+        ]
       },
       {
         "name": "Trees",
-        "url": "https://www.technavigator.io/dsa-basics/trees"
+        "subitems": [
+          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/trees/introduction"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/trees/basic-operations"},
+          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/trees/types"},
+          {
+            "name": "Traversal",
+            "subitems": [
+              {"name": "Inorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/inorder"},
+              {"name": "Preorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/preorder"},
+              {"name": "Postorder Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/postorder"},
+              {"name": "Level Order Traversal", "url": "https://www.technavigator.io/dsa-basics/trees/traversal/level-order"}
+            ]
+          },
+          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/trees/videos"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/trees/practice"}
+        ]
       },
       {
         "name": "Heaps",
-        "url": "https://www.technavigator.io/dsa-basics/heaps"
+        "subitems": [
+          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/heaps/introduction"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/heaps/basic-operations"},
+          {"name": "Types", "url": "https://www.technavigator.io/dsa-basics/heaps/types"},
+          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/heaps/videos"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/heaps/practice"}
+        ]
       },
       {
         "name": "Tries",
-        "url": "https://www.technavigator.io/dsa-basics/tries"
+        "subitems": [
+          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/tries/introduction"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/tries/basic-operations"},
+          {"name": "Applications", "url": "https://www.technavigator.io/dsa-basics/tries/applications"},
+          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/tries/videos"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/tries/practice"}
+        ]
       },
       {
         "name": "Graphs",
-        "url": "https://www.technavigator.io/dsa-basics/graphs"
+        "subitems": [
+          {"name": "Introduction", "url": "https://www.technavigator.io/dsa-basics/graphs/introduction"},
+          {"name": "Representations", "url": "https://www.technavigator.io/dsa-basics/graphs/representations"},
+          {"name": "Basic Operations", "url": "https://www.technavigator.io/dsa-basics/graphs/basic-operations"},
+          {"name": "Videos", "url": "https://www.technavigator.io/dsa-basics/graphs/videos"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/graphs/practice"}
+        ]
       }
     ]
   },
@@ -59,23 +108,75 @@ const dsaBasicsData = {
     "items": [
       {
         "name": "Searching Algorithms",
-        "url": "https://www.technavigator.io/dsa-basics/searching-algorithms"
+        "subitems": [
+          {"name": "Linear Search", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/linear-search"},
+          {"name": "Binary Search", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/binary-search"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/searching-algorithms/practice"}
+        ]
       },
       {
         "name": "Sorting Algorithms",
-        "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms"
+        "subitems": [
+          {"name": "Bubble Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/bubble-sort"},
+          {"name": "Selection Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/selection-sort"},
+          {"name": "Insertion Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/insertion-sort"},
+          {"name": "Merge Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/merge-sort"},
+          {"name": "Quick Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/quick-sort"},
+          {"name": "Heap Sort", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/heap-sort"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/sorting-algorithms/practice"}
+        ]
       },
       {
         "name": "Graph Algorithms",
-        "url": "https://www.technavigator.io/dsa-basics/graph-algorithms"
+        "subitems": [
+          {"name": "Depth-First Search (DFS)", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/dfs"},
+          {"name": "Breadth-First Search (BFS)", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/bfs"},
+          {
+            "name": "Shortest Path Algorithms",
+            "subitems": [
+              {"name": "Dijkstra's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/dijkstra"},
+              {"name": "Bellman-Ford Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/bellman-ford"},
+              {"name": "Floyd-Warshall Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/shortest-path/floyd-warshall"}
+            ]
+          },
+          {
+            "name": "Minimum Spanning Tree",
+            "subitems": [
+              {"name": "Kruskal's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/minimum-spanning-tree/kruskal"},
+              {"name": "Prim's Algorithm", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/minimum-spanning-tree/prim"}
+            ]
+          },
+          {"name": "Topological Sort", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/topological-sort"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/graph-algorithms/practice"}
+        ]
       },
       {
         "name": "Algorithm Techniques",
-        "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques"
+        "subitems": [
+          {"name": "Two Pointers", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/two-pointers"},
+          {"name": "Sliding Window", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/sliding-window"},
+          {"name": "Prefix Sum", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/prefix-sum"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/algorithm-techniques/practice"}
+        ]
       },
       {
         "name": "Advanced Algorithms",
-        "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms"
+        "subitems": [
+          {"name": "Divide and Conquer", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/divide-and-conquer"},
+          {"name": "Greedy Algorithms", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/greedy"},
+          {"name": "Backtracking", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/backtracking"},
+          {
+            "name": "Dynamic Programming",
+            "subitems": [
+              {"name": "1D Dynamic Programming", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/1d"},
+              {"name": "2D Dynamic Programming", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/2d"},
+              {"name": "State Compression", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/dynamic-programming/state-compression"}
+            ]
+          },
+          {"name": "Union Find", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/union-find"},
+          {"name": "Monotonic Stack/Queue", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/monotonic-stack-queue"},
+          {"name": "Practice", "url": "https://www.technavigator.io/dsa-basics/advanced-algorithms/practice"}
+        ]
       }
     ]
   }
@@ -84,17 +185,10 @@ const dsaBasicsData = {
 // Function to check if current page is a DSA Basics page
 function isDsaBasicsPage() {
   const currentURL = window.location.href.toLowerCase();
-  return currentURL.includes('dsa-basics') || 
-         (currentURL.includes('technavigator.io') && 
-          (currentURL.includes('/array') || 
-           currentURL.includes('/linked-list') || 
-           currentURL.includes('/stack') || 
-           currentURL.includes('/queue') || 
-           currentURL.includes('/tree') || 
-           currentURL.includes('/graph') || 
-           currentURL.includes('/algorithm') || 
-           currentURL.includes('/search') || 
-           currentURL.includes('/sort')));
+  return currentURL.includes('datastructure-basics') || 
+         currentURL.includes('data-structure-basics') ||
+         currentURL.includes('algorithm-basics') || 
+         currentURL.includes('algorithms-basics');
 }
 
 // Function to determine if a URL is related to data structures
@@ -135,19 +229,10 @@ function createSimplifiedSidebar() {
     sidebar.innerHTML = '';
   }
 
-  // Create main DSA Basics menu item
+  // Create main DSA Basics menu item (without the title)
   const dsaBasicsItem = document.createElement('li');
   dsaBasicsItem.className = 'sidebar-nav-item expanded';
   dsaBasicsItem.innerHTML = `
-    <div class="sidebar-nav-link main-category">
-      <svg fill='none' height='16' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'>
-        <path d='M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2'/>
-        <rect x='9' y='2' width='6' height='4' rx='1'/>
-        <path d='M9 12h6'/>
-        <path d='M12 9v6'/>
-      </svg>
-      <span>DSA Basics</span>
-    </div>
     <div class="sidebar-tabs-container">
       <ul class="sidebar-tabs" id="dsa-basics-tabs"></ul>
       <div class="sidebar-tab-panels" id="dsa-tab-panels"></div>
@@ -199,18 +284,46 @@ function createSimplifiedSidebar() {
         panelContent += `
           <div class="sidebar-menu-item expandable">
             <div class="sidebar-menu-header">
-              <a href="${item.url}" class="sidebar-menu-link">${item.name}</a>
+              <span class="sidebar-menu-title">${item.name}</span>
               <span class="toggle-icon">▼</span>
             </div>
             <ul class="sidebar-submenu">
         `;
         
+        // Add first level subitems
         item.subitems.forEach(subitem => {
-          panelContent += `
-            <li class="sidebar-submenu-item">
-              <a href="${subitem.url}" class="sidebar-submenu-link">${subitem.name}</a>
-            </li>
-          `;
+          const hasDeepSubitems = subitem.subitems && subitem.subitems.length > 0;
+          
+          if (hasDeepSubitems) {
+            panelContent += `
+              <li class="sidebar-submenu-item expandable">
+                <div class="sidebar-submenu-header">
+                  <span class="sidebar-submenu-title">${subitem.name}</span>
+                  <span class="toggle-icon">▼</span>
+                </div>
+                <ul class="sidebar-deep-submenu">
+            `;
+            
+            // Add second level subitems
+            subitem.subitems.forEach(deepSubitem => {
+              panelContent += `
+                <li class="sidebar-deep-submenu-item">
+                  <a href="${deepSubitem.url}" class="sidebar-deep-submenu-link">${deepSubitem.name}</a>
+                </li>
+              `;
+            });
+            
+            panelContent += `
+                </ul>
+              </li>
+            `;
+          } else {
+            panelContent += `
+              <li class="sidebar-submenu-item">
+                <a href="${subitem.url}" class="sidebar-submenu-link">${subitem.name}</a>
+              </li>
+            `;
+          }
         });
         
         panelContent += `
@@ -220,7 +333,7 @@ function createSimplifiedSidebar() {
       } else {
         panelContent += `
           <div class="sidebar-menu-item">
-            <a href="${item.url}" class="sidebar-menu-link">${item.name}</a>
+            <span class="sidebar-menu-title">${item.name}</span>
           </div>
         `;
       }
@@ -320,42 +433,45 @@ function addTabStyles() {
       margin-bottom: 4px;
     }
     
-    .sidebar-menu-header {
+    .sidebar-menu-header, .sidebar-submenu-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-    }
-    
-    .sidebar-menu-link {
-      display: block;
       padding: 6px 12px;
-      color: var(--text-muted, #888);
-      text-decoration: none;
-      font-size: 13px;
       border-radius: 4px;
       transition: background-color 0.2s;
-      flex-grow: 1;
     }
     
-    .sidebar-menu-link:hover {
+    .sidebar-menu-header:hover, .sidebar-submenu-header:hover {
       background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .sidebar-menu-title, .sidebar-submenu-title {
+      color: var(--text-muted, #888);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    
+    .sidebar-menu-header:hover .sidebar-menu-title,
+    .sidebar-submenu-header:hover .sidebar-submenu-title {
       color: var(--text-color, #eee);
     }
     
     .toggle-icon {
       font-size: 8px;
       color: var(--text-muted, #888);
-      margin-right: 10px;
+      margin-right: 4px;
       transition: transform 0.3s;
     }
     
-    .sidebar-menu-item.expanded .toggle-icon {
+    .sidebar-menu-item.expanded .toggle-icon,
+    .sidebar-submenu-item.expanded .toggle-icon {
       transform: rotate(180deg);
     }
     
     /* Submenu styles */
-    .sidebar-submenu {
+    .sidebar-submenu, .sidebar-deep-submenu {
       list-style: none;
       padding-left: 15px;
       max-height: 0;
@@ -363,15 +479,16 @@ function addTabStyles() {
       transition: max-height 0.3s ease;
     }
     
-    .sidebar-menu-item.expanded .sidebar-submenu {
+    .sidebar-menu-item.expanded .sidebar-submenu,
+    .sidebar-submenu-item.expanded .sidebar-deep-submenu {
       max-height: 500px;
     }
     
-    .sidebar-submenu-item {
+    .sidebar-submenu-item, .sidebar-deep-submenu-item {
       margin: 2px 0;
     }
     
-    .sidebar-submenu-link {
+    .sidebar-submenu-link, .sidebar-deep-submenu-link {
       display: block;
       padding: 4px 12px;
       color: var(--text-muted, #888);
@@ -381,7 +498,7 @@ function addTabStyles() {
       transition: background-color 0.2s;
     }
     
-    .sidebar-submenu-link:hover {
+    .sidebar-submenu-link:hover, .sidebar-deep-submenu-link:hover {
       background-color: rgba(255, 255, 255, 0.05);
       color: var(--text-color, #eee);
     }
@@ -417,19 +534,25 @@ function addTabHandlers() {
 
 // Add submenu toggle handlers
 function addSubmenuHandlers() {
+  // First level menus
   document.querySelectorAll('.sidebar-menu-header').forEach(header => {
     header.addEventListener('click', function(e) {
-      // If clicked on the link itself, allow normal navigation
-      if (e.target.tagName === 'A') {
-        return;
-      }
+      e.preventDefault();
       
       // Toggle expanded class on parent
       const menuItem = this.closest('.sidebar-menu-item');
       menuItem.classList.toggle('expanded');
-      
-      // Prevent link click if toggling
+    });
+  });
+  
+  // Second level menus
+  document.querySelectorAll('.sidebar-submenu-header').forEach(header => {
+    header.addEventListener('click', function(e) {
       e.preventDefault();
+      
+      // Toggle expanded class on parent
+      const submenuItem = this.closest('.sidebar-submenu-item');
+      submenuItem.classList.toggle('expanded');
     });
   });
 }
