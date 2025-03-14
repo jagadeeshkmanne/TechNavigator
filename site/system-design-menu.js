@@ -125,13 +125,16 @@ function addSystemDesignMenuStyles() {
     }
     
     .sd-menu-link {
-      display: block;
-      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
       color: #888;
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       border-radius: 4px;
-      transition: background-color 0.2s;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
     }
     
     .sd-menu-link:hover {
