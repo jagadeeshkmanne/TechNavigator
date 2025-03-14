@@ -130,7 +130,7 @@ function addSystemDesignMenuStyles() {
       align-items: center;
       justify-content: space-between;
       padding: 8px 12px;
-      color: #888;
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 12px;
       border-radius: 4px;
