@@ -1,30 +1,67 @@
-/* Sidebar Consistency Fix for Tech Navigator */
+/* Unified Sidebar Design for Tech Navigator - Complete Redesign */
 
-/* Common variables for consistent styling */
+/* ===== CORE VARIABLES ===== */
 :root {
-  --menu-text-color: #94a3b8;
-  --menu-text-hover: #f1f5f9;
-  --menu-active-color: #f97316; /* Professional orange */
-  --menu-bg: #0f172a;
-  --menu-item-bg: #1e293b;
-  --menu-hover-bg: rgba(255, 255, 255, 0.05);
-  --menu-active-bg: rgba(30, 41, 59, 0.7);
-  --menu-border-color: rgba(255, 255, 255, 0.1);
-  --menu-active-border: #f97316;
-  --menu-item-height: 38px; /* Fixed consistent height */
-  --menu-item-padding: 0 15px; /* Horizontal padding only */
-  --sidebar-width: 100%;
+  /* Colors */
+  --tn-dark-bg: #0f172a;
+  --tn-darker-bg: #070d19;
+  --tn-menu-bg: #1e293b;
+  --tn-menu-active-bg: #1e293b;
+  --tn-text: #94a3b8;
+  --tn-text-hover: #f1f5f9;
+  --tn-orange: #F97316;
+  --tn-orange-muted: rgba(249, 115, 22, 0.3);
+  --tn-border: rgba(255, 255, 255, 0.1);
+
+  /* Sizing */
+  --tn-sidebar-width: 300px;
+  --tn-item-height: 40px;
+  --tn-indent-width: 20px;
+  --tn-item-padding: 15px;
+
+  /* Effects */
+  --tn-transition: all 0.2s ease;
+  --tn-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== CONSISTENT STYLING ACROSS ALL MENUS ===== */
-
-/* Main sidebar container */
+/* ===== RESET STYLES ===== */
 .sidebar {
-  background-color: var(--menu-bg);
-  width: 300px;
+  width: var(--tn-sidebar-width);
+  background-color: var(--tn-dark-bg);
+  height: calc(100vh - 64px);
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow-y: auto;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Make all clickable menu items have consistent height and alignment */
+.sidebar-nav,
+.sidebar-nav-item,
+.sidebar-subnav,
+.sidebar-subnav-item,
+.dsa-tabs-container,
+.dsa-tabs,
+.dsa-tab,
+.dsa-tab-panels,
+.dsa-tab-panel,
+.dsa-menu-item,
+.dsa-submenu,
+.dsa-submenu-item,
+.dsa-deep-submenu,
+.dsa-deep-submenu-item,
+.sd-tabs-container,
+.sd-tabs,
+.sd-tab,
+.sd-tab-panels,
+.sd-tab-panel,
+.sd-menu-item {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  box-sizing: border-box !important;
+}
+
+/* ===== SHARED MENU ITEM STYLES ===== */
 .sidebar-nav-link,
 .sidebar-subnav-link,
 .dsa-tab-link,
@@ -34,221 +71,296 @@
 .dsa-submenu-link,
 .dsa-deep-submenu-link,
 .sd-menu-link {
-  height: var(--menu-item-height) !important;
-  min-height: var(--menu-item-height) !important;
-  line-height: var(--menu-item-height) !important;
   display: flex !important;
   align-items: center !important;
+  height: var(--tn-item-height) !important;
+  padding: 0 var(--tn-item-padding) !important;
+  color: var(--tn-text) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: var(--tn-transition) !important;
+  position: relative !important;
   width: 100% !important;
-  padding: var(--menu-item-padding) !important;
   box-sizing: border-box !important;
+  border-left: 3px solid transparent !important;
 }
 
-/* ===== DSA BASICS MENU FIXES ===== */
+/* Hover state */
+.sidebar-nav-link:hover,
+.sidebar-subnav-link:hover,
+.dsa-menu-header:hover,
+.dsa-submenu-header:hover,
+.dsa-submenu-link:hover,
+.dsa-deep-submenu-link:hover,
+.sd-menu-link:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--tn-text-hover) !important;
+}
 
-/* Tab styling - make tabs fill width consistently */
+/* Active state */
+.sidebar-nav-link.active,
+.sidebar-subnav-link.active,
+.dsa-submenu-link.active,
+.dsa-deep-submenu-link.active,
+.sd-menu-link.active {
+  background-color: var(--tn-menu-active-bg) !important;
+  color: var(--tn-orange) !important;
+  border-left-color: var(--tn-orange) !important;
+  font-weight: 500 !important;
+}
+
+/* Count badges */
+.category-count {
+  background-color: var(--tn-orange-muted) !important;
+  color: var(--tn-orange) !important;
+  height: 22px !important;
+  min-width: 28px !important;
+  padding: 0 8px !important;
+  border-radius: 12px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-left: auto !important;
+}
+
+/* ===== MAIN SIDEBAR STYLING ===== */
+.sidebar-nav {
+  padding: 8px 0 !important;
+  width: 100% !important;
+}
+
+.sidebar-nav-item {
+  margin-bottom: 2px !important;
+  width: 100% !important;
+}
+
+.sidebar-nav-link.main-category {
+  background-color: var(--tn-menu-bg) !important;
+  font-weight: 500 !important;
+  border-left-color: var(--tn-orange) !important;
+}
+
+/* Expandable sections */
+.sidebar-subnav {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.3s ease-out !important;
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.sidebar-nav-item.expanded .sidebar-subnav {
+  max-height: 1500px !important; /* Large enough to show all items */
+}
+
+.sidebar-subnav-item {
+  width: 100% !important;
+}
+
+/* ===== DSA BASICS MENU STYLING ===== */
+.dsa-tabs-container {
+  margin: 8px 0 !important;
+  overflow: hidden !important;
+  border-radius: 6px !important;
+  background-color: var(--tn-darker-bg) !important;
+}
+
 .dsa-tabs {
-  width: 100%;
-  display: flex;
+  display: flex !important;
+  width: 100% !important;
+  background-color: var(--tn-menu-bg) !important;
 }
 
 .dsa-tab {
-  flex: 1;
+  flex: 1 !important;
+  text-align: center !important;
 }
 
 .dsa-tab-link {
-  width: 100%;
-  color: var(--menu-text-color);
+  justify-content: center !important;
+  font-weight: 500 !important;
+  height: 44px !important;
+  border-bottom: 2px solid transparent !important;
+  border-left: none !important;
 }
 
 .dsa-tab.active .dsa-tab-link {
-  color: var(--menu-active-color);
-  font-weight: 600;
+  color: var(--tn-orange) !important;
+  border-bottom-color: var(--tn-orange) !important;
 }
 
-/* Menu items - ensure full width */
+.dsa-tab-panel {
+  display: none !important;
+  width: 100% !important;
+}
+
+.dsa-tab-panel.active {
+  display: block !important;
+}
+
 .dsa-menu-item {
-  width: 100%;
+  width: 100% !important;
 }
 
-.dsa-menu-header, 
-.dsa-submenu-header {
-  margin: 0;
-  width: 100%;
-  color: var(--menu-text-color);
+.dsa-menu-header {
+  font-weight: 500 !important;
+  background-color: rgba(30, 41, 59, 0.5) !important;
 }
 
-/* Fix submenu items to match width */
-.dsa-submenu-link, 
+.dsa-menu-item.expanded .dsa-toggle-icon {
+  transform: rotate(180deg) !important;
+}
+
+.dsa-submenu {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.3s ease-out !important;
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.dsa-menu-item.expanded .dsa-submenu {
+  max-height: 1000px !important;
+}
+
+.dsa-submenu-link {
+  padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width)) !important;
+}
+
+.dsa-deep-submenu {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.3s ease-out !important;
+}
+
+.dsa-submenu-item.expanded .dsa-deep-submenu {
+  max-height: 500px !important;
+}
+
 .dsa-deep-submenu-link {
-  margin: 0;
-  color: var(--menu-text-color);
+  padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width) * 2) !important;
 }
 
-/* Make active items consistent */
-.dsa-submenu-link.active,
-.dsa-deep-submenu-link.active {
-  background-color: var(--menu-active-bg);
-  border-left: 3px solid var(--menu-active-border);
-  color: var(--menu-active-color);
-  font-weight: 500;
+/* ===== SYSTEM DESIGN MENU STYLING ===== */
+.sd-tabs-container {
+  margin: 8px 0 !important;
+  overflow: hidden !important;
+  border-radius: 6px !important;
+  background-color: var(--tn-darker-bg) !important;
 }
 
-/* Fix selected item highlighting */
-.dsa-submenu-link:hover,
-.dsa-deep-submenu-link:hover {
-  background-color: var(--menu-hover-bg);
-  color: var(--menu-text-hover);
-}
-
-/* ===== SYSTEM DESIGN MENU FIXES ===== */
-
-/* Tab styling - make tabs fill width consistently */
 .sd-tabs {
-  width: 100%;
-  display: flex;
+  display: flex !important;
+  width: 100% !important;
+  background-color: var(--tn-menu-bg) !important;
 }
 
 .sd-tab {
-  flex: 1;
+  flex: 1 !important;
+  text-align: center !important;
 }
 
 .sd-tab-link {
-  width: 100%;
-  color: var(--menu-text-color);
+  justify-content: center !important;
+  font-weight: 500 !important;
+  height: 44px !important;
+  border-bottom: 2px solid transparent !important;
+  border-left: none !important;
 }
 
 .sd-tab.active .sd-tab-link {
-  color: var(--menu-active-color);
-  font-weight: 600;
+  color: var(--tn-orange) !important;
+  border-bottom-color: var(--tn-orange) !important;
 }
 
-/* Menu items - ensure full width */
-.sd-menu-item {
-  width: 100%;
-}
-
-.sd-menu-link {
-  margin: 0;
-  color: var(--menu-text-color);
-}
-
-.sd-menu-link.active {
-  background-color: var(--menu-active-bg);
-  border-left: 3px solid var(--menu-active-border);
-  color: var(--menu-active-color);
-  font-weight: 500;
-}
-
-/* ===== MAIN SIDEBAR MENU FIXES ===== */
-
-/* Main category links */
-.sidebar-nav-link.main-category {
-  width: 100%;
-  color: var(--menu-text-color);
-}
-
-/* Submenu links - fix width */
-.sidebar-subnav-link {
-  margin: 0;
-  color: var(--menu-text-color);
-}
-
-/* Active submenu link */
-.sidebar-subnav-link.active {
-  background-color: var(--menu-active-bg);
-  border-left: 3px solid var(--menu-active-border);
-  color: var(--menu-active-color);
-  font-weight: 500;
-}
-
-/* CRITICAL FIX: Set all active submenus to have consistent left border & background */
-.dsa-submenu-link.active,
-.sd-menu-link.active,
-.sidebar-subnav-link.active {
-  border-left: 3px solid var(--menu-active-border) !important;
-  border-left-width: 3px !important;
-  padding-left: 12px !important; /* Adjust left padding to account for border */
-  background-color: var(--menu-active-bg) !important;
-  color: var(--menu-active-color) !important;
-}
-
-/* Count pills - consistent styling and vertical alignment */
-.category-count {
-  background-color: rgba(249, 115, 22, 0.3);
-  color: var(--menu-active-color);
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  min-width: 30px;
-  text-align: center;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 20px;
-  margin-left: auto; /* Push to right */
-}
-
-/* Remove any margins that might affect width */
-.dsa-tab-panel, 
 .sd-tab-panel {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  display: none !important;
+  width: 100% !important;
 }
 
-.sidebar-subnav-item,
-.dsa-submenu-item,
-.dsa-deep-submenu-item,
+.sd-tab-panel.active {
+  display: block !important;
+}
+
 .sd-menu-item {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  width: 100% !important;
 }
 
-/* Fix text alignment for all menu items */
-.sidebar-nav-link span,
-.sidebar-subnav-link span,
-.dsa-menu-header span,
-.dsa-submenu-header span,
-.dsa-submenu-link span,
-.dsa-deep-submenu-link span,
-.sd-menu-link span {
-  line-height: normal !important;
+/* ===== DSA PROBLEMS MENU STYLING ===== */
+.sidebar-subnav-link.active {
+  background-color: var(--tn-menu-active-bg) !important;
+  color: var(--tn-orange) !important;
+  border-left-color: var(--tn-orange) !important;
 }
 
-/* Fix spacing between icon and text */
+/* Specific handling of active states with left borders */
+.sidebar-subnav-link.active,
+.dsa-submenu-link.active,
+.dsa-deep-submenu-link.active,
+.sd-menu-link.active {
+  padding-left: calc(var(--tn-item-padding) - 3px) !important;
+}
+
+.dsa-submenu-link.active {
+  padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width) - 3px) !important;
+}
+
+.dsa-deep-submenu-link.active {
+  padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width) * 2 - 3px) !important;
+}
+
+/* ===== ICONS AND SPACING ===== */
 .sidebar-nav-link svg,
 .sidebar-subnav-link svg,
-.dsa-menu-header svg,
-.dsa-submenu-header svg,
+.dsa-menu-header svg:not(.dsa-toggle-icon),
+.dsa-submenu-header svg:not(.dsa-toggle-icon),
 .dsa-submenu-link svg,
 .dsa-deep-submenu-link svg,
 .sd-menu-link svg {
-  margin-right: 8px;
+  margin-right: 10px !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
 }
 
-/* Fix the toggle icons position */
 .dsa-toggle-icon {
-  margin-left: auto;
+  margin-left: auto !important;
+  transition: transform 0.3s !important;
 }
 
-/* Fix for DSA items that are indented with padding-left */
-.dsa-submenu-link,
-.dsa-deep-submenu-link {
-  padding-left: 30px !important; /* Adjust indent for submenu items */
-}
-
-.dsa-deep-submenu-link {
-  padding-left: 45px !important; /* Further indent for deep submenu items */
-}
-
-/* Fix for active nested items */
-.dsa-submenu-link.active,
-.dsa-deep-submenu-link.active {
-  border-left: 3px solid var(--menu-active-border) !important;
-  padding-left: 27px !important; /* 30px - 3px border */
-}
-
-.dsa-deep-submenu-link.active {
-  padding-left: 42px !important; /* 45px - 3px border */
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 75vh !important;
+  }
+  
+  .sidebar-nav-link.main-category,
+  .sidebar-subnav-link,
+  .dsa-menu-header,
+  .dsa-submenu-header,
+  .dsa-submenu-link,
+  .dsa-deep-submenu-link,
+  .sd-menu-link {
+    padding: 0 10px !important;
+  }
+  
+  .dsa-submenu-link {
+    padding-left: 30px !important; 
+  }
+  
+  .dsa-deep-submenu-link {
+    padding-left: 50px !important;
+  }
+  
+  .dsa-submenu-link.active {
+    padding-left: 27px !important;
+  }
+  
+  .dsa-deep-submenu-link.active {
+    padding-left: 47px !important;
+  }
 }
