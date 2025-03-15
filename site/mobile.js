@@ -1,3 +1,5 @@
+// PART 1: MOBILE MENU CODE
+
 // Function to create mobile toggle button
 function createMobileMenuToggle() {
   // Check if button already exists
@@ -190,56 +192,113 @@ function addSwipeDetection() {
   });
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  createMobileMenuToggle();
+// PART 2: RESPONSIVE TABLES CODE
+
+// Add responsive table styles
+function addResponsiveTableStyles() {
+  // Check if styles are already added
+  if (document.getElementById('responsive-table-styles')) {
+    return;
+  }
   
-  // Close sidebar after clicking a link (mobile UX improvement)
-  document.body.addEventListener('click', function(e) {
-    if (window.innerWidth <= 768) {
-      // Check if the clicked element is a link or inside a link
-      const isLink = e.target.tagName === 'A' || 
-                     e.target.closest('a') || 
-                     e.target.classList.contains('sidebar-nav-link') || 
-                     e.target.classList.contains('sidebar-subnav-link') ||
-                     e.target.classList.contains('dsa-submenu-link') || 
-                     e.target.classList.contains('sd-menu-link');
-      
-      if (isLink) {
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar && sidebar.classList.contains('active')) {
-          setTimeout(() => {
-            sidebar.classList.remove('active');
-          }, 150); // Small delay to allow the click to register first
-        }
+  const styleElement = document.createElement('style');
+  styleElement.id = 'responsive-table-styles';
+  styleElement.textContent = `
+    /* Responsive Table Styles */
+    
+    /* On desktop and tablet, ensure normal table display */
+    @media screen and (min-width: 769px) {
+      .problem-table, .list-table {
+        width: 100%;
+        border-collapse: collapse;
       }
     }
-  }, { capture: true }); // Use capture to ensure this runs before other handlers
-  
-  // Add viewport meta tag if not present
-  if (!document.querySelector('meta[name="viewport"]')) {
-    const meta = document.createElement('meta');
-    meta.name = 'viewport';
-    meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
-    document.head.appendChild(meta);
-  }
-});
-
-// Reinitialize on window resize
-window.addEventListener('resize', function() {
-  // Close mobile menu when switching to desktop view
-  if (window.innerWidth > 768) {
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar) {
-      sidebar.classList.remove('active');
-      sidebar.style.left = ''; // Reset inline styles
-      sidebar.style.display = ''; // Reset inline styles
+    
+    /* On mobile, convert tables to card format */
+    @media screen and (max-width: 768px) {
+      /* Hide table headers */
+      .problem-table thead, .list-table thead {
+        display: none;
+      }
+      
+      /* Convert rows to cards */
+      .problem-table tbody tr, .list-table tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        padding: 8px;
+        background-color: var(--card-bg);
+      }
+      
+      /* Style each cell as a row with label */
+      .problem-table tbody td, .list-table tbody td {
+        display: flex;
+        padding: 8px 4px !important;
+        text-align: right;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      
+      /* Last cell has no border */
+      .problem-table tbody td:last-child, .list-table tbody td:last-child {
+        border-bottom: none;
+      }
+      
+      /* Add label based on data-label attribute */
+      .problem-table tbody td:before, .list-table tbody td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: auto;
+        text-align: left;
+      }
+      
+      /* Special styling for status column */
+      .problem-table td:nth-child(1), .list-table td:nth-child(1) {
+        justify-content: space-between;
+      }
+      
+      /* Special styling for problem link */
+      .problem-link {
+        width: 100%;
+        max-width: none;
+        text-align: right;
+      }
+      
+      /* Fix difficulty tags to be normal size */
+      .difficulty-tag {
+        display: inline-block;
+        min-width: 60px;
+        text-align: center;
+      }
+      
+      /* Adjust icons to show properly */
+      .revision-star-wrapper, .editorial-wrapper {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
-  }
-});
+    
+    /* Even smaller screens - further optimize */
+    @media screen and (max-width: 480px) {
+      .problem-table tbody tr, .list-table tbody tr {
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      
+      .problem-table tbody td, .list-table tbody td {
+        padding: 6px 2px !important;
+        font-size: 0.75rem !important;
+      }
+    }
+  `;
+  document.head.appendChild(styleElement);
+}
 
-// Function to make tables responsive
+// Improved function to make tables responsive
 function makeTablesResponsive() {
+  // First, add required CSS if not already added
+  addResponsiveTableStyles();
+  
   // Find all tables
   const tables = document.querySelectorAll('.problem-table, .list-table');
   
@@ -268,19 +327,6 @@ function makeTablesResponsive() {
         }
       });
     });
-    
-    // Make table scrollable on mobile
-    const parent = table.parentElement;
-    if (!parent.classList.contains('table-scroll-container')) {
-      const scrollContainer = document.createElement('div');
-      scrollContainer.className = 'table-scroll-container';
-      scrollContainer.style.overflowX = 'auto';
-      scrollContainer.style.width = '100%';
-      
-      // Replace table with scroll container containing the table
-      parent.insertBefore(scrollContainer, table);
-      scrollContainer.appendChild(table);
-    }
   });
 }
 
@@ -311,18 +357,137 @@ function optimizeMobileDisplay() {
   }
 }
 
-// Initialize responsive tables and mobile display when DOM is loaded
+// PART 3: MENU TABS FIX
+
+// Fix for DSA and System Design tabs
+function fixMenuTabs() {
+  // Fix for DSA tabs
+  const dsaTabs = document.querySelectorAll('.dsa-tab-link');
+  dsaTabs.forEach(tab => {
+    // Remove any existing event listeners
+    const newTab = tab.cloneNode(true);
+    tab.parentNode.replaceChild(newTab, tab);
+    
+    // Add click event
+    newTab.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Get the tab ID
+      const tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.dsa-tab').forEach(t => {
+        t.classList.remove('active');
+      });
+      document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
+      
+      // Show the corresponding panel
+      const panel = document.getElementById(`${tabId}-panel`);
+      if (panel) {
+        panel.classList.add('active');
+      }
+    });
+  });
+  
+  // Fix for System Design tabs
+  const sdTabs = document.querySelectorAll('.sd-tab-link');
+  sdTabs.forEach(tab => {
+    // Remove any existing event listeners
+    const newTab = tab.cloneNode(true);
+    tab.parentNode.replaceChild(newTab, tab);
+    
+    // Add click event
+    newTab.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Get the tab ID
+      const tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.sd-tab').forEach(t => {
+        t.classList.remove('active');
+      });
+      document.querySelectorAll('.sd-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
+      
+      // Show the corresponding panel
+      const panel = document.getElementById(`${tabId}-panel`);
+      if (panel) {
+        panel.classList.add('active');
+      }
+    });
+  });
+}
+
+// PART 4: INITIALIZATION
+
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+  // Mobile menu initialization
+  createMobileMenuToggle();
+  
+  // Responsive tables initialization
   makeTablesResponsive();
   optimizeMobileDisplay();
   
+  // Menu tabs initialization
+  setTimeout(fixMenuTabs, 1000);
+  
+  // Close sidebar after clicking a link (mobile UX improvement)
+  document.body.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+      // Check if the clicked element is a link or inside a link
+      const isLink = e.target.tagName === 'A' || 
+                     e.target.closest('a') || 
+                     e.target.classList.contains('sidebar-nav-link') || 
+                     e.target.classList.contains('sidebar-subnav-link') ||
+                     e.target.classList.contains('dsa-submenu-link') || 
+                     e.target.classList.contains('sd-menu-link');
+      
+      if (isLink) {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar && sidebar.classList.contains('active')) {
+          setTimeout(() => {
+            sidebar.classList.remove('active');
+          }, 150); // Small delay to allow the click to register first
+        }
+      }
+    }
+  }, { capture: true }); // Use capture to ensure this runs before other handlers
+  
+  // Add viewport meta tag if not present
+  if (!document.querySelector('meta[name="viewport"]')) {
+    const meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+    document.head.appendChild(meta);
+  }
+  
   // Set up an observer to handle dynamically added tables
   const observer = new MutationObserver(function(mutations) {
+    let shouldProcessTables = false;
+    let shouldProcessMenuTabs = false;
+    
     mutations.forEach(function(mutation) {
       if (mutation.type === 'childList') {
         // Check if new tables were added
         const addedNodes = Array.from(mutation.addedNodes);
+        
+        // Check for new tables
         const hasNewTable = addedNodes.some(node => {
+          if (node.nodeType !== 1) return false;
+          
           // Check if the node itself is a table
           if (node.classList && 
               (node.classList.contains('problem-table') || 
@@ -338,33 +503,52 @@ document.addEventListener('DOMContentLoaded', function() {
           return false;
         });
         
+        // Check for new menu tabs
+        const hasMenuTabs = addedNodes.some(node => {
+          if (node.nodeType !== 1) return false;
+          
+          return node.querySelectorAll && 
+                (node.querySelectorAll('.dsa-tab-link').length > 0 || 
+                 node.querySelectorAll('.sd-tab-link').length > 0);
+        });
+        
         if (hasNewTable) {
-          makeTablesResponsive();
+          shouldProcessTables = true;
+        }
+        
+        if (hasMenuTabs) {
+          shouldProcessMenuTabs = true;
         }
       }
     });
+    
+    if (shouldProcessTables) {
+      makeTablesResponsive();
+    }
+    
+    if (shouldProcessMenuTabs) {
+      setTimeout(fixMenuTabs, 500);
+    }
   });
   
   // Start observing the document
   observer.observe(document.body, { childList: true, subtree: true });
 });
 
-// Re-apply on window resize
+// Reinitialize on window resize
 window.addEventListener('resize', function() {
+  // Close mobile menu when switching to desktop view
+  if (window.innerWidth > 768) {
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+      sidebar.classList.remove('active');
+      sidebar.style.left = ''; // Reset inline styles
+      sidebar.style.display = ''; // Reset inline styles
+    }
+  }
+  
   optimizeMobileDisplay();
 });
-
-// Make the function globally available
-window.makeTablesResponsive = makeTablesResponsive;
-window.toggleMobileMenu = toggleMobileMenu;
-
-// Try initialization again after a short delay
-setTimeout(function() {
-  if (!document.querySelector('.mobile-menu-toggle')) {
-    createMobileMenuToggle();
-  }
-  makeTablesResponsive();
-}, 1000);
 
 // Fix for z-index issues
 document.addEventListener('DOMContentLoaded', function() {
@@ -383,21 +567,20 @@ document.addEventListener('DOMContentLoaded', function() {
       position: relative;
       z-index: 3;
     }
-    
-    /* Table scroll container */
-    .table-scroll-container {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      margin-bottom: 1rem;
-    }
-    
-    /* Mobile table styles */
-    @media screen and (max-width: 768px) {
-      .problem-table, .list-table {
-        min-width: 600px;
-      }
-    }
   `;
   document.head.appendChild(style);
 });
+
+// Make functions globally available
+window.toggleMobileMenu = toggleMobileMenu;
+window.makeTablesResponsive = makeTablesResponsive;
+window.fixMenuTabs = fixMenuTabs;
+
+// Try initialization again after a short delay
+setTimeout(function() {
+  if (!document.querySelector('.mobile-menu-toggle')) {
+    createMobileMenuToggle();
+  }
+  makeTablesResponsive();
+  fixMenuTabs();
+}, 1000);
