@@ -1,362 +1,254 @@
-/* Unified Sidebar Styles for Tech Navigator - FIXED */
+/* Sidebar Consistency Fix for Tech Navigator */
 
-/* Root variables for consistent colors */
+/* Common variables for consistent styling */
 :root {
-  --menu-text-color: #94a3b8; /* Consistent with DSA menu text color */
+  --menu-text-color: #94a3b8;
   --menu-text-hover: #f1f5f9;
   --menu-active-color: #f97316; /* Professional orange */
   --menu-bg: #0f172a;
   --menu-item-bg: #1e293b;
   --menu-hover-bg: rgba(255, 255, 255, 0.05);
-  --menu-active-bg: rgba(249, 115, 22, 0.15);
+  --menu-active-bg: rgba(30, 41, 59, 0.7);
   --menu-border-color: rgba(255, 255, 255, 0.1);
-  --menu-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --menu-active-border: #f97316;
+  --menu-item-height: 38px; /* Fixed consistent height */
+  --menu-item-padding: 0 15px; /* Horizontal padding only */
+  --sidebar-width: 100%;
 }
 
-/* Main sidebar container - consistent base styling */
+/* ===== CONSISTENT STYLING ACROSS ALL MENUS ===== */
+
+/* Main sidebar container */
 .sidebar {
-  border-right: 1px solid var(--border-color);
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  background: var(--menu-bg);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--menu-bg);
+  width: 300px;
 }
 
-/**** MAIN SIDEBAR (from sidebar.js) - FIX SUBMENU FUNCTIONALITY ****/
-.sidebar-nav {
-  padding: 0.5rem;
+/* Make all clickable menu items have consistent height and alignment */
+.sidebar-nav-link,
+.sidebar-subnav-link,
+.dsa-tab-link,
+.sd-tab-link,
+.dsa-menu-header,
+.dsa-submenu-header,
+.dsa-submenu-link,
+.dsa-deep-submenu-link,
+.sd-menu-link {
+  height: var(--menu-item-height) !important;
+  min-height: var(--menu-item-height) !important;
+  line-height: var(--menu-item-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  padding: var(--menu-item-padding) !important;
+  box-sizing: border-box !important;
 }
 
-.sidebar-nav-item {
-  margin-bottom: 10px;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: var(--menu-item-bg);
-  box-shadow: var(--menu-shadow);
-  transition: all 0.2s ease;
-}
+/* ===== DSA BASICS MENU FIXES ===== */
 
-.sidebar-nav-link.main-category {
-  padding: 12px 15px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--menu-text-color);
-  border-left: 3px solid var(--menu-active-color);
+/* Tab styling - make tabs fill width consistently */
+.dsa-tabs {
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  background-color: rgba(249, 115, 22, 0.08);
-  transition: all 0.2s ease;
-  text-decoration: none;
 }
 
-.sidebar-nav-link.main-category:hover {
-  background-color: var(--menu-hover-bg);
-  color: var(--menu-text-hover);
-}
-
-.sidebar-nav-link.main-category svg {
-  color: var(--menu-active-color);
-}
-
-/* FIX: Ensure submenus are visible when expanded */
-.sidebar-subnav {
-  list-style-type: none;
-  margin-left: 0; /* Reset margin to fix alignment */
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-  border-top: 1px solid var(--menu-border-color);
-  padding: 0; /* Reset padding */
-}
-
-.sidebar-nav-item.expanded .sidebar-subnav {
-  max-height: 1500px; /* Large value to accommodate all items */
-  padding: 5px 0; /* Add padding only when expanded */
-}
-
-.sidebar-subnav-item {
-  margin: 5px 8px;
-}
-
-.sidebar-subnav-link {
-  padding: 8px 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--menu-text-color);
-  text-decoration: none;
-  font-size: 12px;
-  border-radius: 5px;
-  border-left: 2px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.sidebar-subnav-link:hover {
-  background-color: var(--menu-hover-bg);
-  color: var(--menu-text-hover);
-  border-left-color: rgba(249, 115, 22, 0.5);
-}
-
-.sidebar-subnav-link.active {
-  background-color: var(--menu-active-bg);
-  color: var(--menu-active-color);
-  border-left-color: var(--menu-active-color);
-  font-weight: 500;
-}
-
-/**** DSA MENU (from dsa-menu.js) - FIX ALIGNMENT ****/
-.dsa-tabs-container, .sd-tabs-container {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: var(--menu-shadow);
-  margin: 8px 0;
-}
-
-.dsa-tabs, .sd-tabs {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  background-color: rgba(30, 41, 59, 0.7);
-  border-radius: 8px 8px 0 0;
-}
-
-.dsa-tab, .sd-tab {
+.dsa-tab {
   flex: 1;
-  position: relative;
 }
 
-.dsa-tab-link, .sd-tab-link {
-  display: block;
-  padding: 10px 12px;
-  text-align: center;
+.dsa-tab-link {
+  width: 100%;
   color: var(--menu-text-color);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s;
-  border-radius: 8px 8px 0 0;
 }
 
-.dsa-tab.active .dsa-tab-link, 
-.sd-tab.active .sd-tab-link {
+.dsa-tab.active .dsa-tab-link {
   color: var(--menu-active-color);
-  background-color: var(--menu-item-bg);
   font-weight: 600;
 }
 
-.dsa-tab.active .dsa-tab-link:after,
-.sd-tab.active .sd-tab-link:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background-color: var(--menu-active-color);
-}
-
-.dsa-tab-panels, .sd-tab-panels {
-  border-top: 1px solid var(--menu-border-color);
-  padding: 5px 0;
-  background-color: var(--menu-item-bg);
-}
-
-.dsa-tab-panel, .sd-tab-panel {
-  display: none;
-  padding: 5px 0;
-}
-
-.dsa-tab-panel.active, .sd-tab-panel.active {
-  display: block;
-}
-
-/* FIX: Ensure DSA menu items align properly */
+/* Menu items - ensure full width */
 .dsa-menu-item {
-  margin-bottom: 4px;
+  width: 100%;
 }
 
-.dsa-menu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  padding: 8px 12px;
-  margin: 0; /* Remove margin to fix alignment */
-  border-radius: 5px;
-  color: var(--menu-text-color);
-  transition: all 0.2s ease;
-}
-
-.dsa-menu-header:hover {
-  background-color: var(--menu-hover-bg);
-  color: var(--menu-text-hover);
-}
-
-.dsa-menu-title, .dsa-submenu-title {
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.dsa-toggle-icon {
-  font-size: 8px;
-  transition: transform 0.3s;
-}
-
-.dsa-menu-item.expanded .dsa-toggle-icon,
-.dsa-submenu-item.expanded .dsa-toggle-icon {
-  transform: rotate(180deg);
-}
-
-/* FIX: Ensure DSA submenus work correctly */
-.dsa-submenu, .dsa-deep-submenu {
-  list-style: none;
-  padding-left: 15px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  margin: 0;
-}
-
-.dsa-menu-item.expanded .dsa-submenu,
-.dsa-submenu-item.expanded .dsa-deep-submenu {
-  max-height: 500px;
-}
-
-.dsa-submenu-item {
-  margin: 2px 0;
-}
-
+.dsa-menu-header, 
 .dsa-submenu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  padding: 8px 12px;
   margin: 0;
-  border-radius: 5px;
+  width: 100%;
   color: var(--menu-text-color);
-  transition: all 0.2s ease;
 }
 
-.dsa-submenu-header:hover {
-  background-color: var(--menu-hover-bg);
-  color: var(--menu-text-hover);
-}
-
-.dsa-submenu-link, .dsa-deep-submenu-link {
-  padding: 8px 12px;
-  display: block;
-  margin: 2px 0; /* Fixed margin */
+/* Fix submenu items to match width */
+.dsa-submenu-link, 
+.dsa-deep-submenu-link {
+  margin: 0;
   color: var(--menu-text-color);
-  text-decoration: none;
-  font-size: 12px;
-  border-radius: 5px;
-  border-left: 2px solid transparent;
-  transition: all 0.2s ease;
 }
 
-.dsa-submenu-link:hover, .dsa-deep-submenu-link:hover {
-  background-color: var(--menu-hover-bg);
-  color: var(--menu-text-hover);
-  border-left-color: rgba(249, 115, 22, 0.5);
-}
-
-.dsa-submenu-link.active, .dsa-deep-submenu-link.active {
+/* Make active items consistent */
+.dsa-submenu-link.active,
+.dsa-deep-submenu-link.active {
   background-color: var(--menu-active-bg);
+  border-left: 3px solid var(--menu-active-border);
   color: var(--menu-active-color);
-  border-left-color: var(--menu-active-color);
   font-weight: 500;
 }
 
-/**** SYSTEM DESIGN MENU (from system-design-menu.js) ****/
-/* FIX: Ensure System Design menu items align correctly */
-.sd-tab-panel {
-  padding: 5px 0; /* Fixed padding */
+/* Fix selected item highlighting */
+.dsa-submenu-link:hover,
+.dsa-deep-submenu-link:hover {
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-text-hover);
 }
 
+/* ===== SYSTEM DESIGN MENU FIXES ===== */
+
+/* Tab styling - make tabs fill width consistently */
+.sd-tabs {
+  width: 100%;
+  display: flex;
+}
+
+.sd-tab {
+  flex: 1;
+}
+
+.sd-tab-link {
+  width: 100%;
+  color: var(--menu-text-color);
+}
+
+.sd-tab.active .sd-tab-link {
+  color: var(--menu-active-color);
+  font-weight: 600;
+}
+
+/* Menu items - ensure full width */
 .sd-menu-item {
-  margin-bottom: 4px;
+  width: 100%;
 }
 
 .sd-menu-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  margin: 2px 0;
-  border-radius: 5px;
+  margin: 0;
   color: var(--menu-text-color);
-  text-decoration: none;
-  font-size: 12px;
-  border-left: 2px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.sd-menu-link:hover {
-  background-color: var(--menu-hover-bg);
-  color: var(--menu-text-hover);
-  border-left-color: rgba(249, 115, 22, 0.5);
 }
 
 .sd-menu-link.active {
   background-color: var(--menu-active-bg);
+  border-left: 3px solid var(--menu-active-border);
   color: var(--menu-active-color);
-  border-left-color: var(--menu-active-color);
   font-weight: 500;
 }
 
-/* FIX: Ensure animation works on toggle */
-.sidebar-nav-item .main-category svg:last-child {
-  transition: transform 0.3s ease;
+/* ===== MAIN SIDEBAR MENU FIXES ===== */
+
+/* Main category links */
+.sidebar-nav-link.main-category {
+  width: 100%;
+  color: var(--menu-text-color);
 }
 
-.sidebar-nav-item.expanded .main-category svg:last-child {
-  transform: rotate(90deg);
+/* Submenu links - fix width */
+.sidebar-subnav-link {
+  margin: 0;
+  color: var(--menu-text-color);
 }
 
-/* Category count pills - consistent styling */
-.category-count {
-  background-color: rgba(249, 115, 22, 0.2);
+/* Active submenu link */
+.sidebar-subnav-link.active {
+  background-color: var(--menu-active-bg);
+  border-left: 3px solid var(--menu-active-border);
   color: var(--menu-active-color);
-  font-size: 10px;
-  padding: 2px 6px;
+  font-weight: 500;
+}
+
+/* CRITICAL FIX: Set all active submenus to have consistent left border & background */
+.dsa-submenu-link.active,
+.sd-menu-link.active,
+.sidebar-subnav-link.active {
+  border-left: 3px solid var(--menu-active-border) !important;
+  border-left-width: 3px !important;
+  padding-left: 12px !important; /* Adjust left padding to account for border */
+  background-color: var(--menu-active-bg) !important;
+  color: var(--menu-active-color) !important;
+}
+
+/* Count pills - consistent styling and vertical alignment */
+.category-count {
+  background-color: rgba(249, 115, 22, 0.3);
+  color: var(--menu-active-color);
+  font-size: 12px;
+  padding: 2px 8px;
   border-radius: 12px;
-  min-width: 22px;
+  min-width: 30px;
   text-align: center;
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  margin-left: auto; /* Push to right */
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    position: fixed;
-    z-index: 100;
-    height: auto;
-    max-height: 75vh;
-    overflow-y: auto;
-  }
-  
-  .sidebar-nav-item,
-  .dsa-tabs-container,
-  .sd-tabs-container {
-    margin-bottom: 8px;
-  }
-  
-  .sidebar-nav-link.main-category,
-  .dsa-tab-link,
-  .sd-tab-link {
-    padding: 10px;
-  }
-  
-  .dsa-menu-header,
-  .dsa-submenu-header,
-  .dsa-submenu-link,
-  .dsa-deep-submenu-link,
-  .sd-menu-link,
-  .sidebar-subnav-link {
-    padding: 10px 8px;
-  }
+/* Remove any margins that might affect width */
+.dsa-tab-panel, 
+.sd-tab-panel {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.sidebar-subnav-item,
+.dsa-submenu-item,
+.dsa-deep-submenu-item,
+.sd-menu-item {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Fix text alignment for all menu items */
+.sidebar-nav-link span,
+.sidebar-subnav-link span,
+.dsa-menu-header span,
+.dsa-submenu-header span,
+.dsa-submenu-link span,
+.dsa-deep-submenu-link span,
+.sd-menu-link span {
+  line-height: normal !important;
+}
+
+/* Fix spacing between icon and text */
+.sidebar-nav-link svg,
+.sidebar-subnav-link svg,
+.dsa-menu-header svg,
+.dsa-submenu-header svg,
+.dsa-submenu-link svg,
+.dsa-deep-submenu-link svg,
+.sd-menu-link svg {
+  margin-right: 8px;
+}
+
+/* Fix the toggle icons position */
+.dsa-toggle-icon {
+  margin-left: auto;
+}
+
+/* Fix for DSA items that are indented with padding-left */
+.dsa-submenu-link,
+.dsa-deep-submenu-link {
+  padding-left: 30px !important; /* Adjust indent for submenu items */
+}
+
+.dsa-deep-submenu-link {
+  padding-left: 45px !important; /* Further indent for deep submenu items */
+}
+
+/* Fix for active nested items */
+.dsa-submenu-link.active,
+.dsa-deep-submenu-link.active {
+  border-left: 3px solid var(--menu-active-border) !important;
+  padding-left: 27px !important; /* 30px - 3px border */
+}
+
+.dsa-deep-submenu-link.active {
+  padding-left: 42px !important; /* 45px - 3px border */
 }
