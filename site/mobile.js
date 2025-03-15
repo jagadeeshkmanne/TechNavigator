@@ -195,7 +195,7 @@ function addSwipeDetection() {
 // PART 2: RESPONSIVE TABLES CODE
 
 // Improved function to make tables responsive with horizontal scrolling
-unction makeTablesResponsive() {
+function makeTablesResponsive() {
   // First, add required CSS if not already added
   addResponsiveTableStyles();
   
@@ -223,6 +223,13 @@ unction makeTablesResponsive() {
       // Replace table with scroll container containing the table
       parent.insertBefore(scrollContainer, table);
       scrollContainer.appendChild(table);
+    }
+
+    // Set minimum width on mobile to prevent column squishing
+    if (window.innerWidth <= 768) {
+      // Calculate and set minimum width for the table
+      const minWidth = calculateTotalWidth(table);
+      table.style.minWidth = minWidth + 'px';
     }
   });
 }
@@ -284,16 +291,25 @@ function addResponsiveTableStyles() {
     
     /* Mobile specific styles */
     @media screen and (max-width: 768px) {
+      /* Ensure list view table has fixed column widths */
+      .list-table th:nth-child(1), .list-table td:nth-child(1) { width: 30px; min-width: 30px; }
+      .list-table th:nth-child(2), .list-table td:nth-child(2) { width: 30px; min-width: 30px; }
+      .list-table th:nth-child(3), .list-table td:nth-child(3) { width: 30px; min-width: 30px; }
+      .list-table th:nth-child(4), .list-table td:nth-child(4) { width: 150px; min-width: 150px; }
+      .list-table th:nth-child(5), .list-table td:nth-child(5) { width: 80px; min-width: 80px; }
+      .list-table th:nth-child(6), .list-table td:nth-child(6) { width: 70px; min-width: 70px; }
+      
       /* Smaller font and padding for all tables */
       .problem-table th, .problem-table td,
       .list-table th, .list-table td {
         padding: 0.4rem 0.2rem !important;
         font-size: 0.65rem !important;
+        white-space: nowrap !important; /* Prevent text wrapping */
       }
       
       /* Problem link text adjustments */
       .problem-link {
-        max-width: 160px !important;
+        max-width: 150px !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
@@ -305,6 +321,20 @@ function addResponsiveTableStyles() {
       .difficulty-tag {
         padding: 0.1rem 0.25rem !important;
         font-size: 0.55rem !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+        max-width: 70px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      
+      /* Fix category display */
+      .problem-category {
+        white-space: nowrap !important;
+        max-width: 80px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: inline-block !important;
       }
       
       /* Fix checkbox and icon sizes */
@@ -329,6 +359,19 @@ function addResponsiveTableStyles() {
       }
       
       .problem-link {
+        font-size: 0.6rem !important;
+        max-width: 140px !important;
+      }
+      
+      /* Smaller difficulty tag */
+      .difficulty-tag {
+        font-size: 0.5rem !important;
+        max-width: 65px !important;
+      }
+      
+      /* Smaller category */
+      .problem-category {
+        max-width: 70px !important;
         font-size: 0.6rem !important;
       }
     }
