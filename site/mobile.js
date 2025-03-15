@@ -1,6 +1,3 @@
-
-<script>// Mobile Menu Toggle Implementation
-
 // Function to create mobile toggle button
 function createMobileMenuToggle() {
   // Check if button already exists
@@ -250,4 +247,4 @@ window.addEventListener('resize', function() {
 });
 
 // Make the function globally available
-window.makeTablesResponsive = makeTablesResponsive;</script>
+window.makeTablesResponsive = makeTablesResponsive;
