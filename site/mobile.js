@@ -223,8 +223,43 @@ function makeTablesResponsive() {
       // Replace table with scroll container containing the table
       parent.insertBefore(scrollContainer, table);
       scrollContainer.appendChild(table);
+      
+      // Calculate total width of columns
+      const totalWidth = calculateTotalWidth(table);
+      
+      // Set table width to match total column width to avoid extra space
+      if (window.innerWidth <= 768 && totalWidth > 0) {
+        table.style.width = totalWidth + 'px';
+      }
     }
   });
+}
+
+// Calculate the total width needed for a table based on column widths
+function calculateTotalWidth(table) {
+  let totalWidth = 0;
+  
+  // Define column widths based on mobile breakpoint
+  const columnWidths = [30, 30, 30, 150, 80, 70]; // Match the CSS widths
+  
+  // Count actual columns in the table
+  const headerCells = table.querySelectorAll('thead th');
+  const columnCount = headerCells.length;
+  
+  // Sum up the widths of existing columns
+  for (let i = 0; i < columnCount; i++) {
+    if (i < columnWidths.length) {
+      totalWidth += columnWidths[i];
+    } else {
+      // Default width for any extra columns
+      totalWidth += 50;
+    }
+  }
+  
+  // Add a small buffer
+  totalWidth += 5;
+  
+  return totalWidth;
 }
 
 // Add responsive table styles for horizontal scrolling with smaller fonts
@@ -256,84 +291,84 @@ function addResponsiveTableStyles() {
     
     /* Mobile specific styles */
     @media screen and (max-width: 768px) {
-      /* Ensure table has minimum width to be scrollable */
+      /* Adjust table width to prevent extra space */
       .problem-table, .list-table {
-        min-width: 600px;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        table-layout: fixed !important;
       }
       
       /* Much smaller font and padding */
       .problem-table th, .problem-table td,
       .list-table th, .list-table td {
-        padding: 0.4rem 0.2rem;
-        font-size: 0.65rem;
+        padding: 0.4rem 0.2rem !important;
+        font-size: 0.65rem !important;
       }
       
-      /* Optimize column widths */
+      /* Set exact widths for columns */
       .problem-table th:nth-child(1), .problem-table td:nth-child(1),
       .list-table th:nth-child(1), .list-table td:nth-child(1) {
-        width: 30px;
-        min-width: 30px;
-        max-width: 30px;
+        width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
       }
       
       .problem-table th:nth-child(2), .problem-table td:nth-child(2),
       .list-table th:nth-child(2), .list-table td:nth-child(2),
       .problem-table th:nth-child(3), .problem-table td:nth-child(3),
       .list-table th:nth-child(3), .list-table td:nth-child(3) {
-        width: 30px;
-        min-width: 30px;
-        max-width: 30px;
+        width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
       }
       
       .problem-table th:nth-child(4), .problem-table td:nth-child(4),
       .list-table th:nth-child(4), .list-table td:nth-child(4) {
-        min-width: 140px;
-        max-width: 160px;
+        width: 150px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
       }
       
       .problem-table th:nth-child(5), .problem-table td:nth-child(5),
       .list-table th:nth-child(5), .list-table td:nth-child(5) {
-        min-width: 80px;
-        max-width: 100px;
+        width: 80px !important;
+        min-width: 80px !important;
+        max-width: 80px !important;
       }
       
-      /* Add scroll indicator */
-      .table-scroll-container::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 15px;
-        background: linear-gradient(to right, rgba(30, 41, 59, 0), rgba(30, 41, 59, 0.5));
-        pointer-events: none;
+      .problem-table th:nth-child(6), .problem-table td:nth-child(6),
+      .list-table th:nth-child(6), .list-table td:nth-child(6) {
+        width: 70px !important;
+        min-width: 70px !important;
+        max-width: 70px !important;
       }
       
       /* Problem link text adjustments */
       .problem-link {
-        max-width: 140px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        display: block;
+        max-width: 140px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        display: block !important;
         font-size: 0.65rem !important;
       }
       
       /* Smaller difficulty tags */
       .difficulty-tag {
-        padding: 0.1rem 0.25rem;
-        font-size: 0.55rem;
+        padding: 0.1rem 0.25rem !important;
+        font-size: 0.55rem !important;
       }
       
       /* Fix checkbox and icon sizes */
       .status-checkbox input[type="checkbox"] {
-        width: 14px;
-        height: 14px;
+        width: 14px !important;
+        height: 14px !important;
       }
       
       .revision-star-wrapper svg, .editorial-wrapper svg {
-        width: 14px;
-        height: 14px;
+        width: 14px !important;
+        height: 14px !important;
       }
       
       /* Even smaller screens */
@@ -341,8 +376,8 @@ function addResponsiveTableStyles() {
         /* Further reduce font size */
         .problem-table th, .problem-table td,
         .list-table th, .list-table td {
-          padding: 0.3rem 0.15rem;
-          font-size: 0.6rem;
+          padding: 0.3rem 0.15rem !important;
+          font-size: 0.6rem !important;
         }
         
         .problem-link {
@@ -350,24 +385,19 @@ function addResponsiveTableStyles() {
         }
         
         .difficulty-tag {
-          font-size: 0.5rem;
-          padding: 0.05rem 0.2rem;
-        }
-        
-        /* Smaller minimum width */
-        .problem-table, .list-table {
-          min-width: 550px;
+          font-size: 0.5rem !important;
+          padding: 0.05rem 0.2rem !important;
         }
         
         /* Even smaller icons */
         .status-checkbox input[type="checkbox"] {
-          width: 12px;
-          height: 12px;
+          width: 12px !important;
+          height: 12px !important;
         }
         
         .revision-star-wrapper svg, .editorial-wrapper svg {
-          width: 12px;
-          height: 12px;
+          width: 12px !important;
+          height: 12px !important;
         }
       }
     }
