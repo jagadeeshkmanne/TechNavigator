@@ -1,4 +1,4 @@
-/* Unified Sidebar Styles for Tech Navigator - Consistent across all menu types */
+/* Unified Sidebar Styles for Tech Navigator - FIXED */
 
 /* Root variables for consistent colors */
 :root {
@@ -21,70 +21,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/**** CONSISTENT STYLING FOR ALL MENU TYPES ****/
-
-/* Base menu items across all menu types - shared properties */
-.sidebar-nav-link,
-.sidebar-subnav-link,
-.dsa-tab-link,
-.sd-tab-link,
-.dsa-menu-header,
-.dsa-submenu-header,
-.dsa-submenu-link,
-.dsa-deep-submenu-link,
-.sd-menu-link {
-  color: var(--menu-text-color);
-  transition: all 0.2s ease;
-  padding: 10px 12px;
-  border-radius: 5px;
-  border-left: 2px solid transparent;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.5;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Hover state - consistent for all clickable elements */
-.sidebar-nav-link:hover,
-.sidebar-subnav-link:hover,
-.dsa-menu-header:hover,
-.dsa-submenu-header:hover,
-.dsa-submenu-link:hover,
-.dsa-deep-submenu-link:hover,
-.sd-menu-link:hover {
-  background-color: var(--menu-hover-bg);
-  color: var(--menu-text-hover);
-  border-left-color: rgba(249, 115, 22, 0.5);
-}
-
-/* Active state - consistent for all clickable elements */
-.sidebar-subnav-link.active,
-.dsa-submenu-link.active,
-.dsa-deep-submenu-link.active,
-.sd-menu-link.active {
-  background-color: var(--menu-active-bg);
-  color: var(--menu-active-color);
-  border-left-color: var(--menu-active-color);
-  font-weight: 500;
-  box-shadow: 0 0 5px rgba(249, 115, 22, 0.3);
-}
-
-/* Category count pills - consistent styling */
-.category-count {
-  background-color: rgba(249, 115, 22, 0.2);
-  color: var(--menu-active-color);
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 12px;
-  min-width: 22px;
-  text-align: center;
-  font-weight: 500;
-}
-
-/**** MAIN SIDEBAR (from sidebar.js) ****/
-
+/**** MAIN SIDEBAR (from sidebar.js) - FIX SUBMENU FUNCTIONALITY ****/
 .sidebar-nav {
   padding: 0.5rem;
 }
@@ -102,28 +39,40 @@
   padding: 12px 15px;
   font-size: 13px;
   font-weight: 500;
+  color: var(--menu-text-color);
   border-left: 3px solid var(--menu-active-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
   background-color: rgba(249, 115, 22, 0.08);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.sidebar-nav-link.main-category:hover {
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-text-hover);
 }
 
 .sidebar-nav-link.main-category svg {
   color: var(--menu-active-color);
 }
 
+/* FIX: Ensure submenus are visible when expanded */
 .sidebar-subnav {
-  padding: 5px 0;
-  border-top: 1px solid var(--menu-border-color);
+  list-style-type: none;
+  margin-left: 0; /* Reset margin to fix alignment */
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
+  border-top: 1px solid var(--menu-border-color);
+  padding: 0; /* Reset padding */
 }
 
 .sidebar-nav-item.expanded .sidebar-subnav {
-  max-height: 1500px;
+  max-height: 1500px; /* Large value to accommodate all items */
+  padding: 5px 0; /* Add padding only when expanded */
 }
 
 .sidebar-subnav-item {
@@ -135,10 +84,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--menu-text-color);
+  text-decoration: none;
+  font-size: 12px;
+  border-radius: 5px;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
 }
 
-/**** DSA MENU (from dsa-menu.js) ****/
+.sidebar-subnav-link:hover {
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-text-hover);
+  border-left-color: rgba(249, 115, 22, 0.5);
+}
 
+.sidebar-subnav-link.active {
+  background-color: var(--menu-active-bg);
+  color: var(--menu-active-color);
+  border-left-color: var(--menu-active-color);
+  font-weight: 500;
+}
+
+/**** DSA MENU (from dsa-menu.js) - FIX ALIGNMENT ****/
 .dsa-tabs-container, .sd-tabs-container {
   border-radius: 8px;
   overflow: hidden;
@@ -164,11 +131,12 @@
   display: block;
   padding: 10px 12px;
   text-align: center;
+  color: var(--menu-text-color);
+  text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   transition: all 0.2s;
   border-radius: 8px 8px 0 0;
-  border-left: none;
 }
 
 .dsa-tab.active .dsa-tab-link, 
@@ -204,18 +172,26 @@
   display: block;
 }
 
+/* FIX: Ensure DSA menu items align properly */
 .dsa-menu-item {
   margin-bottom: 4px;
 }
 
-.dsa-menu-header, .dsa-submenu-header {
+.dsa-menu-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   padding: 8px 12px;
-  margin: 0 8px;
+  margin: 0; /* Remove margin to fix alignment */
   border-radius: 5px;
+  color: var(--menu-text-color);
+  transition: all 0.2s ease;
+}
+
+.dsa-menu-header:hover {
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-text-hover);
 }
 
 .dsa-menu-title, .dsa-submenu-title {
@@ -233,6 +209,7 @@
   transform: rotate(180deg);
 }
 
+/* FIX: Ensure DSA submenus work correctly */
 .dsa-submenu, .dsa-deep-submenu {
   list-style: none;
   padding-left: 15px;
@@ -247,20 +224,56 @@
   max-height: 500px;
 }
 
-.dsa-submenu-item, .dsa-deep-submenu-item {
+.dsa-submenu-item {
   margin: 2px 0;
+}
+
+.dsa-submenu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  margin: 0;
+  border-radius: 5px;
+  color: var(--menu-text-color);
+  transition: all 0.2s ease;
+}
+
+.dsa-submenu-header:hover {
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-text-hover);
 }
 
 .dsa-submenu-link, .dsa-deep-submenu-link {
   padding: 8px 12px;
   display: block;
-  margin: 2px 8px;
+  margin: 2px 0; /* Fixed margin */
+  color: var(--menu-text-color);
+  text-decoration: none;
+  font-size: 12px;
+  border-radius: 5px;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.dsa-submenu-link:hover, .dsa-deep-submenu-link:hover {
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-text-hover);
+  border-left-color: rgba(249, 115, 22, 0.5);
+}
+
+.dsa-submenu-link.active, .dsa-deep-submenu-link.active {
+  background-color: var(--menu-active-bg);
+  color: var(--menu-active-color);
+  border-left-color: var(--menu-active-color);
+  font-weight: 500;
 }
 
 /**** SYSTEM DESIGN MENU (from system-design-menu.js) ****/
-
+/* FIX: Ensure System Design menu items align correctly */
 .sd-tab-panel {
-  padding: 5px 8px; /* Matches DSA padding */
+  padding: 5px 0; /* Fixed padding */
 }
 
 .sd-menu-item {
@@ -274,9 +287,27 @@
   padding: 8px 12px;
   margin: 2px 0;
   border-radius: 5px;
+  color: var(--menu-text-color);
+  text-decoration: none;
+  font-size: 12px;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
 }
 
-/* Ensure consistent animation on toggle */
+.sd-menu-link:hover {
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-text-hover);
+  border-left-color: rgba(249, 115, 22, 0.5);
+}
+
+.sd-menu-link.active {
+  background-color: var(--menu-active-bg);
+  color: var(--menu-active-color);
+  border-left-color: var(--menu-active-color);
+  font-weight: 500;
+}
+
+/* FIX: Ensure animation works on toggle */
 .sidebar-nav-item .main-category svg:last-child {
   transition: transform 0.3s ease;
 }
@@ -285,38 +316,16 @@
   transform: rotate(90deg);
 }
 
-/* Extra enhancements for visual appeal */
-
-/* Subtle hover effect for menu containers */
-.sidebar-nav-item:hover,
-.dsa-menu-item:hover,
-.sd-menu-item:hover {
-  transform: translateX(2px);
-}
-
-/* Add subtle line separators in tab panels */
-.dsa-tab-panel,
-.sd-tab-panel {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Progressive indent styling for nested items */
-.dsa-deep-submenu {
-  border-left: 1px solid rgba(249, 115, 22, 0.2);
-  margin-left: 5px;
-  padding-left: 10px;
-}
-
-/* Consistent focus indicators for accessibility */
-.sidebar-nav-link:focus,
-.sidebar-subnav-link:focus,
-.dsa-tab-link:focus,
-.sd-tab-link:focus,
-.dsa-menu-header:focus,
-.dsa-submenu-link:focus,
-.sd-menu-link:focus {
-  outline: 1px dashed var(--menu-active-color);
-  outline-offset: -2px;
+/* Category count pills - consistent styling */
+.category-count {
+  background-color: rgba(249, 115, 22, 0.2);
+  color: var(--menu-active-color);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  min-width: 22px;
+  text-align: center;
+  font-weight: 500;
 }
 
 /* Responsive adjustments */
