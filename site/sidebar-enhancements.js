@@ -183,96 +183,108 @@ function enhanceSidebar() {
   function setupMenuInteractions() {
     // Main sidebar category toggles
     document.querySelectorAll('.sidebar-nav-link.main-category').forEach(link => {
-      link.addEventListener('click', function(e) {
-        // Don't interfere with normal link behavior if it has a real href
-        if (this.getAttribute('href') && 
-            this.getAttribute('href') !== 'javascript:void(0)' && 
-            this.getAttribute('href') !== '#') {
-          return;
-        }
-        
-        e.preventDefault();
-        
-        // Toggle the expanded state
-        const parent = this.closest('.sidebar-nav-item');
-        if (parent) {
-          parent.classList.toggle('expanded');
-        }
-      });
+      if (!link.hasAttribute('data-handler-added')) {
+        link.addEventListener('click', function(e) {
+          // Don't interfere with normal link behavior if it has a real href
+          if (this.getAttribute('href') && 
+              this.getAttribute('href') !== 'javascript:void(0)' && 
+              this.getAttribute('href') !== '#') {
+            return;
+          }
+          
+          e.preventDefault();
+          
+          // Toggle the expanded state
+          const parent = this.closest('.sidebar-nav-item');
+          if (parent) {
+            parent.classList.toggle('expanded');
+          }
+        });
+        link.setAttribute('data-handler-added', 'true');
+      }
     });
     
     // DSA menu item toggles
     document.querySelectorAll('.dsa-menu-header').forEach(header => {
-      header.addEventListener('click', function() {
-        const parent = this.closest('.dsa-menu-item');
-        if (parent) {
-          // If this item is already expanded, just collapse it
-          if (parent.classList.contains('expanded')) {
-            parent.classList.remove('expanded');
-          } else {
-            // Expand this item and collapse others
-            const allItems = document.querySelectorAll('.dsa-menu-item');
-            allItems.forEach(item => {
-              item.classList.remove('expanded');
-            });
-            parent.classList.add('expanded');
+      if (!header.hasAttribute('data-handler-added')) {
+        header.addEventListener('click', function() {
+          const parent = this.closest('.dsa-menu-item');
+          if (parent) {
+            // If this item is already expanded, just collapse it
+            if (parent.classList.contains('expanded')) {
+              parent.classList.remove('expanded');
+            } else {
+              // Expand this item and collapse others
+              const allItems = document.querySelectorAll('.dsa-menu-item');
+              allItems.forEach(item => {
+                item.classList.remove('expanded');
+              });
+              parent.classList.add('expanded');
+            }
           }
-        }
-      });
+        });
+        header.setAttribute('data-handler-added', 'true');
+      }
     });
     
     // DSA submenu toggles
     document.querySelectorAll('.dsa-submenu-header').forEach(header => {
-      header.addEventListener('click', function() {
-        const parent = this.closest('.dsa-submenu-item');
-        if (parent) {
-          // If this item is already expanded, just collapse it
-          if (parent.classList.contains('expanded')) {
-            parent.classList.remove('expanded');
-          } else {
-            // Expand this item and collapse others
-            const siblingItems = Array.from(parent.parentElement.children).filter(
-              el => el.classList.contains('dsa-submenu-item')
-            );
-            siblingItems.forEach(item => {
-              item.classList.remove('expanded');
-            });
-            parent.classList.add('expanded');
+      if (!header.hasAttribute('data-handler-added')) {
+        header.addEventListener('click', function() {
+          const parent = this.closest('.dsa-submenu-item');
+          if (parent) {
+            // If this item is already expanded, just collapse it
+            if (parent.classList.contains('expanded')) {
+              parent.classList.remove('expanded');
+            } else {
+              // Expand this item and collapse others
+              const siblingItems = Array.from(parent.parentElement.children).filter(
+                el => el.classList.contains('dsa-submenu-item')
+              );
+              siblingItems.forEach(item => {
+                item.classList.remove('expanded');
+              });
+              parent.classList.add('expanded');
+            }
           }
-        }
-      });
+        });
+        header.setAttribute('data-handler-added', 'true');
+      }
     });
     
     // DSA and System Design tab handling
     document.querySelectorAll('.dsa-tab-link, .sd-tab-link').forEach(tabLink => {
-      tabLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Get the tab ID
-        const tabId = this.getAttribute('data-tab');
-        if (!tabId) return;
-        
-        // Determine if this is DSA or SD tab
-        const isDsa = this.classList.contains('dsa-tab-link');
-        const tabType = isDsa ? 'dsa' : 'sd';
-        
-        // Remove active class from all tabs and panels
-        document.querySelectorAll(`.${tabType}-tab`).forEach(tab => {
-          tab.classList.remove('active');
+      if (!tabLink.hasAttribute('data-handler-added')) {
+        tabLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Get the tab ID
+          const tabId = this.getAttribute('data-tab');
+          if (!tabId) return;
+          
+          // Determine if this is DSA or SD tab
+          const isDsa = this.classList.contains('dsa-tab-link');
+          const tabType = isDsa ? 'dsa' : 'sd';
+          
+          // Remove active class from all tabs and panels
+          document.querySelectorAll(`.${tabType}-tab`).forEach(tab => {
+            tab.classList.remove('active');
+          });
+          document.querySelectorAll(`.${tabType}-tab-panel`).forEach(panel => {
+            panel.classList.remove('active');
+          });
+          
+          // Add active class to clicked tab
+          this.parentElement.classList.add('active');
+          
+          // Show the corresponding panel
+          const panel = document.getElementById(`${tabId}-panel`);
+          if (panel) {
+            panel.classList.add('active');
+          }
         });
-        document.querySelectorAll(`.${tabType}-tab-panel`).forEach(panel => {
-          panel.classList.remove('active');
-        });
-        
-        // Add active class to clicked tab
-        this.parentElement.classList.add('active');
-        
-        // Show the corresponding panel
-        const panel = document.getElementById(`${tabId}-panel`);
-        if (panel) {
-          panel.classList.add('active');
-        }
-      });
+        tabLink.setAttribute('data-handler-added', 'true');
+      }
     });
   }
   
@@ -281,13 +293,16 @@ function enhanceSidebar() {
     // All menu containers
     const containers = document.querySelectorAll('.sidebar-nav-item, .dsa-menu-item, .sd-menu-item');
     containers.forEach(container => {
-      container.addEventListener('mouseenter', () => {
-        container.style.transform = 'translateX(2px)';
-      });
-      
-      container.addEventListener('mouseleave', () => {
-        container.style.transform = '';
-      });
+      if (!container.hasAttribute('data-hover-added')) {
+        container.addEventListener('mouseenter', () => {
+          container.style.transform = 'translateX(2px)';
+        });
+        
+        container.addEventListener('mouseleave', () => {
+          container.style.transform = '';
+        });
+        container.setAttribute('data-hover-added', 'true');
+      }
     });
     
     // All clickable menu items
@@ -300,13 +315,16 @@ function enhanceSidebar() {
     `);
     
     items.forEach(item => {
-      item.addEventListener('mouseenter', () => {
-        item.style.borderLeftWidth = '3px';
-      });
-      
-      item.addEventListener('mouseleave', () => {
-        item.style.borderLeftWidth = '2px';
-      });
+      if (!item.hasAttribute('data-hover-added')) {
+        item.addEventListener('mouseenter', () => {
+          item.style.borderLeftWidth = '3px';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          item.style.borderLeftWidth = '2px';
+        });
+        item.setAttribute('data-hover-added', 'true');
+      }
     });
   }
   
@@ -333,3 +351,40 @@ function checkForTechNavigatorMenus() {
 document.addEventListener('DOMContentLoaded', () => {
   // Initial check
   const initialized = checkForTechNavigatorMenus();
+  
+  // If not initialized, try again after a delay
+  if (!initialized) {
+    setTimeout(checkForTechNavigatorMenus, 1000);
+  }
+});
+
+// Also run after page loads completely
+window.addEventListener('load', () => {
+  checkForTechNavigatorMenus();
+  
+  // Run again after a delay to catch any dynamically loaded menus
+  setTimeout(checkForTechNavigatorMenus, 1500);
+});
+
+// Set up a mutation observer to detect when menu elements are added to the DOM
+const observer = new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    if (mutation.type === 'childList' && mutation.addedNodes.length) {
+      // Check if any menu elements were added
+      const hasMenuElements = Array.from(mutation.addedNodes).some(node => {
+        if (node.nodeType !== Node.ELEMENT_NODE) return false;
+        return node.classList?.contains('sidebar-nav-item') || 
+               node.querySelector?.('.sidebar-nav, .dsa-tabs-container, .sd-tabs-container');
+      });
+      
+      if (hasMenuElements) {
+        // Run enhancements if menu elements were added
+        enhanceSidebar();
+        break;
+      }
+    }
+  }
+});
+
+// Start observing the document body for changes
+observer.observe(document.body, { childList: true, subtree: true });
