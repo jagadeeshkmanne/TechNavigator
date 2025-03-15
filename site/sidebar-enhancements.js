@@ -1,4 +1,4 @@
-// Sidebar Interaction Enhancements for Tech Navigator
+// Sidebar Interaction Enhancements for Tech Navigator - FIXED
 
 // Function to enhance sidebar interactions
 function enhanceSidebar() {
@@ -8,9 +8,10 @@ function enhanceSidebar() {
   function createRipple(event) {
     const button = event.currentTarget;
     
-    // Don't create ripple if this is a link with href
-    if (button.tagName === 'A' && button.getAttribute('href') !== 'javascript:void(0)' && 
-        button.getAttribute('href') !== '#' && button.getAttribute('href')) {
+    // Don't create ripple if this is a link with href (that's not javascript:void(0))
+    if (button.tagName === 'A' && button.getAttribute('href') && 
+        button.getAttribute('href') !== 'javascript:void(0)' && 
+        button.getAttribute('href') !== '#') {
       return;
     }
     
@@ -33,7 +34,7 @@ function enhanceSidebar() {
     button.appendChild(circle);
   }
   
-  // Add ripple styles
+  // Add ripple styles only once
   const styleId = "sidebar-ripple-styles";
   if (!document.getElementById(styleId)) {
     const style = document.createElement('style');
@@ -71,6 +72,10 @@ function enhanceSidebar() {
     document.head.appendChild(style);
   }
   
+  // Keep track of event handlers to prevent duplicates
+  const handledElements = new Set();
+  
+  // FIX: Ensure we don't break or duplicate existing click handlers
   // Attach ripple effect to clickable elements
   const clickableElements = document.querySelectorAll(`
     .sidebar-nav-link, 
@@ -85,15 +90,174 @@ function enhanceSidebar() {
   `);
   
   clickableElements.forEach(element => {
-    // Only add event listener once
-    if (!element.hasAttribute('data-ripple-added')) {
+    const elementId = element.getAttribute('data-id') || 
+                     element.getAttribute('id') || 
+                     element.getAttribute('href') || 
+                     element.textContent.trim();
+    
+    // Only add ripple if not already handled
+    if (!handledElements.has('ripple-' + elementId)) {
       element.addEventListener("click", createRipple);
-      element.setAttribute('data-ripple-added', 'true');
+      handledElements.add('ripple-' + elementId);
     }
   });
   
-  // Enhance active state detection for all menu types
-  function updateActiveState() {
+  // FIX: Preserve existing click handlers for main category toggles
+  function setupMainCategoryToggles() {
+    document.querySelectorAll('.sidebar-nav-link.main-category').forEach(link => {
+      const elementId = link.getAttribute('data-id') || 
+                       link.getAttribute('id') || 
+                       link.getAttribute('href') || 
+                       link.textContent.trim();
+      
+      // Only add toggle handling if not already handled
+      if (!handledElements.has('toggle-' + elementId)) {
+        // Remove any existing onclick attributes to avoid conflicts
+        const originalOnClick = link.getAttribute('onclick');
+        if (originalOnClick) {
+          link.removeAttribute('onclick');
+        }
+        
+        link.addEventListener('click', function(e) {
+          // Don't interfere with normal link behavior if it has a real href
+          if (this.getAttribute('href') && 
+              this.getAttribute('href') !== 'javascript:void(0)' && 
+              this.getAttribute('href') !== '#') {
+            return;
+          }
+          
+          e.preventDefault();
+          
+          // Toggle the expanded state
+          const parent = this.closest('.sidebar-nav-item');
+          if (parent) {
+            parent.classList.toggle('expanded');
+          }
+        });
+        
+        handledElements.add('toggle-' + elementId);
+      }
+    });
+  }
+  
+  // FIX: Setup DSA menu toggles without breaking existing ones
+  function setupDsaMenuToggles() {
+    // DSA menu item toggles
+    document.querySelectorAll('.dsa-menu-header').forEach(header => {
+      const elementId = header.getAttribute('data-id') || 
+                       header.getAttribute('id') || 
+                       header.querySelector('.dsa-menu-title')?.textContent.trim();
+      
+      if (!elementId) return;
+      
+      // Only add event handler if not already handled
+      if (!handledElements.has('dsa-toggle-' + elementId)) {
+        // Remove any existing onclick attributes to avoid conflicts
+        const originalOnClick = header.getAttribute('onclick');
+        if (originalOnClick) {
+          header.removeAttribute('onclick');
+        }
+        
+        header.addEventListener('click', function(e) {
+          const parent = this.closest('.dsa-menu-item');
+          if (parent) {
+            parent.classList.toggle('expanded');
+          }
+        });
+        
+        handledElements.add('dsa-toggle-' + elementId);
+      }
+    });
+    
+    // DSA submenu toggles
+    document.querySelectorAll('.dsa-submenu-header').forEach(header => {
+      const elementId = header.getAttribute('data-id') || 
+                       header.getAttribute('id') || 
+                       header.querySelector('.dsa-submenu-title')?.textContent.trim();
+      
+      if (!elementId) return;
+      
+      // Only add event handler if not already handled
+      if (!handledElements.has('dsa-subtoggle-' + elementId)) {
+        // Remove any existing onclick attributes to avoid conflicts
+        const originalOnClick = header.getAttribute('onclick');
+        if (originalOnClick) {
+          header.removeAttribute('onclick');
+        }
+        
+        header.addEventListener('click', function(e) {
+          const parent = this.closest('.dsa-submenu-item');
+          if (parent) {
+            parent.classList.toggle('expanded');
+          }
+        });
+        
+        handledElements.add('dsa-subtoggle-' + elementId);
+      }
+    });
+  }
+  
+  // FIX: Setup tab toggles without breaking existing ones
+  function setupTabToggles() {
+    // DSA and System Design tab handling
+    document.querySelectorAll('.dsa-tab-link, .sd-tab-link').forEach(tabLink => {
+      const tabId = tabLink.getAttribute('data-tab');
+      if (!tabId) return;
+      
+      // Only add event handler if not already handled
+      if (!handledElements.has('tab-toggle-' + tabId)) {
+        // Remove any existing onclick attributes if it exists, to avoid conflicts
+        const originalOnClick = tabLink.getAttribute('onclick');
+        if (originalOnClick) {
+          tabLink.removeAttribute('onclick');
+        }
+        
+        tabLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Determine if this is DSA or SD tab
+          const isDsa = this.classList.contains('dsa-tab-link');
+          const tabType = isDsa ? 'dsa' : 'sd';
+          
+          // Remove active class from all tabs and panels
+          document.querySelectorAll(`.${tabType}-tab`).forEach(tab => {
+            tab.classList.remove('active');
+          });
+          document.querySelectorAll(`.${tabType}-tab-panel`).forEach(panel => {
+            panel.classList.remove('active');
+          });
+          
+          // Add active class to clicked tab
+          this.parentElement.classList.add('active');
+          
+          // Show the corresponding panel
+          const panel = document.getElementById(`${tabId}-panel`);
+          if (panel) {
+            panel.classList.add('active');
+          }
+          
+          // Call the original onclick if it existed
+          if (originalOnClick) {
+            try {
+              new Function(originalOnClick).call(this);
+            } catch (err) {
+              console.error('Error executing original onclick:', err);
+            }
+          }
+        });
+        
+        handledElements.add('tab-toggle-' + tabId);
+      }
+    });
+  }
+  
+  // Run menu setup functions
+  setupMainCategoryToggles();
+  setupDsaMenuToggles();
+  setupTabToggles();
+  
+  // FIX: Highlight active items without breaking existing active states
+  function highlightActiveItems() {
     const currentUrl = window.location.href.toLowerCase();
     
     // Check all sidebar links
@@ -133,14 +297,6 @@ function enhanceSidebar() {
             const tabId = panel.id.replace('-panel', '');
             const tab = document.querySelector(`.dsa-tab-link[data-tab="${tabId}"]`);
             if (tab) {
-              // Remove active class from all tabs and panels
-              document.querySelectorAll('.dsa-tab').forEach(t => {
-                t.classList.remove('active');
-              });
-              document.querySelectorAll('.dsa-tab-panel').forEach(p => {
-                p.classList.remove('active');
-              });
-              
               // Set active for current tab and panel
               tab.parentElement.classList.add('active');
               panel.classList.add('active');
@@ -162,14 +318,6 @@ function enhanceSidebar() {
           const tabId = panel.id.replace('-panel', '');
           const tab = document.querySelector(`.sd-tab-link[data-tab="${tabId}"]`);
           if (tab) {
-            // Remove active class from all tabs and panels
-            document.querySelectorAll('.sd-tab').forEach(t => {
-              t.classList.remove('active');
-            });
-            document.querySelectorAll('.sd-tab-panel').forEach(p => {
-              p.classList.remove('active');
-            });
-            
             // Set active for current tab and panel
             tab.parentElement.classList.add('active');
             panel.classList.add('active');
@@ -179,164 +327,13 @@ function enhanceSidebar() {
     });
   }
   
-  // Add click handlers for all menu types
-  function setupMenuInteractions() {
-    // Main sidebar category toggles
-    document.querySelectorAll('.sidebar-nav-link.main-category').forEach(link => {
-      if (!link.hasAttribute('data-handler-added')) {
-        link.addEventListener('click', function(e) {
-          // Don't interfere with normal link behavior if it has a real href
-          if (this.getAttribute('href') && 
-              this.getAttribute('href') !== 'javascript:void(0)' && 
-              this.getAttribute('href') !== '#') {
-            return;
-          }
-          
-          e.preventDefault();
-          
-          // Toggle the expanded state
-          const parent = this.closest('.sidebar-nav-item');
-          if (parent) {
-            parent.classList.toggle('expanded');
-          }
-        });
-        link.setAttribute('data-handler-added', 'true');
-      }
-    });
-    
-    // DSA menu item toggles
-    document.querySelectorAll('.dsa-menu-header').forEach(header => {
-      if (!header.hasAttribute('data-handler-added')) {
-        header.addEventListener('click', function() {
-          const parent = this.closest('.dsa-menu-item');
-          if (parent) {
-            // If this item is already expanded, just collapse it
-            if (parent.classList.contains('expanded')) {
-              parent.classList.remove('expanded');
-            } else {
-              // Expand this item and collapse others
-              const allItems = document.querySelectorAll('.dsa-menu-item');
-              allItems.forEach(item => {
-                item.classList.remove('expanded');
-              });
-              parent.classList.add('expanded');
-            }
-          }
-        });
-        header.setAttribute('data-handler-added', 'true');
-      }
-    });
-    
-    // DSA submenu toggles
-    document.querySelectorAll('.dsa-submenu-header').forEach(header => {
-      if (!header.hasAttribute('data-handler-added')) {
-        header.addEventListener('click', function() {
-          const parent = this.closest('.dsa-submenu-item');
-          if (parent) {
-            // If this item is already expanded, just collapse it
-            if (parent.classList.contains('expanded')) {
-              parent.classList.remove('expanded');
-            } else {
-              // Expand this item and collapse others
-              const siblingItems = Array.from(parent.parentElement.children).filter(
-                el => el.classList.contains('dsa-submenu-item')
-              );
-              siblingItems.forEach(item => {
-                item.classList.remove('expanded');
-              });
-              parent.classList.add('expanded');
-            }
-          }
-        });
-        header.setAttribute('data-handler-added', 'true');
-      }
-    });
-    
-    // DSA and System Design tab handling
-    document.querySelectorAll('.dsa-tab-link, .sd-tab-link').forEach(tabLink => {
-      if (!tabLink.hasAttribute('data-handler-added')) {
-        tabLink.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          // Get the tab ID
-          const tabId = this.getAttribute('data-tab');
-          if (!tabId) return;
-          
-          // Determine if this is DSA or SD tab
-          const isDsa = this.classList.contains('dsa-tab-link');
-          const tabType = isDsa ? 'dsa' : 'sd';
-          
-          // Remove active class from all tabs and panels
-          document.querySelectorAll(`.${tabType}-tab`).forEach(tab => {
-            tab.classList.remove('active');
-          });
-          document.querySelectorAll(`.${tabType}-tab-panel`).forEach(panel => {
-            panel.classList.remove('active');
-          });
-          
-          // Add active class to clicked tab
-          this.parentElement.classList.add('active');
-          
-          // Show the corresponding panel
-          const panel = document.getElementById(`${tabId}-panel`);
-          if (panel) {
-            panel.classList.add('active');
-          }
-        });
-        tabLink.setAttribute('data-handler-added', 'true');
-      }
-    });
-  }
-  
-  // Add hover effects for menu items
-  function addHoverEffects() {
-    // All menu containers
-    const containers = document.querySelectorAll('.sidebar-nav-item, .dsa-menu-item, .sd-menu-item');
-    containers.forEach(container => {
-      if (!container.hasAttribute('data-hover-added')) {
-        container.addEventListener('mouseenter', () => {
-          container.style.transform = 'translateX(2px)';
-        });
-        
-        container.addEventListener('mouseleave', () => {
-          container.style.transform = '';
-        });
-        container.setAttribute('data-hover-added', 'true');
-      }
-    });
-    
-    // All clickable menu items
-    const items = document.querySelectorAll(`
-      .sidebar-nav-link:not(.main-category), 
-      .sidebar-subnav-link, 
-      .dsa-submenu-link,
-      .dsa-deep-submenu-link,
-      .sd-menu-link
-    `);
-    
-    items.forEach(item => {
-      if (!item.hasAttribute('data-hover-added')) {
-        item.addEventListener('mouseenter', () => {
-          item.style.borderLeftWidth = '3px';
-        });
-        
-        item.addEventListener('mouseleave', () => {
-          item.style.borderLeftWidth = '2px';
-        });
-        item.setAttribute('data-hover-added', 'true');
-      }
-    });
-  }
-  
-  // Run all enhancements
-  updateActiveState();
-  setupMenuInteractions();
-  addHoverEffects();
+  // Run highlight active items
+  highlightActiveItems();
   
   console.log("Sidebar enhancements applied");
 }
 
-// Check if Tech Navigator DSA menu is present
+// Check if Tech Navigator menu is present
 function checkForTechNavigatorMenus() {
   // Run sidebar enhancements if any Tech Navigator menu is present
   const hasSidebar = document.querySelector('.sidebar-nav, .dsa-tabs-container, .sd-tabs-container');
