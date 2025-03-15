@@ -8,6 +8,7 @@ function createMobileMenuToggle() {
   // Create toggle button
   const toggleButton = document.createElement('button');
   toggleButton.className = 'mobile-menu-toggle';
+  toggleButton.id = 'mobile-menu-toggle'; // Add ID for easier reference
   toggleButton.setAttribute('aria-label', 'Toggle menu');
   toggleButton.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
@@ -18,8 +19,11 @@ function createMobileMenuToggle() {
     </svg>
   `;
   
-  // Add click event
-  toggleButton.addEventListener('click', toggleMobileMenu);
+  // Use onclick instead of addEventListener for better mobile compatibility
+  toggleButton.onclick = function() {
+    toggleMobileMenu();
+    return false; // Prevent default
+  };
   
   // Add to header (before the logo)
   const header = document.querySelector('.app-header');
@@ -29,16 +33,100 @@ function createMobileMenuToggle() {
     header.insertBefore(toggleButton, logo);
   }
   
+  // Add mobile menu styles
+  addMobileMenuStyles();
+  
   // Add swipe functionality
   addSwipeDetection();
 }
 
-// Function to toggle mobile menu
+// Add required CSS for mobile menu
+function addMobileMenuStyles() {
+  // Check if styles already exist
+  if (document.getElementById('mobile-menu-styles')) {
+    return;
+  }
+  
+  const styleElement = document.createElement('style');
+  styleElement.id = 'mobile-menu-styles';
+  styleElement.textContent = `
+    /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: white;
+      padding: 6px;
+      margin-right: 0.5rem;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    
+    /* Force sidebar styles on mobile */
+    @media screen and (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      .sidebar {
+        position: fixed !important;
+        top: 56px !important;
+        left: -100% !important;
+        width: 80% !important;
+        max-width: 300px !important;
+        height: calc(100vh - 56px) !important;
+        transition: left 0.3s ease !important;
+        z-index: 100 !important;
+        overflow-y: auto !important;
+        box-shadow: none !important;
+      }
+      
+      .sidebar.active {
+        left: 0 !important;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2) !important;
+      }
+      
+      .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+      }
+    }
+  `;
+  document.head.appendChild(styleElement);
+}
+
+// Improved function to toggle mobile menu
 function toggleMobileMenu() {
   const sidebar = document.querySelector('.sidebar');
-  if (sidebar) {
-    sidebar.classList.toggle('active');
+  if (!sidebar) return;
+  
+  // Check current state
+  const isActive = sidebar.classList.contains('active');
+  
+  // Toggle class
+  if (isActive) {
+    sidebar.classList.remove('active');
+  } else {
+    // Force display block first, then add active class
+    sidebar.style.display = 'block';
+    sidebar.classList.add('active');
+    
+    // Force layout recalculation
+    sidebar.offsetHeight;
   }
+  
+  // Force styles using setTimeout to ensure they apply
+  setTimeout(function() {
+    if (!isActive) {
+      // Ensure sidebar is displayed and positioned correctly
+      sidebar.style.left = '0';
+      sidebar.style.display = 'block';
+    } else {
+      sidebar.style.left = '-100%';
+    }
+  }, 10);
 }
 
 // Function to handle swipe detection for the sidebar
@@ -50,13 +138,13 @@ function addSwipeDetection() {
   // Detect touch start
   document.addEventListener('touchstart', function(e) {
     touchStartX = e.changedTouches[0].screenX;
-  }, false);
+  }, {passive: true}); // Use passive listener for better performance
   
   // Detect touch end
   document.addEventListener('touchend', function(e) {
     touchEndX = e.changedTouches[0].screenX;
     handleSwipe();
-  }, false);
+  }, {passive: true});
   
   // Handle swipe based on direction
   function handleSwipe() {
@@ -68,12 +156,21 @@ function addSwipeDetection() {
     
     // Detect right swipe (open sidebar)
     if (swipeDistance > minSwipeDistance && window.innerWidth <= 768) {
+      sidebar.style.display = 'block'; // Force display first
       sidebar.classList.add('active');
+      sidebar.style.left = '0'; // Force left position
     }
     
     // Detect left swipe (close sidebar)
     if (swipeDistance < -minSwipeDistance && window.innerWidth <= 768) {
       sidebar.classList.remove('active');
+      
+      // Wait for animation to complete, then reset display
+      setTimeout(() => {
+        if (!sidebar.classList.contains('active')) {
+          sidebar.style.left = '-100%';
+        }
+      }, 300);
     }
   }
   
@@ -82,10 +179,12 @@ function addSwipeDetection() {
     const sidebar = document.querySelector('.sidebar');
     if (!sidebar) return;
     
-    // If sidebar is active and click is outside sidebar
+    const toggleButton = document.getElementById('mobile-menu-toggle');
+    
+    // If sidebar is active and click is outside sidebar and not on toggle button
     if (sidebar.classList.contains('active') && 
         !sidebar.contains(e.target) && 
-        !e.target.classList.contains('mobile-menu-toggle')) {
+        (!toggleButton || !toggleButton.contains(e.target))) {
       sidebar.classList.remove('active');
     }
   });
@@ -96,19 +195,26 @@ document.addEventListener('DOMContentLoaded', function() {
   createMobileMenuToggle();
   
   // Close sidebar after clicking a link (mobile UX improvement)
-  const sidebarLinks = document.querySelectorAll('.sidebar-nav-link, .sidebar-subnav-link, .dsa-submenu-link, .sd-menu-link');
-  sidebarLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      if (window.innerWidth <= 768) {
+  document.body.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+      // Check if the clicked element is a link or inside a link
+      const isLink = e.target.tagName === 'A' || 
+                     e.target.closest('a') || 
+                     e.target.classList.contains('sidebar-nav-link') || 
+                     e.target.classList.contains('sidebar-subnav-link') ||
+                     e.target.classList.contains('dsa-submenu-link') || 
+                     e.target.classList.contains('sd-menu-link');
+      
+      if (isLink) {
         const sidebar = document.querySelector('.sidebar');
-        if (sidebar) {
+        if (sidebar && sidebar.classList.contains('active')) {
           setTimeout(() => {
             sidebar.classList.remove('active');
           }, 150); // Small delay to allow the click to register first
         }
       }
-    });
-  });
+    }
+  }, { capture: true }); // Use capture to ensure this runs before other handlers
   
   // Add viewport meta tag if not present
   if (!document.querySelector('meta[name="viewport"]')) {
@@ -126,9 +232,11 @@ window.addEventListener('resize', function() {
     const sidebar = document.querySelector('.sidebar');
     if (sidebar) {
       sidebar.classList.remove('active');
+      sidebar.style.left = ''; // Reset inline styles
+      sidebar.style.display = ''; // Reset inline styles
     }
   }
-});// Responsive Table Enhancement
+});
 
 // Function to make tables responsive
 function makeTablesResponsive() {
@@ -203,7 +311,7 @@ function optimizeMobileDisplay() {
   }
 }
 
-// Initialize when DOM is loaded
+// Initialize responsive tables and mobile display when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   makeTablesResponsive();
   optimizeMobileDisplay();
@@ -248,103 +356,15 @@ window.addEventListener('resize', function() {
 
 // Make the function globally available
 window.makeTablesResponsive = makeTablesResponsive;
+window.toggleMobileMenu = toggleMobileMenu;
 
-function fixMenuTabs() {
-  // Fix for DSA tabs
-  const dsaTabs = document.querySelectorAll('.dsa-tab-link');
-  dsaTabs.forEach(tab => {
-    // Remove any existing event listeners
-    const newTab = tab.cloneNode(true);
-    tab.parentNode.replaceChild(newTab, tab);
-    
-    // Add click event
-    newTab.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      // Get the tab ID
-      const tabId = this.getAttribute('data-tab');
-      
-      // Remove active class from all tabs and panels
-      document.querySelectorAll('.dsa-tab').forEach(t => {
-        t.classList.remove('active');
-      });
-      document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
-        panel.classList.remove('active');
-      });
-      
-      // Add active class to clicked tab
-      this.parentElement.classList.add('active');
-      
-      // Show the corresponding panel
-      const panel = document.getElementById(`${tabId}-panel`);
-      if (panel) {
-        panel.classList.add('active');
-      }
-    });
-  });
-  
-  // Fix for System Design tabs
-  const sdTabs = document.querySelectorAll('.sd-tab-link');
-  sdTabs.forEach(tab => {
-    // Remove any existing event listeners
-    const newTab = tab.cloneNode(true);
-    tab.parentNode.replaceChild(newTab, tab);
-    
-    // Add click event
-    newTab.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      // Get the tab ID
-      const tabId = this.getAttribute('data-tab');
-      
-      // Remove active class from all tabs and panels
-      document.querySelectorAll('.sd-tab').forEach(t => {
-        t.classList.remove('active');
-      });
-      document.querySelectorAll('.sd-tab-panel').forEach(panel => {
-        panel.classList.remove('active');
-      });
-      
-      // Add active class to clicked tab
-      this.parentElement.classList.add('active');
-      
-      // Show the corresponding panel
-      const panel = document.getElementById(`${tabId}-panel`);
-      if (panel) {
-        panel.classList.add('active');
-      }
-    });
-  });
-}
-
-// Call this function after DOM is loaded and whenever menu is created
-document.addEventListener('DOMContentLoaded', function() {
-  // Initial fix
-  setTimeout(fixMenuTabs, 1000);
-  
-  // Set up an observer to detect when menu tabs are added
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.type === 'childList') {
-        const addedNodes = Array.from(mutation.addedNodes);
-        const hasMenuTabs = addedNodes.some(node => {
-          return node.querySelectorAll && 
-                (node.querySelectorAll('.dsa-tab-link').length > 0 || 
-                 node.querySelectorAll('.sd-tab-link').length > 0);
-        });
-        
-        if (hasMenuTabs) {
-          setTimeout(fixMenuTabs, 500);
-        }
-      }
-    });
-  });
-  
-  // Start observing the document
-  observer.observe(document.body, { childList: true, subtree: true });
-});
+// Try initialization again after a short delay
+setTimeout(function() {
+  if (!document.querySelector('.mobile-menu-toggle')) {
+    createMobileMenuToggle();
+  }
+  makeTablesResponsive();
+}, 1000);
 
 // Fix for z-index issues
 document.addEventListener('DOMContentLoaded', function() {
@@ -362,6 +382,21 @@ document.addEventListener('DOMContentLoaded', function() {
     .dsa-tab-panels, .sd-tab-panels {
       position: relative;
       z-index: 3;
+    }
+    
+    /* Table scroll container */
+    .table-scroll-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 1rem;
+    }
+    
+    /* Mobile table styles */
+    @media screen and (max-width: 768px) {
+      .problem-table, .list-table {
+        min-width: 600px;
+      }
     }
   `;
   document.head.appendChild(style);
