@@ -1,0 +1,177 @@
+/* Enhanced Sidebar Styles for Tech Navigator */
+
+/* Main sidebar container */
+.sidebar {
+  border-right: 1px solid var(--border-color);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #0f172a, #1e293b);
+}
+
+/* Sidebar navigation list */
+.sidebar-nav {
+  padding: 0.5rem;
+}
+
+/* Main nav items */
+.sidebar-nav-item {
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(30, 41, 59, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sidebar-nav-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Main category headers */
+.sidebar-nav-link.main-category {
+  padding: 0.8rem 1rem;
+  background-color: rgba(249, 115, 22, 0.1);
+  border-left: 3px solid var(--professional-orange);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav-link.main-category:hover {
+  background-color: rgba(249, 115, 22, 0.15);
+}
+
+.sidebar-nav-link.main-category svg {
+  color: var(--professional-orange);
+}
+
+/* Subnavigation */
+.sidebar-subnav {
+  padding: 0.5rem;
+  background-color: rgba(15, 23, 42, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Subnav items */
+.sidebar-subnav-item {
+  margin: 0.3rem 0;
+}
+
+.sidebar-subnav-link {
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.sidebar-subnav-link:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-left-color: rgba(249, 115, 22, 0.5);
+}
+
+.sidebar-subnav-link.active {
+  background-color: rgba(249, 115, 22, 0.15);
+  border-left-color: var(--professional-orange);
+  color: var(--professional-orange);
+}
+
+/* Category counts */
+.category-count {
+  background-color: rgba(249, 115, 22, 0.2);
+  color: var(--professional-orange);
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 12px;
+  min-width: 22px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Animation for toggle icon */
+.sidebar-nav-item .main-category svg:last-child {
+  transition: transform 0.3s ease;
+}
+
+.sidebar-nav-item.expanded .main-category svg:last-child {
+  transform: rotate(90deg);
+}
+
+/* DSA Menu styles enhancements */
+.dsa-tabs-container, .sd-tabs-container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0.3rem 0;
+}
+
+.dsa-tabs, .sd-tabs {
+  background: linear-gradient(to right, #1e293b, #334155);
+}
+
+.dsa-tab.active .dsa-tab-link:after,
+.sd-tab.active .sd-tab-link:after {
+  background: linear-gradient(to right, #f97316, #fb923c);
+  height: 3px;
+}
+
+.dsa-tab-panels, .sd-tab-panels {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(15, 23, 42, 0.7);
+}
+
+.dsa-menu-header, .sd-menu-link {
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.dsa-menu-header:hover, .sd-menu-link:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-left-color: rgba(249, 115, 22, 0.5);
+}
+
+.dsa-submenu-link.active, .sd-menu-link.active {
+  background-color: rgba(249, 115, 22, 0.15);
+  border-left: 2px solid var(--professional-orange);
+  color: var(--professional-orange);
+}
+
+/* System Design specific styling */
+.sd-menu-link {
+  padding: 0.6rem 1rem;
+  margin: 0.15rem 0;
+  border-radius: 5px;
+}
+
+/* Add a subtle glow to active items */
+.sidebar-subnav-link.active,
+.dsa-submenu-link.active,
+.sd-menu-link.active {
+  box-shadow: 0 0 5px rgba(249, 115, 22, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar-nav-item {
+    margin-bottom: 0.5rem;
+  }
+  
+  .sidebar-nav-link.main-category,
+  .sidebar-subnav-link {
+    padding: 0.75rem;
+  }
+}
