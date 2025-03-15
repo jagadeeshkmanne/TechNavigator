@@ -1,7 +1,3 @@
-
-<style> /* Responsive CSS Fixes for Tech Navigator */
-
-/* Mobile-first Approach */
 @media screen and (max-width: 768px) {
   /* Header Adjustments */
   .app-header {
@@ -350,4 +346,4 @@
     content: "Exit";
     font-size: 12px;
   }
-}</style>
+}
