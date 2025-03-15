@@ -5,8 +5,8 @@
   /* Colors */
   --tn-dark-bg: #0f172a;
   --tn-darker-bg: #070d19;
-  --tn-menu-bg: #1e293b;
-  --tn-menu-active-bg: #1e293b;
+  --tn-menu-bg: transparent;      /* Changed to transparent */
+  --tn-menu-active-bg: transparent; /* Changed to transparent */
   --tn-text: #94a3b8;
   --tn-text-hover: #f1f5f9;
   --tn-orange: #F97316;
@@ -91,7 +91,7 @@
   border-left: 3px solid transparent !important;
   /* Add border bottom for visual separation */
   border-bottom: 1px solid var(--tn-border) !important;
-  background-color: var(--tn-menu-bg) !important;
+  background-color: transparent !important; /* Changed to transparent */
   margin-bottom: 1px !important;
 }
 
@@ -114,7 +114,7 @@
 .dsa-submenu-link.active,
 .dsa-deep-submenu-link.active,
 .sd-menu-link.active {
-  background-color: var(--tn-menu-active-bg) !important;
+  background-color: transparent !important; /* Changed to transparent */
   color: var(--tn-orange) !important;
   border-left-color: var(--tn-orange) !important;
   font-weight: 500 !important;
@@ -165,7 +165,7 @@
 }
 
 .sidebar-nav-link.main-category {
-  background-color: var(--tn-menu-bg) !important;
+  background-color: transparent !important; /* Changed to transparent */
   font-weight: 500 !important;
   border-left-color: var(--tn-orange) !important;
   color: var(--tn-text) !important;
@@ -178,7 +178,7 @@
   max-height: 0 !important;
   overflow: hidden !important;
   transition: max-height 0.3s ease-out !important;
-  background-color: rgba(0, 0, 0, 0.15) !important;
+  background-color: transparent !important; /* Changed to transparent */
 }
 
 .sidebar-nav-item.expanded .sidebar-subnav {
@@ -195,13 +195,13 @@
   margin: 8px 0 !important;
   overflow: hidden !important;
   border-radius: 6px !important;
-  background-color: var(--tn-darker-bg) !important;
+  background-color: transparent !important; /* Changed to transparent */
 }
 
 .dsa-tabs {
   display: flex !important;
   width: 100% !important;
-  background-color: var(--tn-menu-bg) !important;
+  background-color: transparent !important; /* Changed to transparent */
   border-bottom: 1px solid var(--tn-border) !important;
 }
 
@@ -265,7 +265,7 @@
 .dsa-submenu-link {
   padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width)) !important;
   color: var(--tn-text) !important;
-  background-color: var(--tn-darker-bg) !important; /* Slightly darker for submenu */
+  background-color: transparent !important; /* Changed to transparent */
 }
 
 .dsa-deep-submenu {
@@ -282,7 +282,7 @@
 .dsa-deep-submenu-link {
   padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width) * 2) !important;
   color: var(--tn-text) !important;
-  background-color: rgba(0, 0, 0, 0.2) !important; /* Even darker for deep submenu */
+  background-color: transparent !important; /* Changed to transparent */
 }
 
 /* ===== SYSTEM DESIGN MENU STYLING ===== */
@@ -290,13 +290,13 @@
   margin: 8px 0 !important;
   overflow: hidden !important;
   border-radius: 6px !important;
-  background-color: var(--tn-darker-bg) !important;
+  background-color: transparent !important; /* Changed to transparent */
 }
 
 .sd-tabs {
   display: flex !important;
   width: 100% !important;
-  background-color: var(--tn-menu-bg) !important;
+  background-color: transparent !important; /* Changed to transparent */
   border-bottom: 1px solid var(--tn-border) !important;
 }
 
