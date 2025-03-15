@@ -224,12 +224,6 @@ function makeTablesResponsive() {
       // Replace table with scroll container containing the table
       parent.insertBefore(scrollContainer, table);
       scrollContainer.appendChild(table);
-      
-      // Force full width for category view tables
-      const isInCategoryView = table.closest('#categories-container') !== null;
-      if (isInCategoryView && window.innerWidth <= 768) {
-        table.style.width = '100%';
-      }
     }
   });
 }
@@ -271,7 +265,7 @@ function addResponsiveTableStyles() {
   const styleElement = document.createElement('style');
   styleElement.id = 'responsive-table-styles';
   styleElement.textContent = `
-    /* Responsive Table Styles - Fixes for both views */
+    /* Responsive Table Styles - Final Fix */
     
     /* Table scroll container */
     .table-scroll-container {
@@ -299,11 +293,13 @@ function addResponsiveTableStyles() {
         table-layout: fixed !important;
       }
       
-      /* For category view - expanding width */
-      #categories-container .table-scroll-container .problem-table {
-        width: auto !important;
-        min-width: 390px !important;
-        max-width: none !important;
+      /* For category view - need exact column widths to match container */
+      #categories-container .table-scroll-container .problem-table,
+      .accordion-content .table-scroll-container .problem-table {
+        width: 320px !important;
+        min-width: 320px !important;
+        max-width: 320px !important;
+        table-layout: fixed !important;
       }
       
       /* Make sure table container is full width in all cases */
@@ -318,48 +314,83 @@ function addResponsiveTableStyles() {
       .list-table th, .list-table td {
         padding: 0.4rem 0.2rem !important;
         font-size: 0.65rem !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
       }
       
-      /* Set percentages for category view column widths */
+      /* Category view column widths */
       #categories-container .problem-table th:nth-child(1),
-      #categories-container .problem-table td:nth-child(1) {
-        width: 8% !important;
+      #categories-container .problem-table td:nth-child(1),
+      .accordion-content .problem-table th:nth-child(1),
+      .accordion-content .problem-table td:nth-child(1) {
+        width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
       }
       
       #categories-container .problem-table th:nth-child(2),
       #categories-container .problem-table td:nth-child(2),
+      .accordion-content .problem-table th:nth-child(2),
+      .accordion-content .problem-table td:nth-child(2) {
+        width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
+      }
+      
       #categories-container .problem-table th:nth-child(3),
-      #categories-container .problem-table td:nth-child(3) {
-        width: 8% !important;
+      #categories-container .problem-table td:nth-child(3),
+      .accordion-content .problem-table th:nth-child(3),
+      .accordion-content .problem-table td:nth-child(3) {
+        width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
       }
       
       #categories-container .problem-table th:nth-child(4),
-      #categories-container .problem-table td:nth-child(4) {
-        width: 50% !important;
+      #categories-container .problem-table td:nth-child(4),
+      .accordion-content .problem-table th:nth-child(4),
+      .accordion-content .problem-table td:nth-child(4) {
+        width: 150px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
       }
       
       #categories-container .problem-table th:nth-child(5),
-      #categories-container .problem-table td:nth-child(5) {
-        width: 22% !important;
+      #categories-container .problem-table td:nth-child(5),
+      .accordion-content .problem-table th:nth-child(5),
+      .accordion-content .problem-table td:nth-child(5) {
+        width: 80px !important;
+        min-width: 80px !important;
+        max-width: 80px !important;
       }
       
-      /* Set fixed widths for list view column widths */
+      /* List view column widths */
       #list-container .problem-table th:nth-child(1),
       #list-container .problem-table td:nth-child(1),
       #list-container .list-table th:nth-child(1),
       #list-container .list-table td:nth-child(1) {
         width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
       }
       
       #list-container .problem-table th:nth-child(2),
       #list-container .problem-table td:nth-child(2),
       #list-container .list-table th:nth-child(2),
-      #list-container .list-table td:nth-child(2),
+      #list-container .list-table td:nth-child(2) {
+        width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
+      }
+      
       #list-container .problem-table th:nth-child(3),
       #list-container .problem-table td:nth-child(3),
       #list-container .list-table th:nth-child(3),
       #list-container .list-table td:nth-child(3) {
         width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
       }
       
       #list-container .problem-table th:nth-child(4),
@@ -367,6 +398,8 @@ function addResponsiveTableStyles() {
       #list-container .list-table th:nth-child(4),
       #list-container .list-table td:nth-child(4) {
         width: 150px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
       }
       
       #list-container .problem-table th:nth-child(5),
@@ -374,6 +407,17 @@ function addResponsiveTableStyles() {
       #list-container .list-table th:nth-child(5),
       #list-container .list-table td:nth-child(5) {
         width: 80px !important;
+        min-width: 80px !important;
+        max-width: 80px !important;
+      }
+      
+      #list-container .problem-table th:nth-child(6),
+      #list-container .problem-table td:nth-child(6),
+      #list-container .list-table th:nth-child(6),
+      #list-container .list-table td:nth-child(6) {
+        width: 70px !important;
+        min-width: 70px !important;
+        max-width: 70px !important;
       }
       
       /* Problem link text adjustments */
@@ -413,9 +457,12 @@ function addResponsiveTableStyles() {
         min-width: 360px !important;
       }
       
-      /* Smaller minimum width for category view */
-      #categories-container .table-scroll-container .problem-table {
-        min-width: 360px !important;
+      /* Smaller fixed width for category view */
+      #categories-container .table-scroll-container .problem-table,
+      .accordion-content .table-scroll-container .problem-table {
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
       }
       
       /* Further reduce font size */
@@ -428,6 +475,7 @@ function addResponsiveTableStyles() {
   `;
   document.head.appendChild(styleElement);
 }
+
 
 // Function to optimize mobile display
 function optimizeMobileDisplay() {
