@@ -248,3 +248,121 @@ window.addEventListener('resize', function() {
 
 // Make the function globally available
 window.makeTablesResponsive = makeTablesResponsive;
+
+function fixMenuTabs() {
+  // Fix for DSA tabs
+  const dsaTabs = document.querySelectorAll('.dsa-tab-link');
+  dsaTabs.forEach(tab => {
+    // Remove any existing event listeners
+    const newTab = tab.cloneNode(true);
+    tab.parentNode.replaceChild(newTab, tab);
+    
+    // Add click event
+    newTab.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Get the tab ID
+      const tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.dsa-tab').forEach(t => {
+        t.classList.remove('active');
+      });
+      document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
+      
+      // Show the corresponding panel
+      const panel = document.getElementById(`${tabId}-panel`);
+      if (panel) {
+        panel.classList.add('active');
+      }
+    });
+  });
+  
+  // Fix for System Design tabs
+  const sdTabs = document.querySelectorAll('.sd-tab-link');
+  sdTabs.forEach(tab => {
+    // Remove any existing event listeners
+    const newTab = tab.cloneNode(true);
+    tab.parentNode.replaceChild(newTab, tab);
+    
+    // Add click event
+    newTab.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Get the tab ID
+      const tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.sd-tab').forEach(t => {
+        t.classList.remove('active');
+      });
+      document.querySelectorAll('.sd-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
+      
+      // Show the corresponding panel
+      const panel = document.getElementById(`${tabId}-panel`);
+      if (panel) {
+        panel.classList.add('active');
+      }
+    });
+  });
+}
+
+// Call this function after DOM is loaded and whenever menu is created
+document.addEventListener('DOMContentLoaded', function() {
+  // Initial fix
+  setTimeout(fixMenuTabs, 1000);
+  
+  // Set up an observer to detect when menu tabs are added
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList') {
+        const addedNodes = Array.from(mutation.addedNodes);
+        const hasMenuTabs = addedNodes.some(node => {
+          return node.querySelectorAll && 
+                (node.querySelectorAll('.dsa-tab-link').length > 0 || 
+                 node.querySelectorAll('.sd-tab-link').length > 0);
+        });
+        
+        if (hasMenuTabs) {
+          setTimeout(fixMenuTabs, 500);
+        }
+      }
+    });
+  });
+  
+  // Start observing the document
+  observer.observe(document.body, { childList: true, subtree: true });
+});
+
+// Fix for z-index issues
+document.addEventListener('DOMContentLoaded', function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .dsa-tab, .sd-tab {
+      position: relative;
+      z-index: 5;
+    }
+    .dsa-tab-link, .sd-tab-link {
+      position: relative;
+      z-index: 5;
+      pointer-events: auto !important;
+    }
+    .dsa-tab-panels, .sd-tab-panels {
+      position: relative;
+      z-index: 3;
+    }
+  `;
+  document.head.appendChild(style);
+});
