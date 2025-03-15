@@ -264,7 +264,7 @@ function addResponsiveTableStyles() {
   const styleElement = document.createElement('style');
   styleElement.id = 'responsive-table-styles';
   styleElement.textContent = `
-    /* Responsive Table Styles - Fixed Width */
+    /* Responsive Table Styles - For Both Views */
     
     /* Table scroll container */
     .table-scroll-container {
@@ -275,7 +275,7 @@ function addResponsiveTableStyles() {
       position: relative;
     }
     
-    /* Table styles */
+    /* Normal table styles (desktop) */
     .problem-table, .list-table {
       width: 100%;
       border-collapse: collapse;
@@ -283,13 +283,22 @@ function addResponsiveTableStyles() {
     
     /* Mobile specific styles */
     @media screen and (max-width: 768px) {
-      /* Fixed total width */
-      .problem-table, .list-table {
+      /* List view tables - fixed width */
+      #list-container .problem-table,
+      #list-container .list-table {
         width: 390px !important;
         table-layout: fixed !important;
       }
       
-      /* Much smaller font and padding */
+      /* Category view tables - full width */
+      #categories-container .problem-table,
+      .accordion-content .problem-table {
+        width: 100% !important;
+        table-layout: fixed !important;
+        min-width: 390px !important;
+      }
+      
+      /* Much smaller font and padding for all tables */
       .problem-table th, .problem-table td,
       .list-table th, .list-table td {
         padding: 0.4rem 0.2rem !important;
@@ -322,11 +331,6 @@ function addResponsiveTableStyles() {
         width: 80px !important;
       }
       
-      .problem-table th:nth-child(6), .problem-table td:nth-child(6),
-      .list-table th:nth-child(6), .list-table td:nth-child(6) {
-        width: 70px !important;
-      }
-      
       /* Problem link text adjustments */
       .problem-link {
         max-width: 140px !important;
@@ -357,8 +361,16 @@ function addResponsiveTableStyles() {
     
     /* Even smaller screens */
     @media screen and (max-width: 480px) {
-      .problem-table, .list-table {
+      /* List view tables - smaller width */
+      #list-container .problem-table,
+      #list-container .list-table {
         width: 360px !important;
+      }
+      
+      /* Category view tables - still full width but with minimum */
+      #categories-container .problem-table,
+      .accordion-content .problem-table {
+        min-width: 360px !important;
       }
       
       /* Further reduce font size */
