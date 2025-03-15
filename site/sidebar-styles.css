@@ -1,4 +1,4 @@
-/* Unified Sidebar Design for Tech Navigator - Complete Redesign */
+/* Unified Sidebar Design for Tech Navigator - Enhanced Consistency */
 
 /* ===== CORE VARIABLES ===== */
 :root {
@@ -7,7 +7,7 @@
   --tn-darker-bg: #070d19;
   --tn-menu-bg: #1e293b;
   --tn-menu-active-bg: #1e293b;
-  --tn-text: #94a3b8;
+  --tn-text: #94a3b8;          /* Consistent text color for all items */
   --tn-text-hover: #f1f5f9;
   --tn-orange: #F97316;
   --tn-orange-muted: rgba(249, 115, 22, 0.3);
@@ -15,7 +15,7 @@
 
   /* Sizing */
   --tn-sidebar-width: 300px;
-  --tn-item-height: 40px;
+  --tn-item-height: 40px;      /* Consistent height for all items */
   --tn-indent-width: 20px;
   --tn-item-padding: 15px;
 
@@ -61,7 +61,7 @@
   box-sizing: border-box !important;
 }
 
-/* ===== SHARED MENU ITEM STYLES ===== */
+/* ===== SHARED MENU ITEM STYLES - CRITICAL CONSISTENCY ENFORCEMENT ===== */
 .sidebar-nav-link,
 .sidebar-subnav-link,
 .dsa-tab-link,
@@ -73,9 +73,12 @@
 .sd-menu-link {
   display: flex !important;
   align-items: center !important;
-  height: var(--tn-item-height) !important;
+  height: var(--tn-item-height) !important;  /* FIXED HEIGHT FOR ALL ITEMS */
+  min-height: var(--tn-item-height) !important;
+  max-height: var(--tn-item-height) !important;
+  line-height: var(--tn-item-height) !important;
   padding: 0 var(--tn-item-padding) !important;
-  color: var(--tn-text) !important;
+  color: var(--tn-text) !important;          /* CONSISTENT TEXT COLOR FOR ALL ITEMS */
   font-size: 13px !important;
   font-weight: 400 !important;
   text-decoration: none !important;
@@ -111,6 +114,15 @@
   font-weight: 500 !important;
 }
 
+/* Tab links can be taller, but should still be consistent with each other */
+.dsa-tab-link,
+.sd-tab-link {
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  line-height: 44px !important;
+}
+
 /* Count badges */
 .category-count {
   background-color: var(--tn-orange-muted) !important;
@@ -142,6 +154,7 @@
   background-color: var(--tn-menu-bg) !important;
   font-weight: 500 !important;
   border-left-color: var(--tn-orange) !important;
+  color: var(--tn-text) !important;  /* Ensure consistent color */
 }
 
 /* Expandable sections */
@@ -182,9 +195,9 @@
 .dsa-tab-link {
   justify-content: center !important;
   font-weight: 500 !important;
-  height: 44px !important;
   border-bottom: 2px solid transparent !important;
   border-left: none !important;
+  color: var(--tn-text) !important;  /* Ensure consistent color */
 }
 
 .dsa-tab.active .dsa-tab-link {
@@ -208,6 +221,12 @@
 .dsa-menu-header {
   font-weight: 500 !important;
   background-color: rgba(30, 41, 59, 0.5) !important;
+  color: var(--tn-text) !important;  /* Ensure consistent color */
+}
+
+.dsa-menu-title,
+.dsa-submenu-title {
+  color: var(--tn-text) !important;  /* Ensure consistent color */
 }
 
 .dsa-menu-item.expanded .dsa-toggle-icon {
@@ -227,6 +246,7 @@
 
 .dsa-submenu-link {
   padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width)) !important;
+  color: var(--tn-text) !important;  /* Ensure consistent color */
 }
 
 .dsa-deep-submenu {
@@ -241,6 +261,7 @@
 
 .dsa-deep-submenu-link {
   padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width) * 2) !important;
+  color: var(--tn-text) !important;  /* Ensure consistent color */
 }
 
 /* ===== SYSTEM DESIGN MENU STYLING ===== */
@@ -265,9 +286,9 @@
 .sd-tab-link {
   justify-content: center !important;
   font-weight: 500 !important;
-  height: 44px !important;
   border-bottom: 2px solid transparent !important;
   border-left: none !important;
+  color: var(--tn-text) !important;  /* Ensure consistent color */
 }
 
 .sd-tab.active .sd-tab-link {
@@ -286,6 +307,11 @@
 
 .sd-menu-item {
   width: 100% !important;
+}
+
+.sd-menu-link {
+  margin: 0 !important;
+  color: var(--tn-text) !important;  /* Ensure consistent color */
 }
 
 /* ===== DSA PROBLEMS MENU STYLING ===== */
@@ -328,6 +354,35 @@
 .dsa-toggle-icon {
   margin-left: auto !important;
   transition: transform 0.3s !important;
+}
+
+/* ===== TYPOGRAPHY CONSISTENCY ===== */
+/* Ensure all text elements inside menu items have consistent styling */
+.sidebar-nav-link span,
+.sidebar-subnav-link span,
+.dsa-tab-link span,
+.sd-tab-link span,
+.dsa-menu-header span,
+.dsa-submenu-header span,
+.dsa-submenu-link span,
+.dsa-deep-submenu-link span,
+.sd-menu-link span {
+  color: var(--tn-text) !important;  /* Force consistent text color */
+  font-size: 13px !important;
+  line-height: normal !important;
+}
+
+/* Ensure consistent color for links */
+.sidebar-nav-link a,
+.sidebar-subnav-link a,
+.dsa-tab-link a,
+.sd-tab-link a,
+.dsa-menu-header a,
+.dsa-submenu-header a,
+.dsa-submenu-link a,
+.dsa-deep-submenu-link a,
+.sd-menu-link a {
+  color: var(--tn-text) !important;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
