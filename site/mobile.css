@@ -1,1 +1,353 @@
 
+<style> /* Responsive CSS Fixes for Tech Navigator */
+
+/* Mobile-first Approach */
+@media screen and (max-width: 768px) {
+  /* Header Adjustments */
+  .app-header {
+    padding: 0 0.5rem;
+    height: 56px;
+  }
+  
+  .app-logo h1 {
+    font-size: 0.9rem;
+  }
+  
+  .compass-icon {
+    margin: 0 4px;
+  }
+  
+  .compass-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Navigation Links */
+  .nav-link {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  
+  .nav-link span {
+    display: none;
+  }
+  
+  .nav-link svg {
+    margin-right: 0;
+  }
+  
+  /* Sidebar Adjustments */
+  .sidebar {
+    width: 100%;
+    position: fixed;
+    top: 56px;
+    left: -100%;
+    transition: left 0.3s ease;
+    z-index: 100;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  /* Main Content Adjustments */
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem 0.5rem;
+    margin-top: 56px;
+  }
+  
+  /* Problem Table Adjustments */
+  .problem-table th, 
+  .problem-table td,
+  .list-table th,
+  .list-table td {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Hide less important columns on very small screens */
+  @media screen and (max-width: 480px) {
+    .problem-table th:nth-child(2),
+    .problem-table td:nth-child(2),
+    .problem-table th:nth-child(3),
+    .problem-table td:nth-child(3),
+    .list-table th:nth-child(2),
+    .list-table td:nth-child(2),
+    .list-table th:nth-child(3),
+    .list-table td:nth-child(3) {
+      display: none;
+    }
+    
+    .problem-link svg {
+      display: none;
+    }
+  }
+  
+  /* Accordion Category Adjustments */
+  .accordion-header {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .category-title {
+    font-size: 0.9rem;
+  }
+  
+  .category-stats {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .category-progress {
+    width: 60px;
+  }
+  
+  /* Tab Adjustments for DSA and System Design Menus */
+  .dsa-tab-link, .sd-tab-link {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+  
+  .dsa-menu-link, .sd-menu-link,
+  .dsa-submenu-link, .dsa-deep-submenu-link {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  
+  /* Mobile Menu Toggle Button */
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: white;
+    margin-right: 0.5rem;
+    padding: 0.25rem;
+    cursor: pointer;
+  }
+  
+  /* View Toggle Container Responsiveness */
+  .view-toggle-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+  
+  .view-toggle-btn {
+    flex: 1;
+    min-width: 90px;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.5rem;
+  }
+  
+  /* Better readable category count */
+  .category-count {
+    padding: 1px 4px;
+    font-size: 9px;
+  }
+}
+
+/* Medium Screens */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .sidebar {
+    width: 240px;
+  }
+  
+  .main-content {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+  }
+  
+  .problem-table th, 
+  .problem-table td,
+  .list-table th,
+  .list-table td {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile Menu Toggle Button Visibility */
+.mobile-menu-toggle {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+/* Make tables scroll horizontally on small screens */
+@media screen and (max-width: 600px) {
+  .problem-table,
+  .list-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  
+  /* Ensure minimum column widths */
+  .problem-table th, 
+  .problem-table td,
+  .list-table th,
+  .list-table td {
+    min-width: 70px;
+  }
+  
+  /* Status column (checkbox) */
+  .problem-table th:nth-child(1), 
+  .problem-table td:nth-child(1),
+  .list-table th:nth-child(1), 
+  .list-table td:nth-child(1) {
+    min-width: 40px;
+    width: 40px;
+  }
+  
+  /* Problem name column */
+  .problem-table th:nth-child(4), 
+  .problem-table td:nth-child(4),
+  .list-table th:nth-child(4), 
+  .list-table td:nth-child(4) {
+    min-width: 150px;
+  }
+  
+  /* Reduce difficulty tag size */
+  .difficulty-tag {
+    padding: 0.1rem 0.25rem;
+    font-size: 0.65rem;
+  }
+} /* Additional Mobile CSS Fixes */
+
+/* Table scroll container */
+.table-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+
+/* Better mobile table display */
+@media screen and (max-width: 480px) {
+  /* Add some spacing between rows */
+  .problem-table tr, .list-table tr {
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  /* Improve checkbox appearance */
+  .status-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Improve tap targets */
+  .revision-star-wrapper, .editorial-wrapper {
+    padding: 5px;
+  }
+  
+  /* Make problem difficulty tags more compact */
+  .difficulty-tag {
+    padding: 0.1rem 0.25rem;
+    font-size: 0.65rem;
+  }
+  
+  /* Fix problem status info */
+  .problem-status-info {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+  }
+  
+  /* No text wrapping in table cells */
+  .problem-table td, .list-table td {
+    white-space: nowrap;
+  }
+  
+  /* Fix problem links to avoid overflow */
+  .problem-link {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+  }
+}
+
+/* Fix login modal on mobile */
+@media screen and (max-width: 480px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px 15px;
+  }
+  
+  #login-modal-title {
+    font-size: 1.2rem;
+  }
+  
+  #login-modal-message {
+    font-size: 0.9rem;
+  }
+  
+  .modal-compass-icon svg {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Improve mobile accordion UI */
+@media screen and (max-width: 480px) {
+  .accordion-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .category-title {
+    margin-bottom: 0.5rem;
+  }
+  
+  .category-stats {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Better DSA menu on mobile */
+@media screen and (max-width: 480px) {
+  .dsa-tabs-container, .sd-tabs-container {
+    font-size: 0.8rem;
+  }
+  
+  .dsa-tab-link, .sd-tab-link {
+    padding: 8px 4px;
+  }
+  
+  .dsa-submenu, .dsa-deep-submenu {
+    padding-left: 10px;
+  }
+}
+
+/* Fix Firebase auth buttons for mobile */
+@media screen and (max-width: 480px) {
+  .auth-btn {
+    padding: 4px 8px;
+  }
+  
+  .auth-btn.logout {
+    font-size: 0;
+  }
+  
+  .auth-btn.logout:before {
+    content: "Exit";
+    font-size: 12px;
+  }
+}</style>
