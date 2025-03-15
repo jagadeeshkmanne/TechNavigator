@@ -1,4 +1,4 @@
-/* Unified Sidebar Design for Tech Navigator - Enhanced Consistency */
+/* Unified Sidebar Design for Tech Navigator - With Consistent Borders */
 
 /* ===== CORE VARIABLES ===== */
 :root {
@@ -7,15 +7,16 @@
   --tn-darker-bg: #070d19;
   --tn-menu-bg: #1e293b;
   --tn-menu-active-bg: #1e293b;
-  --tn-text: #94a3b8;          /* Consistent text color for all items */
+  --tn-text: #94a3b8;
   --tn-text-hover: #f1f5f9;
   --tn-orange: #F97316;
   --tn-orange-muted: rgba(249, 115, 22, 0.3);
-  --tn-border: rgba(255, 255, 255, 0.1);
+  --tn-border: rgba(255, 255, 255, 0.05);
+  --tn-border-hover: rgba(255, 255, 255, 0.1);
 
   /* Sizing */
   --tn-sidebar-width: 300px;
-  --tn-item-height: 40px;      /* Consistent height for all items */
+  --tn-item-height: 40px;
   --tn-indent-width: 20px;
   --tn-item-padding: 15px;
 
@@ -61,7 +62,7 @@
   box-sizing: border-box !important;
 }
 
-/* ===== SHARED MENU ITEM STYLES - CRITICAL CONSISTENCY ENFORCEMENT ===== */
+/* ===== SHARED MENU ITEM STYLES - CONSISTENT ACROSS ALL MENUS ===== */
 .sidebar-nav-link,
 .sidebar-subnav-link,
 .dsa-tab-link,
@@ -73,12 +74,12 @@
 .sd-menu-link {
   display: flex !important;
   align-items: center !important;
-  height: var(--tn-item-height) !important;  /* FIXED HEIGHT FOR ALL ITEMS */
+  height: var(--tn-item-height) !important;
   min-height: var(--tn-item-height) !important;
   max-height: var(--tn-item-height) !important;
   line-height: var(--tn-item-height) !important;
   padding: 0 var(--tn-item-padding) !important;
-  color: var(--tn-text) !important;          /* CONSISTENT TEXT COLOR FOR ALL ITEMS */
+  color: var(--tn-text) !important;
   font-size: 13px !important;
   font-weight: 400 !important;
   text-decoration: none !important;
@@ -88,9 +89,13 @@
   width: 100% !important;
   box-sizing: border-box !important;
   border-left: 3px solid transparent !important;
+  /* Add border bottom for visual separation */
+  border-bottom: 1px solid var(--tn-border) !important;
+  background-color: var(--tn-menu-bg) !important;
+  margin-bottom: 1px !important;
 }
 
-/* Hover state */
+/* Hover state with enhanced border */
 .sidebar-nav-link:hover,
 .sidebar-subnav-link:hover,
 .dsa-menu-header:hover,
@@ -100,6 +105,7 @@
 .sd-menu-link:hover {
   background-color: rgba(255, 255, 255, 0.05) !important;
   color: var(--tn-text-hover) !important;
+  border-bottom-color: var(--tn-border-hover) !important;
 }
 
 /* Active state */
@@ -112,15 +118,23 @@
   color: var(--tn-orange) !important;
   border-left-color: var(--tn-orange) !important;
   font-weight: 500 !important;
+  border-bottom-color: var(--tn-orange) !important;
 }
 
-/* Tab links can be taller, but should still be consistent with each other */
+/* Tab links are different - no bottom border */
 .dsa-tab-link,
 .sd-tab-link {
   height: 44px !important;
   min-height: 44px !important;
   max-height: 44px !important;
   line-height: 44px !important;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
+
+.dsa-tab.active .dsa-tab-link,
+.sd-tab.active .sd-tab-link {
+  border-bottom: 2px solid var(--tn-orange) !important;
 }
 
 /* Count badges */
@@ -146,15 +160,17 @@
 }
 
 .sidebar-nav-item {
-  margin-bottom: 2px !important;
   width: 100% !important;
+  margin-bottom: 2px !important;
 }
 
 .sidebar-nav-link.main-category {
   background-color: var(--tn-menu-bg) !important;
   font-weight: 500 !important;
   border-left-color: var(--tn-orange) !important;
-  color: var(--tn-text) !important;  /* Ensure consistent color */
+  color: var(--tn-text) !important;
+  /* Special styling for main category */
+  border-radius: 4px 0 0 4px !important;
 }
 
 /* Expandable sections */
@@ -167,6 +183,7 @@
 
 .sidebar-nav-item.expanded .sidebar-subnav {
   max-height: 1500px !important; /* Large enough to show all items */
+  padding: 2px 0 !important;
 }
 
 .sidebar-subnav-item {
@@ -185,6 +202,7 @@
   display: flex !important;
   width: 100% !important;
   background-color: var(--tn-menu-bg) !important;
+  border-bottom: 1px solid var(--tn-border) !important;
 }
 
 .dsa-tab {
@@ -195,14 +213,13 @@
 .dsa-tab-link {
   justify-content: center !important;
   font-weight: 500 !important;
-  border-bottom: 2px solid transparent !important;
   border-left: none !important;
-  color: var(--tn-text) !important;  /* Ensure consistent color */
+  color: var(--tn-text) !important;
+  background-color: transparent !important;
 }
 
 .dsa-tab.active .dsa-tab-link {
   color: var(--tn-orange) !important;
-  border-bottom-color: var(--tn-orange) !important;
 }
 
 .dsa-tab-panel {
@@ -220,13 +237,13 @@
 
 .dsa-menu-header {
   font-weight: 500 !important;
-  background-color: rgba(30, 41, 59, 0.5) !important;
-  color: var(--tn-text) !important;  /* Ensure consistent color */
+  color: var(--tn-text) !important;
+  border-radius: 0 !important;
 }
 
 .dsa-menu-title,
 .dsa-submenu-title {
-  color: var(--tn-text) !important;  /* Ensure consistent color */
+  color: var(--tn-text) !important;
 }
 
 .dsa-menu-item.expanded .dsa-toggle-icon {
@@ -237,16 +254,18 @@
   max-height: 0 !important;
   overflow: hidden !important;
   transition: max-height 0.3s ease-out !important;
-  background-color: rgba(0, 0, 0, 0.15) !important;
+  padding: 0 !important;
 }
 
 .dsa-menu-item.expanded .dsa-submenu {
   max-height: 1000px !important;
+  padding: 2px 0 !important;
 }
 
 .dsa-submenu-link {
   padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width)) !important;
-  color: var(--tn-text) !important;  /* Ensure consistent color */
+  color: var(--tn-text) !important;
+  background-color: var(--tn-darker-bg) !important; /* Slightly darker for submenu */
 }
 
 .dsa-deep-submenu {
@@ -257,11 +276,13 @@
 
 .dsa-submenu-item.expanded .dsa-deep-submenu {
   max-height: 500px !important;
+  padding: 2px 0 !important;
 }
 
 .dsa-deep-submenu-link {
   padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width) * 2) !important;
-  color: var(--tn-text) !important;  /* Ensure consistent color */
+  color: var(--tn-text) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important; /* Even darker for deep submenu */
 }
 
 /* ===== SYSTEM DESIGN MENU STYLING ===== */
@@ -276,6 +297,7 @@
   display: flex !important;
   width: 100% !important;
   background-color: var(--tn-menu-bg) !important;
+  border-bottom: 1px solid var(--tn-border) !important;
 }
 
 .sd-tab {
@@ -286,19 +308,19 @@
 .sd-tab-link {
   justify-content: center !important;
   font-weight: 500 !important;
-  border-bottom: 2px solid transparent !important;
   border-left: none !important;
-  color: var(--tn-text) !important;  /* Ensure consistent color */
+  color: var(--tn-text) !important;
+  background-color: transparent !important;
 }
 
 .sd-tab.active .sd-tab-link {
   color: var(--tn-orange) !important;
-  border-bottom-color: var(--tn-orange) !important;
 }
 
 .sd-tab-panel {
   display: none !important;
   width: 100% !important;
+  padding: 2px 0 !important;
 }
 
 .sd-tab-panel.active {
@@ -311,16 +333,11 @@
 
 .sd-menu-link {
   margin: 0 !important;
-  color: var(--tn-text) !important;  /* Ensure consistent color */
+  color: var(--tn-text) !important;
+  border-radius: 0 !important;
 }
 
-/* ===== DSA PROBLEMS MENU STYLING ===== */
-.sidebar-subnav-link.active {
-  background-color: var(--tn-menu-active-bg) !important;
-  color: var(--tn-orange) !important;
-  border-left-color: var(--tn-orange) !important;
-}
-
+/* ===== SPECIFIC ACTIVE STATES ===== */
 /* Specific handling of active states with left borders */
 .sidebar-subnav-link.active,
 .dsa-submenu-link.active,
@@ -367,7 +384,7 @@
 .dsa-submenu-link span,
 .dsa-deep-submenu-link span,
 .sd-menu-link span {
-  color: var(--tn-text) !important;  /* Force consistent text color */
+  color: var(--tn-text) !important;
   font-size: 13px !important;
   line-height: normal !important;
 }
