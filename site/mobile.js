@@ -1,3 +1,5 @@
+// PART 1: MOBILE MENU CODE
+
 // Function to create mobile toggle button
 function createMobileMenuToggle() {
   // Check if button already exists
@@ -190,9 +192,302 @@ function addSwipeDetection() {
   });
 }
 
+// PART 2: RESPONSIVE TABLES CODE
+
+// Improved function to make tables responsive with horizontal scrolling
+function makeTablesResponsive() {
+  // First, add required CSS if not already added
+  addResponsiveTableStyles();
+  
+  // Find all tables
+  const tables = document.querySelectorAll('.problem-table, .list-table');
+  
+  tables.forEach(table => {
+    // Skip if already processed
+    if (table.classList.contains('responsive-processed')) {
+      return;
+    }
+    
+    // Mark as processed
+    table.classList.add('responsive-processed');
+    
+    // Make table scrollable on mobile by wrapping it
+    const parent = table.parentElement;
+    
+    // Check if already wrapped in scroll container
+    if (!parent.classList.contains('table-scroll-container')) {
+      // Create the scroll container
+      const scrollContainer = document.createElement('div');
+      scrollContainer.className = 'table-scroll-container';
+      
+      // Replace table with scroll container containing the table
+      parent.insertBefore(scrollContainer, table);
+      scrollContainer.appendChild(table);
+    }
+  });
+}
+
+// Add responsive table styles for horizontal scrolling with smaller fonts
+function addResponsiveTableStyles() {
+  // Check if styles are already added
+  if (document.getElementById('responsive-table-styles')) {
+    return;
+  }
+  
+  const styleElement = document.createElement('style');
+  styleElement.id = 'responsive-table-styles';
+  styleElement.textContent = `
+    /* Responsive Table Styles - Improved Horizontal Scrolling */
+    
+    /* Table scroll container */
+    .table-scroll-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    
+    /* Table styles */
+    .problem-table, .list-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    /* Mobile specific styles */
+    @media screen and (max-width: 768px) {
+      /* Ensure table has minimum width to be scrollable */
+      .problem-table, .list-table {
+        min-width: 600px;
+      }
+      
+      /* Much smaller font and padding */
+      .problem-table th, .problem-table td,
+      .list-table th, .list-table td {
+        padding: 0.4rem 0.2rem;
+        font-size: 0.65rem;
+      }
+      
+      /* Optimize column widths */
+      .problem-table th:nth-child(1), .problem-table td:nth-child(1),
+      .list-table th:nth-child(1), .list-table td:nth-child(1) {
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
+      }
+      
+      .problem-table th:nth-child(2), .problem-table td:nth-child(2),
+      .list-table th:nth-child(2), .list-table td:nth-child(2),
+      .problem-table th:nth-child(3), .problem-table td:nth-child(3),
+      .list-table th:nth-child(3), .list-table td:nth-child(3) {
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
+      }
+      
+      .problem-table th:nth-child(4), .problem-table td:nth-child(4),
+      .list-table th:nth-child(4), .list-table td:nth-child(4) {
+        min-width: 140px;
+        max-width: 160px;
+      }
+      
+      .problem-table th:nth-child(5), .problem-table td:nth-child(5),
+      .list-table th:nth-child(5), .list-table td:nth-child(5) {
+        min-width: 80px;
+        max-width: 100px;
+      }
+      
+      /* Add scroll indicator */
+      .table-scroll-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 15px;
+        background: linear-gradient(to right, rgba(30, 41, 59, 0), rgba(30, 41, 59, 0.5));
+        pointer-events: none;
+      }
+      
+      /* Problem link text adjustments */
+      .problem-link {
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+        font-size: 0.65rem !important;
+      }
+      
+      /* Smaller difficulty tags */
+      .difficulty-tag {
+        padding: 0.1rem 0.25rem;
+        font-size: 0.55rem;
+      }
+      
+      /* Fix checkbox and icon sizes */
+      .status-checkbox input[type="checkbox"] {
+        width: 14px;
+        height: 14px;
+      }
+      
+      .revision-star-wrapper svg, .editorial-wrapper svg {
+        width: 14px;
+        height: 14px;
+      }
+      
+      /* Even smaller screens */
+      @media screen and (max-width: 480px) {
+        /* Further reduce font size */
+        .problem-table th, .problem-table td,
+        .list-table th, .list-table td {
+          padding: 0.3rem 0.15rem;
+          font-size: 0.6rem;
+        }
+        
+        .problem-link {
+          font-size: 0.6rem !important;
+        }
+        
+        .difficulty-tag {
+          font-size: 0.5rem;
+          padding: 0.05rem 0.2rem;
+        }
+        
+        /* Smaller minimum width */
+        .problem-table, .list-table {
+          min-width: 550px;
+        }
+        
+        /* Even smaller icons */
+        .status-checkbox input[type="checkbox"] {
+          width: 12px;
+          height: 12px;
+        }
+        
+        .revision-star-wrapper svg, .editorial-wrapper svg {
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+  `;
+  document.head.appendChild(styleElement);
+}
+
+// Function to optimize mobile display
+function optimizeMobileDisplay() {
+  // Hide text in navigation links on mobile
+  if (window.innerWidth <= 480) {
+    document.querySelectorAll('.nav-link span').forEach(span => {
+      span.style.display = 'none';
+    });
+    
+    // Simplify auth button
+    const loginBtn = document.getElementById('login-btn');
+    if (loginBtn && !loginBtn.dataset.originalHtml) {
+      loginBtn.dataset.originalHtml = loginBtn.innerHTML;
+      loginBtn.innerHTML = `<img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width: 18px;">`;
+    }
+  } else {
+    document.querySelectorAll('.nav-link span').forEach(span => {
+      span.style.display = '';
+    });
+    
+    // Restore auth button
+    const loginBtn = document.getElementById('login-btn');
+    if (loginBtn && loginBtn.dataset.originalHtml) {
+      loginBtn.innerHTML = loginBtn.dataset.originalHtml;
+    }
+  }
+}
+
+// PART 3: MENU TABS FIX
+
+// Fix for DSA and System Design tabs
+function fixMenuTabs() {
+  // Fix for DSA tabs
+  const dsaTabs = document.querySelectorAll('.dsa-tab-link');
+  dsaTabs.forEach(tab => {
+    // Remove any existing event listeners
+    const newTab = tab.cloneNode(true);
+    tab.parentNode.replaceChild(newTab, tab);
+    
+    // Add click event
+    newTab.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Get the tab ID
+      const tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.dsa-tab').forEach(t => {
+        t.classList.remove('active');
+      });
+      document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
+      
+      // Show the corresponding panel
+      const panel = document.getElementById(`${tabId}-panel`);
+      if (panel) {
+        panel.classList.add('active');
+      }
+    });
+  });
+  
+  // Fix for System Design tabs
+  const sdTabs = document.querySelectorAll('.sd-tab-link');
+  sdTabs.forEach(tab => {
+    // Remove any existing event listeners
+    const newTab = tab.cloneNode(true);
+    tab.parentNode.replaceChild(newTab, tab);
+    
+    // Add click event
+    newTab.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Get the tab ID
+      const tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.sd-tab').forEach(t => {
+        t.classList.remove('active');
+      });
+      document.querySelectorAll('.sd-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
+      
+      // Show the corresponding panel
+      const panel = document.getElementById(`${tabId}-panel`);
+      if (panel) {
+        panel.classList.add('active');
+      }
+    });
+  });
+}
+
+// PART 4: INITIALIZATION
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+  // Mobile menu initialization
   createMobileMenuToggle();
+  
+  // Responsive tables initialization
+  makeTablesResponsive();
+  optimizeMobileDisplay();
+  
+  // Menu tabs initialization
+  setTimeout(fixMenuTabs, 1000);
   
   // Close sidebar after clicking a link (mobile UX improvement)
   document.body.addEventListener('click', function(e) {
@@ -223,106 +518,21 @@ document.addEventListener('DOMContentLoaded', function() {
     meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
     document.head.appendChild(meta);
   }
-});
-
-// Reinitialize on window resize
-window.addEventListener('resize', function() {
-  // Close mobile menu when switching to desktop view
-  if (window.innerWidth > 768) {
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar) {
-      sidebar.classList.remove('active');
-      sidebar.style.left = ''; // Reset inline styles
-      sidebar.style.display = ''; // Reset inline styles
-    }
-  }
-});
-
-// Function to make tables responsive
-function makeTablesResponsive() {
-  // Find all tables
-  const tables = document.querySelectorAll('.problem-table, .list-table');
-  
-  tables.forEach(table => {
-    // Skip if already processed
-    if (table.classList.contains('responsive-processed')) {
-      return;
-    }
-    
-    // Mark as processed
-    table.classList.add('responsive-processed');
-    
-    // Find all table rows in tbody
-    const rows = table.querySelectorAll('tbody tr');
-    
-    // Get header text for data labels
-    const headerCells = table.querySelectorAll('thead th');
-    const headerTexts = Array.from(headerCells).map(th => th.textContent.trim());
-    
-    // Add data attributes to cells for better mobile display
-    rows.forEach(row => {
-      const cells = row.querySelectorAll('td');
-      cells.forEach((cell, index) => {
-        if (index < headerTexts.length) {
-          cell.setAttribute('data-label', headerTexts[index]);
-        }
-      });
-    });
-    
-    // Make table scrollable on mobile
-    const parent = table.parentElement;
-    if (!parent.classList.contains('table-scroll-container')) {
-      const scrollContainer = document.createElement('div');
-      scrollContainer.className = 'table-scroll-container';
-      scrollContainer.style.overflowX = 'auto';
-      scrollContainer.style.width = '100%';
-      
-      // Replace table with scroll container containing the table
-      parent.insertBefore(scrollContainer, table);
-      scrollContainer.appendChild(table);
-    }
-  });
-}
-
-// Function to optimize mobile display
-function optimizeMobileDisplay() {
-  // Hide text in navigation links on mobile
-  if (window.innerWidth <= 480) {
-    document.querySelectorAll('.nav-link span').forEach(span => {
-      span.style.display = 'none';
-    });
-    
-    // Simplify auth button
-    const loginBtn = document.getElementById('login-btn');
-    if (loginBtn && !loginBtn.dataset.originalHtml) {
-      loginBtn.dataset.originalHtml = loginBtn.innerHTML;
-      loginBtn.innerHTML = `<img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width: 18px;">`;
-    }
-  } else {
-    document.querySelectorAll('.nav-link span').forEach(span => {
-      span.style.display = '';
-    });
-    
-    // Restore auth button
-    const loginBtn = document.getElementById('login-btn');
-    if (loginBtn && loginBtn.dataset.originalHtml) {
-      loginBtn.innerHTML = loginBtn.dataset.originalHtml;
-    }
-  }
-}
-
-// Initialize responsive tables and mobile display when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  makeTablesResponsive();
-  optimizeMobileDisplay();
   
   // Set up an observer to handle dynamically added tables
   const observer = new MutationObserver(function(mutations) {
+    let shouldProcessTables = false;
+    let shouldProcessMenuTabs = false;
+    
     mutations.forEach(function(mutation) {
       if (mutation.type === 'childList') {
         // Check if new tables were added
         const addedNodes = Array.from(mutation.addedNodes);
+        
+        // Check for new tables
         const hasNewTable = addedNodes.some(node => {
+          if (node.nodeType !== 1) return false;
+          
           // Check if the node itself is a table
           if (node.classList && 
               (node.classList.contains('problem-table') || 
@@ -338,33 +548,52 @@ document.addEventListener('DOMContentLoaded', function() {
           return false;
         });
         
+        // Check for new menu tabs
+        const hasMenuTabs = addedNodes.some(node => {
+          if (node.nodeType !== 1) return false;
+          
+          return node.querySelectorAll && 
+                (node.querySelectorAll('.dsa-tab-link').length > 0 || 
+                 node.querySelectorAll('.sd-tab-link').length > 0);
+        });
+        
         if (hasNewTable) {
-          makeTablesResponsive();
+          shouldProcessTables = true;
+        }
+        
+        if (hasMenuTabs) {
+          shouldProcessMenuTabs = true;
         }
       }
     });
+    
+    if (shouldProcessTables) {
+      makeTablesResponsive();
+    }
+    
+    if (shouldProcessMenuTabs) {
+      setTimeout(fixMenuTabs, 500);
+    }
   });
   
   // Start observing the document
   observer.observe(document.body, { childList: true, subtree: true });
 });
 
-// Re-apply on window resize
+// Reinitialize on window resize
 window.addEventListener('resize', function() {
+  // Close mobile menu when switching to desktop view
+  if (window.innerWidth > 768) {
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+      sidebar.classList.remove('active');
+      sidebar.style.left = ''; // Reset inline styles
+      sidebar.style.display = ''; // Reset inline styles
+    }
+  }
+  
   optimizeMobileDisplay();
 });
-
-// Make the function globally available
-window.makeTablesResponsive = makeTablesResponsive;
-window.toggleMobileMenu = toggleMobileMenu;
-
-// Try initialization again after a short delay
-setTimeout(function() {
-  if (!document.querySelector('.mobile-menu-toggle')) {
-    createMobileMenuToggle();
-  }
-  makeTablesResponsive();
-}, 1000);
 
 // Fix for z-index issues
 document.addEventListener('DOMContentLoaded', function() {
@@ -383,21 +612,20 @@ document.addEventListener('DOMContentLoaded', function() {
       position: relative;
       z-index: 3;
     }
-    
-    /* Table scroll container */
-    .table-scroll-container {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      margin-bottom: 1rem;
-    }
-    
-    /* Mobile table styles */
-    @media screen and (max-width: 768px) {
-      .problem-table, .list-table {
-        min-width: 600px;
-      }
-    }
   `;
   document.head.appendChild(style);
 });
+
+// Make functions globally available
+window.toggleMobileMenu = toggleMobileMenu;
+window.makeTablesResponsive = makeTablesResponsive;
+window.fixMenuTabs = fixMenuTabs;
+
+// Try initialization again after a short delay
+setTimeout(function() {
+  if (!document.querySelector('.mobile-menu-toggle')) {
+    createMobileMenuToggle();
+  }
+  makeTablesResponsive();
+  fixMenuTabs();
+}, 1000);
