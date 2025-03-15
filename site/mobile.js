@@ -223,14 +223,6 @@ function makeTablesResponsive() {
       // Replace table with scroll container containing the table
       parent.insertBefore(scrollContainer, table);
       scrollContainer.appendChild(table);
-      
-      // Calculate total width of columns
-      const totalWidth = calculateTotalWidth(table);
-      
-      // Set table width to match total column width to avoid extra space
-      if (window.innerWidth <= 768 && totalWidth > 0) {
-        table.style.width = totalWidth + 'px';
-      }
     }
   });
 }
@@ -272,7 +264,7 @@ function addResponsiveTableStyles() {
   const styleElement = document.createElement('style');
   styleElement.id = 'responsive-table-styles';
   styleElement.textContent = `
-    /* Responsive Table Styles - Improved Horizontal Scrolling */
+    /* Responsive Table Styles - Fixed Width */
     
     /* Table scroll container */
     .table-scroll-container {
@@ -291,11 +283,9 @@ function addResponsiveTableStyles() {
     
     /* Mobile specific styles */
     @media screen and (max-width: 768px) {
-      /* Adjust table width to prevent extra space */
+      /* Fixed total width */
       .problem-table, .list-table {
-        width: auto !important;
-        min-width: 0 !important;
-        max-width: none !important;
+        width: 390px !important;
         table-layout: fixed !important;
       }
       
@@ -310,38 +300,31 @@ function addResponsiveTableStyles() {
       .problem-table th:nth-child(1), .problem-table td:nth-child(1),
       .list-table th:nth-child(1), .list-table td:nth-child(1) {
         width: 30px !important;
-        min-width: 30px !important;
-        max-width: 30px !important;
       }
       
       .problem-table th:nth-child(2), .problem-table td:nth-child(2),
-      .list-table th:nth-child(2), .list-table td:nth-child(2),
+      .list-table th:nth-child(2), .list-table td:nth-child(2) {
+        width: 30px !important;
+      }
+      
       .problem-table th:nth-child(3), .problem-table td:nth-child(3),
       .list-table th:nth-child(3), .list-table td:nth-child(3) {
         width: 30px !important;
-        min-width: 30px !important;
-        max-width: 30px !important;
       }
       
       .problem-table th:nth-child(4), .problem-table td:nth-child(4),
       .list-table th:nth-child(4), .list-table td:nth-child(4) {
         width: 150px !important;
-        min-width: 150px !important;
-        max-width: 150px !important;
       }
       
       .problem-table th:nth-child(5), .problem-table td:nth-child(5),
       .list-table th:nth-child(5), .list-table td:nth-child(5) {
         width: 80px !important;
-        min-width: 80px !important;
-        max-width: 80px !important;
       }
       
       .problem-table th:nth-child(6), .problem-table td:nth-child(6),
       .list-table th:nth-child(6), .list-table td:nth-child(6) {
         width: 70px !important;
-        min-width: 70px !important;
-        max-width: 70px !important;
       }
       
       /* Problem link text adjustments */
@@ -370,35 +353,19 @@ function addResponsiveTableStyles() {
         width: 14px !important;
         height: 14px !important;
       }
+    }
+    
+    /* Even smaller screens */
+    @media screen and (max-width: 480px) {
+      .problem-table, .list-table {
+        width: 360px !important;
+      }
       
-      /* Even smaller screens */
-      @media screen and (max-width: 480px) {
-        /* Further reduce font size */
-        .problem-table th, .problem-table td,
-        .list-table th, .list-table td {
-          padding: 0.3rem 0.15rem !important;
-          font-size: 0.6rem !important;
-        }
-        
-        .problem-link {
-          font-size: 0.6rem !important;
-        }
-        
-        .difficulty-tag {
-          font-size: 0.5rem !important;
-          padding: 0.05rem 0.2rem !important;
-        }
-        
-        /* Even smaller icons */
-        .status-checkbox input[type="checkbox"] {
-          width: 12px !important;
-          height: 12px !important;
-        }
-        
-        .revision-star-wrapper svg, .editorial-wrapper svg {
-          width: 12px !important;
-          height: 12px !important;
-        }
+      /* Further reduce font size */
+      .problem-table th, .problem-table td,
+      .list-table th, .list-table td {
+        padding: 0.3rem 0.15rem !important;
+        font-size: 0.6rem !important;
       }
     }
   `;
