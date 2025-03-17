@@ -225,22 +225,40 @@ function makeTablesResponsive() {
       scrollContainer.appendChild(table);
     }
 
-    // Set minimum width to prevent column squishing
-    table.style.minWidth = calculateTotalWidth(table) + 'px';
-    
-    // Force all cells to be visible (new code)
-    const cells = table.querySelectorAll('th, td');
-    cells.forEach(cell => {
-      cell.style.display = 'table-cell';
-      cell.style.visibility = 'visible';
-    });
+    // Set minimum width on mobile to prevent column squishing
+    if (window.innerWidth <= 768) {
+      // Calculate and set minimum width for the table
+      const minWidth = calculateTotalWidth(table);
+      table.style.minWidth = minWidth + 'px';
+    }
   });
 }
 
 // Calculate the total width needed for a table based on column widths
 function calculateTotalWidth(table) {
-  // Ensure a minimum total width of 350px for tables on mobile
-  return 350;
+  let totalWidth = 0;
+  
+  // Define column widths based on mobile breakpoint - first column (status) is hidden
+  const columnWidths = [0, 30, 40, 150, 80, 70]; // Adjusted with 0 for hidden status column
+  
+  // Count actual columns in the table
+  const headerCells = table.querySelectorAll('thead th');
+  const columnCount = headerCells.length;
+  
+  // Sum up the widths of existing columns
+  for (let i = 0; i < columnCount; i++) {
+    if (i < columnWidths.length) {
+      totalWidth += columnWidths[i];
+    } else {
+      // Default width for any extra columns
+      totalWidth += 50;
+    }
+  }
+  
+  // Add a small buffer
+  totalWidth += 5;
+  
+  return totalWidth;
 }
 
 // Add responsive table styles for horizontal scrolling with smaller fonts
@@ -253,16 +271,15 @@ function addResponsiveTableStyles() {
   const styleElement = document.createElement('style');
   styleElement.id = 'responsive-table-styles';
   styleElement.textContent = `
-    /* Responsive Table Styles - Improved Fix */
+    /* Responsive Table Styles - Prioritizing Editorial Column */
     
     /* Table scroll container */
     .table-scroll-container {
       width: 100%;
-      overflow-x: auto !important;
-      -webkit-overflow-scrolling: touch !important;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       margin-bottom: 1rem;
       position: relative;
-      scrollbar-width: thin;
     }
     
     /* Basic table styles for all views */
@@ -270,17 +287,36 @@ function addResponsiveTableStyles() {
       width: 100%;
       border-collapse: collapse;
       margin: 0;
-      min-width: 350px; /* Ensure minimum width for horizontal scroll */
     }
     
     /* Mobile specific styles */
     @media screen and (max-width: 768px) {
-      /* Force display for all columns */
-      .problem-table th, .problem-table td,
-      .list-table th, .list-table td {
-        display: table-cell !important;
-        visibility: visible !important;
+      /* Hide status column on mobile to prioritize editorial */
+      .problem-table th:nth-child(1), .problem-table td:nth-child(1),
+      .list-table th:nth-child(1), .list-table td:nth-child(1) {
+        display: none !important;
       }
+      
+      /* Ensure editorial column is visible and given more prominence */
+      .problem-table th:nth-child(3), .problem-table td:nth-child(3),
+      .list-table th:nth-child(3), .list-table td:nth-child(3) {
+        display: table-cell !important;
+        width: 40px !important;
+        min-width: 40px !important;
+        padding: 0.4rem 0.3rem !important;
+      }
+      
+      /* Make editorial icon slightly larger for better visibility */
+      .editorial-wrapper svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      
+      /* Ensure list view table has fixed column widths */
+      .list-table th:nth-child(2), .list-table td:nth-child(2) { width: 30px; min-width: 30px; }
+      .list-table th:nth-child(4), .list-table td:nth-child(4) { width: 150px; min-width: 150px; }
+      .list-table th:nth-child(5), .list-table td:nth-child(5) { width: 80px; min-width: 80px; }
+      .list-table th:nth-child(6), .list-table td:nth-child(6) { width: 70px; min-width: 70px; }
       
       /* Smaller font and padding for all tables */
       .problem-table th, .problem-table td,
@@ -292,7 +328,7 @@ function addResponsiveTableStyles() {
       
       /* Problem link text adjustments */
       .problem-link {
-        max-width: 130px !important;
+        max-width: 150px !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
@@ -306,7 +342,7 @@ function addResponsiveTableStyles() {
         font-size: 0.55rem !important;
         white-space: nowrap !important;
         display: inline-block !important;
-        max-width: 60px !important;
+        max-width: 70px !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
       }
@@ -314,7 +350,7 @@ function addResponsiveTableStyles() {
       /* Fix category display */
       .problem-category {
         white-space: nowrap !important;
-        max-width: 70px !important;
+        max-width: 80px !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         display: inline-block !important;
@@ -326,14 +362,42 @@ function addResponsiveTableStyles() {
         height: 14px !important;
       }
       
-      .revision-star-wrapper svg, .editorial-wrapper svg {
+      .revision-star-wrapper svg {
         width: 14px !important;
         height: 14px !important;
+      }
+    }
+    
+    /* Even smaller screens */
+    @media screen and (max-width: 480px) {
+      /* Further reduce font size */
+      .problem-table th, .problem-table td,
+      .list-table th, .list-table td {
+        padding: 0.3rem 0.15rem !important;
+        font-size: 0.6rem !important;
+      }
+      
+      .problem-link {
+        font-size: 0.6rem !important;
+        max-width: 140px !important;
+      }
+      
+      /* Smaller difficulty tag */
+      .difficulty-tag {
+        font-size: 0.5rem !important;
+        max-width: 65px !important;
+      }
+      
+      /* Smaller category */
+      .problem-category {
+        max-width: 70px !important;
+        font-size: 0.6rem !important;
       }
     }
   `;
   document.head.appendChild(styleElement);
 }
+
 
 // Function to optimize mobile display
 function optimizeMobileDisplay() {
