@@ -79,15 +79,30 @@ function addMobileMenuStyles() {
         width: 80% !important;
         max-width: 300px !important;
         height: calc(100vh - 56px) !important;
+        min-height: 100% !important;
         transition: left 0.3s ease !important;
         z-index: 100 !important;
         overflow-y: auto !important;
         box-shadow: none !important;
+        padding-bottom: 60px !important; /* Add extra padding at bottom for scroll space */
+      }
+      
+      /* Fix for sidebar body to ensure proper height */
+      .sidebar-body {
+        height: auto !important;
+        min-height: calc(100vh - 56px) !important;
+      }
+      
+      /* Fix for sidebar-nav to ensure it fills the space */
+      .sidebar-nav {
+        min-height: calc(100vh - 120px) !important;
       }
       
       .sidebar.active {
         left: 0 !important;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2) !important;
+        display: block !important;
+        bottom: 0 !important; /* Ensure it extends to bottom of screen */
       }
       
       .main-content {
@@ -113,6 +128,12 @@ function toggleMobileMenu() {
   } else {
     // Force display block first, then add active class
     sidebar.style.display = 'block';
+    
+    // Force height calculation first
+    sidebar.style.height = `calc(100vh - 56px)`;
+    sidebar.style.minHeight = `100%`;
+    
+    // Then add active class
     sidebar.classList.add('active');
     
     // Force layout recalculation
@@ -125,6 +146,9 @@ function toggleMobileMenu() {
       // Ensure sidebar is displayed and positioned correctly
       sidebar.style.left = '0';
       sidebar.style.display = 'block';
+      sidebar.style.height = `calc(100vh - 56px)`;
+      sidebar.style.minHeight = `100%`;
+      sidebar.style.bottom = '0';
     } else {
       sidebar.style.left = '-100%';
     }
@@ -161,6 +185,9 @@ function addSwipeDetection() {
       sidebar.style.display = 'block'; // Force display first
       sidebar.classList.add('active');
       sidebar.style.left = '0'; // Force left position
+      sidebar.style.height = `calc(100vh - 56px)`;
+      sidebar.style.minHeight = `100%`;
+      sidebar.style.bottom = '0';
     }
     
     // Detect left swipe (close sidebar)
@@ -190,6 +217,28 @@ function addSwipeDetection() {
       sidebar.classList.remove('active');
     }
   });
+}
+
+// Function to apply full-height fix when DOM is loaded
+function applySidebarHeightFix() {
+  // Apply the height fix to sidebar elements
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar && window.innerWidth <= 768) {
+    sidebar.style.height = `calc(100vh - 56px)`;
+    sidebar.style.minHeight = `100%`;
+    
+    // Also fix any inner sidebar elements
+    const sidebarBody = sidebar.querySelector('.sidebar-body');
+    if (sidebarBody) {
+      sidebarBody.style.height = 'auto';
+      sidebarBody.style.minHeight = `calc(100vh - 56px)`;
+    }
+    
+    const sidebarNav = sidebar.querySelector('.sidebar-nav');
+    if (sidebarNav) {
+      sidebarNav.style.minHeight = `calc(100vh - 120px)`;
+    }
+  }
 }
 
 // PART 2: RESPONSIVE TABLES CODE
@@ -518,6 +567,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Mobile menu initialization
   createMobileMenuToggle();
   
+  // Apply sidebar height fix
+  applySidebarHeightFix();
+  
   // Responsive tables initialization
   makeTablesResponsive();
   optimizeMobileDisplay();
@@ -629,6 +681,9 @@ window.addEventListener('resize', function() {
       sidebar.style.left = ''; // Reset inline styles
       sidebar.style.display = ''; // Reset inline styles
     }
+  } else {
+    // Re-apply sidebar height fix on resize to mobile
+    applySidebarHeightFix();
   }
   
   optimizeMobileDisplay();
@@ -662,6 +717,7 @@ document.addEventListener('DOMContentLoaded', function() {
 window.toggleMobileMenu = toggleMobileMenu;
 window.makeTablesResponsive = makeTablesResponsive;
 window.fixMenuTabs = fixMenuTabs;
+window.applySidebarHeightFix = applySidebarHeightFix;
 
 // Try initialization again after a short delay
 setTimeout(function() {
@@ -670,4 +726,5 @@ setTimeout(function() {
   }
   makeTablesResponsive();
   fixMenuTabs();
+  applySidebarHeightFix();
 }, 1000);
