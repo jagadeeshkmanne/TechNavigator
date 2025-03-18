@@ -72,6 +72,7 @@ window.switchDsaTab = function(tabId) {
     panel.classList.add('active');
   }
 };
+
 // Add styles for the DSA menu
 function addDsaMenuStyles() {
   if (document.getElementById('dsa-menu-styles')) {
@@ -154,64 +155,12 @@ function addDsaMenuStyles() {
       margin-bottom: 4px;
     }
     
-    .dsa-menu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      padding: 6px 12px;
-      border-radius: 4px;
-      transition: background-color 0.2s;
-    }
-    
-    .dsa-menu-header:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-    
-    .dsa-menu-title {
-      color: #888;
-      font-size: 13px;
-      font-weight: 500;
-    }
-    
-    .dsa-menu-header:hover .dsa-menu-title {
-      color: #eee;
-    }
-    
-    .dsa-toggle-icon {
-      font-size: 8px;
-      color: #888;
-      margin-right: 4px;
-      transition: transform 0.3s;
-    }
-    
-    .dsa-menu-item.expanded .dsa-toggle-icon {
-      transform: rotate(180deg);
-    }
-    
-    .dsa-submenu {
-      list-style: none;
-      padding-left: 15px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      margin: 0;
-    }
-    
-    .dsa-menu-item.expanded .dsa-submenu {
-      max-height: 500px;
-    }
-    
-    .dsa-submenu-item {
-      margin: 2px 0;
-    }
-    
     .dsa-submenu-link {
       display: block;
-      padding: 4px 12px;
+      padding: 6px 12px;
       color: #888;
       text-decoration: none;
-      font-size: 12px;
+      font-size: 13px;
       border-radius: 4px;
       transition: background-color 0.2s;
     }
@@ -234,17 +183,9 @@ function addDsaMenuStyles() {
         font-size: 12px;
       }
       
-      .dsa-menu-header {
-        padding: 8px 12px;
-      }
-      
       .dsa-submenu-link {
         padding: 8px 12px;
         margin: 2px 0;
-      }
-      
-      .dsa-toggle-icon {
-        font-size: 10px;
       }
     }
   `;
@@ -321,42 +262,51 @@ function createDsaMenu() {
 
     // Create tabs
     Object.keys(dsaBasicsData).forEach(categoryKey => {
-  const category = dsaBasicsData[categoryKey];
-  
-  // Create the tab
-  const tab = document.createElement('li');
-  tab.className = 'dsa-tab'; 
-  
-  // Use inline onclick for better mobile compatibility
-  tab.innerHTML = `
-    <a href="javascript:void(0)" class="dsa-tab-link" data-tab="${categoryKey}" onclick="switchDsaTab('${categoryKey}')">
-      ${category.title}
-    </a>
-  `;
-  tabsContainer.appendChild(tab);
-  
-  // Create the tab panel
-  const tabPanel = document.createElement('div');
-  tabPanel.className = 'dsa-tab-panel';
-  tabPanel.id = `${categoryKey}-panel`;
-  
-  // Add items to the panel
-  let panelContent = '';
-  category.items.forEach(item => {
-    panelContent += `
-      <div class="dsa-menu-item" data-name="${item.name.toLowerCase()}">
-        <a href="${item.url}" class="dsa-submenu-link">
-          ${item.name}
+      const category = dsaBasicsData[categoryKey];
+      
+      // Create the tab
+      const tab = document.createElement('li');
+      tab.className = 'dsa-tab'; 
+      
+      // Use inline onclick for better mobile compatibility
+      tab.innerHTML = `
+        <a href="javascript:void(0)" class="dsa-tab-link" data-tab="${categoryKey}" onclick="switchDsaTab('${categoryKey}')">
+          ${category.title}
         </a>
-      </div>
-    `;
-  });
-  
-  tabPanel.innerHTML = panelContent;
-  tabPanelsContainer.appendChild(tabPanel);
-});
+      `;
+      tabsContainer.appendChild(tab);
+      
+      // Create the tab panel
+      const tabPanel = document.createElement('div');
+      tabPanel.className = 'dsa-tab-panel';
+      tabPanel.id = `${categoryKey}-panel`;
+      
+      // Add items to the panel
+      let panelContent = '';
+      category.items.forEach(item => {
+        panelContent += `
+          <div class="dsa-menu-item" data-name="${item.name.toLowerCase()}">
+            <a href="${item.url}" class="dsa-submenu-link">
+              ${item.name}
+            </a>
+          </div>
+        `;
+      });
+      
+      tabPanel.innerHTML = panelContent;
+      tabPanelsContainer.appendChild(tabPanel);
+    });
 
-    
+    // Highlight active items
+    highlightActiveItem(currentURL, defaultActiveTab);
+
+    console.log("DSA Menu created successfully");
+  } catch (error) {
+    console.error("Error creating DSA menu:", error);
+  }
+}
+
+// Highlight active item based on URL
 function highlightActiveItem(currentURL, defaultActiveTab) {
   let activeLink = null;
   let activeTabId = defaultActiveTab;
@@ -378,21 +328,10 @@ function highlightActiveItem(currentURL, defaultActiveTab) {
     // Add active class to the link
     activeLink.classList.add('active');
     
-    // Expand parent menu items
-    let parent = activeLink.parentElement;
-    while (parent) {
-      // For submenu item
-      if (parent.classList.contains('dsa-menu-item')) {
-        parent.classList.add('expanded');
-        
-        // Determine which tab this belongs to
-        const panel = parent.closest('.dsa-tab-panel');
-        if (panel) {
-          activeTabId = panel.id.replace('-panel', '');
-        }
-      }
-      
-      parent = parent.parentElement;
+    // Determine which tab this belongs to
+    const panel = activeLink.closest('.dsa-tab-panel');
+    if (panel) {
+      activeTabId = panel.id.replace('-panel', '');
     }
   }
   
@@ -441,11 +380,6 @@ function addMobileFixes() {
       /* Fix z-index issues */
       .dsa-tab, .sd-tab {
         position: relative !important;
-      }
-      
-      /* Improve menu headers */
-      .dsa-menu-header, .dsa-submenu-header {
-        padding: 10px 12px !important;
       }
       
       /* Add active state for mobile */
