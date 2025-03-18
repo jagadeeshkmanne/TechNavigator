@@ -78,7 +78,7 @@ function isDsaBasicsPage() {
          currentURL.includes('/2025/03/coming-soon.html');
 }
 
-// Add styles for the DSA menu (updated to match System Design menu)
+// Add styles for the DSA menu (updated to exactly match System Design menu)
 function addDsaMenuStyles() {
   if (document.getElementById('dsa-menu-styles')) {
     return; // Styles already added
@@ -120,6 +120,10 @@ function addDsaMenuStyles() {
       transition: all 0.2s;
       border-radius: 4px 4px 0 0;
       cursor: pointer;
+    }
+    
+    .dsa-tab-link:hover {
+      color: #f97316;
     }
     
     .dsa-tab.active .dsa-tab-link {
@@ -237,12 +241,19 @@ function createDsaMenu() {
     // Current URL for matching links
     const currentURL = window.location.href.toLowerCase();
     
-    // Determine which tab should be active based on the active menu item
+    // Determine which tab should be active
     let activeTabId = 'dataStructures'; // Default to data structures tab
+    
+    // Function to check if a URL matches
+    const isUrlActive = (url) => {
+      const normalizedUrl = url.toLowerCase();
+      return currentURL.includes(normalizedUrl) || 
+             currentURL.includes(normalizedUrl.replace('https://www.technavigator.io', ''));
+    };
     
     // Check if any item in algorithms is active
     const isAlgorithmsActive = dsaBasicsData.algorithms.items.some(item => 
-      currentURL.includes(item.url.toLowerCase()) || currentURL.includes(item.name.toLowerCase().replace(/[^a-z0-9]/g, '-'))
+      isUrlActive(item.url)
     );
     
     // If an algorithms item is active, set the active tab
@@ -296,7 +307,7 @@ function createDsaMenu() {
       let panelContent = '';
       category.items.forEach(item => {
         // Check if this menu item should be active based on its href
-        const isActive = currentURL.includes(item.url.toLowerCase());
+        const isActive = isUrlActive(item.url);
         
         panelContent += `
           <div class="dsa-menu-item">
