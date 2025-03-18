@@ -72,7 +72,6 @@ window.switchDsaTab = function(tabId) {
     panel.classList.add('active');
   }
 };
-
 // Add styles for the DSA menu
 function addDsaMenuStyles() {
   if (document.getElementById('dsa-menu-styles')) {
@@ -397,9 +396,7 @@ function createDsaMenu() {
   } catch (error) {
     console.error("Error creating DSA menu:", error);
   }
-}
-
-// Highlight active item based on URL
+}// Highlight active item based on URL
 function highlightActiveItem(currentURL, defaultActiveTab) {
   let activeLink = null;
   let activeTabId = defaultActiveTab;
@@ -408,7 +405,15 @@ function highlightActiveItem(currentURL, defaultActiveTab) {
   const allLinks = document.querySelectorAll('.dsa-submenu-link');
   
   // Try to find an exact match for the current URL
-  for (const link of allLinks) {// If we found a matching link
+  for (const link of allLinks) {
+    const href = link.getAttribute('href').toLowerCase();
+    if (currentURL.includes(href)) {
+      activeLink = link;
+      break;
+    }
+  }
+  
+  // If we found a matching link
   if (activeLink) {
     // Add active class to the link
     activeLink.classList.add('active');
