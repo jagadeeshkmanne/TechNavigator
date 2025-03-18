@@ -321,82 +321,42 @@ function createDsaMenu() {
 
     // Create tabs
     Object.keys(dsaBasicsData).forEach(categoryKey => {
-      const category = dsaBasicsData[categoryKey];
-      
-      // Create the tab
-      const tab = document.createElement('li');
-      tab.className = 'dsa-tab'; 
-      
-      // Use inline onclick for better mobile compatibility
-      tab.innerHTML = `
-        <a href="javascript:void(0)" class="dsa-tab-link" data-tab="${categoryKey}" onclick="switchDsaTab('${categoryKey}')">
-          ${category.title}
+  const category = dsaBasicsData[categoryKey];
+  
+  // Create the tab
+  const tab = document.createElement('li');
+  tab.className = 'dsa-tab'; 
+  
+  // Use inline onclick for better mobile compatibility
+  tab.innerHTML = `
+    <a href="javascript:void(0)" class="dsa-tab-link" data-tab="${categoryKey}" onclick="switchDsaTab('${categoryKey}')">
+      ${category.title}
+    </a>
+  `;
+  tabsContainer.appendChild(tab);
+  
+  // Create the tab panel
+  const tabPanel = document.createElement('div');
+  tabPanel.className = 'dsa-tab-panel';
+  tabPanel.id = `${categoryKey}-panel`;
+  
+  // Add items to the panel
+  let panelContent = '';
+  category.items.forEach(item => {
+    panelContent += `
+      <div class="dsa-menu-item" data-name="${item.name.toLowerCase()}">
+        <a href="${item.url}" class="dsa-submenu-link">
+          ${item.name}
         </a>
-      `;
-      tabsContainer.appendChild(tab);
-      
-      // Create the tab panel
-      const tabPanel = document.createElement('div');
-      tabPanel.className = 'dsa-tab-panel';
-      tabPanel.id = `${categoryKey}-panel`;
-      
-      // Add items to the panel
-      let panelContent = '';
-      category.items.forEach(item => {
-        panelContent += `
-          <div class="dsa-menu-item" data-name="${item.name.toLowerCase()}">
-            <div class="dsa-menu-header" onclick="toggleDsaMenuItem(this)">
-              <span class="dsa-menu-title">${item.name}</span>
-              <span class="dsa-toggle-icon">▼</span>
-            </div>
-            <ul class="dsa-submenu">
-              <li class="dsa-submenu-item">
-                <a href="${item.url}" class="dsa-submenu-link" data-name="introduction">Introduction</a>
-              </li>
-              <li class="dsa-submenu-item">
-                <a href="${item.url}" class="dsa-submenu-link" data-name="basic-operations">Basic Operations</a>
-              </li>
-              <li class="dsa-submenu-item">
-                <a href="${item.url}" class="dsa-submenu-link" data-name="practice">Practice</a>
-              </li>
-            </ul>
-          </div>
-        `;
-      });
-      
-      tabPanel.innerHTML = panelContent;
-      tabPanelsContainer.appendChild(tabPanel);
-    });
+      </div>
+    `;
+  });
+  
+  tabPanel.innerHTML = panelContent;
+  tabPanelsContainer.appendChild(tabPanel);
+});
 
-    // Toggle menu item function
-    window.toggleDsaMenuItem = function(header) {
-      // Get all menu items at this level
-      const allMenuItems = document.querySelectorAll('.dsa-menu-item');
-      const menuItem = header.closest('.dsa-menu-item');
-      
-      // If this item is already expanded, just collapse it
-      if (menuItem.classList.contains('expanded')) {
-        menuItem.classList.remove('expanded');
-        return;
-      }
-      
-      // Collapse all other items at this level
-      allMenuItems.forEach(item => {
-        item.classList.remove('expanded');
-      });
-      
-      // Expand only this item
-      menuItem.classList.add('expanded');
-    };
-
-    // Highlight active items
-    highlightActiveItem(currentURL, defaultActiveTab);
-
-    console.log("DSA Menu created successfully");
-  } catch (error) {
-    console.error("Error creating DSA menu:", error);
-  }
-}// Highlight active item based on URL
+    
 function highlightActiveItem(currentURL, defaultActiveTab) {
   let activeLink = null;
   let activeTabId = defaultActiveTab;
