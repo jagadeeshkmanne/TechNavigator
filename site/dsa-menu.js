@@ -78,44 +78,7 @@ function isDsaBasicsPage() {
          currentURL.includes('/2025/03/coming-soon.html');
 }
 
-// Function to determine if a URL is related to data structures
-function isDataStructuresURL(url) {
-  url = url.toLowerCase();
-  return url.includes('datastructure-basics') || url.includes('data-structure-basics');
-}
-
-// Function to determine if a URL is related to algorithms
-function isAlgorithmsURL(url) {
-  url = url.toLowerCase();
-  return url.includes('algorithm-basics') || url.includes('algorithms-basics');
-}
-
-// Make the switchDsaTab function globally available
-window.switchDsaTab = function(tabId) {
-  console.log("Switching to tab:", tabId);
-  
-  // Remove active class from all tabs and panels
-  document.querySelectorAll('.dsa-tab').forEach(tab => {
-    tab.classList.remove('active');
-  });
-  document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
-    panel.classList.remove('active');
-  });
-  
-  // Add active class to clicked tab
-  const clickedTab = document.querySelector(`.dsa-tab-link[data-tab="${tabId}"]`);
-  if (clickedTab) {
-    clickedTab.parentElement.classList.add('active');
-  }
-  
-  // Show the corresponding panel
-  const panel = document.getElementById(`${tabId}-panel`);
-  if (panel) {
-    panel.classList.add('active');
-  }
-};
-
-// Add styles for the DSA menu
+// Add styles for the DSA menu (updated to match System Design menu)
 function addDsaMenuStyles() {
   if (document.getElementById('dsa-menu-styles')) {
     return; // Styles already added
@@ -150,15 +113,13 @@ function addDsaMenuStyles() {
       display: block;
       padding: 10px 12px;
       text-align: center;
-      color: #888;
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 13px;
       font-weight: 500;
       transition: all 0.2s;
       border-radius: 4px 4px 0 0;
       cursor: pointer;
-      position: relative;
-      z-index: 5;
     }
     
     .dsa-tab.active .dsa-tab-link {
@@ -180,8 +141,7 @@ function addDsaMenuStyles() {
     .dsa-tab-panels {
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       padding-top: 5px;
-      position: relative;
-      z-index: 1;
+      margin-left: 1.5rem;
     }
     
     .dsa-tab-panel {
@@ -198,12 +158,15 @@ function addDsaMenuStyles() {
     }
     
     .dsa-menu-link {
-      display: block;
-      padding: 6px 12px;
-      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      color: var(--text-muted);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       border-radius: 4px;
+      cursor: pointer;
       transition: background-color 0.2s, color 0.2s;
     }
     
@@ -218,15 +181,16 @@ function addDsaMenuStyles() {
       font-weight: 500;
     }
     
-    /* Mobile-specific styles */
-    @media screen and (max-width: 768px) {
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
       .dsa-tab-link {
-        padding: 12px 8px;
+        padding: 8px 6px;
         font-size: 12px;
       }
       
       .dsa-menu-link {
-        padding: 8px 12px;
+        padding: 5px 8px;
+        font-size: 12px;
       }
     }
   `;
@@ -270,48 +234,54 @@ function createDsaMenu() {
       sidebar.innerHTML = '';
     }
 
-    // Create the menu structure
+    // Current URL for matching links
+    const currentURL = window.location.href.toLowerCase();
+    
+    // Determine which tab should be active based on the active menu item
+    let activeTabId = 'dataStructures'; // Default to data structures tab
+    
+    // Check if any item in algorithms is active
+    const isAlgorithmsActive = dsaBasicsData.algorithms.items.some(item => 
+      currentURL.includes(item.url.toLowerCase()) || currentURL.includes(item.name.toLowerCase().replace(/[^a-z0-9]/g, '-'))
+    );
+    
+    // If an algorithms item is active, set the active tab
+    if (isAlgorithmsActive) {
+      activeTabId = 'algorithms';
+    }
+
+    // Create menu structure
     dsaMenuContainer.innerHTML = `
       <div class="dsa-tabs-container">
         <ul class="dsa-tabs" id="dsa-tabs"></ul>
         <div class="dsa-tab-panels" id="dsa-tab-panels"></div>
       </div>
     `;
-
+    
     // Append to sidebar
     const menuItem = document.createElement('li');
     menuItem.className = 'sidebar-nav-item expanded';
     menuItem.appendChild(dsaMenuContainer);
     sidebar.appendChild(menuItem);
-
-    // Current URL for matching links
-    const currentURL = window.location.href.toLowerCase();
     
-    // Determine which tab should be active by default
-    const isDataStructures = isDataStructuresURL(currentURL);
-    const isAlgorithms = isAlgorithmsURL(currentURL);
-    const defaultActiveTab = isAlgorithms ? 'algorithms' : 'dataStructures';
-
     // Populate tabs
     const tabsContainer = document.getElementById('dsa-tabs');
     const tabPanelsContainer = document.getElementById('dsa-tab-panels');
-
+    
     if (!tabsContainer || !tabPanelsContainer) {
       console.error("Tab containers not found");
       return;
     }
-
+    
     // Create tabs
     Object.keys(dsaBasicsData).forEach(categoryKey => {
       const category = dsaBasicsData[categoryKey];
       
       // Create the tab
       const tab = document.createElement('li');
-      tab.className = 'dsa-tab'; 
-      
-      // Use inline onclick for better mobile compatibility
+      tab.className = `dsa-tab ${categoryKey === activeTabId ? 'active' : ''}`; 
       tab.innerHTML = `
-        <a href="javascript:void(0)" class="dsa-tab-link" data-tab="${categoryKey}" onclick="switchDsaTab('${categoryKey}')">
+        <a href="javascript:void(0)" class="dsa-tab-link" data-tab="${categoryKey}">
           ${category.title}
         </a>
       `;
@@ -319,15 +289,20 @@ function createDsaMenu() {
       
       // Create the tab panel
       const tabPanel = document.createElement('div');
-      tabPanel.className = 'dsa-tab-panel';
+      tabPanel.className = `dsa-tab-panel ${categoryKey === activeTabId ? 'active' : ''}`;
       tabPanel.id = `${categoryKey}-panel`;
       
       // Add items to the panel
       let panelContent = '';
       category.items.forEach(item => {
+        // Check if this menu item should be active based on its href
+        const isActive = currentURL.includes(item.url.toLowerCase());
+        
         panelContent += `
           <div class="dsa-menu-item">
-            <a href="${item.url}" class="dsa-menu-link" data-name="${item.name.toLowerCase()}">${item.name}</a>
+            <a href="${item.url}" class="dsa-menu-link ${isActive ? 'active' : ''}" data-name="${item.name.toLowerCase()}">
+              ${item.name}
+            </a>
           </div>
         `;
       });
@@ -335,109 +310,45 @@ function createDsaMenu() {
       tabPanel.innerHTML = panelContent;
       tabPanelsContainer.appendChild(tabPanel);
     });
-
-    // Highlight active items
-    highlightActiveItem(currentURL, defaultActiveTab);
-
+    
+    // Add tab click handlers
+    addTabClickHandlers();
+    
     console.log("DSA Menu created successfully");
   } catch (error) {
     console.error("Error creating DSA menu:", error);
   }
 }
 
-// Highlight active item based on URL
-function highlightActiveItem(currentURL, defaultActiveTab) {
-  let activeLink = null;
-  let activeTabId = defaultActiveTab;
-  
-  // Find all links in the sidebar
-  const allLinks = document.querySelectorAll('.dsa-menu-link');
-  
-  // Try to find an exact match for the current URL
-  for (const link of allLinks) {
-    const href = link.getAttribute('href').toLowerCase();
-    if (currentURL.includes(href)) {
-      activeLink = link;
-      break;
-    }
-  }
-  
-  // If we found a matching link
-  if (activeLink) {
-    // Add active class to the link
-    activeLink.classList.add('active');
-    
-    // Determine which tab this belongs to
-    const panel = activeLink.closest('.dsa-tab-panel');
-    if (panel) {
-      activeTabId = panel.id.replace('-panel', '');
-    }
-  }
-  
-  // Activate the correct tab
-  const activeTab = document.querySelector(`.dsa-tab-link[data-tab="${activeTabId}"]`);
-  if (activeTab) {
-    // Remove active class from all tabs and panels
-    document.querySelectorAll('.dsa-tab').forEach(tab => {
-      tab.classList.remove('active');
+// Add tab click handlers
+function addTabClickHandlers() {
+  document.querySelectorAll('.dsa-tab-link').forEach(tabLink => {
+    tabLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Get the tab ID
+      const tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.dsa-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      this.parentElement.classList.add('active');
+      
+      // Show the corresponding panel
+      document.getElementById(`${tabId}-panel`).classList.add('active');
     });
-    document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
-      panel.classList.remove('active');
-    });
-    
-    // Add active class to the tab
-    activeTab.parentElement.classList.add('active');
-    
-    // Show the corresponding panel
-    document.getElementById(`${activeTabId}-panel`).classList.add('active');
-  }
-}
-
-// Add mobile-specific fixes
-function addMobileFixes() {
-  // Add styles for better mobile experience
-  const mobileCss = document.createElement('style');
-  mobileCss.textContent = `
-    @media screen and (max-width: 768px) {
-      /* Force tabs to be clickable */
-      .dsa-tab-link, .sd-tab-link {
-        pointer-events: auto !important;
-        position: relative !important;
-        z-index: 50 !important;
-      }
-      
-      /* Increase tap target size */
-      .dsa-tab-link, .sd-tab-link {
-        padding: 12px 8px !important;
-      }
-      
-      /* Make sure active panels display */
-      .dsa-tab-panel.active, .sd-tab-panel.active {
-        display: block !important;
-      }
-      
-      /* Fix z-index issues */
-      .dsa-tab, .sd-tab {
-        position: relative !important;
-      }
-      
-      /* Add active state for mobile */
-      .dsa-tab.active, .sd-tab.active {
-        background-color: rgba(249, 115, 22, 0.1) !important;
-        position: relative !important;
-      }
-    }
-  `;
-  document.head.appendChild(mobileCss);
+  });
 }
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
   if (isDsaBasicsPage()) {
-    // Apply mobile fixes first
-    addMobileFixes();
-    
-    // Create menu
     createDsaMenu();
   }
 });
@@ -446,37 +357,5 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', function() {
   if (isDsaBasicsPage()) {
     createDsaMenu();
-    
-    // If we're on the coming soon page, check if this is called from the menu
-    if (window.location.href.toLowerCase().includes('/2025/03/coming-soon.html')) {
-      // Make sure the menu is always visible on this page
-      const sidebar = document.querySelector('.sidebar');
-      if (sidebar) {
-        sidebar.style.display = 'block';
-      }
-      
-      // Force the sidebar to be visible
-      const sidebarToggle = document.querySelector('.sidebar-toggle');
-      if (sidebarToggle) {
-        sidebarToggle.classList.add('active');
-      }
-    }
-    
-    // Try again after a short delay to ensure everything is processed
-    setTimeout(function() {
-      // Check if tabs are working
-      const tabs = document.querySelectorAll('.dsa-tab-link');
-      if (tabs.length > 0) {
-        console.log("DSA tabs found, ensuring they're clickable");
-        
-        // Force tabs to be clickable with inline handlers
-        tabs.forEach(tab => {
-          if (!tab.getAttribute('onclick')) {
-            const tabId = tab.getAttribute('data-tab');
-            tab.setAttribute('onclick', `switchDsaTab('${tabId}')`);
-          }
-        });
-      }
-    }, 1000);
   }
 });
