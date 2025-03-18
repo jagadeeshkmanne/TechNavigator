@@ -5,101 +5,39 @@ const dsaBasicsData = {
     "items": [
       {
         "name": "Arrays",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/data-structure-basics-arrays-introduction.html"
       },
       {
         "name": "Linked Lists",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Types", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/data-structure-basics-linked-list.html"
       },
       {
         "name": "Hash Tables",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Collision Handling", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Stacks",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Applications", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Queues",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Types", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Trees",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Types", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {
-            "name": "Traversal",
-            "subitems": [
-              {"name": "Inorder Traversal", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-              {"name": "Preorder Traversal", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-              {"name": "Postorder Traversal", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-              {"name": "Level Order Traversal", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-            ]
-          },
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Heaps",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Types", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Tries",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Applications", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Graphs",
-        "subitems": [
-          {"name": "Introduction", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Representations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Basic Operations", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Videos", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       }
     ]
   },
@@ -108,75 +46,23 @@ const dsaBasicsData = {
     "items": [
       {
         "name": "Searching Algorithms",
-        "subitems": [
-          {"name": "Linear Search", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Binary Search", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Sorting Algorithms",
-        "subitems": [
-          {"name": "Bubble Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Selection Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Insertion Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Merge Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Quick Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Heap Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Graph Algorithms",
-        "subitems": [
-          {"name": "Depth-First Search (DFS)", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Breadth-First Search (BFS)", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {
-            "name": "Shortest Path Algorithms",
-            "subitems": [
-              {"name": "Dijkstra's Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-              {"name": "Bellman-Ford Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-              {"name": "Floyd-Warshall Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-            ]
-          },
-          {
-            "name": "Minimum Spanning Tree",
-            "subitems": [
-              {"name": "Kruskal's Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-              {"name": "Prim's Algorithm", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-            ]
-          },
-          {"name": "Topological Sort", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Algorithm Techniques",
-        "subitems": [
-          {"name": "Two Pointers", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Sliding Window", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Prefix Sum", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       },
       {
         "name": "Advanced Algorithms",
-        "subitems": [
-          {"name": "Divide and Conquer", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Greedy Algorithms", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Backtracking", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {
-            "name": "Dynamic Programming",
-            "subitems": [
-              {"name": "1D Dynamic Programming", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-              {"name": "2D Dynamic Programming", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-              {"name": "State Compression", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-            ]
-          },
-          {"name": "Union Find", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Monotonic Stack/Queue", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-          {"name": "Practice", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-        ]
+        "url": "https://www.technavigator.io/2025/03/coming-soon.html"
       }
     ]
   }
@@ -311,97 +197,22 @@ function addDsaMenuStyles() {
       margin-bottom: 4px;
     }
     
-    .dsa-menu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      padding: 6px 12px;
-      border-radius: 4px;
-      transition: background-color 0.2s;
-    }
-    
-    .dsa-menu-header:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-    
-    .dsa-menu-title {
-      color: #888;
-      font-size: 13px;
-      font-weight: 500;
-    }
-    
-    .dsa-menu-header:hover .dsa-menu-title {
-      color: #eee;
-    }
-    
-    .dsa-toggle-icon {
-      font-size: 8px;
-      color: #888;
-      margin-right: 4px;
-      transition: transform 0.3s;
-    }
-    
-    .dsa-menu-item.expanded .dsa-toggle-icon,
-    .dsa-submenu-item.expanded .dsa-toggle-icon {
-      transform: rotate(180deg);
-    }
-    
-    .dsa-submenu, .dsa-deep-submenu {
-      list-style: none;
-      padding-left: 15px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      margin: 0;
-    }
-    
-    .dsa-menu-item.expanded .dsa-submenu,
-    .dsa-submenu-item.expanded .dsa-deep-submenu {
-      max-height: 500px;
-    }
-    
-    .dsa-submenu-item, .dsa-deep-submenu-item {
-      margin: 2px 0;
-    }
-    
-    .dsa-submenu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      padding: 4px 12px;
-      border-radius: 4px;
-      transition: background-color 0.2s;
-      color: #888;
-      font-size: 12px;
-    }
-    
-    .dsa-submenu-header:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: #eee;
-    }
-    
-    .dsa-submenu-title {
-      font-weight: 400;
-    }
-    
-    .dsa-submenu-link, .dsa-deep-submenu-link {
+    .dsa-menu-link {
       display: block;
-      padding: 4px 12px;
+      padding: 6px 12px;
       color: #888;
       text-decoration: none;
-      font-size: 12px;
+      font-size: 13px;
       border-radius: 4px;
-      transition: background-color 0.2s;
+      transition: background-color 0.2s, color 0.2s;
     }
     
-    .dsa-submenu-link:hover, .dsa-deep-submenu-link:hover {
+    .dsa-menu-link:hover {
       background-color: rgba(255, 255, 255, 0.05);
       color: #eee;
     }
     
-    .dsa-submenu-link.active, .dsa-deep-submenu-link.active {
+    .dsa-menu-link.active {
       background-color: rgba(249, 115, 22, 0.1);
       color: #f97316;
       font-weight: 500;
@@ -414,17 +225,8 @@ function addDsaMenuStyles() {
         font-size: 12px;
       }
       
-      .dsa-menu-header, .dsa-submenu-header {
+      .dsa-menu-link {
         padding: 8px 12px;
-      }
-      
-      .dsa-submenu-link, .dsa-deep-submenu-link {
-        padding: 8px 12px;
-        margin: 2px 0;
-      }
-      
-      .dsa-toggle-icon {
-        font-size: 10px;
       }
     }
   `;
@@ -523,113 +325,17 @@ function createDsaMenu() {
       // Add items to the panel
       let panelContent = '';
       category.items.forEach(item => {
-        const hasSubitems = item.subitems && item.subitems.length > 0;
-        
-        if (hasSubitems) {
-          panelContent += `
-            <div class="dsa-menu-item" data-name="${item.name.toLowerCase()}">
-              <div class="dsa-menu-header" onclick="toggleDsaMenuItem(this)">
-                <span class="dsa-menu-title">${item.name}</span>
-                <span class="dsa-toggle-icon">▼</span>
-              </div>
-              <ul class="dsa-submenu">
-          `;
-          
-          // Add first level subitems
-          item.subitems.forEach(subitem => {
-            const hasDeepSubitems = subitem.subitems && subitem.subitems.length > 0;
-            
-            if (hasDeepSubitems) {
-              panelContent += `
-                <li class="dsa-submenu-item" data-name="${subitem.name.toLowerCase()}">
-                  <div class="dsa-submenu-header" onclick="toggleDsaSubMenuItem(this)">
-                    <span class="dsa-submenu-title">${subitem.name}</span>
-                    <span class="dsa-toggle-icon">▼</span>
-                  </div>
-                  <ul class="dsa-deep-submenu">
-              `;
-              
-              // Add second level subitems
-              subitem.subitems.forEach(deepSubitem => {
-                panelContent += `
-                  <li class="dsa-deep-submenu-item">
-                    <a href="${deepSubitem.url}" class="dsa-deep-submenu-link" data-name="${deepSubitem.name.toLowerCase()}">${deepSubitem.name}</a>
-                  </li>
-                `;
-              });
-              
-              panelContent += `
-                  </ul>
-                </li>
-              `;
-            } else {
-              panelContent += `
-                <li class="dsa-submenu-item">
-                  <a href="${subitem.url}" class="dsa-submenu-link" data-name="${subitem.name.toLowerCase()}">${subitem.name}</a>
-                </li>
-              `;
-            }
-          });
-          
-          panelContent += `
-              </ul>
-            </div>
-          `;
-        } else {
-          panelContent += `
-            <div class="dsa-menu-item" data-name="${item.name.toLowerCase()}">
-              <span class="dsa-menu-title">${item.name}</span>
-            </div>
-          `;
-        }
+        panelContent += `
+          <div class="dsa-menu-item">
+            <a href="${item.url}" class="dsa-menu-link" data-name="${item.name.toLowerCase()}">${item.name}</a>
+          </div>
+        `;
       });
       
       tabPanel.innerHTML = panelContent;
       tabPanelsContainer.appendChild(tabPanel);
     });
 
-    // Define global toggle functions for menu items
-    window.toggleDsaMenuItem = function(header) {
-      // Get all menu items at this level
-      const allMenuItems = document.querySelectorAll('.dsa-menu-item');
-      const menuItem = header.closest('.dsa-menu-item');
-      
-      // If this item is already expanded, just collapse it
-      if (menuItem.classList.contains('expanded')) {
-        menuItem.classList.remove('expanded');
-        return;
-      }
-      
-      // Collapse all other items at this level
-      allMenuItems.forEach(item => {
-        item.classList.remove('expanded');
-      });
-      
-      // Expand only this item
-      menuItem.classList.add('expanded');
-    };
-    
-    window.toggleDsaSubMenuItem = function(header) {
-      // Get all submenu items within the same parent menu
-      const parentMenu = header.closest('.dsa-submenu');
-      const allSubmenuItems = parentMenu.querySelectorAll('.dsa-submenu-item');
-      const submenuItem = header.closest('.dsa-submenu-item');
-      
-      // If this item is already expanded, just collapse it
-      if (submenuItem.classList.contains('expanded')) {
-        submenuItem.classList.remove('expanded');
-        return;
-      }
-      
-      // Collapse all other items at this level
-      allSubmenuItems.forEach(item => {
-        item.classList.remove('expanded');
-      });
-      
-      // Expand only this item
-      submenuItem.classList.add('expanded');
-    };
-    
     // Highlight active items
     highlightActiveItem(currentURL, defaultActiveTab);
 
@@ -645,10 +351,7 @@ function highlightActiveItem(currentURL, defaultActiveTab) {
   let activeTabId = defaultActiveTab;
   
   // Find all links in the sidebar
-  const allLinks = [
-    ...document.querySelectorAll('.dsa-submenu-link'),
-    ...document.querySelectorAll('.dsa-deep-submenu-link')
-  ];
+  const allLinks = document.querySelectorAll('.dsa-menu-link');
   
   // Try to find an exact match for the current URL
   for (const link of allLinks) {
@@ -664,26 +367,10 @@ function highlightActiveItem(currentURL, defaultActiveTab) {
     // Add active class to the link
     activeLink.classList.add('active');
     
-    // Expand parent menu items
-    let parent = activeLink.parentElement;
-    while (parent) {
-      // For submenu item
-      if (parent.classList.contains('dsa-submenu-item')) {
-        parent.classList.add('expanded');
-      }
-      
-      // For menu item
-      if (parent.classList.contains('dsa-menu-item')) {
-        parent.classList.add('expanded');
-        
-        // Determine which tab this belongs to
-        const panel = parent.closest('.dsa-tab-panel');
-        if (panel) {
-          activeTabId = panel.id.replace('-panel', '');
-        }
-      }
-      
-      parent = parent.parentElement;
+    // Determine which tab this belongs to
+    const panel = activeLink.closest('.dsa-tab-panel');
+    if (panel) {
+      activeTabId = panel.id.replace('-panel', '');
     }
   }
   
@@ -696,7 +383,7 @@ function highlightActiveItem(currentURL, defaultActiveTab) {
     });
     document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
       panel.classList.remove('active');
-        });
+    });
     
     // Add active class to the tab
     activeTab.parentElement.classList.add('active');
@@ -705,31 +392,6 @@ function highlightActiveItem(currentURL, defaultActiveTab) {
     document.getElementById(`${activeTabId}-panel`).classList.add('active');
   }
 }
-
-// Override the original functions
-(function() {
-  // Store original functions
-  const originalPopulateSidebar = window.populateSidebar;
-  const originalControlMenuVisibilityByURL = window.controlMenuVisibilityByURL;
-  
-  // Override populateSidebar
-  window.populateSidebar = function(problems) {
-    if (isDsaBasicsPage()) {
-      createDsaMenu();
-    } else if (typeof originalPopulateSidebar === 'function') {
-      originalPopulateSidebar(problems);
-    }
-  };
-  
-  // Override controlMenuVisibilityByURL
-  window.controlMenuVisibilityByURL = function() {
-    if (isDsaBasicsPage()) {
-      createDsaMenu();
-    } else if (typeof originalControlMenuVisibilityByURL === 'function') {
-      originalControlMenuVisibilityByURL();
-    }
-  };
-})();
 
 // Add mobile-specific fixes
 function addMobileFixes() {
@@ -757,11 +419,6 @@ function addMobileFixes() {
       /* Fix z-index issues */
       .dsa-tab, .sd-tab {
         position: relative !important;
-      }
-      
-      /* Improve menu headers */
-      .dsa-menu-header, .dsa-submenu-header {
-        padding: 10px 12px !important;
       }
       
       /* Add active state for mobile */
