@@ -263,7 +263,6 @@
 }
 
 .dsa-submenu-link {
-  padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width)) !important;
   color: var(--tn-text) !important;
   background-color: transparent !important; /* Changed to transparent */
 }
