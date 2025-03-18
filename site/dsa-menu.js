@@ -1,175 +1,159 @@
-// DSA Basics Menu Data Structure (Simplified with URLs)
-// Modifying the createDsaMenu function to work with simplified data structure
-function createDsaMenu() {
-  try {
-    // Only run on DSA Basics pages
-    if (!isDsaBasicsPage()) {
-      return;
-    }
-
-    console.log("Creating DSA Menu...");
-
-    // Add styles
-    addDsaMenuStyles();
-
-    // Create the menu structure
-    const dsaMenuContainer = document.createElement('div');
-    dsaMenuContainer.className = 'dsa-menu-container';
-
-    // Get the sidebar or create a new one
-    let sidebar = document.querySelector('.sidebar-nav');
-    if (!sidebar) {
-      console.log("Sidebar not found, creating new one");
-      sidebar = document.createElement('ul');
-      sidebar.className = 'sidebar-nav';
-      const sidebarContainer = document.querySelector('.sidebar');
-      if (sidebarContainer) {
-        sidebarContainer.innerHTML = ''; // Clear the container
-        sidebarContainer.appendChild(sidebar);
-      } else {
-        console.log("Sidebar container not found, inserting at body");
-        document.body.appendChild(dsaMenuContainer);
-        return;
-      }
-    } else {
-      // Clear existing sidebar
-      sidebar.innerHTML = '';
-    }
-
-    // Create the menu structure
-    dsaMenuContainer.innerHTML = `
-      <div class="dsa-tabs-container">
-        <ul class="dsa-tabs" id="dsa-tabs"></ul>
-        <div class="dsa-tab-panels" id="dsa-tab-panels"></div>
-      </div>
-    `;
-
-    // Append to sidebar
-    const menuItem = document.createElement('li');
-    menuItem.className = 'sidebar-nav-item expanded';
-    menuItem.appendChild(dsaMenuContainer);
-    sidebar.appendChild(menuItem);
-
-    // Current URL for matching links
-    const currentURL = window.location.href.toLowerCase();
+// If we found a matching link
+  if (activeLink) {
+    // Add active class to the link
+    activeLink.classList.add('active');
     
-    // Determine which tab should be active by default
-    const isDataStructures = isDataStructuresURL(currentURL);
-    const isAlgorithms = isAlgorithmsURL(currentURL);
-    const defaultActiveTab = isAlgorithms ? 'algorithms' : 'dataStructures';
-
-    // Populate tabs
-    const tabsContainer = document.getElementById('dsa-tabs');
-    const tabPanelsContainer = document.getElementById('dsa-tab-panels');
-
-    if (!tabsContainer || !tabPanelsContainer) {
-      console.error("Tab containers not found");
-      return;
-    }
-
-    // Create tabs
-    Object.keys(dsaBasicsData).forEach(categoryKey => {
-      const category = dsaBasicsData[categoryKey];
-      
-      // Create the tab
-      const tab = document.createElement('li');
-      tab.className = 'dsa-tab'; 
-      
-      // Use inline onclick for better mobile compatibility
-      tab.innerHTML = `
-        <a href="javascript:void(0)" class="dsa-tab-link" data-tab="${categoryKey}" onclick="switchDsaTab('${categoryKey}')">
-          ${category.title}
-        </a>
-      `;
-      tabsContainer.appendChild(tab);
-      
-      // Create the tab panel
-      const tabPanel = document.createElement('div');
-      tabPanel.className = 'dsa-tab-panel';
-      tabPanel.id = `${categoryKey}-panel`;
-      
-      // Add items to the panel
-      let panelContent = '';
-      category.items.forEach(item => {
-        panelContent += `
-          <div class="dsa-menu-item" data-name="${item.name.toLowerCase()}">
-            <div class="dsa-menu-header" onclick="toggleDsaMenuItem(this)">
-              <span class="dsa-menu-title">${item.name}</span>
-              <span class="dsa-toggle-icon">▼</span>
-            </div>
-            <ul class="dsa-submenu">
-              <li class="dsa-submenu-item">
-                <a href="${item.url}" class="dsa-submenu-link" data-name="introduction">Introduction</a>
-              </li>
-              <li class="dsa-submenu-item">
-                <a href="${item.url}" class="dsa-submenu-link" data-name="basic-operations">Basic Operations</a>
-              </li>
-              <li class="dsa-submenu-item">
-                <a href="${item.url}" class="dsa-submenu-link" data-name="practice">Practice</a>
-              </li>
-            </ul>
-          </div>
-        `;
-      });
-      
-      tabPanel.innerHTML = panelContent;
-      tabPanelsContainer.appendChild(tabPanel);
-    });
-
-    // Define global toggle function for menu items
-    if (!window.toggleDsaMenuItem) {
-      window.toggleDsaMenuItem = function(header) {
-        // Get all menu items at this level
-        const allMenuItems = document.querySelectorAll('.dsa-menu-item');
-        const menuItem = header.closest('.dsa-menu-item');
+    // Expand parent menu items
+    let parent = activeLink.parentElement;
+    while (parent) {
+      // For submenu item
+      if (parent.classList.contains('dsa-menu-item')) {
+        parent.classList.add('expanded');
         
-        // If this item is already expanded, just collapse it
-        if (menuItem.classList.contains('expanded')) {
-          menuItem.classList.remove('expanded');
-          return;
+        // Determine which tab this belongs to
+        const panel = parent.closest('.dsa-tab-panel');
+        if (panel) {
+          activeTabId = panel.id.replace('-panel', '');
         }
-        
-        // Collapse all other items at this level
-        allMenuItems.forEach(item => {
-          item.classList.remove('expanded');
-        });
-        
-        // Expand only this item
-        menuItem.classList.add('expanded');
-      };
+      }
+      
+      parent = parent.parentElement;
     }
-
-    // Highlight active items
-    highlightActiveItem(currentURL, defaultActiveTab);
-
-    console.log("DSA Menu created successfully");
-  } catch (error) {
-    console.error("Error creating DSA menu:", error);
+  }
+  
+  // Activate the correct tab
+  const activeTab = document.querySelector(`.dsa-tab-link[data-tab="${activeTabId}"]`);
+  if (activeTab) {
+    // Remove active class from all tabs and panels
+    document.querySelectorAll('.dsa-tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    document.querySelectorAll('.dsa-tab-panel').forEach(panel => {
+      panel.classList.remove('active');
+    });
+    
+    // Add active class to the tab
+    activeTab.parentElement.classList.add('active');
+    
+    // Show the corresponding panel
+    document.getElementById(`${activeTabId}-panel`).classList.add('active');
   }
 }
 
-  "dataStructures": {
-    "title": "Data Structures",
-    "items": [
-      {"name": "Arrays", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Linked Lists", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Hash Tables", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Stacks", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Queues", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Trees", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Heaps", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Tries", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Graphs", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-    ]
-  },
-  "algorithms": {
-    "title": "Algorithms",
-    "items": [
-      {"name": "Searching Algorithms", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Sorting Algorithms", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Graph Algorithms", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Algorithm Techniques", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Advanced Algorithms", "url": "https://www.technavigator.io/2025/03/coming-soon.html"}
-    ]
+// Add mobile-specific fixes
+function addMobileFixes() {
+  // Add styles for better mobile experience
+  const mobileCss = document.createElement('style');
+  mobileCss.textContent = `
+    @media screen and (max-width: 768px) {
+      /* Force tabs to be clickable */
+      .dsa-tab-link, .sd-tab-link {
+        pointer-events: auto !important;
+        position: relative !important;
+        z-index: 50 !important;
+      }
+      
+      /* Increase tap target size */
+      .dsa-tab-link, .sd-tab-link {
+        padding: 12px 8px !important;
+      }
+      
+      /* Make sure active panels display */
+      .dsa-tab-panel.active, .sd-tab-panel.active {
+        display: block !important;
+      }
+      
+      /* Fix z-index issues */
+      .dsa-tab, .sd-tab {
+        position: relative !important;
+      }
+      
+      /* Improve menu headers */
+      .dsa-menu-header, .dsa-submenu-header {
+        padding: 10px 12px !important;
+      }
+      
+      /* Add active state for mobile */
+      .dsa-tab.active, .sd-tab.active {
+        background-color: rgba(249, 115, 22, 0.1) !important;
+        position: relative !important;
+      }
+    }
+  `;
+  document.head.appendChild(mobileCss);
+}
+
+// Override the original functions
+(function() {
+  // Store original functions
+  const originalPopulateSidebar = window.populateSidebar;
+  const originalControlMenuVisibilityByURL = window.controlMenuVisibilityByURL;
+  
+  // Override populateSidebar
+  window.populateSidebar = function(problems) {
+    if (isDsaBasicsPage()) {
+      createDsaMenu();
+    } else if (typeof originalPopulateSidebar === 'function') {
+      originalPopulateSidebar(problems);
+    }
+  };
+  
+  // Override controlMenuVisibilityByURL
+  window.controlMenuVisibilityByURL = function() {
+    if (isDsaBasicsPage()) {
+      createDsaMenu();
+    } else if (typeof originalControlMenuVisibilityByURL === 'function') {
+      originalControlMenuVisibilityByURL();
+    }
+  };
+})();
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  if (isDsaBasicsPage()) {
+    // Apply mobile fixes first
+    addMobileFixes();
+    
+    // Create menu
+    createDsaMenu();
   }
-};
+});
+
+// Re-check on window load
+window.addEventListener('load', function() {
+  if (isDsaBasicsPage()) {
+    createDsaMenu();
+    
+    // If we're on the coming soon page, check if this is called from the menu
+    if (window.location.href.toLowerCase().includes('/2025/03/coming-soon.html')) {
+      // Make sure the menu is always visible on this page
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar) {
+        sidebar.style.display = 'block';
+      }
+      
+      // Force the sidebar to be visible
+      const sidebarToggle = document.querySelector('.sidebar-toggle');
+      if (sidebarToggle) {
+        sidebarToggle.classList.add('active');
+      }
+    }
+    
+    // Try again after a short delay to ensure everything is processed
+    setTimeout(function() {
+      // Check if tabs are working
+      const tabs = document.querySelectorAll('.dsa-tab-link');
+      if (tabs.length > 0) {
+        console.log("DSA tabs found, ensuring they're clickable");
+        
+        // Force tabs to be clickable with inline handlers
+        tabs.forEach(tab => {
+          if (!tab.getAttribute('onclick')) {
+            const tabId = tab.getAttribute('data-tab');
+            tab.setAttribute('onclick', `switchDsaTab('${tabId}')`);
+          }
+        });
+      }
+    }, 1000);
+  }
+});
