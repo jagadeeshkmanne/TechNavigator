@@ -18,7 +18,7 @@ const categoryOrder = [
 // Fetch problems data from remote JSON
 async function fetchProblemsData() {
   try {
-    const response = await fetch('https://cdn.jsdelivr.net/gh/jagadeeshkmanne/TechNavigator@2c1d32ef8e83fc29768d1d5ff37d8e394e152937/site/data.json');
+    const response = await fetch('https://cdn.jsdelivr.net/gh/jagadeeshkmanne/TechNavigator@d8b82907833a7f3de648b54d6f26906be92fc6cb/site/data.json');
     
     if (!response.ok) {
       throw new Error('Network response was not ok');
