@@ -7,7 +7,7 @@ const dsaBasicsData = {
       {"name": "Linked Lists", "url": "https://www.technavigator.io/2025/03/data-structure-basics-linked-list.html"},
       {"name": "Hash Tables", "url": "https://www.technavigator.io/2025/03/data-structure-basics-hash-tables.html"},
       {"name": "Stacks", "url": "https://www.technavigator.io/2025/03/data-structure-basics-stacks.html"},
-      {"name": "Queues", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+      {"name": "Queues", "url": "https://www.technavigator.io/2025/03/data-structure-basics-queue.html"},
       {"name": "Trees", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "Heaps", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "Tries", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
