@@ -346,7 +346,7 @@
 }
 
 .dsa-submenu-link.active {
-  padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width) - 3px) !important;
+  /*padding-left: calc(var(--tn-item-padding) + var(--tn-indent-width) - 3px) !important;*/
 }
 
 .dsa-deep-submenu-link.active {
