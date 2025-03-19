@@ -3,9 +3,9 @@ const dsaBasicsData = {
   "dataStructures": {
     "title": "Data Structures",
     "items": [
-      {"name": "Arrays", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Linked Lists", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
-      {"name": "Hash Tables", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
+      {"name": "Arrays", "url": "https://www.technavigator.io/2025/03/data-structure-basics-arrays-introduction.html"},
+      {"name": "Linked Lists", "url": "https://www.technavigator.io/2025/03/data-structure-basics-linked-list.html"},
+      {"name": "Hash Tables", "url": "https://www.technavigator.io/2025/03/data-structure-basics-hash-tables.html"},
       {"name": "Stacks", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "Queues", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
       {"name": "Trees", "url": "https://www.technavigator.io/2025/03/coming-soon.html"},
