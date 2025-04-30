@@ -1,1315 +1,630 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Navigator</title>
-  
-  <!-- Import External Resources -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-  <!-- Import Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --professional-orange: #F97316;
-      --professional-orange-hover: #EA580C;
-      --secondary-color: #f9fafb;
-      --border-color: #334155;  /* Darker border color for dark theme */
-      --header-bg: #1e293b;
-      --sidebar-bg: #0f172a;    /* Darker sidebar background */
-      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
-      --easy-color: #22c55e;
-      --medium-color: #f59e0b;
-      --hard-color: #ef4444;
-      --text-muted: #94a3b8;
-      --text-color: #f1f5f9;
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
-      --primary-color: var(--professional-orange);
-      --primary-hover: var(--professional-orange-hover);
-      --accordion-header-bg: #1e293b;  /* Accordion header background */
-      --accordion-content-bg: #0f172a; /* Accordion content background */
-    }
-    
-    /* Rotation Animation */
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
-    .compass-icon {
-      display: inline-block;
-      margin: 0 8px;
-      animation: rotate 4s linear infinite;
-      transform-origin: center;
-    }
-    
-    .compass-icon svg {
-      stroke: var(--professional-orange);
-    }
-    
-    .app-logo h1 {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    
-    /* Base Reset & Typography */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.5;
-    }
-    
-    /* Layout */
-    .app-container {
-      display: flex;
-      min-height: 100vh;
-    }
-    
-    /* Header */
-    .app-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 64px;
-      background-color: var(--header-bg);
-      color: white;
-      display: flex;
-      align-items: center;
-      padding: 0 1.5rem;
-      z-index: 50;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    
-    .header-stats {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    
-    .progress-pill {
-      background-color: #334155;
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .circle-progress {
-      width: 24px;
-      height: 24px;
-      position: relative;
-    }
-    
-    .circle-progress svg {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-    
-    .circle-bg {
-      fill: none;
-      stroke: rgba(255, 255, 255, 0.1);
-      stroke-width: 3;
-    }
-    
-    .circle-progress-bar {
-      fill: none;
-      stroke: var(--primary-color);
-      stroke-width: 3;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 0.3s;
-    }
-    
-    /* Main Content */
-    .main-content {
-      margin-top: 64px;
-      padding: 1.5rem;
-      width: 100%;
-    }
-    
-    .content-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-    }
-    
-    .content-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--primary-color) !important;
-    }
-    
-    .title-progress-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-    
-    /* Problem Status Info */
-    .problem-status-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1rem;
-      padding: 1rem;
-      background-color: var(--card-bg);
-      border-radius: 0.5rem;
-      box-shadow: var(--card-shadow);
-      margin-bottom: 1rem;
-    }
-    
-    .status-group {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-    
-    .status-dot.easy {
-      background-color: var(--easy-color);
-    }
-    
-    .status-dot.medium {
-      background-color: var(--medium-color);
-    }
-    
-    .status-dot.hard {
-      background-color: var(--hard-color);
-    }
-    
-    .status-count {
-      font-size: 0.875rem;
-      color: var(--text-color);
-      font-weight: 500;
-    }
-    
-    /* Progress mini bar */
-    .progress-mini {
-      width: 60px;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-      overflow: hidden;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .progress-mini-bar {
-      height: 100%;
-      background: var(--professional-orange);
-      transition: width 0.3s;
-    }
-    
-    /* App Logo */
-    .app-logo h1 {
-      display: flex;
-      align-items: center;
-      gap: 0px;
-      margin: 0;
-      font-size: 1.2rem;
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #ffffff;
-    }
-    
-    /* Compass icon animations */
-    .compass-icon {
-      animation: rotate 4s linear infinite;
-      transform-origin: 50% 50%;
-    }
-    
-    .compass-icon svg {
-      animation: colorChange 4s linear infinite;
-      display: block;
-    }
-    
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
-    @keyframes colorChange {
-      0% { stroke: #f97316; }
-      25% { stroke: #22c55e; }
-      50% { stroke: #3b82f6; }
-      75% { stroke: #facc15; }
-      100% { stroke: #f97316; }
-    }
-    
-    /* Navbar links styling */
-    .nav-link {
-      background-color: #333;
-      color: #ddd;
-      border: 1px solid #555;
-      padding: 6px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      margin-right: 10px;
-    }
-    
-    .nav-link:hover {
-      background-color: #444;
-    }
-    
-    /* Auth Container */
-    .auth-container {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .auth-container .user-info {
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .auth-container.signed-in .user-info {
-      display: flex;
-    }
-    
-    .auth-container.signed-in #login-btn {
-      display: none;
-    }
-    
-    .auth-btn {
-      background-color: #333;
-      color: #ddd;
-      border: 1px solid #555;
-      padding: 6px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.2s;
-      display: flex;
-      align-items: center;
-    }
-    
-    .auth-btn:hover {
-      background-color: #444;
-    }
-    
-    .auth-btn.logout {
-      background-color: #555;
-      color: white;
-      border: none;
-    }
-    
-    .auth-btn.logout:hover {
-      background-color: #333;
-    }
-    
-    .user-avatar {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    
-    /* Revision star styles */
-    .revision-star {
-      color: var(--text-muted);
-      transition: all 0.2s;
-    }
-    
-    .revision-star.marked {
-      fill: var(--professional-orange);
-      color: var(--professional-orange);
-    }
-    
-    .revision-star-wrapper:hover .revision-star {
-      color: var(--professional-orange);
-    }
-    
-    /* Counter badge in the header */
-    .revision-count {
-      background-color: var(--professional-orange);
-      color: white;
-      border-radius: 9999px;
-      padding: 2px 6px;
-      font-size: 10px;
-      font-weight: bold;
-      margin-left: 4px;
-    }
-    
-    /* Hover effect for revision link */
-    #revision-link {
-      position: relative;
-    }
-    
-    #revision-link:hover svg {
-      color: var(--professional-orange);
-    }
-    
-    /* Animation for the star when marked */
-    @keyframes star-pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    
-    .revision-star.marked {
-      animation: star-pulse 0.3s ease-in-out;
-    }
-    
-    .editorial-icon svg {
-      color: var(--text-muted);
-      transition: color 0.2s;
-    }
-    
-    .editorial-icon:hover svg {
-      color: var(--professional-orange);
-    }
-    
-    /* Difficulty Tags */
-    .difficulty-tag {
-      display: inline-flex;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    
-    .difficulty-tag.easy {
-      background-color: rgba(34, 197, 94, 0.1);
-      color: var(--easy-color);
-    }
-    
-    .difficulty-tag.medium {
-      background-color: rgba(245, 158, 11, 0.1);
-      color: var(--medium-color);
-    }
-    
-    .difficulty-tag.hard {
-      background-color: rgba(239, 68, 68, 0.1);
-      color: var(--hard-color);
-    }
-    
-    /* Accordion Category Styles */
-    .accordion-container {
-      width: 100%;
-      margin-bottom: 2rem;
-    }
-    
-    .accordion-category {
-      margin-bottom: 1rem;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      box-shadow: var(--card-shadow);
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-    }
-    
-    .accordion-header {
-      padding: 0.6rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--accordion-header-bg);
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.2s;
-    }
-    
-    .accordion-header:hover {
-      background-color: rgba(249, 115, 22, 0.05);
-    }
-    
-    .category-title {
-      display: flex;
-      align-items: center;
-      font-weight: 600;
-      color: var(--professional-orange);
-      font-size: 1rem;
-    }
-    
-    .category-title-icon {
-      margin-right: 0.75rem;
-      transition: transform 0.2s;
-      display: flex;
-      align-items: center;
-    }
-    
-    .accordion-category.expanded .category-title-icon svg {
-      transform: rotate(90deg);
-    }
-    
-    .category-stats {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
-    
-    .category-progress {
-      width: 100px;
-      height: 5px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    
-    .category-progress-bar {
-      height: 100%;
-      background-color: var(--professional-orange);
-      transition: width 0.3s;
-    }
-    
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
-      background-color: var(--accordion-content-bg);
-    }
-    
-    .accordion-category.expanded .accordion-content {
-      max-height: 2000px; /* Arbitrary large value */
-    }
-    
-    .problem-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    .problem-table th {
-      text-align: left;
-      padding: 0.6rem 1rem;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      border-bottom: 1px solid var(--border-color);
-      background-color: var(--accordion-header-bg);
-    }
-    
-    .problem-table td {
-      padding: 0.6rem 1rem;
-      font-size: 0.875rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    
-    .problem-table tr:last-child td {
-      border-bottom: none;
-    }
-    
-    .problem-row:hover {
-      background-color: rgba(255, 255, 255, 0.03);
-    }
-    
-    .problem-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-color);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    
-    .problem-link:hover {
-      color: var(--professional-orange);
-    }
-    
-    .status-checkbox {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .status-checkbox input {
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-      accent-color: var(--professional-orange);
-    }
-    
-    .revision-star-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-    
-    .editorial-icon {
-      display: flex;
-      justify-content: center;
-    }
-    
-    /* Loading spinner */
-    .loading-spinner {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 200px;
-    }
-    
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      border-top: 4px solid var(--professional-orange);
-      animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    /* Editorial icon styling */
-    .editorial-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-    
-    .editorial-icon {
-      color: var(--text-muted);
-      transition: all 0.2s;
-    }
-    
-    .editorial-icon.marked {
-      fill: var(--professional-orange);
-      color: var(--professional-orange);
-    }
-    
-    .editorial-wrapper:hover .editorial-icon {
-      color: var(--professional-orange);
-    }
-    
-    /* Animation for marking */
-    @keyframes icon-pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    
-    .editorial-icon.marked {
-      animation: icon-pulse 0.3s ease-in-out;
-    }
-    
-    /* Disable hover effect when no editorial link exists */
-    .editorial-wrapper:not([onclick]) {
-      cursor: default;
-    }
-    
-    .editorial-wrapper:not([onclick]):hover .editorial-icon {
-      color: var(--text-muted);
-    }
-    
-    /* Reduce accordion header padding */
-    .accordion-header {
-      padding: 0.6rem 1.5rem;
-    }
-    
-    /* Reduce table cell padding */
-    .problem-table th,
-    .problem-table td {
-      padding: 0.6rem 1rem;
-    }
-    
-    /* Reduce overall row height */
-    .problem-row {
-      height: 38px;
-    }
-    
-    /* Make the icons slightly smaller */
-    .problem-link svg,
-    .revision-star-wrapper svg,
-    .editorial-wrapper svg {
-      width: 16px;
-      height: 16px;
-    }
-    
-    /* Reduce the size of the difficulty tags */
-    .difficulty-tag {
-      padding: 0.15rem 0.4rem;
-      font-size: 0.7rem;
-    }
-    
-    /* Make the progress bar in category header a bit thinner */
-    .category-progress {
-      height: 5px;
-    }
-    
-    /* View toggle styles */
-    .view-toggle-container {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 1rem;
-    }
-    
-    .view-toggle-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background-color: var(--card-bg);
-      color: var(--text-muted);
-      border: 1px solid var(--border-color);
-      padding: 0.5rem 1rem;
-      border-radius: 0.25rem;
-      cursor: pointer;
-      font-size: 0.875rem;
-      transition: all 0.2s;
-    }
-    
-    .view-toggle-btn:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right: none;
-    }
-    
-    .view-toggle-btn:last-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-    
-    .view-toggle-btn.active {
-      background-color: var(--professional-orange);
-      color: white;
-    }
-    
-    .view-toggle-btn:hover:not(.active) {
-      background-color: var(--sidebar-bg);
-    }
-    
-    /* Container for the list view */
-    #list-container {
-      display: none;
-      width: 100%;
-      margin-bottom: 2rem;
-      background-color: var(--card-bg);
-      border-radius: 0.5rem;
-      box-shadow: var(--card-shadow);
-      overflow: hidden;
-    }
-    
-    /* List view table styles */
-    .list-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    .list-table th {
-      position: sticky;
-      top: 0;
-      text-align: left;
-      padding: 0.6rem 1rem;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      border-bottom: 1px solid var(--border-color);
-      background-color: var(--accordion-header-bg);
-      z-index: 10;
-    }
-    
-    .list-table td {
-      padding: 0.6rem 1rem;
-      font-size: 0.875rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    
-    .list-table tr:last-child td {
-      border-bottom: none;
-    }
-    
-    .list-table tr:hover {
-      background-color: rgba(255, 255, 255, 0.03);
-    }
-    
-    /* Column width adjustments for both views */
-    .problem-table th:nth-child(1), 
-    .problem-table td:nth-child(1),
-    .list-table th:nth-child(1), 
-    .list-table td:nth-child(1) {
-      width: 25px;
-      max-width: 25px;
-    }
-    
-    .problem-table th:nth-child(2), 
-    .problem-table td:nth-child(2),
-    .list-table th:nth-child(2), 
-    .list-table td:nth-child(2) {
-      width: 25px;
-      max-width: 25px;
-    }
-    
-    .problem-table th:nth-child(3), 
-    .problem-table td:nth-child(3),
-    .list-table th:nth-child(3), 
-    .list-table td:nth-child(3) {
-      width: 25px;
-      max-width: 25px;
-    }
-    
-    .problem-table th:nth-child(4), 
-    .problem-table td:nth-child(4),
-    .list-table th:nth-child(4), 
-    .list-table td:nth-child(4) {
-      width: 300px;
-      max-width: 300px;
-    }
-    
-    .problem-table th:nth-child(5), 
-    .problem-table td:nth-child(5),
-    .list-table th:nth-child(5), 
-    .list-table td:nth-child(5) {
-      width: 120px;
-      max-width: 120px;
-    }
-    
-    .problem-table th:nth-child(6), 
-    .problem-table td:nth-child(6),
-    .list-table th:nth-child(6), 
-    .list-table td:nth-child(6) {
-      width: 80px;
-      max-width: 80px;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .category-stats {
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 0.25rem;
-      }
-      
-      .problem-table {
-        font-size: 0.75rem;
-      }
-      
-      .problem-table th, 
-      .problem-table td {
-        padding: 0.5rem;
-      }
-      
-      .difficulty-tag {
-        font-size: 0.7rem;
-        padding: 0.15rem 0.35rem;
-      }
-      
-      .problem-status-info {
-        flex-wrap: wrap;
-        gap: 0.75rem;
-      }
-    }
-      .view-toggle-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-}
-
-/* Style for revision view button */
-#revision-view-btn svg {
-  margin-right: 4px;
-}
-
-#revision-view-btn.active svg {
-  fill: white;
-}
-
-/* Hover effect for remove star */
-#revision-list .revision-star-wrapper:hover .revision-star {
-  fill: var(--hard-color);
-  stroke: var(--hard-color);
-}
-
-/* Animation for removing star */
-@keyframes star-pulse-out {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
-
-#revision-list .revision-star-wrapper:active .revision-star {
-  animation: star-pulse-out 0.3s ease-in-out forwards;
-}
-
-/* Empty state improvements */
-.empty-state {
-  padding: 3rem 1.5rem;
-  background-color: var(--card-bg);
-  border-radius: 0.5rem;
-  text-align: center;
-  border: 1px solid var(--border-color);
-  margin-top: 1rem;
-}
-
-.empty-state svg {
-  color: var(--text-muted);
-  opacity: 0.6;
-  margin-bottom: 1.5rem;
-}
-
-.empty-state h3 {
-  font-weight: 500;
-  margin-bottom: 0.75rem;
-}
-
-.empty-state p {
-  color: var(--text-muted);
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-/* Add subtle highlight to revision items */
-#revision-list .problem-row {
-  position: relative;
-}
-
-#revision-list .problem-row:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background-color: var(--professional-orange);
-  opacity: 0.6;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .view-toggle-container {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  
-  .view-toggle-btn {
-    flex: 1 1 auto;
-    min-width: 120px;
-  }
-}
-      /* Revision List Specific Styles */
-#revision-container .empty-state {
-  padding: 3rem 1.5rem;
-  background-color: var(--card-bg);
-  border-radius: 0.5rem;
-  text-align: center;
-  margin: 2rem 0;
-}
-
-#revision-container .empty-state svg {
-  color: var(--text-muted);
-  opacity: 0.6;
-  margin-bottom: 1.5rem;
-  display: block;
-  margin: 0 auto 1.5rem;
-}
-
-#revision-container .empty-state h3 {
-  font-weight: 500;
-  margin-bottom: 0.75rem;
-  color: var(--text-color);
-}
-
-#revision-container .empty-state p {
-  color: var(--text-muted);
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-/* Hover effect for remove star */
-#revision-problems .revision-star-wrapper:hover .revision-star {
-  fill: var(--hard-color);
-  stroke: var(--hard-color);
-}
-
-/* Animation for removing star */
-@keyframes star-pulse-out {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
-
-#revision-problems .revision-star-wrapper:active .revision-star {
-  animation: star-pulse-out 0.3s ease-in-out forwards;
-}
-      /* Make sure revision-container has the same styling as list-container */
-#revision-container {
-  width: 100%;
-  margin-bottom: 2rem;
-  background-color: var(--card-bg);
-  border-radius: 0.5rem;
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-}
-
-/* Ensure revision list table has the same styling as list table */
-#revision-container .list-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#revision-container .list-table th {
-  position: sticky;
-  top: 0;
-  text-align: left;
-  padding: 0.6rem 1rem;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--accordion-header-bg);
-  z-index: 10;
-}
-
-#revision-container .list-table td {
-  padding: 0.6rem 1rem;
-  font-size: 0.875rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-#revision-container .list-table tr:last-child td {
-  border-bottom: none;
-}
-
-#revision-container .list-table tr:hover {
-  background-color: rgba(255, 255, 255, 0.03);
-}
-
-/* Apply column width adjustments for both views */
-#revision-container .list-table th:nth-child(1), 
-#revision-container .list-table td:nth-child(1) {
-  width: 25px;
-  max-width: 25px;
-}
-
-#revision-container .list-table th:nth-child(2), 
-#revision-container .list-table td:nth-child(2) {
-  width: 25px;
-  max-width: 25px;
-}
-
-#revision-container .list-table th:nth-child(3), 
-#revision-container .list-table td:nth-child(3) {
-  width: 25px;
-  max-width: 25px;
-}
-
-#revision-container .list-table th:nth-child(4), 
-#revision-container .list-table td:nth-child(4) {
-  width: 300px;
-  max-width: 300px;
-}
-
-#revision-container .list-table th:nth-child(5), 
-#revision-container .list-table td:nth-child(5) {
-  width: 120px;
-  max-width: 120px;
-}
-
-#revision-container .list-table th:nth-child(6), 
-#revision-container .list-table td:nth-child(6) {
-  width: 80px;
-  max-width: 80px;
-}
-    .fixed-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  display: none;
-}
-
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  z-index: 1001;
-}
-
-.modal-content {
-  background-color: var(--card-bg);
-  border-radius: 12px;
-  padding: 30px;
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: var(--card-shadow);
-  position: relative;
-}
-
-.modal-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
-  transition: background-color 0.3s;
-}
-
-.modal-close-btn:hover {
-  background-color: rgba(255,255,255,0.1);
-}
-
-.modal-compass-icon {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.modal-compass-icon svg {
-  animation: rotate 4s linear infinite;
-}
-
-#login-modal-title {
-  color: var(--text-color);
-  margin-bottom: 15px;
-}
-
-#login-modal-message {
-  color: var(--text-muted);
-  margin-bottom: 20px;
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-  </style>
-</head>
-
-<body>
-  <!-- Main Container -->
-  <div class="app-container">
-    <!-- Header -->
-    <header class="app-header">
-      <div class="app-logo">
-        <h1>
-          <span>Tech</span>
-          <div class="compass-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/>
-            </svg>
-          </div>
-          <span>Navigator</span>
-        </h1>
-      </div>
-      
-      <div id="auth-container" class="auth-container">
-        <a class="nav-link" href="https://blog.technavigator.io/">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-          </svg>
-          <span>Basics</span>
-        </a>
-        <a class="nav-link" href="https://technavigator.io/">
-            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
-            <span>Practice</span>
-        </a>
-        <button id="login-btn" class="auth-btn">
-          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; margin-right: 8px;">
-          Sign in
-        </button>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeetCode 150 + Google DP & Graph Problems</title>
+    
+    <!-- AG Grid CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.2.0/styles/ag-grid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.2.0/styles/ag-theme-alpine-dark.min.css">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #1c1c1c;
+            color: #e0e0e0;
+        }
         
-        <div class="user-info">
-          <img id="user-img" class="user-avatar" alt="Profile" style="display: none;">
-          <span id="user-name"></span>
-          <button id="logout-btn" class="btn auth-btn logout">Sign Out</button>
-        </div>
-      </div>
-    </header>
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #64b5f6;
+        }
+        
+        #myGrid {
+            height: 650px;
+            width: 100%;
+        }
+        
+        .easy-cell {
+            color: #4caf50;
+        }
+        
+        .medium-cell {
+            color: #ff9800;
+        }
+        
+        .hard-cell {
+            color: #f44336;
+        }
+        
+        .source-nc150 {
+            color: #64b5f6;
+        }
+        
+        .source-google {
+            color: #ea4335;
+        }
+        
+        .source-both {
+            color: #9c27b0;
+            font-weight: bold;
+        }
+        
+        .stats {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 15px;
+            min-width: 150px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .stat-title {
+            font-size: 14px;
+            color: #ababab;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #64b5f6;
+        }
+        
+        .completed-cell {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        #save-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2d2d2d;
+            color: #4caf50;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #909090;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            #myGrid {
+                height: 500px;
+            }
+        }
+
+        /* Custom checkbox styling */
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #2d2d2d;
+            border: 2px solid #64b5f6;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            outline: none;
+        }
+        
+        .custom-checkbox:checked {
+            background-color: #4caf50;
+            border-color: #4caf50;
+        }
+        
+        .custom-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        #completed-count {
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <h1>NeetCode 150 + Google DP & Graph Problems</h1>
     
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Statistics Info -->
-      <div class="problem-status-info">
-        <div class="status-group">
-          <span class="status-dot easy"></span>
-          <span class="status-count" id="easy-count">Easy: 0/8</span>
-        </div>
-        <div class="status-group">
-          <span class="status-dot medium"></span>
-          <span class="status-count" id="medium-count">Medium: 0/9</span>
-        </div>
-        <div class="status-group">
-          <span class="status-dot hard"></span>
-          <span class="status-count" id="hard-count">Hard: 0/4</span>
-        </div>
-        <div class="status-group">
-          <div class="progress-pill" id="overall-progress-pill">
-            <div class="circle-progress">
-              <svg viewBox="0 0 36 36">
-                <circle class="circle-bg" cx="18" cy="18" r="15"></circle>
-                <circle id="overall-progress" class="circle-progress-bar" cx="18" cy="18" r="15" style="stroke-dasharray: 94.2478, 94.2478; stroke-dashoffset: 94.2478;"></circle>
-              </svg>
-</div>
-            <span id="overall-progress-text">0% Completed</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- View Toggle Buttons -->
-      <div class="view-toggle-container">
-      <button id="list-view-btn" class="view-toggle-btn active">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M8 6h13"></path>
-          <path d="M8 12h13"></path>
-          <path d="M8 18h13"></path>
-          <path d="M3 6h.01"></path>
-          <path d="M3 12h.01"></path>
-          <path d="M3 18h.01"></path>
-        </svg>
-        List View
-      </button>      
-      <button id="category-view-btn" class="view-toggle-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 6h18"></path>
-          <path d="M3 12h18"></path>
-          <path d="M3 18h18"></path>
-        </svg>
-        Category View
-      </button>
-      <button id="revision-view-btn" class="view-toggle-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-        </svg>
-        Revision List
-        <span class="revision-count" id="revision-count">0</span>
-
-      </button>
-    </div>
-      
-      <!-- Loading Spinner -->
-      <div class="loading-spinner" id="loading-spinner">
-        <div class="spinner"></div>
-      </div>
-      
-      <!-- Accordion Categories Container -->
-      <div class="accordion-container" id="categories-container">
-        <!-- Will be populated by JavaScript -->
-      </div>
-      
-      <!-- List View Container -->
-      <div id="list-container">
-        <table class="list-table">
-          <thead>
-            <tr>
-              <th>Status</th>
-              <th>Review</th>
-              <th>Editorial</th>
-              <th>Problem</th>
-              <th>Category</th>
-              <th>Difficulty</th>
-            </tr>
-          </thead>
-          <tbody id="list-problems">
-            <!-- Will be populated by JavaScript -->
-          </tbody>
-        </table>
-      </div>
+    <div id="myGrid" class="ag-theme-alpine-dark"></div>
     
-      <!-- Revision List Container -->
-    <!-- Revision List Container -->
-    <div id="revision-container" style="display: none;">
-      <table class="list-table">
-        <thead>
-          <tr>
-            <th>Status</th>
-            <th>Review</th>
-            <th>Editorial</th>
-            <th>Problem</th>
-            <th>Category</th>
-            <th>Difficulty</th>
-          </tr>
-        </thead>
-        <tbody id="revision-problems">
-          <!-- Will be populated by JavaScript -->
-        </tbody>
-      </table>
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-title">Total Problems</div>
+            <div class="stat-value" id="total-count">200</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Completed</div>
+            <div class="stat-value" id="completed-count">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Easy</div>
+            <div class="stat-value" id="easy-count">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Medium</div>
+            <div class="stat-value" id="medium-count">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Hard</div>
+            <div class="stat-value" id="hard-count">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">NeetCode 150</div>
+            <div class="stat-value" id="nc150-count">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Google</div>
+            <div class="stat-value" id="google-count">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Both Sources</div>
+            <div class="stat-value" id="both-count">0</div>
+        </div>
     </div>
-    </main>
-  </div>
+    
+    <div id="save-status">Progress saved!</div>
+    
+    <footer>
+        <p>© 2025 - NeetCode 150 + Google DP/Graph Problems</p>
+    </footer>
+    
+    <!-- AG Grid JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.2.0/ag-grid-community.min.js"></script>
+    
+    <script>
+        // Data for the grid
+        const initialRowData = [
+            {num: 1, id: 1, title: "Two Sum", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false},
+            {num: 2, id: 217, title: "Contains Duplicate", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false},
+            {num: 3, id: 242, title: "Valid Anagram", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false},
+            {num: 4, id: 49, title: "Group Anagrams", difficulty: "Medium", category: "Arrays & Hashing", source: "BOTH", completed: false},
+            {num: 5, id: 347, title: "Top K Frequent Elements", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false},
+            {num: 6, id: 238, title: "Product of Array Except Self", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false},
+            {num: 7, id: 271, title: "Encode and Decode Strings", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false},
+            {num: 8, id: 128, title: "Longest Consecutive Sequence", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false},
+            {num: 9, id: 125, title: "Valid Palindrome", difficulty: "Easy", category: "Two Pointers", source: "NC150", completed: false},
+            {num: 10, id: 167, title: "Two Sum II", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false},
+            {num: 11, id: 15, title: "3Sum", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false},
+            {num: 12, id: 11, title: "Container With Most Water", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false},
+            {num: 13, id: 42, title: "Trapping Rain Water", difficulty: "Hard", category: "Two Pointers", source: "BOTH", completed: false},
+            {num: 14, id: 121, title: "Best Time to Buy and Sell Stock", difficulty: "Easy", category: "Sliding Window", source: "NC150", completed: false},
+            {num: 15, id: 3, title: "Longest Substring Without Repeating Characters", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false},
+            {num: 16, id: 424, title: "Longest Repeating Character Replacement", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false},
+            {num: 17, id: 567, title: "Permutation in String", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false},
+            {num: 18, id: 76, title: "Minimum Window Substring", difficulty: "Hard", category: "Sliding Window", source: "BOTH", completed: false},
+            {num: 19, id: 239, title: "Sliding Window Maximum", difficulty: "Hard", category: "Sliding Window", source: "NC150", completed: false},
+            {num: 20, id: 20, title: "Valid Parentheses", difficulty: "Easy", category: "Stack", source: "NC150", completed: false},
+            {num: 21, id: 155, title: "Min Stack", difficulty: "Medium", category: "Stack", source: "NC150", completed: false},
+            {num: 22, id: 150, title: "Evaluate Reverse Polish Notation", difficulty: "Medium", category: "Stack", source: "NC150", completed: false},
+            {num: 23, id: 22, title: "Generate Parentheses", difficulty: "Medium", category: "Stack", source: "BOTH", completed: false},
+            {num: 24, id: 739, title: "Daily Temperatures", difficulty: "Medium", category: "Stack", source: "NC150", completed: false},
+            {num: 25, id: 853, title: "Car Fleet", difficulty: "Medium", category: "Stack", source: "NC150", completed: false},
+            {num: 26, id: 84, title: "Largest Rectangle in Histogram", difficulty: "Hard", category: "Stack", source: "NC150", completed: false},
+            {num: 27, id: 704, title: "Binary Search", difficulty: "Easy", category: "Binary Search", source: "NC150", completed: false},
+            {num: 28, id: 74, title: "Search a 2D Matrix", difficulty: "Medium", category: "Binary Search", source: "BOTH", completed: false},
+            {num: 29, id: 875, title: "Koko Eating Bananas", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false},
+            {num: 30, id: 33, title: "Search in Rotated Sorted Array", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false},
+            {num: 31, id: 153, title: "Find Minimum in Rotated Sorted Array", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false},
+            {num: 32, id: 981, title: "Time Based Key-Value Store", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false},
+            {num: 33, id: 4, title: "Median of Two Sorted Arrays", difficulty: "Hard", category: "Binary Search", source: "NC150", completed: false},
+            {num: 34, id: 206, title: "Reverse Linked List", difficulty: "Easy", category: "Linked List", source: "NC150", completed: false},
+            {num: 35, id: 21, title: "Merge Two Sorted Lists", difficulty: "Easy", category: "Linked List", source: "BOTH", completed: false},
+            {num: 36, id: 143, title: "Reorder List", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false},
+            {num: 37, id: 19, title: "Remove Nth Node From End of List", difficulty: "Medium", category: "Linked List", source: "BOTH", completed: false},
+            {num: 38, id: 141, title: "Linked List Cycle", difficulty: "Easy", category: "Linked List", source: "NC150", completed: false},
+            {num: 39, id: 23, title: "Merge k Sorted Lists", difficulty: "Hard", category: "Linked List", source: "BOTH", completed: false},
+            {num: 40, id: 138, title: "Copy List with Random Pointer", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false},
+            {num: 41, id: 2, title: "Add Two Numbers", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false},
+            {num: 42, id: 287, title: "Find the Duplicate Number", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false},
+            {num: 43, id: 146, title: "LRU Cache", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false},
+            {num: 44, id: 226, title: "Invert Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false},
+            {num: 45, id: 104, title: "Maximum Depth of Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false},
+            {num: 46, id: 543, title: "Diameter of Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false},
+            {num: 47, id: 110, title: "Balanced Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false},
+            {num: 48, id: 100, title: "Same Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false},
+            {num: 49, id: 572, title: "Subtree of Another Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false},
+            {num: 50, id: 235, title: "Lowest Common Ancestor of a Binary Search Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false},
+            {num: 51, id: 102, title: "Binary Tree Level Order Traversal", difficulty: "Medium", category: "Trees", source: "NC150", completed: false},
+            {num: 52, id: 199, title: "Binary Tree Right Side View", difficulty: "Medium", category: "Trees", source: "NC150", completed: false},
+            {num: 53, id: 1448, title: "Count Good Nodes in Binary Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false},
+            {num: 54, id: 98, title: "Validate Binary Search Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false},
+            {num: 55, id: 230, title: "Kth Smallest Element in a BST", difficulty: "Medium", category: "Trees", source: "NC150", completed: false},
+            {num: 56, id: 105, title: "Construct Binary Tree from Preorder and Inorder Traversal", difficulty: "Medium", category: "Trees", source: "NC150", completed: false},
+            {num: 57, id: 124, title: "Binary Tree Maximum Path Sum", difficulty: "Hard", category: "Trees", source: "BOTH", completed: false},
+            {num: 58, id: 297, title: "Serialize and Deserialize Binary Tree", difficulty: "Hard", category: "Trees", source: "NC150", completed: false},
+            {num: 59, id: 208, title: "Implement Trie (Prefix Tree)", difficulty: "Medium", category: "Tries", source: "NC150", completed: false},
+            {num: 60, id: 211, title: "Design Add and Search Words Data Structure", difficulty: "Medium", category: "Tries", source: "NC150", completed: false},
+            {num: 61, id: 212, title: "Word Search II", difficulty: "Hard", category: "Tries", source: "NC150", completed: false},
+            {num: 62, id: 703, title: "Kth Largest Element in a Stream", difficulty: "Easy", category: "Heap / Priority Queue", source: "NC150", completed: false},
+            {num: 63, id: 1046, title: "Last Stone Weight", difficulty: "Easy", category: "Heap / Priority Queue", source: "NC150", completed: false},
+            {num: 64, id: 973, title: "K Closest Points to Origin", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false},
+            {num: 65, id: 215, title: "Kth Largest Element in an Array", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false},
+            {num: 66, id: 621, title: "Task Scheduler", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false},
+            {num: 67, id: 355, title: "Design Twitter", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false},
+            {num: 68, id: 295, title: "Find Median from Data Stream", difficulty: "Hard", category: "Heap / Priority Queue", source: "NC150", completed: false},
+            {num: 69, id: 78, title: "Subsets", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false},
+            {num: 70, id: 39, title: "Combination Sum", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false},
+            {num: 71, id: 46, title: "Permutations", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false},
+            {num: 72, id: 90, title: "Subsets II", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false},
+            {num: 73, id: 40, title: "Combination Sum II", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false},
+            {num: 74, id: 79, title: "Word Search", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false},
+            {num: 75, id: 131, title: "Palindrome Partitioning", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false},
+            {num: 76, id: 17, title: "Letter Combinations of a Phone Number", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false},
+            {num: 77, id: 51, title: "N-Queens", difficulty: "Hard", category: "Backtracking", source: "BOTH", completed: false},
+            {num: 78, id: 200, title: "Number of Islands", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false},
+            {num: 79, id: 133, title: "Clone Graph", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false},
+            {num: 80, id: 695, title: "Max Area of Island", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false},
+            {num: 81, id: 417, title: "Pacific Atlantic Water Flow", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false},
+            {num: 82, id: 130, title: "Surrounded Regions", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false},
+            {num: 83, id: 994, title: "Rotting Oranges", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false},
+            {num: 84, id: 286, title: "Walls and Gates", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false},
+            {num: 85, id: 207, title: "Course Schedule", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false},
+            {num: 86, id: 210, title: "Course Schedule II", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false},
+            {num: 87, id: 684, title: "Redundant Connection", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false},
+            {num: 88, id: 323, title: "Number of Connected Components in an Undirected Graph", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false},
+            {num: 89, id: 261, title: "Graph Valid Tree", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false},
+            {num: 90, id: 127, title: "Word Ladder", difficulty: "Hard", category: "Graphs", source: "NC150", completed: false},
+            {num: 91, id: 269, title: "Alien Dictionary", difficulty: "Hard", category: "Graphs", source: "BOTH", completed: false},
+            {num: 92, id: 332, title: "Reconstruct Itinerary", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false},
+            {num: 93, id: 1584, title: "Min Cost to Connect All Points", difficulty: "Medium", category: "Advanced Graphs", source: "NC150", completed: false},
+            {num: 94, id: 743, title: "Network Delay Time", difficulty: "Medium", category: "Advanced Graphs", source: "NC150", completed: false},
+            {num: 95, id: 787, title: "Cheapest Flights Within K Stops", difficulty: "Medium", category: "Advanced Graphs", source: "BOTH", completed: false},
+            {num: 96, id: 847, title: "Shortest Path Visiting All Nodes", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false},
+            {num: 97, id: 1192, title: "Critical Connections in a Network", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false},
+            {num: 98, id: 70, title: "Climbing Stairs", difficulty: "Easy", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 99, id: 746, title: "Min Cost Climbing Stairs", difficulty: "Easy", category: "1-D Dynamic Programming", source: "NC150", completed: false},
+            {num: 100, id: 198, title: "House Robber", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 101, id: 213, title: "House Robber II", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 102, id: 5, title: "Longest Palindromic Substring", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 103, id: 647, title: "Palindromic Substrings", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 104, id: 91, title: "Decode Ways", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 105, id: 322, title: "Coin Change", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 106, id: 152, title: "Maximum Product Subarray", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 107, id: 139, title: "Word Break", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 108, id: 300, title: "Longest Increasing Subsequence", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 109, id: 416, title: "Partition Equal Subset Sum", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 110, id: 62, title: "Unique Paths", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 111, id: 1143, title: "Longest Common Subsequence", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 112, id: 309, title: "Best Time to Buy and Sell Stock with Cooldown", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 113, id: 518, title: "Coin Change II", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 114, id: 494, title: "Target Sum", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 115, id: 97, title: "Interleaving String", difficulty: "Medium", category: "2-D Dynamic Programming", source: "NC150", completed: false},
+            {num: 116, id: 329, title: "Longest Increasing Path in a Matrix", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 117, id: 115, title: "Distinct Subsequences", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 118, id: 72, title: "Edit Distance", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 119, id: 312, title: "Burst Balloons", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 120, id: 10, title: "Regular Expression Matching", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false},
+            {num: 121, id: 53, title: "Maximum Subarray", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false},
+            {num: 122, id: 55, title: "Jump Game", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false},
+            {num: 123, id: 45, title: "Jump Game II", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false},
+            {num: 124, id: 134, title: "Gas Station", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false},
+            {num: 125, id: 846, title: "Hand of Straights", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false},
+            {num: 126, id: 1899, title: "Merge Triplets to Form Target Triplet", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false},
+            {num: 127, id: 763, title: "Partition Labels", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false},
+            {num: 128, id: 678, title: "Valid Parenthesis String", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false},
+            {num: 129, id: 57, title: "Insert Interval", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false},
+            {num: 130, id: 56, title: "Merge Intervals", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false},
+            {num: 131, id: 435, title: "Non-overlapping Intervals", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false},
+            {num: 132, id: 252, title: "Meeting Rooms", difficulty: "Easy", category: "Intervals", source: "NC150", completed: false},
+            {num: 133, id: 253, title: "Meeting Rooms II", difficulty: "Medium", category: "Intervals", source: "NC150", completed: false},
+            {num: 134, id: 1851, title: "Minimum Interval to Include Each Query", difficulty: "Hard", category: "Intervals", source: "NC150", completed: false},
+            {num: 135, id: 48, title: "Rotate Image", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false},
+            {num: 136, id: 54, title: "Spiral Matrix", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false},
+            {num: 137, id: 73, title: "Set Matrix Zeroes", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false},
+            {num: 138, id: 202, title: "Happy Number", difficulty: "Easy", category: "Math & Geometry", source: "NC150", completed: false},
+            {num: 139, id: 66, title: "Plus One", difficulty: "Easy", category: "Math & Geometry", source: "BOTH", completed: false},
+            {num: 140, id: 50, title: "Pow(x, n)", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false},
+            {num: 141, id: 43, title: "Multiply Strings", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false},
+            {num: 142, id: 2013, title: "Detect Squares", difficulty: "Medium", category: "Math & Geometry", source: "NC150", completed: false},
+            {num: 143, id: 136, title: "Single Number", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false},
+            {num: 144, id: 191, title: "Number of 1 Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false},
+            {num: 145, id: 338, title: "Counting Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false},
+            {num: 146, id: 190, title: "Reverse Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false},
+            {num: 147, id: 268, title: "Missing Number", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false},
+            {num: 148, id: 371, title: "Sum of Two Integers", difficulty: "Medium", category: "Bit Manipulation", source: "NC150", completed: false},
+            {num: 149, id: 221, title: "Maximal Square", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false},
+            {num: 150, id: 410, title: "Split Array Largest Sum", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 151, id: 354, title: "Russian Doll Envelopes", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 152, id: 3351, title: "Sum of Good Subsequences", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 153, id: 3472, title: "Longest Palindromic Subsequence After at Most K Operations", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 154, id: 907, title: "Sum of Subarray Minimums", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 155, id: 85, title: "Maximal Rectangle", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 156, id: 122, title: "Best Time to Buy and Sell Stock II", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 157, id: 368, title: "Largest Divisible Subset", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 158, id: 64, title: "Minimum Path Sum", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false},
+            {num: 159, id: 32, title: "Longest Valid Parentheses", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 160, id: 63, title: "Unique Paths II", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false},
+            {num: 161, id: 279, title: "Perfect Squares", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false},
+            {num: 162, id: 1218, title: "Longest Arithmetic Subsequence of Given Difference", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 163, id: 542, title: "01 Matrix", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false},
+            {num: 164, id: 2035, title: "Partition Array Into Two Arrays to Minimize Sum Difference", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 165, id: 188, title: "Best Time to Buy and Sell Stock IV", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 166, id: 44, title: "Wildcard Matching", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 167, id: 1526, title: "Minimum Number of Increments on Subarrays to Form a Target Array", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 168, id: 1749, title: "Maximum Absolute Sum of Any Subarray", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 169, id: 120, title: "Triangle", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 170, id: 123, title: "Best Time to Buy and Sell Stock III", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 171, id: 1092, title: "Shortest Common Supersequence", difficulty: "Hard", category: "2-D Dynamic Programming", source: "Google", completed: false},
+            {num: 172, id: 2572, title: "Count the Number of Square-Free Subsets", difficulty: "Hard", category: "2-D Dynamic Programming", source: "Google", completed: false},
+            {num: 173, id: 174, title: "Dungeon Game", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false},
+            {num: 174, id: 3532, title: "Path Existence Queries in a Graph I", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 175, id: 2203, title: "Minimum Weighted Subgraph With the Required Paths", difficulty: "Hard", category: "Advanced Graphs", source: "Google", completed: false},
+            {num: 176, id: 547, title: "Number of Provinces", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 177, id: 399, title: "Evaluate Division", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 178, id: 802, title: "Find Eventual Safe States", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 179, id: 841, title: "Keys and Rooms", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 180, id: 3419, title: "Minimize the Maximum Edge Weight of Graph", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 181, id: 3108, title: "Minimum Cost Walk in Weighted Graph", difficulty: "Hard", category: "Advanced Graphs", source: "Google", completed: false},
+            {num: 182, id: 2101, title: "Detonate the Maximum Bombs", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 183, id: 1976, title: "Number of Ways to Arrive at Destination", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 184, id: 1462, title: "Course Schedule IV", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 185, id: 2577, title: "Minimum Time to Visit a Cell In a Grid", difficulty: "Hard", category: "Graphs", source: "Google", completed: false},
+            {num: 186, id: 785, title: "Is Graph Bipartite?", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 187, id: 2493, title: "Divide Nodes Into the Maximum Number of Groups", difficulty: "Hard", category: "Graphs", source: "Google", completed: false},
+            {num: 188, id: 2510, title: "Check if There is a Path With Equal Number of 0's And 1's", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 189, id: 2685, title: "Count the Number of Complete Components", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 190, id: 1361, title: "Validate Binary Tree Nodes", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 191, id: 773, title: "Sliding Puzzle", difficulty: "Hard", category: "Graphs", source: "Google", completed: false},
+            {num: 192, id: 310, title: "Minimum Height Trees", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 193, id: 2290, title: "Minimum Obstacle Removal to Reach Corner", difficulty: "Hard", category: "Graphs", source: "Google", completed: false},
+            {num: 194, id: 3203, title: "Find Minimum Diameter After Merging Two Trees", difficulty: "Hard", category: "Graphs", source: "Google", completed: false},
+            {num: 195, id: 1319, title: "Number of Operations to Make Network Connected", difficulty: "Medium", category: "Advanced Graphs", source: "Google", completed: false},
+            {num: 196, id: 924, title: "Minimize Malware Spread", difficulty: "Hard", category: "Graphs", source: "Google", completed: false},
+            {num: 197, id: 1368, title: "Minimum Cost to Make at Least One Valid Path in a Grid", difficulty: "Hard", category: "Advanced Graphs", source: "Google", completed: false},
+            {num: 198, id: 947, title: "Most Stones Removed with Same Row or Column", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 199, id: 886, title: "Possible Bipartition", difficulty: "Medium", category: "Graphs", source: "Google", completed: false},
+            {num: 200, id: 1334, title: "Find the City With the Smallest Number of Neighbors at a Threshold Distance", difficulty: "Medium", category: "Graphs", source: "Google", completed: false}
+        ];
 
-  <div id="login-required-modal" class="fixed-modal" style="display: none;">
-  <div class="modal-overlay"></div>
-  <div class="modal-container">
-    <div class="modal-content">
-      <button class="modal-close-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
-             fill="none" stroke="currentColor" stroke-width="2" 
-             stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-      
-      <div class="modal-compass-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" 
-             stroke="var(--professional-orange)" stroke-width="2" 
-             stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/>
-        </svg>
-      </div>
+        // Load saved progress from localStorage if available
+        function loadSavedData() {
+            try {
+                const savedData = localStorage.getItem('leetcodeProblemProgress');
+                if (savedData) {
+                    const parsedData = JSON.parse(savedData);
+                    // Create a map of completed statuses by problem ID
+                    const completedMap = {};
+                    parsedData.forEach(problem => {
+                        completedMap[problem.id] = problem.completed;
+                    });
+                    
+                    // Update the initialRowData with saved completion status
+                    return initialRowData.map(problem => ({
+                        ...problem,
+                        completed: completedMap[problem.id] || false
+                    }));
+                }
+            } catch (e) {
+                console.error('Error loading saved data:', e);
+            }
+            return initialRowData;
+        }
 
-      <h2 id="login-modal-title">Login Required</h2>
-      
-      <p id="login-modal-message">Please sign in to access this feature and track your progress across all your devices.</p>
-    </div>
-  </div>
-</div>
-  
- <script src="https://jagadeeshkmanne.github.io/TechNavigator/tech-navigator.js"></script>
-   
-     
-
+        // Initialize the AG Grid when the document is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load any saved data
+            const rowData = loadSavedData();
+            
+            // Create checkbox column renderer
+            function checkboxRenderer(params) {
+                return `<div class="checkbox-container">
+                    <input type="checkbox" 
+                           class="custom-checkbox" 
+                           ${params.data.completed ? 'checked' : ''}
+                           onclick="toggleCompleted(${params.data.num}, this.checked)"
+                    />
+                </div>`;
+            }
+            
+            // Column definitions for the grid
+            const columnDefs = [
+                { 
+                    field: 'num', 
+                    headerName: '#', 
+                    width: 60, 
+                    filter: 'agNumberColumnFilter',
+                    sortable: true,
+                    resizable: true
+                },
+                {
+                    headerName: 'Done',
+                    width: 80,
+                    cellRenderer: checkboxRenderer,
+                    filter: true,
+                    floatingFilter: true,
+                    filterParams: {
+                        valueGetter: params => params.data.completed ? 'Yes' : 'No',
+                        values: ['Yes', 'No'],
+                    }
+                },
+                { 
+                    field: 'title', 
+                    headerName: 'Problem', 
+                    flex: 1, 
+                    filter: 'agTextColumnFilter',
+                    sortable: true,
+                    resizable: true,
+                    cellRenderer: function(params) {
+                        const completedClass = params.data.completed ? 'completed-cell' : '';
+                        return `<a href="https://leetcode.com/problems/${params.data.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}" target="_blank" style="color: #64b5f6; text-decoration: none;" class="${completedClass}">${params.value}</a>`;
+                    }
+                },
+                { 
+                    field: 'difficulty', 
+                    headerName: 'Difficulty', 
+                    width: 120, 
+                    filter: 'agSetColumnFilter',
+                    sortable: true,
+                    resizable: true,
+                    cellClass: function(params) {
+                        if (params.value === 'Easy') return 'easy-cell';
+                        if (params.value === 'Medium') return 'medium-cell';
+                        if (params.value === 'Hard') return 'hard-cell';
+                        return '';
+                    }
+                },
+                { 
+                    field: 'category', 
+                    headerName: 'Category', 
+                    width: 220, 
+                    filter: 'agSetColumnFilter',
+                    sortable: true,
+                    resizable: true
+                },
+                { 
+                    field: 'source', 
+                    headerName: 'Source', 
+                    width: 120, 
+                    filter: 'agSetColumnFilter',
+                    sortable: true,
+                    resizable: true,
+                    cellClass: function(params) {
+                        if (params.value === 'NC150') return 'source-nc150';
+                        if (params.value === 'Google') return 'source-google';
+                        if (params.value === 'BOTH') return 'source-both';
+                        return '';
+                    }
+                }
+            ];
+            
+            // Grid options
+            const gridOptions = {
+                columnDefs: columnDefs,
+                rowData: rowData,
+                defaultColDef: {
+                    filter: true,
+                    sortable: true,
+                    resizable: true,
+                    floatingFilter: true
+                },
+                pagination: true,
+                paginationPageSize: 100,
+                domLayout: 'autoHeight',
+                animateRows: true,
+                rowSelection: 'single',
+                overlayNoRowsTemplate: 'No problems match your filter criteria'
+            };
+            
+            // Create the grid
+            const gridDiv = document.querySelector('#myGrid');
+            window.grid = new agGrid.Grid(gridDiv, gridOptions);
+            window.gridOptions = gridOptions;
+            
+            // Update stat counters
+            updateStatCounters(rowData);
+        });
+        
+        // Function to toggle completed status
+        window.toggleCompleted = function(num, checked) {
+            const rowNode = window.gridOptions.api.getRowNode(num - 1);
+            if (rowNode) {
+                rowNode.setDataValue('completed', checked);
+                
+                // Refresh the cell
+                window.gridOptions.api.refreshCells({
+                    force: true,
+                    rowNodes: [rowNode],
+                    columns: ['title']
+                });
+                
+                // Save progress to localStorage
+                saveProgress();
+                
+                // Update stat counters
+                updateStatCounters(window.gridOptions.api.getModel().rowsToDisplay.map(row => row.data));
+                
+                // Show save notification
+                showSaveNotification();
+            }
+        };
+        
+        // Function to save progress to localStorage
+        function saveProgress() {
+            try {
+                const allData = [];
+                window.gridOptions.api.forEachNode(node => {
+                    allData.push({
+                        id: node.data.id,
+                        completed: node.data.completed
+                    });
+                });
+                localStorage.setItem('leetcodeProblemProgress', JSON.stringify(allData));
+            } catch (e) {
+                console.error('Error saving progress:', e);
+            }
+        }
+        
+        // Function to show save notification
+        function showSaveNotification() {
+            const notification = document.getElementById('save-status');
+            notification.style.display = 'block';
+            
+            // Hide after 2 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        // Update the statistics counters
+        function updateStatCounters(data) {
+            document.getElementById('total-count').textContent = data.length;
+            
+            // Count completed problems
+            const completedCount = data.filter(item => item.completed).length;
+            document.getElementById('completed-count').textContent = completedCount;
+            
+            // Count by difficulty
+            const easyCount = data.filter(item => item.difficulty === 'Easy').length;
+            const mediumCount = data.filter(item => item.difficulty === 'Medium').length;
+            const hardCount = data.filter(item => item.difficulty === 'Hard').length;
+            
+            document.getElementById('easy-count').textContent = easyCount;
+            document.getElementById('medium-count').textContent = mediumCount;
+            document.getElementById('hard-count').textContent = hardCount;
+            
+            // Count by source
+            const nc150Count = data.filter(item => item.source === 'NC150').length;
+            const googleCount = data.filter(item => item.source === 'Google').length;
+            const bothCount = data.filter(item => item.source === 'BOTH').length;
+            
+            document.getElementById('nc150-count').textContent = nc150Count;
+            document.getElementById('google-count').textContent = googleCount;
+            document.getElementById('both-count').textContent = bothCount;
+        }
+    </script>
 </body>
 </html>
