@@ -12,61 +12,63 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            padding: 20px;
+            padding: 15px;
             max-width: 1400px;
             margin: 0 auto;
             background-color: #1c1c1c;
             color: #e0e0e0;
         }
         
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #64b5f6;
-        }
-        
         #myGrid {
             height: 700px;
             width: 100%;
+            margin-top: 10px;
         }
         
-        .stats {
-            margin-top: 20px;
+        .stats-container {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .stats-left, .stats-right {
+            display: flex;
             gap: 10px;
         }
         
         .stat-card {
             background-color: #2d2d2d;
-            border-radius: 8px;
-            padding: 15px;
-            min-width: 140px;
+            border-radius: 6px;
+            padding: 8px 12px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             text-align: center;
+            min-width: 90px;
         }
         
         .stat-title {
-            font-size: 14px;
+            font-size: 12px;
             color: #ababab;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
         
         .stat-value {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: bold;
             color: #64b5f6;
         }
         
         #progress-text {
+            background-color: #2d2d2d;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-size: 16px;
             text-align: center;
-            margin: 20px 0;
-            font-size: 18px;
+            margin-bottom: 15px;
         }
         
         footer {
-            margin-top: 30px;
+            margin-top: 20px;
             text-align: center;
             color: #909090;
             font-size: 14px;
@@ -82,49 +84,47 @@
     </style>
 </head>
 <body>
-    <h1>LeetCode 30-Day Study Plan (May 1 - May 30, 2025)</h1>
-    
-    <div id="progress-text">Loading problems...</div>
-    
-    <div id="myGrid" class="ag-theme-alpine-dark"></div>
-    
-    <div class="stats">
-        <div class="stat-card">
-            <div class="stat-title">Total</div>
-            <div class="stat-value" id="total-count">200</div>
+    <div class="stats-container">
+        <div class="stats-left">
+            <div class="stat-card">
+                <div class="stat-title">Completed</div>
+                <div class="stat-value" id="completed-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Easy</div>
+                <div class="stat-value easy" id="easy-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Medium</div>
+                <div class="stat-value medium" id="medium-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Hard</div>
+                <div class="stat-value hard" id="hard-count">0</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-title">Completed</div>
-            <div class="stat-value" id="completed-count">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">Easy</div>
-            <div class="stat-value" id="easy-count">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">Medium</div>
-            <div class="stat-value" id="medium-count">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">Hard</div>
-            <div class="stat-value" id="hard-count">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">NeetCode</div>
-            <div class="stat-value" id="nc150-count">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">Google</div>
-            <div class="stat-value" id="google-count">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">Both</div>
-            <div class="stat-value" id="both-count">0</div>
+        <div class="stats-right">
+            <div class="stat-card">
+                <div class="stat-title">NC150</div>
+                <div class="stat-value nc150" id="nc150-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Google</div>
+                <div class="stat-value google" id="google-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Both</div>
+                <div class="stat-value both" id="both-count">0</div>
+            </div>
         </div>
     </div>
     
+    <div id="progress-text">Loading 200 problems...</div>
+    
+    <div id="myGrid" class="ag-theme-alpine-dark"></div>
+    
     <footer>
-        <p>© 2025 - LeetCode Study Plan</p>
+        <p>© 2025 - LeetCode Study Plan (May 1 - May 30, 2025)</p>
     </footer>
     
     <!-- AG Grid JavaScript -->
@@ -133,188 +133,206 @@
     <script>
         // ==== Problem Data ====
         const problemsData = [
-            {id: 1, title: "Two Sum", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
-            {id: 217, title: "Contains Duplicate", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
-            {id: 242, title: "Valid Anagram", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
-            {id: 49, title: "Group Anagrams", difficulty: "Medium", category: "Arrays & Hashing", source: "BOTH", completed: false, date: "May 1"},
-            {id: 347, title: "Top K Frequent Elements", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
-            {id: 238, title: "Product of Array Except Self", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
-            {id: 271, title: "Encode and Decode Strings", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
-            {id: 128, title: "Longest Consecutive Sequence", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 2"},
-            {id: 125, title: "Valid Palindrome", difficulty: "Easy", category: "Two Pointers", source: "NC150", completed: false, date: "May 2"},
-            {id: 167, title: "Two Sum II", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false, date: "May 2"},
-            {id: 15, title: "3Sum", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false, date: "May 2"},
-            {id: 11, title: "Container With Most Water", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false, date: "May 2"},
-            {id: 42, title: "Trapping Rain Water", difficulty: "Hard", category: "Two Pointers", source: "BOTH", completed: false, date: "May 2"},
-            {id: 121, title: "Best Time to Buy and Sell Stock", difficulty: "Easy", category: "Sliding Window", source: "NC150", completed: false, date: "May 2"},
-            {id: 3, title: "Longest Substring Without Repeating Characters", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false, date: "May 3"},
-            {id: 424, title: "Longest Repeating Character Replacement", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false, date: "May 3"},
-            {id: 567, title: "Permutation in String", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false, date: "May 3"},
-            {id: 76, title: "Minimum Window Substring", difficulty: "Hard", category: "Sliding Window", source: "BOTH", completed: false, date: "May 3"},
-            {id: 239, title: "Sliding Window Maximum", difficulty: "Hard", category: "Sliding Window", source: "NC150", completed: false, date: "May 3"},
-            {id: 20, title: "Valid Parentheses", difficulty: "Easy", category: "Stack", source: "NC150", completed: false, date: "May 3"},
-            {id: 155, title: "Min Stack", difficulty: "Medium", category: "Stack", source: "NC150", completed: false, date: "May 4"},
-            {id: 150, title: "Evaluate Reverse Polish Notation", difficulty: "Medium", category: "Stack", source: "NC150", completed: false, date: "May 4"},
-            {id: 22, title: "Generate Parentheses", difficulty: "Medium", category: "Stack", source: "BOTH", completed: false, date: "May 4"},
-            {id: 739, title: "Daily Temperatures", difficulty: "Medium", category: "Stack", source: "NC150", completed: false, date: "May 4"},
-            {id: 853, title: "Car Fleet", difficulty: "Medium", category: "Stack", source: "NC150", completed: false, date: "May 4"},
-            {id: 84, title: "Largest Rectangle in Histogram", difficulty: "Hard", category: "Stack", source: "NC150", completed: false, date: "May 4"},
-            {id: 704, title: "Binary Search", difficulty: "Easy", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
-            {id: 74, title: "Search a 2D Matrix", difficulty: "Medium", category: "Binary Search", source: "BOTH", completed: false, date: "May 5"},
-            {id: 875, title: "Koko Eating Bananas", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
-            {id: 33, title: "Search in Rotated Sorted Array", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
-            {id: 153, title: "Find Minimum in Rotated Sorted Array", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
-            {id: 981, title: "Time Based Key-Value Store", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
-            {id: 4, title: "Median of Two Sorted Arrays", difficulty: "Hard", category: "Binary Search", source: "NC150", completed: false, date: "May 6"},
-            {id: 206, title: "Reverse Linked List", difficulty: "Easy", category: "Linked List", source: "NC150", completed: false, date: "May 6"},
-            {id: 21, title: "Merge Two Sorted Lists", difficulty: "Easy", category: "Linked List", source: "BOTH", completed: false, date: "May 6"},
-            {id: 143, title: "Reorder List", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 6"},
-            {id: 19, title: "Remove Nth Node From End of List", difficulty: "Medium", category: "Linked List", source: "BOTH", completed: false, date: "May 6"},
-            {id: 141, title: "Linked List Cycle", difficulty: "Easy", category: "Linked List", source: "NC150", completed: false, date: "May 6"},
-            {id: 23, title: "Merge k Sorted Lists", difficulty: "Hard", category: "Linked List", source: "BOTH", completed: false, date: "May 7"},
-            {id: 138, title: "Copy List with Random Pointer", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 7"},
-            {id: 2, title: "Add Two Numbers", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 7"},
-            {id: 287, title: "Find the Duplicate Number", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 7"},
-            {id: 146, title: "LRU Cache", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 7"},
-            {id: 226, title: "Invert Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 7"},
-            {id: 104, title: "Maximum Depth of Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
-            {id: 543, title: "Diameter of Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
-            {id: 110, title: "Balanced Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
-            {id: 100, title: "Same Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
-            {id: 572, title: "Subtree of Another Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
-            {id: 235, title: "Lowest Common Ancestor of a Binary Search Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 8"},
-            {id: 102, title: "Binary Tree Level Order Traversal", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
-            {id: 199, title: "Binary Tree Right Side View", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
-            {id: 1448, title: "Count Good Nodes in Binary Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
-            {id: 98, title: "Validate Binary Search Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
-            {id: 230, title: "Kth Smallest Element in a BST", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
-            {id: 105, title: "Construct Binary Tree from Preorder and Inorder Traversal", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
-            {id: 124, title: "Binary Tree Maximum Path Sum", difficulty: "Hard", category: "Trees", source: "BOTH", completed: false, date: "May 10"},
-            {id: 297, title: "Serialize and Deserialize Binary Tree", difficulty: "Hard", category: "Trees", source: "NC150", completed: false, date: "May 10"},
-            {id: 208, title: "Implement Trie (Prefix Tree)", difficulty: "Medium", category: "Tries", source: "NC150", completed: false, date: "May 10"},
-            {id: 211, title: "Design Add and Search Words Data Structure", difficulty: "Medium", category: "Tries", source: "NC150", completed: false, date: "May 10"},
-            {id: 212, title: "Word Search II", difficulty: "Hard", category: "Tries", source: "NC150", completed: false, date: "May 10"},
-            {id: 703, title: "Kth Largest Element in a Stream", difficulty: "Easy", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 10"},
-            {id: 1046, title: "Last Stone Weight", difficulty: "Easy", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
-            {id: 973, title: "K Closest Points to Origin", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
-            {id: 215, title: "Kth Largest Element in an Array", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
-            {id: 621, title: "Task Scheduler", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
-            {id: 355, title: "Design Twitter", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
-            {id: 295, title: "Find Median from Data Stream", difficulty: "Hard", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
-            {id: 78, title: "Subsets", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 12"},
-            {id: 39, title: "Combination Sum", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 12"},
-            {id: 46, title: "Permutations", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 12"},
-            {id: 90, title: "Subsets II", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false, date: "May 12"},
-            {id: 40, title: "Combination Sum II", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 12"},
-            {id: 79, title: "Word Search", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false, date: "May 12"},
-            {id: 131, title: "Palindrome Partitioning", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 13"},
-            {id: 17, title: "Letter Combinations of a Phone Number", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false, date: "May 13"},
-            {id: 51, title: "N-Queens", difficulty: "Hard", category: "Backtracking", source: "BOTH", completed: false, date: "May 13"},
-            {id: 200, title: "Number of Islands", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 13"},
-            {id: 133, title: "Clone Graph", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 13"},
-            {id: 695, title: "Max Area of Island", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 13"},
-            {id: 417, title: "Pacific Atlantic Water Flow", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 14"},
-            {id: 130, title: "Surrounded Regions", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 14"},
-            {id: 994, title: "Rotting Oranges", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 14"},
-            {id: 286, title: "Walls and Gates", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 14"},
-            {id: 207, title: "Course Schedule", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 14"},
-            {id: 210, title: "Course Schedule II", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 14"},
-            {id: 684, title: "Redundant Connection", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 15"},
-            {id: 323, title: "Number of Connected Components in an Undirected Graph", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 15"},
-            {id: 261, title: "Graph Valid Tree", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 15"},
-            {id: 127, title: "Word Ladder", difficulty: "Hard", category: "Graphs", source: "NC150", completed: false, date: "May 15"},
-            {id: 269, title: "Alien Dictionary", difficulty: "Hard", category: "Graphs", source: "BOTH", completed: false, date: "May 15"},
-            {id: 332, title: "Reconstruct Itinerary", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false, date: "May 15"},
-            {id: 1584, title: "Min Cost to Connect All Points", difficulty: "Medium", category: "Advanced Graphs", source: "NC150", completed: false, date: "May 16"},
-            {id: 743, title: "Network Delay Time", difficulty: "Medium", category: "Advanced Graphs", source: "NC150", completed: false, date: "May 16"},
-            {id: 787, title: "Cheapest Flights Within K Stops", difficulty: "Medium", category: "Advanced Graphs", source: "BOTH", completed: false, date: "May 16"},
-            {id: 847, title: "Shortest Path Visiting All Nodes", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false, date: "May 16"},
-            {id: 1192, title: "Critical Connections in a Network", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false, date: "May 16"},
-            {id: 70, title: "Climbing Stairs", difficulty: "Easy", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 16"},
-            {id: 746, title: "Min Cost Climbing Stairs", difficulty: "Easy", category: "1-D Dynamic Programming", source: "NC150", completed: false, date: "May 17"},
-            {id: 198, title: "House Robber", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
-            {id: 213, title: "House Robber II", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
-            {id: 5, title: "Longest Palindromic Substring", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
-            {id: 647, title: "Palindromic Substrings", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
-            {id: 91, title: "Decode Ways", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
-            {id: 322, title: "Coin Change", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
-            {id: 152, title: "Maximum Product Subarray", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
-            {id: 139, title: "Word Break", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
-            {id: 300, title: "Longest Increasing Subsequence", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
-            {id: 416, title: "Partition Equal Subset Sum", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
-            {id: 62, title: "Unique Paths", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
-            {id: 1143, title: "Longest Common Subsequence", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
-            {id: 309, title: "Best Time to Buy and Sell Stock with Cooldown", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
-            {id: 518, title: "Coin Change II", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
-            {id: 494, title: "Target Sum", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
-            {id: 97, title: "Interleaving String", difficulty: "Medium", category: "2-D Dynamic Programming", source: "NC150", completed: false, date: "May 19"},
-            {id: 329, title: "Longest Increasing Path in a Matrix", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
-            {id: 115, title: "Distinct Subsequences", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 20"},
-            {id: 72, title: "Edit Distance", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 20"},
-            {id: 312, title: "Burst Balloons", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 20"},
-            {id: 10, title: "Regular Expression Matching", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 20"},
-            {id: 53, title: "Maximum Subarray", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false, date: "May 20"},
-            {id: 55, title: "Jump Game", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false, date: "May 20"},
-            {id: 45, title: "Jump Game II", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false, date: "May 21"},
-            {id: 134, title: "Gas Station", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false, date: "May 21"},
-            {id: 846, title: "Hand of Straights", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false, date: "May 21"},
-            {id: 1899, title: "Merge Triplets to Form Target Triplet", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false, date: "May 21"},
-            {id: 763, title: "Partition Labels", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false, date: "May 21"},
-            {id: 678, title: "Valid Parenthesis String", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false, date: "May 21"},
-            {id: 57, title: "Insert Interval", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false, date: "May 22"},
-            {id: 56, title: "Merge Intervals", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false, date: "May 22"},
-            {id: 435, title: "Non-overlapping Intervals", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false, date: "May 22"},
-            {id: 252, title: "Meeting Rooms", difficulty: "Easy", category: "Intervals", source: "NC150", completed: false, date: "May 22"},
-            {id: 253, title: "Meeting Rooms II", difficulty: "Medium", category: "Intervals", source: "NC150", completed: false, date: "May 22"},
-            {id: 1851, title: "Minimum Interval to Include Each Query", difficulty: "Hard", category: "Intervals", source: "NC150", completed: false, date: "May 22"},
-            {id: 48, title: "Rotate Image", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
-            {id: 54, title: "Spiral Matrix", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
-            {id: 73, title: "Set Matrix Zeroes", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
-            {id: 202, title: "Happy Number", difficulty: "Easy", category: "Math & Geometry", source: "NC150", completed: false, date: "May 23"},
-            {id: 66, title: "Plus One", difficulty: "Easy", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
-            {id: 50, title: "Pow(x, n)", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
-            {id: 43, title: "Multiply Strings", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 24"},
-            {id: 2013, title: "Detect Squares", difficulty: "Medium", category: "Math & Geometry", source: "NC150", completed: false, date: "May 24"},
-            {id: 136, title: "Single Number", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 24"},
-            {id: 191, title: "Number of 1 Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 24"},
-            {id: 338, title: "Counting Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 24"},
-            {id: 190, title: "Reverse Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 24"},
-            {id: 268, title: "Missing Number", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 25"},
-            {id: 371, title: "Sum of Two Integers", difficulty: "Medium", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 25"},
-            {id: 221, title: "Maximal Square", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 25"},
-            {id: 410, title: "Split Array Largest Sum", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 25"},
-            {id: 354, title: "Russian Doll Envelopes", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 25"},
-            {id: 3351, title: "Sum of Good Subsequences", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 25"},
-            {id: 3472, title: "Longest Palindromic Subsequence After at Most K Operations", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
-            {id: 907, title: "Sum of Subarray Minimums", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
-            {id: 85, title: "Maximal Rectangle", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
-            {id: 122, title: "Best Time to Buy and Sell Stock II", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
-            {id: 368, title: "Largest Divisible Subset", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
-            {id: 64, title: "Minimum Path Sum", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
-            {id: 32, title: "Longest Valid Parentheses", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
-            {id: 63, title: "Unique Paths II", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
-            {id: 279, title: "Perfect Squares", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
-            {id: 1218, title: "Longest Arithmetic Subsequence of Given Difference", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
-            {id: 542, title: "01 Matrix", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
-            {id: 2035, title: "Partition Array Into Two Arrays to Minimize Sum Difference", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
-            {id: 3532, title: "Path Existence Queries in a Graph I", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 28"},
-            {id: 2203, title: "Minimum Weighted Subgraph With the Required Paths", difficulty: "Hard", category: "Advanced Graphs", source: "Google", completed: false, date: "May 28"},
-            {id: 547, title: "Number of Provinces", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 28"},
-            {id: 399, title: "Evaluate Division", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 28"},
-            {id: 802, title: "Find Eventual Safe States", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 28"},
-            {id: 841, title: "Keys and Rooms", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 28"},
-            {id: 3419, title: "Minimize the Maximum Edge Weight of Graph", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
-            {id: 3108, title: "Minimum Cost Walk in Weighted Graph", difficulty: "Hard", category: "Advanced Graphs", source: "Google", completed: false, date: "May 29"},
-            {id: 2101, title: "Detonate the Maximum Bombs", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
-            {id: 1976, title: "Number of Ways to Arrive at Destination", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
-            {id: 1462, title: "Course Schedule IV", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
-            {id: 2577, title: "Minimum Time to Visit a Cell In a Grid", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 29"},
-            {id: 785, title: "Is Graph Bipartite?", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
-            {id: 2493, title: "Divide Nodes Into the Maximum Number of Groups", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 30"},
-            {id: 2510, title: "Check if There is a Path With Equal Number of 0's And 1's", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
-            {id: 2685, title: "Count the Number of Complete Components", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
-            {id: 1361, title: "Validate Binary Tree Nodes", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
-            {id: 773, title: "Sliding Puzzle", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 30"}
+            {num: 1, leetcodeId: 1, title: "Two Sum", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
+            {num: 2, leetcodeId: 217, title: "Contains Duplicate", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
+            {num: 3, leetcodeId: 242, title: "Valid Anagram", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
+            {num: 4, leetcodeId: 49, title: "Group Anagrams", difficulty: "Medium", category: "Arrays & Hashing", source: "BOTH", completed: false, date: "May 1"},
+            {num: 5, leetcodeId: 347, title: "Top K Frequent Elements", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
+            {num: 6, leetcodeId: 238, title: "Product of Array Except Self", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
+            {num: 7, leetcodeId: 271, title: "Encode and Decode Strings", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
+            {num: 8, leetcodeId: 128, title: "Longest Consecutive Sequence", difficulty: "Medium", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 2"},
+            {num: 9, leetcodeId: 125, title: "Valid Palindrome", difficulty: "Easy", category: "Two Pointers", source: "NC150", completed: false, date: "May 2"},
+            {num: 10, leetcodeId: 167, title: "Two Sum II", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false, date: "May 2"},
+            {num: 11, leetcodeId: 15, title: "3Sum", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false, date: "May 2"},
+            {num: 12, leetcodeId: 11, title: "Container With Most Water", difficulty: "Medium", category: "Two Pointers", source: "NC150", completed: false, date: "May 2"},
+            {num: 13, leetcodeId: 42, title: "Trapping Rain Water", difficulty: "Hard", category: "Two Pointers", source: "BOTH", completed: false, date: "May 2"},
+            {num: 14, leetcodeId: 121, title: "Best Time to Buy and Sell Stock", difficulty: "Easy", category: "Sliding Window", source: "NC150", completed: false, date: "May 2"},
+            {num: 15, leetcodeId: 3, title: "Longest Substring Without Repeating Characters", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false, date: "May 3"},
+            {num: 16, leetcodeId: 424, title: "Longest Repeating Character Replacement", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false, date: "May 3"},
+            {num: 17, leetcodeId: 567, title: "Permutation in String", difficulty: "Medium", category: "Sliding Window", source: "NC150", completed: false, date: "May 3"},
+            {num: 18, leetcodeId: 76, title: "Minimum Window Substring", difficulty: "Hard", category: "Sliding Window", source: "BOTH", completed: false, date: "May 3"},
+            {num: 19, leetcodeId: 239, title: "Sliding Window Maximum", difficulty: "Hard", category: "Sliding Window", source: "NC150", completed: false, date: "May 3"},
+            {num: 20, leetcodeId: 20, title: "Valid Parentheses", difficulty: "Easy", category: "Stack", source: "NC150", completed: false, date: "May 3"},
+            {num: 21, leetcodeId: 155, title: "Min Stack", difficulty: "Medium", category: "Stack", source: "NC150", completed: false, date: "May 4"},
+            {num: 22, leetcodeId: 150, title: "Evaluate Reverse Polish Notation", difficulty: "Medium", category: "Stack", source: "NC150", completed: false, date: "May 4"},
+            {num: 23, leetcodeId: 22, title: "Generate Parentheses", difficulty: "Medium", category: "Stack", source: "BOTH", completed: false, date: "May 4"},
+            {num: 24, leetcodeId: 739, title: "Daily Temperatures", difficulty: "Medium", category: "Stack", source: "NC150", completed: false, date: "May 4"},
+            {num: 25, leetcodeId: 853, title: "Car Fleet", difficulty: "Medium", category: "Stack", source: "NC150", completed: false, date: "May 4"},
+            {num: 26, leetcodeId: 84, title: "Largest Rectangle in Histogram", difficulty: "Hard", category: "Stack", source: "NC150", completed: false, date: "May 4"},
+            {num: 27, leetcodeId: 704, title: "Binary Search", difficulty: "Easy", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
+            {num: 28, leetcodeId: 74, title: "Search a 2D Matrix", difficulty: "Medium", category: "Binary Search", source: "BOTH", completed: false, date: "May 5"},
+            {num: 29, leetcodeId: 875, title: "Koko Eating Bananas", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
+            {num: 30, leetcodeId: 33, title: "Search in Rotated Sorted Array", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
+            {num: 31, leetcodeId: 153, title: "Find Minimum in Rotated Sorted Array", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
+            {num: 32, leetcodeId: 981, title: "Time Based Key-Value Store", difficulty: "Medium", category: "Binary Search", source: "NC150", completed: false, date: "May 5"},
+            {num: 33, leetcodeId: 4, title: "Median of Two Sorted Arrays", difficulty: "Hard", category: "Binary Search", source: "NC150", completed: false, date: "May 6"},
+            {num: 34, leetcodeId: 206, title: "Reverse Linked List", difficulty: "Easy", category: "Linked List", source: "NC150", completed: false, date: "May 6"},
+            {num: 35, leetcodeId: 21, title: "Merge Two Sorted Lists", difficulty: "Easy", category: "Linked List", source: "BOTH", completed: false, date: "May 6"},
+            {num: 36, leetcodeId: 143, title: "Reorder List", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 6"},
+            {num: 37, leetcodeId: 19, title: "Remove Nth Node From End of List", difficulty: "Medium", category: "Linked List", source: "BOTH", completed: false, date: "May 6"},
+            {num: 38, leetcodeId: 141, title: "Linked List Cycle", difficulty: "Easy", category: "Linked List", source: "NC150", completed: false, date: "May 6"},
+            {num: 39, leetcodeId: 23, title: "Merge k Sorted Lists", difficulty: "Hard", category: "Linked List", source: "BOTH", completed: false, date: "May 7"},
+            {num: 40, leetcodeId: 138, title: "Copy List with Random Pointer", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 7"},
+            {num: 41, leetcodeId: 2, title: "Add Two Numbers", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 7"},
+            {num: 42, leetcodeId: 287, title: "Find the Duplicate Number", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 7"},
+            {num: 43, leetcodeId: 146, title: "LRU Cache", difficulty: "Medium", category: "Linked List", source: "NC150", completed: false, date: "May 7"},
+            {num: 44, leetcodeId: 226, title: "Invert Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 7"},
+            {num: 45, leetcodeId: 104, title: "Maximum Depth of Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
+            {num: 46, leetcodeId: 543, title: "Diameter of Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
+            {num: 47, leetcodeId: 110, title: "Balanced Binary Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
+            {num: 48, leetcodeId: 100, title: "Same Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
+            {num: 49, leetcodeId: 572, title: "Subtree of Another Tree", difficulty: "Easy", category: "Trees", source: "NC150", completed: false, date: "May 8"},
+            {num: 50, leetcodeId: 235, title: "Lowest Common Ancestor of a Binary Search Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 8"},
+            {num: 51, leetcodeId: 102, title: "Binary Tree Level Order Traversal", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
+            {num: 52, leetcodeId: 199, title: "Binary Tree Right Side View", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
+            {num: 53, leetcodeId: 1448, title: "Count Good Nodes in Binary Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
+            {num: 54, leetcodeId: 98, title: "Validate Binary Search Tree", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
+            {num: 55, leetcodeId: 230, title: "Kth Smallest Element in a BST", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
+            {num: 56, leetcodeId: 105, title: "Construct Binary Tree from Preorder and Inorder Traversal", difficulty: "Medium", category: "Trees", source: "NC150", completed: false, date: "May 9"},
+            {num: 57, leetcodeId: 124, title: "Binary Tree Maximum Path Sum", difficulty: "Hard", category: "Trees", source: "BOTH", completed: false, date: "May 10"},
+            {num: 58, leetcodeId: 297, title: "Serialize and Deserialize Binary Tree", difficulty: "Hard", category: "Trees", source: "NC150", completed: false, date: "May 10"},
+            {num: 59, leetcodeId: 208, title: "Implement Trie (Prefix Tree)", difficulty: "Medium", category: "Tries", source: "NC150", completed: false, date: "May 10"},
+            {num: 60, leetcodeId: 211, title: "Design Add and Search Words Data Structure", difficulty: "Medium", category: "Tries", source: "NC150", completed: false, date: "May 10"},
+            {num: 61, leetcodeId: 212, title: "Word Search II", difficulty: "Hard", category: "Tries", source: "NC150", completed: false, date: "May 10"},
+            {num: 62, leetcodeId: 703, title: "Kth Largest Element in a Stream", difficulty: "Easy", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 10"},
+            {num: 63, leetcodeId: 1046, title: "Last Stone Weight", difficulty: "Easy", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
+            {num: 64, leetcodeId: 973, title: "K Closest Points to Origin", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
+            {num: 65, leetcodeId: 215, title: "Kth Largest Element in an Array", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
+            {num: 66, leetcodeId: 621, title: "Task Scheduler", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
+            {num: 67, leetcodeId: 355, title: "Design Twitter", difficulty: "Medium", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
+            {num: 68, leetcodeId: 295, title: "Find Median from Data Stream", difficulty: "Hard", category: "Heap / Priority Queue", source: "NC150", completed: false, date: "May 11"},
+            {num: 69, leetcodeId: 78, title: "Subsets", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 12"},
+            {num: 70, leetcodeId: 39, title: "Combination Sum", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 12"},
+            {num: 71, leetcodeId: 46, title: "Permutations", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 12"},
+            {num: 72, leetcodeId: 90, title: "Subsets II", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false, date: "May 12"},
+            {num: 73, leetcodeId: 40, title: "Combination Sum II", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 12"},
+            {num: 74, leetcodeId: 79, title: "Word Search", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false, date: "May 12"},
+            {num: 75, leetcodeId: 131, title: "Palindrome Partitioning", difficulty: "Medium", category: "Backtracking", source: "BOTH", completed: false, date: "May 13"},
+            {num: 76, leetcodeId: 17, title: "Letter Combinations of a Phone Number", difficulty: "Medium", category: "Backtracking", source: "NC150", completed: false, date: "May 13"},
+            {num: 77, leetcodeId: 51, title: "N-Queens", difficulty: "Hard", category: "Backtracking", source: "BOTH", completed: false, date: "May 13"},
+            {num: 78, leetcodeId: 200, title: "Number of Islands", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 13"},
+            {num: 79, leetcodeId: 133, title: "Clone Graph", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 13"},
+            {num: 80, leetcodeId: 695, title: "Max Area of Island", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 13"},
+            {num: 81, leetcodeId: 417, title: "Pacific Atlantic Water Flow", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 14"},
+            {num: 82, leetcodeId: 130, title: "Surrounded Regions", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 14"},
+            {num: 83, leetcodeId: 994, title: "Rotting Oranges", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 14"},
+            {num: 84, leetcodeId: 286, title: "Walls and Gates", difficulty: "Medium", category: "Graphs", source: "NC150", completed: false, date: "May 14"},
+            {num: 85, leetcodeId: 207, title: "Course Schedule", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 14"},
+            {num: 86, leetcodeId: 210, title: "Course Schedule II", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 14"},
+            {num: 87, leetcodeId: 684, title: "Redundant Connection", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 15"},
+            {num: 88, leetcodeId: 323, title: "Number of Connected Components in an Undirected Graph", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 15"},
+            {num: 89, leetcodeId: 261, title: "Graph Valid Tree", difficulty: "Medium", category: "Graphs", source: "BOTH", completed: false, date: "May 15"},
+            {num: 90, leetcodeId: 127, title: "Word Ladder", difficulty: "Hard", category: "Graphs", source: "NC150", completed: false, date: "May 15"},
+            {num: 91, leetcodeId: 269, title: "Alien Dictionary", difficulty: "Hard", category: "Graphs", source: "BOTH", completed: false, date: "May 15"},
+            {num: 92, leetcodeId: 332, title: "Reconstruct Itinerary", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false, date: "May 15"},
+            {num: 93, leetcodeId: 1584, title: "Min Cost to Connect All Points", difficulty: "Medium", category: "Advanced Graphs", source: "NC150", completed: false, date: "May 16"},
+            {num: 94, leetcodeId: 743, title: "Network Delay Time", difficulty: "Medium", category: "Advanced Graphs", source: "NC150", completed: false, date: "May 16"},
+            {num: 95, leetcodeId: 787, title: "Cheapest Flights Within K Stops", difficulty: "Medium", category: "Advanced Graphs", source: "BOTH", completed: false, date: "May 16"},
+            {num: 96, leetcodeId: 847, title: "Shortest Path Visiting All Nodes", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false, date: "May 16"},
+            {num: 97, leetcodeId: 1192, title: "Critical Connections in a Network", difficulty: "Hard", category: "Advanced Graphs", source: "BOTH", completed: false, date: "May 16"},
+            {num: 98, leetcodeId: 70, title: "Climbing Stairs", difficulty: "Easy", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 16"},
+            {num: 99, leetcodeId: 746, title: "Min Cost Climbing Stairs", difficulty: "Easy", category: "1-D Dynamic Programming", source: "NC150", completed: false, date: "May 17"},
+            {num: 100, leetcodeId: 198, title: "House Robber", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
+            {num: 101, leetcodeId: 213, title: "House Robber II", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
+            {num: 102, leetcodeId: 5, title: "Longest Palindromic Substring", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
+            {num: 103, leetcodeId: 647, title: "Palindromic Substrings", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
+            {num: 104, leetcodeId: 91, title: "Decode Ways", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 17"},
+            {num: 105, leetcodeId: 322, title: "Coin Change", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
+            {num: 106, leetcodeId: 152, title: "Maximum Product Subarray", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
+            {num: 107, leetcodeId: 139, title: "Word Break", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
+            {num: 108, leetcodeId: 300, title: "Longest Increasing Subsequence", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
+            {num: 109, leetcodeId: 416, title: "Partition Equal Subset Sum", difficulty: "Medium", category: "1-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
+            {num: 110, leetcodeId: 62, title: "Unique Paths", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 18"},
+            {num: 111, leetcodeId: 1143, title: "Longest Common Subsequence", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
+            {num: 112, leetcodeId: 309, title: "Best Time to Buy and Sell Stock with Cooldown", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
+            {num: 113, leetcodeId: 518, title: "Coin Change II", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
+            {num: 114, leetcodeId: 494, title: "Target Sum", difficulty: "Medium", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
+            {num: 115, leetcodeId: 97, title: "Interleaving String", difficulty: "Medium", category: "2-D Dynamic Programming", source: "NC150", completed: false, date: "May 19"},
+            {num: 116, leetcodeId: 329, title: "Longest Increasing Path in a Matrix", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 19"},
+            {num: 117, leetcodeId: 115, title: "Distinct Subsequences", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 20"},
+            {num: 118, leetcodeId: 72, title: "Edit Distance", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 20"},
+            {num: 119, leetcodeId: 312, title: "Burst Balloons", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 20"},
+            {num: 120, leetcodeId: 10, title: "Regular Expression Matching", difficulty: "Hard", category: "2-D Dynamic Programming", source: "BOTH", completed: false, date: "May 20"},
+            {num: 121, leetcodeId: 53, title: "Maximum Subarray", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false, date: "May 20"},
+            {num: 122, leetcodeId: 55, title: "Jump Game", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false, date: "May 20"},
+            {num: 123, leetcodeId: 45, title: "Jump Game II", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false, date: "May 21"},
+            {num: 124, leetcodeId: 134, title: "Gas Station", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false, date: "May 21"},
+            {num: 125, leetcodeId: 846, title: "Hand of Straights", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false, date: "May 21"},
+            {num: 126, leetcodeId: 1899, title: "Merge Triplets to Form Target Triplet", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false, date: "May 21"},
+            {num: 127, leetcodeId: 763, title: "Partition Labels", difficulty: "Medium", category: "Greedy", source: "NC150", completed: false, date: "May 21"},
+            {num: 128, leetcodeId: 678, title: "Valid Parenthesis String", difficulty: "Medium", category: "Greedy", source: "BOTH", completed: false, date: "May 21"},
+            {num: 129, leetcodeId: 57, title: "Insert Interval", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false, date: "May 22"},
+            {num: 130, leetcodeId: 56, title: "Merge Intervals", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false, date: "May 22"},
+            {num: 131, leetcodeId: 435, title: "Non-overlapping Intervals", difficulty: "Medium", category: "Intervals", source: "BOTH", completed: false, date: "May 22"},
+            {num: 132, leetcodeId: 252, title: "Meeting Rooms", difficulty: "Easy", category: "Intervals", source: "NC150", completed: false, date: "May 22"},
+            {num: 133, leetcodeId: 253, title: "Meeting Rooms II", difficulty: "Medium", category: "Intervals", source: "NC150", completed: false, date: "May 22"},
+            {num: 134, leetcodeId: 1851, title: "Minimum Interval to Include Each Query", difficulty: "Hard", category: "Intervals", source: "NC150", completed: false, date: "May 22"},
+            {num: 135, leetcodeId: 48, title: "Rotate Image", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
+            {num: 136, leetcodeId: 54, title: "Spiral Matrix", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
+            {num: 137, leetcodeId: 73, title: "Set Matrix Zeroes", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
+            {num: 138, leetcodeId: 202, title: "Happy Number", difficulty: "Easy", category: "Math & Geometry", source: "NC150", completed: false, date: "May 23"},
+            {num: 139, leetcodeId: 66, title: "Plus One", difficulty: "Easy", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
+            {num: 140, leetcodeId: 50, title: "Pow(x, n)", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 23"},
+            {num: 141, leetcodeId: 43, title: "Multiply Strings", difficulty: "Medium", category: "Math & Geometry", source: "BOTH", completed: false, date: "May 24"},
+            {num: 142, leetcodeId: 2013, title: "Detect Squares", difficulty: "Medium", category: "Math & Geometry", source: "NC150", completed: false, date: "May 24"},
+            {num: 143, leetcodeId: 136, title: "Single Number", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 24"},
+            {num: 144, leetcodeId: 191, title: "Number of 1 Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 24"},
+            {num: 145, leetcodeId: 338, title: "Counting Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 24"},
+            {num: 146, leetcodeId: 190, title: "Reverse Bits", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 24"},
+            {num: 147, leetcodeId: 268, title: "Missing Number", difficulty: "Easy", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 25"},
+            {num: 148, leetcodeId: 371, title: "Sum of Two Integers", difficulty: "Medium", category: "Bit Manipulation", source: "NC150", completed: false, date: "May 25"},
+            {num: 149, leetcodeId: 221, title: "Maximal Square", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 25"},
+            {num: 150, leetcodeId: 410, title: "Split Array Largest Sum", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 25"},
+            {num: 151, leetcodeId: 354, title: "Russian Doll Envelopes", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 25"},
+            {num: 152, leetcodeId: 3351, title: "Sum of Good Subsequences", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 25"},
+            {num: 153, leetcodeId: 3472, title: "Longest Palindromic Subsequence After at Most K Operations", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
+            {num: 154, leetcodeId: 907, title: "Sum of Subarray Minimums", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
+            {num: 155, leetcodeId: 85, title: "Maximal Rectangle", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
+            {num: 156, leetcodeId: 122, title: "Best Time to Buy and Sell Stock II", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
+            {num: 157, leetcodeId: 368, title: "Largest Divisible Subset", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
+            {num: 158, leetcodeId: 64, title: "Minimum Path Sum", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 26"},
+            {num: 159, leetcodeId: 32, title: "Longest Valid Parentheses", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
+            {num: 160, leetcodeId: 63, title: "Unique Paths II", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
+            {num: 161, leetcodeId: 279, title: "Perfect Squares", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
+            {num: 162, leetcodeId: 1218, title: "Longest Arithmetic Subsequence of Given Difference", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
+            {num: 163, leetcodeId: 542, title: "01 Matrix", difficulty: "Medium", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
+            {num: 164, leetcodeId: 2035, title: "Partition Array Into Two Arrays to Minimize Sum Difference", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 27"},
+            {num: 165, leetcodeId: 188, title: "Best Time to Buy and Sell Stock IV", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 28"},
+            {num: 166, leetcodeId: 44, title: "Wildcard Matching", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 28"},
+            {num: 167, leetcodeId: 1526, title: "Minimum Number of Increments on Subarrays to Form a Target Array", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 28"},
+            {num: 168, leetcodeId: 1749, title: "Maximum Absolute Sum of Any Subarray", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 28"},
+            {num: 169, leetcodeId: 120, title: "Triangle", difficulty: "Medium", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 28"},
+            {num: 170, leetcodeId: 123, title: "Best Time to Buy and Sell Stock III", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 28"},
+            {num: 171, leetcodeId: 1092, title: "Shortest Common Supersequence", difficulty: "Hard", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 28"},
+            {num: 172, leetcodeId: 2572, title: "Count the Number of Square-Free Subsets", difficulty: "Hard", category: "2-D Dynamic Programming", source: "Google", completed: false, date: "May 29"},
+            {num: 173, leetcodeId: 174, title: "Dungeon Game", difficulty: "Hard", category: "1-D Dynamic Programming", source: "Google", completed: false, date: "May 29"},
+            {num: 174, leetcodeId: 3532, title: "Path Existence Queries in a Graph I", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
+            {num: 175, leetcodeId: 2203, title: "Minimum Weighted Subgraph With the Required Paths", difficulty: "Hard", category: "Advanced Graphs", source: "Google", completed: false, date: "May 29"},
+            {num: 176, leetcodeId: 547, title: "Number of Provinces", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
+            {num: 177, leetcodeId: 399, title: "Evaluate Division", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
+            {num: 178, leetcodeId: 802, title: "Find Eventual Safe States", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
+            {num: 179, leetcodeId: 841, title: "Keys and Rooms", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 29"},
+            {num: 180, leetcodeId: 3419, title: "Minimize the Maximum Edge Weight of Graph", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 181, leetcodeId: 3108, title: "Minimum Cost Walk in Weighted Graph", difficulty: "Hard", category: "Advanced Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 182, leetcodeId: 2101, title: "Detonate the Maximum Bombs", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 183, leetcodeId: 1976, title: "Number of Ways to Arrive at Destination", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 184, leetcodeId: 1462, title: "Course Schedule IV", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 185, leetcodeId: 2577, title: "Minimum Time to Visit a Cell In a Grid", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 186, leetcodeId: 785, title: "Is Graph Bipartite?", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 187, leetcodeId: 2493, title: "Divide Nodes Into the Maximum Number of Groups", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 188, leetcodeId: 2510, title: "Check if There is a Path With Equal Number of 0's And 1's", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 189, leetcodeId: 2685, title: "Count the Number of Complete Components", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 190, leetcodeId: 1361, title: "Validate Binary Tree Nodes", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 191, leetcodeId: 773, title: "Sliding Puzzle", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 192, leetcodeId: 310, title: "Minimum Height Trees", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 193, leetcodeId: 2290, title: "Minimum Obstacle Removal to Reach Corner", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 194, leetcodeId: 3203, title: "Find Minimum Diameter After Merging Two Trees", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 195, leetcodeId: 1319, title: "Number of Operations to Make Network Connected", difficulty: "Medium", category: "Advanced Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 196, leetcodeId: 924, title: "Minimize Malware Spread", difficulty: "Hard", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 197, leetcodeId: 1368, title: "Minimum Cost to Make at Least One Valid Path in a Grid", difficulty: "Hard", category: "Advanced Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 198, leetcodeId: 947, title: "Most Stones Removed with Same Row or Column", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 199, leetcodeId: 886, title: "Possible Bipartition", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"},
+            {num: 200, leetcodeId: 1334, title: "Find the City With the Smallest Number of Neighbors at a Threshold Distance", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"}
         ];
 
         // Load saved progress if available
@@ -326,7 +344,7 @@
                     
                     // Update completed status for problems
                     problemsData.forEach(problem => {
-                        const savedProblem = savedProgress.find(p => p.id === problem.id);
+                        const savedProblem = savedProgress.find(p => p.num === problem.num);
                         if (savedProblem) {
                             problem.completed = savedProblem.completed;
                         }
@@ -340,7 +358,7 @@
         // Save progress to localStorage
         function saveProgress() {
             try {
-                const dataToSave = problemsData.map(p => ({ id: p.id, completed: p.completed }));
+                const dataToSave = problemsData.map(p => ({ num: p.num, completed: p.completed }));
                 localStorage.setItem('leetcodeProgress', JSON.stringify(dataToSave));
             } catch (error) {
                 console.error("Error saving progress:", error);
@@ -365,9 +383,9 @@
                     cellClass: params => params.value ? 'completed' : ''
                 },
                 { 
-                    field: 'id', 
-                    headerName: 'ID', 
-                    width: 80, 
+                    field: 'num', 
+                    headerName: '#', 
+                    width: 60, 
                     filter: 'agNumberColumnFilter', 
                     sortable: true 
                 },
@@ -435,11 +453,11 @@
             // Handler for checkbox selection
             function onSelectionChanged() {
                 const selectedNodes = gridOptions.api.getSelectedNodes();
-                const selectedIds = selectedNodes.map(node => node.data.id);
+                const selectedNums = selectedNodes.map(node => node.data.num);
                 
                 // Update completed status for selected problems
                 problemsData.forEach(problem => {
-                    const isSelected = selectedIds.includes(problem.id);
+                    const isSelected = selectedNums.includes(problem.num);
                     if (isSelected !== problem.completed) {
                         problem.completed = isSelected;
                     }
@@ -456,6 +474,16 @@
             
             // On grid ready
             function onGridReady(params) {
+                // Select rows that are marked as completed
+                const completedNodes = [];
+                params.api.forEachNode(node => {
+                    if (node.data.completed) {
+                        completedNodes.push(node);
+                    }
+                });
+                
+                params.api.setNodesSelected({ nodes: completedNodes, newValue: true });
+                
                 // Update statistics initial display
                 updateStatistics();
                 updateProgressDisplay();
@@ -472,7 +500,6 @@
                 const googleCount = problemsData.filter(p => p.source === 'Google').length;
                 const bothCount = problemsData.filter(p => p.source === 'BOTH').length;
                 
-                document.getElementById('total-count').textContent = totalCount;
                 document.getElementById('completed-count').textContent = completedCount;
                 document.getElementById('easy-count').textContent = easyCount;
                 document.getElementById('medium-count').textContent = mediumCount;
