@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeetCode Study Plan</title>
+    <title>Tech Navigator - Problem Tracker</title>
+    <!-- Add Google Fonts for Roboto Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- AG Grid CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.2.0/styles/ag-grid.min.css">
@@ -12,16 +14,40 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            padding: 15px;
+            padding: 0;
             max-width: 1400px;
             margin: 0 auto;
             background-color: #1c1c1c;
             color: #e0e0e0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+        }
+        
+        html {
+            height: 100%;
         }
         
         #myGrid {
-            height: 700px;
+            height: calc(100vh - 180px); /* Adjust based on your header, controls and footer height */
             width: 100%;
+            margin-top: 10px;
+            padding: 0 15px;
+            overflow: auto;
+        }
+        
+        .schedule-control {
+            margin: 0 15px 15px 15px;
+            flex-shrink: 0;
+        }
+        
+        .header {
+            flex-shrink: 0;
+        }
+        
+        footer {
+            padding: 10px 15px;
             margin-top: 10px;
         }
         
@@ -29,7 +55,7 @@
             display: flex;
             justify-content: space-between;
             gap: 10px;
-            margin-bottom: 15px;
+            padding: 10px 15px 10px 0;
         }
         
         .stats-left, .stats-right {
@@ -40,31 +66,22 @@
         .stat-card {
             background-color: #2d2d2d;
             border-radius: 6px;
-            padding: 8px 12px;
+            padding: 4px 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             text-align: center;
-            min-width: 90px;
+            min-width: 60px;
         }
         
         .stat-title {
-            font-size: 12px;
+            font-size: 10px;
             color: #ababab;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         
         .stat-value {
-            font-size: 18px;
+            font-size: 12px;
             font-weight: bold;
             color: #64b5f6;
-        }
-        
-        #progress-text {
-            background-color: #2d2d2d;
-            border-radius: 6px;
-            padding: 8px 15px;
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 15px;
         }
         
         footer {
@@ -79,7 +96,7 @@
         .hard { color: #f44336; }
         .nc150 { color: #64b5f6; }
         .google { color: #ea4335; }
-        .both { color: #9c27b0; font-weight: bold; }
+        .both { color: #ff69b4; font-weight: bold; }
         .completed { text-decoration: line-through; opacity: 0.7; }
         .compact-table {
             width: 100%;
@@ -112,94 +129,196 @@
             flex: 1;
         }
         
-        .easy { color: #4caf50; }
-        .medium { color: #ff9800; }
-        .hard { color: #f44336; }
-        .nc150 { color: #64b5f6; }
-        .google { color: #ea4335; }
-        .both { color: #9c27b0; font-weight: bold; }
-        
-        .compact-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            font-size: 14px;
-        }
-        .compact-table th, .compact-table td {
-            border: 1px solid #ddd;
-            padding: 4px 6px;
-            text-align: left;
-        }
-        .compact-table th {
-            background-color: #f2f2f2;
-        }
-        .formula {
-            font-family: monospace;
-            white-space: nowrap;
-        }
-        h2 {
-            font-size: 18px;
-            margin-top: 20px;
-            margin-bottom: 5px;
-        }
-        .two-column {
+        /* Tech Navigator Logo Styles */
+        .header {
             display: flex;
-            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0 0 15px 0;
+            border-bottom: 1px solid #333;
+            background-color: #181818;
         }
-        .column {
-            flex: 1;
+        
+        .app-logo {
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+        }
+        
+        .app-logo h1 {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+            margin: 0;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+        
+        .compass-icon {
+            display: inline-block;
+            margin: 0 4px;
+            animation: rotate 4s linear infinite;
+            transform-origin: center;
+        }
+        
+        .compass-icon svg {
+            stroke: #F97316;
+            animation: colorChange 4s linear infinite;
+            display: block;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes colorChange {
+            0% { stroke: #f97316; }    /* Orange */
+            25% { stroke: #22c55e; }   /* Green */
+            50% { stroke: #3b82f6; }   /* Blue */
+            75% { stroke: #facc15; }   /* Yellow */
+            100% { stroke: #f97316; }  /* Back to Orange */
+        }
+        
+        /* Schedule control */
+        .schedule-control {
+            background-color: #2d2d2d;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .schedule-control label {
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+        
+        .schedule-control input {
+            background-color: #1c1c1c;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+        
+        .schedule-control button {
+            background-color: #F97316;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .schedule-control button:hover {
+            background-color: #ea580c;
         }
     </style>
 </head>
 <body>
-    <div class="stats-container">
-        <div class="stats-left">
-            <div class="stat-card">
-                <div class="stat-title">Completed</div>
-                <div class="stat-value" id="completed-count">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Easy</div>
-                <div class="stat-value easy" id="easy-count">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Medium</div>
-                <div class="stat-value medium" id="medium-count">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Hard</div>
-                <div class="stat-value hard" id="hard-count">0</div>
-            </div>
+    <!-- Tech Navigator Logo Header with Stats Container -->
+    <div class="header">
+        <div class='app-logo'>
+            <h1>
+                <span>Tech</span>
+                <div class='compass-icon'>
+                    <svg fill='none' height='28' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'>
+                        <circle cx='12' cy='12' r='10'></circle>
+                        <path d='M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z'></path>
+                    </svg>
+                </div>
+                <span>Navigator</span>
+            </h1>
         </div>
-        <div class="stats-right">
-            <div class="stat-card">
-                <div class="stat-title">NC150</div>
-                <div class="stat-value nc150" id="nc150-count">0</div>
+        
+        <div class="stats-container">
+            <div class="stats-left">
+                <div class="stat-card">
+                    <div class="stat-title">Completed</div>
+                    <div class="stat-value" id="completed-count">0/200</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Easy</div>
+                    <div class="stat-value easy" id="easy-count">0/0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Medium</div>
+                    <div class="stat-value medium" id="medium-count">0/0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Hard</div>
+                    <div class="stat-value hard" id="hard-count">0/0</div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-title">Google</div>
-                <div class="stat-value google" id="google-count">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Both</div>
-                <div class="stat-value both" id="both-count">0</div>
+            <div class="stats-right">
+                <div class="stat-card">
+                    <div class="stat-title">NC150</div>
+                    <div class="stat-value nc150" id="nc150-count">0/0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Google</div>
+                    <div class="stat-value google" id="google-count">0/0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Both</div>
+                    <div class="stat-value both" id="both-count">0/0</div>
+                </div>
             </div>
         </div>
     </div>
     
-    <div id="progress-text">Loading 200 problems...</div>
+    <!-- Schedule Control -->
+    <div class="schedule-control">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" value="2025-05-01">
+        
+        <label for="problem-count">Problem Count:</label>
+        <input type="number" id="problem-count" value="200" min="1" max="500">
+        
+        <label for="days-count">Days to Complete:</label>
+        <input type="number" id="days-count" value="30" min="1" max="365">
+        
+        <button id="generate-schedule">Generate Schedule</button>
+    </div>
     
     <div id="myGrid" class="ag-theme-alpine-dark"></div>
     
     <footer>
-        <p>© 2025 - LeetCode Study Plan (May 1 - May 30, 2025)</p>
+        <p>© 2025 - Tech Navigator Problem Tracker</p>
     </footer>
     
     <!-- AG Grid JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.2.0/ag-grid-community.min.js"></script>
     
     <script>
-        // ==== Problem Data ====
+        // Adjust grid height on window resize
+        window.addEventListener('resize', function() {
+            resizeGrid();
+        });
+        
+        function resizeGrid() {
+            const gridDiv = document.getElementById('myGrid');
+            if (gridDiv) {
+                const gridApi = gridDiv.gridApi;
+                if (gridApi) {
+                    setTimeout(function() {
+                        gridApi.sizeColumnsToFit();
+                    }, 100);
+                }
+            }
+        }
+        
         const problemsData = [
             {num: 1, leetcodeId: 1, title: "Two Sum", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
             {num: 2, leetcodeId: 217, title: "Contains Duplicate", difficulty: "Easy", category: "Arrays & Hashing", source: "NC150", completed: false, date: "May 1"},
@@ -403,6 +522,7 @@
             {num: 200, leetcodeId: 1334, title: "Find the City With the Smallest Number of Neighbors at a Threshold Distance", difficulty: "Medium", category: "Graphs", source: "Google", completed: false, date: "May 30"}
         ];
 
+
         // Load saved progress if available
         function loadSavedProgress() {
             try {
@@ -433,8 +553,39 @@
             }
         }
 
+        // Function to generate a scheduled plan
+        function generateSchedule() {
+            const startDate = new Date(document.getElementById('start-date').value);
+            const problemCount = parseInt(document.getElementById('problem-count').value);
+            const daysCount = parseInt(document.getElementById('days-count').value);
+            
+            if (isNaN(startDate.getTime()) || isNaN(problemCount) || isNaN(daysCount)) {
+                alert('Please enter valid values for all schedule fields.');
+                return;
+            }
+            
+            // Calculate problems per day (can be fractional)
+            const problemsPerDay = problemCount / daysCount;
+            
+            // Assign dates to problems
+            problemsData.forEach((problem, index) => {
+                const dayNumber = Math.floor(index / problemsPerDay);
+                const targetDate = new Date(startDate);
+                targetDate.setDate(targetDate.getDate() + dayNumber);
+                
+                const month = targetDate.toLocaleString('en-US', { month: 'short' });
+                const day = targetDate.getDate();
+                problem.date = `${month} ${day}`;
+            });
+            
+            // Refresh the grid
+            gridOptions.api.setRowData(problemsData);
+        }
+        
         // Initialize grid when document is ready
         document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('generate-schedule').addEventListener('click', generateSchedule);
+            
             // Load any saved progress
             loadSavedProgress();
             
@@ -534,7 +685,6 @@
                 // Save progress and update stats
                 saveProgress();
                 updateStatistics();
-                updateProgressDisplay();
                 
                 // Refresh grid to show completed styling
                 gridOptions.api.redrawRows();
@@ -552,144 +702,48 @@
                 
                 params.api.setNodesSelected({ nodes: completedNodes, newValue: true });
                 
+                // Store reference to the grid API
+                document.getElementById('myGrid').gridApi = params.api;
+                
+                // Size columns to fit
+                params.api.sizeColumnsToFit();
+                
                 // Update statistics initial display
                 updateStatistics();
-                updateProgressDisplay();
             }
             
             // Update statistics display
             function updateStatistics() {
                 const totalCount = problemsData.length;
                 const completedCount = problemsData.filter(p => p.completed).length;
-                const easyCount = problemsData.filter(p => p.difficulty === 'Easy').length;
-                const mediumCount = problemsData.filter(p => p.difficulty === 'Medium').length;
-                const hardCount = problemsData.filter(p => p.difficulty === 'Hard').length;
-                const nc150Count = problemsData.filter(p => p.source === 'NC150').length;
-                const googleCount = problemsData.filter(p => p.source === 'Google').length;
-                const bothCount = problemsData.filter(p => p.source === 'BOTH').length;
                 
-                document.getElementById('completed-count').textContent = completedCount;
-                document.getElementById('easy-count').textContent = easyCount;
-                document.getElementById('medium-count').textContent = mediumCount;
-                document.getElementById('hard-count').textContent = hardCount;
-                document.getElementById('nc150-count').textContent = nc150Count;
-                document.getElementById('google-count').textContent = googleCount;
-                document.getElementById('both-count').textContent = bothCount;
-            }
-            
-            // Update progress text
-            function updateProgressDisplay() {
-                const totalCount = problemsData.length;
-                const completedCount = problemsData.filter(p => p.completed).length;
-                const percentage = Math.round((completedCount / totalCount) * 100);
+                const easyTotal = problemsData.filter(p => p.difficulty === 'Easy').length;
+                const easyCompleted = problemsData.filter(p => p.difficulty === 'Easy' && p.completed).length;
                 
-                document.getElementById('progress-text').textContent = 
-                    `Progress: ${completedCount} / ${totalCount} problems completed (${percentage}%)`;
+                const mediumTotal = problemsData.filter(p => p.difficulty === 'Medium').length;
+                const mediumCompleted = problemsData.filter(p => p.difficulty === 'Medium' && p.completed).length;
+                
+                const hardTotal = problemsData.filter(p => p.difficulty === 'Hard').length;
+                const hardCompleted = problemsData.filter(p => p.difficulty === 'Hard' && p.completed).length;
+                
+                const nc150Total = problemsData.filter(p => p.source === 'NC150').length;
+                const nc150Completed = problemsData.filter(p => p.source === 'NC150' && p.completed).length;
+                
+                const googleTotal = problemsData.filter(p => p.source === 'Google').length;
+                const googleCompleted = problemsData.filter(p => p.source === 'Google' && p.completed).length;
+                
+                const bothTotal = problemsData.filter(p => p.source === 'BOTH').length;
+                const bothCompleted = problemsData.filter(p => p.source === 'BOTH' && p.completed).length;
+                
+                document.getElementById('completed-count').textContent = `${completedCount}/${totalCount}`;
+                document.getElementById('easy-count').textContent = `${easyCompleted}/${easyTotal}`;
+                document.getElementById('medium-count').textContent = `${mediumCompleted}/${mediumTotal}`;
+                document.getElementById('hard-count').textContent = `${hardCompleted}/${hardTotal}`;
+                document.getElementById('nc150-count').textContent = `${nc150Completed}/${nc150Total}`;
+                document.getElementById('google-count').textContent = `${googleCompleted}/${googleTotal}`;
+                document.getElementById('both-count').textContent = `${bothCompleted}/${bothTotal}`;
             }
         });
     </script>
-    <div class="two-column">
-    <div class="column">
-        <h2>1 Million Users (10⁶)</h2>
-        <table class="compact-table">
-            <tr>
-                <th>Metric</th>
-                <th>Calculation</th>
-                <th>Example</th>
-            </tr>
-            <tr>
-                <td>RPS (10/day)</td>
-                <td class="formula">1M × 10 ÷ 100k</td>
-                <td>100 RPS</td>
-            </tr>
-            <tr>
-                <td>Storage</td>
-                <td class="formula">1M × 100MB</td>
-                <td>100 TB</td>
-            </tr>
-            <tr>
-                <td>Bandwidth</td>
-                <td class="formula">1M × 1MB</td>
-                <td>1 TB/day</td>
-            </tr>
-            <tr>
-                <td>RAM (10KB/user)</td>
-                <td class="formula">1M × 10KB</td>
-                <td>10 GB</td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="column">
-        <h2>1 Billion Users (10⁹)</h2>
-        <table class="compact-table">
-            <tr>
-                <th>Metric</th>
-                <th>Calculation</th>
-                <th>Example</th>
-            </tr>
-            <tr>
-                <td>RPS (10/day)</td>
-                <td class="formula">1B × 10 ÷ 100k</td>
-                <td>100k RPS</td>
-            </tr>
-            <tr>
-                <td>Storage</td>
-                <td class="formula">1B × 100MB</td>
-                <td>100 PB</td>
-            </tr>
-            <tr>
-                <td>Bandwidth</td>
-                <td class="formula">1B × 1MB</td>
-                <td>1 PB/day</td>
-            </tr>
-            <tr>
-                <td>RAM (10KB/user)</td>
-                <td class="formula">1B × 10KB</td>
-                <td>10 TB</td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-<h2>Universal Formulas</h2>
-<table class="compact-table">
-    <tr>
-        <th>Calculation</th>
-        <th>Formula</th>
-        <th>Example</th>
-    </tr>
-    <tr>
-        <td>RPS from users</td>
-        <td class="formula">(Users × Reqs/day) ÷ 100k</td>
-        <td>1M×10=100 RPS</td>
-    </tr>
-    <tr>
-        <td>Storage</td>
-        <td class="formula">Users × MB/user</td>
-        <td>1M×100MB=100TB</td>
-    </tr>
-    <tr>
-        <td>Bandwidth</td>
-        <td class="formula">Users × MB/user/day</td>
-        <td>1B×1MB=1PB/day</td>
-    </tr>
-</table>
-
-<h2>Quick Rules</h2>
-<table class="compact-table">
-    <tr>
-        <td class="formula">1M × 1MB = 1TB</td>
-        <td class="formula">1B × 1MB = 1PB</td>
-    </tr>
-    <tr>
-        <td class="formula">100 RPS = 10M/day</td>
-        <td class="formula">1Gbps ≈ 1TB/hour</td>
-    </tr>
-    <tr>
-        <td class="formula">Cache: 1% users × 100KB = 1GB</td>
-        <td class="formula">DB: 10:1 read:write</td>
-    </tr>
-</table>
 </body>
 </html>
