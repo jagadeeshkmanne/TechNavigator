@@ -931,74 +931,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Firebase
     if (typeof firebase !== 'undefined') {
         firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+        
+        // Enable Firestore persistence
+        firebase.firestore().enablePersistence()
+            .catch(err => console.error('Firestore persistence failed:', err));
         
         // Set up authentication
-        setupAuth(auth, db);
+        setupAuth();
+        
+        // Load initial problem data
+        loadProblems();
+        
     } else {
         console.error("Firebase SDK not loaded");
     }
-    
-    // Set up tab navigation
-    setupTabs();
-    
-    // Load problem data
-    loadProblems();
-    
-    // Set up event listeners
-    setupEventListeners();
-
-    addStyles();
-
 });
 
-async function setupAuth(auth, db) {
-    console.log("Initializing authentication...");
-    const authContainer = document.getElementById('auth-container');
-
-    try {
-        // First, check if we're returning from a redirect
-        const result = await auth.getRedirectResult();
-        console.log("Redirect result:", result);
+function setupAuth() {
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    
+    auth.onAuthStateChanged(async (user) => {
+        console.log('Auth state changed:', user ? user.uid : 'no user');
         
-        if (result.user) {
-            console.log("User from redirect:", result.user.uid);
-            currentUser = result.user;
-            updateUIForUser(currentUser);
-            await initializeUserData(db, currentUser);
-            return;
-        }
-
-        // If no redirect user, check current auth state
-        const user = auth.currentUser;
         if (user) {
-            console.log("Already signed in:", user.uid);
-            currentUser = user;
+            // User is signed in
             updateUIForUser(user);
-            await loadUserData(db, user);
-            return;
-        }
-
-        // If no user at all, show sign-in button
-        console.log("No user signed in - showing sign-in button");
-        renderSignInButton(auth);
-        
-        // Set up auth state listener for future changes
-        auth.onAuthStateChanged(async (user) => {
-            console.log("Auth state changed:", user ? user.uid : "no user");
-            if (user && !currentUser) {
-                currentUser = user;
-                updateUIForUser(user);
+            
+            try {
+                // Load user data
                 await loadUserData(db, user);
+                
+                // Initialize app with user data
+                initializeApp();
+            } catch (error) {
+                console.error('Error loading user data:', error);
             }
-        });
-
-    } catch (error) {
-        console.error("Auth initialization error:", error);
-        alert("Authentication error: " + error.message);
-        renderSignInButton(auth);
-    }
+        } else {
+            // No user signed in
+            renderSignInButton();
+        }
+    });
 }
 
 function updateUIForUser(user) {
