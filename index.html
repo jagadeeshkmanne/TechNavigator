@@ -1435,16 +1435,12 @@ function updateStats() {
     const reviewCount = userProblems.filter(p => p.forReview).length;
     
     // Update pending count to include overdue problems
-    const pendingCount = userProblems.filter(p => {
-        // Include not started problems
-        if (p.status === "Not Started") return true;
-        
-        // Include overdue problems
+   const pendingCount = userProblems.filter(p => {
+    // Only count problems with due dates in the past that aren't completed
         if (p.dueDate) {
             const dueDate = new Date(p.dueDate);
             return dueDate < today && p.status !== "Completed";
         }
-        
         return false;
     }).length;
     
