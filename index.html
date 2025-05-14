@@ -1001,7 +1001,27 @@ async function setupAuth(auth, db) {
     }
 }
 
-function renderSignInButton(auth) {
+function updateUIForUser(user) {
+    const authContainer = document.getElementById('auth-container');
+    authContainer.innerHTML = `
+        <div class="user-info">
+            <img class="user-avatar" src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName || 'User')}" 
+                 alt="${user.displayName || 'User'}">
+            <span class="user-name">${user.displayName || 'User'}</span>
+        </div>
+        <button class="auth-button signout" id="signout-button">
+            Sign Out
+        </button>
+    `;
+    
+    document.getElementById('signout-button').addEventListener('click', () => {
+        firebase.auth().signOut().then(() => {
+            window.location.reload();
+        });
+    });
+}
+
+function renderSignInButton() {
     const authContainer = document.getElementById('auth-container');
     authContainer.innerHTML = `
         <button class="auth-button google" id="signin-button">
@@ -1010,16 +1030,39 @@ function renderSignInButton(auth) {
         </button>
     `;
     
-    document.getElementById('signin-button').addEventListener('click', async () => {
-        try {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            const result = await auth.signInWithPopup(provider);
-            console.log("Popup result:", result);
-            window.location.reload(); // Refresh to sync state
-        } catch (error) {
-            console.error("Popup error:", error);
+    document.getElementById('signin-button').addEventListener('click', signInWithGooglePopup);
+}
+
+async function signInWithGooglePopup() {
+    try {
+        const auth = firebase.auth();
+        const provider = new firebase.auth.GoogleAuthProvider();
+        
+        // Add any additional scopes you need
+        provider.addScope('profile');
+        provider.addScope('email');
+        
+        const result = await auth.signInWithPopup(provider);
+        console.log('Sign-in successful', result.user);
+        
+        // Initialize user data in Firestore
+        await initializeUserData(firebase.firestore(), result.user);
+        
+        // Update UI
+        updateUIForUser(result.user);
+        
+        // Reload the page to sync all data
+        window.location.reload();
+        
+    } catch (error) {
+        console.error('Sign-in error:', error);
+        alert('Sign-in failed: ' + error.message);
+        
+        // Handle specific errors
+        if (error.code === 'auth/account-exists-with-different-credential') {
+            alert('An account already exists with this email. Please sign in with the original method.');
         }
-    });
+    }
 }
         
 // Load user data from Firestore
