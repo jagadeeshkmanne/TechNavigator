@@ -1724,7 +1724,6 @@ Sliding Puzzle (#773) - Hard
     initializeApp();
 }
 
-// Parse the problem text into structured data
 function parseProblems(text) {
     const lines = text.split('\n');
     const parsedProblems = [];
@@ -1744,14 +1743,17 @@ function parseProblems(text) {
         if (line.includes('High Priority List')) {
             currentPriority = 'High';
             inNumberedList = false;
+            currentSection = '';
             continue;
         } else if (line.includes('Medium Priority List')) {
             currentPriority = 'Medium';
             inNumberedList = false;
+            currentSection = '';
             continue;
         } else if (line.includes('High-Medium Priority')) {
             currentPriority = 'High-Medium';
             inNumberedList = false;
+            currentSection = '';
             continue;
         }
         
@@ -1763,13 +1765,13 @@ function parseProblems(text) {
             continue;
         }
         
-        // Check for category headers
-        const categoryMatch = line.match(/^([^(]+?)(?:\s+\((\d+)\))?(?:\s+-\s+.*)?$/);
-        if (categoryMatch && !line.includes('(#') && !line.includes('Priority') && line.length > 0) {
+        // Check for category headers - more strict matching
+        const categoryMatch = line.match(/^([A-Za-z][^#(]*?)(?:\s+\((\d+)\))?$/);
+        if (categoryMatch && !line.includes('#') && !line.includes('Priority') && line.length > 0) {
             // This is a category header
-            if (inNumberedList) {
-                // If we're in a numbered list, prepend the section name
-                currentCategory = currentSection + ': ' + categoryMatch[1].trim();
+            if (inNumberedList && currentSection) {
+                // If we're in a numbered list, use just the current section as category
+                currentCategory = currentSection;
             } else {
                 currentCategory = categoryMatch[1].trim();
             }
