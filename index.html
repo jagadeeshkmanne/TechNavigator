@@ -953,62 +953,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-function setupAuth(auth, db) {
-    console.log("Initializing authentication..."); // Debug
-    
+async function setupAuth(auth, db) {
+    console.log("Initializing authentication...");
     const authContainer = document.getElementById('auth-container');
-    
-    // Handle any pending redirect
-    auth.getRedirectResult().then((result) => {
-        console.log("Redirect result:", result); // Debug
+
+    try {
+        // First, check if we're returning from a redirect
+        const result = await auth.getRedirectResult();
+        console.log("Redirect result:", result);
+        
         if (result.user) {
-            console.log("User from redirect:", result.user.uid); // Debug
+            console.log("User from redirect:", result.user.uid);
             currentUser = result.user;
             updateUIForUser(currentUser);
-            initializeUserData(db, currentUser);
+            await initializeUserData(db, currentUser);
+            return;
         }
-    }).catch((error) => {
-        console.error("Redirect error:", error); // Debug
-        alert("Sign-in error: " + error.message);
-    });
-    
-    // Listen for auth state changes
-    auth.onAuthStateChanged(async (user) => {
-        console.log("Auth state changed:", user ? user.uid : "no user"); // Debug
-        
-        currentUser = user;
-        
+
+        // If no redirect user, check current auth state
+        const user = auth.currentUser;
         if (user) {
-            console.log("User signed in:", user.email); // Debug
+            console.log("Already signed in:", user.uid);
+            currentUser = user;
             updateUIForUser(user);
-            
-            try {
-                console.log("Loading user data..."); // Debug
+            await loadUserData(db, user);
+            return;
+        }
+
+        // If no user at all, show sign-in button
+        console.log("No user signed in - showing sign-in button");
+        renderSignInButton(auth);
+        
+        // Set up auth state listener for future changes
+        auth.onAuthStateChanged(async (user) => {
+            console.log("Auth state changed:", user ? user.uid : "no user");
+            if (user && !currentUser) {
+                currentUser = user;
+                updateUIForUser(user);
                 await loadUserData(db, user);
-                console.log("User data loaded successfully"); // Debug
-            } catch (error) {
-                console.error("Error loading user data:", error); // Debug
             }
-        } else {
-            console.log("No user signed in"); // Debug
-            // Render sign-in button
-            authContainer.innerHTML = `
-                <button class="auth-button google" id="signin-button">
-                    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-logo">
-                    Sign in with Google
-                </button>
-            `;
-            
-            document.getElementById('signin-button').addEventListener('click', () => {
-                console.log("Sign-in button clicked"); // Debug
-                const provider = new firebase.auth.GoogleAuthProvider();
-                auth.signInWithRedirect(provider).catch(error => {
-                    console.error("Sign-in error:", error); // Debug
-                });
-            });
+        });
+
+    } catch (error) {
+        console.error("Auth initialization error:", error);
+        alert("Authentication error: " + error.message);
+        renderSignInButton(auth);
+    }
+}
+
+function renderSignInButton(auth) {
+    const authContainer = document.getElementById('auth-container');
+    authContainer.innerHTML = `
+        <button class="auth-button google" id="signin-button">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-logo">
+            Sign in with Google
+        </button>
+    `;
+    
+    document.getElementById('signin-button').addEventListener('click', async () => {
+        try {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const result = await auth.signInWithPopup(provider);
+            console.log("Popup result:", result);
+            window.location.reload(); // Refresh to sync state
+        } catch (error) {
+            console.error("Popup error:", error);
         }
     });
 }
+        
 // Load user data from Firestore
 function loadUserData(db) {
     if (!currentUser) return;
