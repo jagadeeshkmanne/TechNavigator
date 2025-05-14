@@ -860,8 +860,8 @@ function addStyles() {
   styleElement.textContent = `
     /* Improved Auth Buttons */
     .auth-button {
-      padding: 8px 16px;
-      border-radius: 4px;
+      padding: 10px 16px;
+      border-radius: 6px;
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
@@ -869,42 +869,62 @@ function addStyles() {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: background-color 0.2s, box-shadow 0.2s;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      text-transform: none;
+      letter-spacing: 0.2px;
     }
     
     .auth-button.google {
-      background-color: white;
-      color: #757575;
-      border: 1px solid #ddd;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      background-color: #2d3748;
+      color: white;
+      border: 1px solid #4a5568;
     }
     
     .auth-button.google:hover {
-      background-color: #f8f8f8;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      background-color: #4a5568;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    
+    .auth-button.google:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    }
+    
+    /* Compact button style */
+    .auth-button.compact {
+      padding: 8px 12px;
     }
     
     .auth-button.signout {
-      background-color: #f44336;
+      background-color: #c53030;
       color: white;
+      font-weight: 500;
     }
     
     .auth-button.signout:hover {
-      background-color: #e53935;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      background-color: #e53e3e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
     
-    .google-logo {
-      width: 18px;
-      height: 18px;
+    .auth-button.signout:active {
+      background-color: #c53030;
+      transform: translateY(0);
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2);
     }
     
     .user-info {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       margin-right: 12px;
+      background: #2d3748;
+      padding: 5px 10px;
+      border-radius: 20px;
+      border: 1px solid #4a5568;
     }
     
     .user-avatar {
@@ -912,11 +932,13 @@ function addStyles() {
       height: 24px;
       border-radius: 50%;
       object-fit: cover;
+      border: 2px solid var(--blue);
     }
     
     .user-name {
       font-size: 14px;
       color: var(--text-primary);
+      font-weight: 500;
     }
     
     .auth-container {
@@ -968,6 +990,9 @@ function setupAuth() {
             updateUIForUser(user);
             
             try {
+                // Check and fix corrupted data if needed
+                await checkAndFixUserData();
+                
                 // Load user data
                 await loadUserData(db);
                 
@@ -975,6 +1000,7 @@ function setupAuth() {
                 initializeApp();
             } catch (error) {
                 console.error('Error loading user data:', error);
+                alert('There was an error loading your data. Please try refreshing the page.');
             }
         } else {
             // No user signed in
@@ -984,15 +1010,13 @@ function setupAuth() {
 }
 
 // Initialize user data in Firestore
-async function initializeUserData(db, user) {
+function initializeUserData(db, user) {
     const userRef = db.collection('users').doc(user.uid);
     
-    try {
-        const doc = await userRef.get();
-        
+    return userRef.get().then(doc => {
         if (!doc.exists) {
             console.log('Creating new user document');
-            await userRef.set({
+            return userRef.set({
                 problems: problems, // Your initial problems array
                 studyPlan: [],
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -1000,13 +1024,65 @@ async function initializeUserData(db, user) {
                 email: user.email,
                 displayName: user.displayName,
                 photoURL: user.photoURL || ''
+            }).then(() => {
+                console.log('User document created successfully');
+                return true;
             });
-            console.log('User document created successfully');
+        } else {
+            console.log('User document already exists');
+            return true;
         }
-    } catch (error) {
+    }).catch(error => {
         console.error('Error initializing user data:', error);
         throw error;
-    }
+    });
+}
+
+function checkAndFixUserData() {
+    if (!currentUser || typeof firebase === 'undefined') return;
+    
+    const db = firebase.firestore();
+    const userRef = db.collection('users').doc(currentUser.uid);
+    
+    return userRef.get().then(doc => {
+        if (doc.exists) {
+            const data = doc.data();
+            let needsFix = false;
+            
+            // Check if study plan exists but is corrupted
+            if (data.studyPlan) {
+                const corruptDays = data.studyPlan.filter(day => 
+                    !day.date || 
+                    (!(day.date instanceof firebase.firestore.Timestamp) && 
+                     !(day.date instanceof Date) && 
+                     typeof day.date !== 'string' && 
+                     typeof day.date !== 'number')
+                );
+                
+                if (corruptDays.length > 0) {
+                    console.warn('Found corrupt study plan entries:', corruptDays);
+                    needsFix = true;
+                }
+            }
+            
+            if (needsFix) {
+                console.log('Fixing corrupted data');
+                // Reset study plan or fix it
+                return userRef.update({
+                    studyPlan: []
+                }).then(() => {
+                    console.log('Data fixed');
+                    return true;
+                });
+            }
+            
+            return false; // No fix needed
+        }
+        return false;
+    }).catch(error => {
+        console.error('Error checking user data:', error);
+        return false;
+    });
 }
 
 // Update UI after authentication
@@ -1018,8 +1094,13 @@ function updateUIForUser(user) {
                  alt="${user.displayName || 'User'}">
             <span class="user-name">${user.displayName || user.email || 'User'}</span>
         </div>
-        <button class="auth-button signout" id="signout-button">
-            Sign Out
+        <button class="auth-button signout compact" id="signout-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Sign out</span>
         </button>
     `;
     
@@ -1034,9 +1115,15 @@ function updateUIForUser(user) {
 function renderSignInButton() {
     const authContainer = document.getElementById('auth-container');
     authContainer.innerHTML = `
-        <button class="auth-button google" id="signin-button">
-            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-logo">
-            Sign in with Google
+        <button class="auth-button google compact" id="signin-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                <path fill="none" d="M0 0h48v48H0z"/>
+            </svg>
+            <span>Sign in</span>
         </button>
     `;
     
@@ -1081,54 +1168,108 @@ async function signInWithGooglePopup() {
         
 // Load user data from Firestore
 function loadUserData(db) {
-    if (!currentUser) return;
+    if (!currentUser) {
+        console.log('No current user, skipping data load');
+        return Promise.reject('No current user');
+    }
     
+    console.log('Loading user data for:', currentUser.uid);
     const userRef = db.collection('users').doc(currentUser.uid);
     
-    userRef.get().then(doc => {
+    return userRef.get().then(doc => {
         if (doc.exists) {
             const data = doc.data();
+            console.log('User data loaded:', data);
+            
             if (data.problems) {
                 problems = data.problems;
-                if (data.studyPlan) {
-                    studyPlan = data.studyPlan.map(day => {
+                console.log(`Loaded ${problems.length} problems`);
+            }
+            
+            if (data.studyPlan) {
+                console.log('Raw study plan from Firestore:', data.studyPlan);
+                
+                studyPlan = data.studyPlan.map(day => {
+                    try {
+                        // Handle Firestore Timestamp objects
+                        const processedDate = day.date && day.date.toDate ? 
+                            day.date.toDate() : 
+                            new Date(day.date);
+                            
+                        console.log(`Converted date: ${day.date} -> ${processedDate}`);
+                        
                         return {
                             ...day,
-                            date: day.date && day.date.toDate ? day.date.toDate() : new Date(day.date)
+                            date: processedDate
                         };
-                    });
-                }
+                    } catch (error) {
+                        console.error('Error processing date for study plan day:', day, error);
+                        // Return a fallback date as today if conversion fails
+                        return {
+                            ...day,
+                            date: new Date()
+                        };
+                    }
+                });
                 
-                // Initialize the app with user data
-                initializeApp();
+                console.log('Processed study plan:', studyPlan);
             }
+            
+            // Initialize the app with user data
+            initializeApp();
+            return true;
+        } else {
+            console.log('No user document found');
+            return false;
         }
     }).catch(error => {
         console.error('Error loading user data:', error);
+        throw error;
     });
 }
 
 // Save user data to Firestore
 function saveUserData() {
-    if (!currentUser || typeof firebase === 'undefined') return;
+    if (!currentUser || typeof firebase === 'undefined') {
+        console.log('Cannot save: No current user or Firebase not initialized');
+        return Promise.reject('No current user or Firebase not initialized');
+    }
+    
+    console.log('Saving user data for:', currentUser.uid);
+    console.log('Study plan to save:', studyPlan);
     
     const db = firebase.firestore();
     const userRef = db.collection('users').doc(currentUser.uid);
     
-    // Convert dates to Firestore Timestamp
-    const studyPlanForSave = studyPlan.map(day => {
+    // Ensure all date objects are valid before converting
+    const validStudyPlan = studyPlan.map(day => {
+        let validDate = day.date;
+        
+        // Check if date is valid, if not create a new date
+        if (!validDate || !(validDate instanceof Date) || isNaN(validDate)) {
+            console.warn('Invalid date found in study plan:', day);
+            validDate = new Date();
+        }
+        
         return {
             ...day,
-            date: firebase.firestore.Timestamp.fromDate(day.date)
+            date: firebase.firestore.Timestamp.fromDate(validDate)
         };
     });
     
-    userRef.set({
+    console.log('Processed study plan for saving:', validStudyPlan);
+    
+    return userRef.set({
         problems: problems,
-        studyPlan: studyPlanForSave,
+        studyPlan: validStudyPlan,
         lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true }).catch(error => {
+    }, { merge: true }).then(() => {
+        console.log('User data saved successfully');
+        return true;
+    }).catch(error => {
         console.error('Error saving user data:', error);
+        alert('Failed to save your study plan. Please try again.');
+        throw error;
     });
 }
 
@@ -1891,12 +2032,14 @@ function updateProblemStatus(id, status) {
     saveUserData();
 }
 
-// Generate study plan
 function generateStudyPlan() {
     const planDaysEl = document.getElementById('plan-days');
     const problemsPerDayEl = document.getElementById('problems-per-day');
     
-    if (!planDaysEl || !problemsPerDayEl) return;
+    if (!planDaysEl || !problemsPerDayEl) {
+        console.error('Required elements not found');
+        return;
+    }
     
     const numDays = parseInt(planDaysEl.value) || 30;
     const problemsPerDay = parseInt(problemsPerDayEl.value) || 3;
@@ -1911,9 +2054,18 @@ function generateStudyPlan() {
     if (highMediumEl && highMediumEl.checked) selectedPriorities.push('High-Medium');
     if (mediumEl && mediumEl.checked) selectedPriorities.push('Medium');
     
+    if (selectedPriorities.length === 0) {
+        alert('Please select at least one priority level');
+        return;
+    }
+    
     // Create a date object for today
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    
+    console.log('Generating study plan from:', today);
+    console.log('Days:', numDays, 'Problems per day:', problemsPerDay);
+    console.log('Selected priorities:', selectedPriorities);
     
     // Create a new plan
     studyPlan = [];
@@ -1923,6 +2075,8 @@ function generateStudyPlan() {
         (p.status === 'Not Started' || p.status === 'In Progress') &&
         selectedPriorities.includes(p.priority)
     );
+    
+    console.log(`Found ${availableProblems.length} available problems matching criteria`);
     
     // Sort by priority (High first, then High-Medium, then Medium)
     // Within each priority, sort by difficulty (Easy first)
@@ -1976,13 +2130,20 @@ function generateStudyPlan() {
         });
     }
     
-    // Save to Firebase
-    saveUserData();
+    console.log(`Generated ${studyPlan.length} study days`);
     
-    // Update planner UI
-    renderTodayProblems();
-    renderPendingProblems();
-    renderRevisionProblems();
+    // Save to Firebase with error handling
+    saveUserData()
+        .then(() => {
+            // Only update UI after successful save
+            renderTodayProblems();
+            renderPendingProblems();
+            renderRevisionProblems();
+            alert('Study plan generated and saved successfully!');
+        })
+        .catch(error => {
+            console.error('Failed to save study plan:', error);
+        });
 }
 
 // Create a problem list item
