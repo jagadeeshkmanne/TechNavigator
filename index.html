@@ -1273,7 +1273,6 @@ function saveUserData() {
     });
 }
 
-// Tab navigation
 function setupTabs() {
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -1289,11 +1288,22 @@ function setupTabs() {
             // Activate the selected tab
             button.classList.add('active');
             document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Log tab change for debugging
+            console.log(`Tab switched to: ${tabName}`);
+            
+            // If switching to planner tab, ensure we're showing the existing plan (don't regenerate)
+            if (tabName === 'planner') {
+                // Just update calculations and render existing plan
+                updateProblemsPerDay();
+                renderTodayProblems();
+                renderPendingProblems();
+                renderRevisionProblems();
+            }
         });
     });
 }
 
-// Event listeners
 function setupEventListeners() {
     // Filter changes
     document.getElementById('search-input').addEventListener('input', handleFilterChange);
@@ -1317,14 +1327,97 @@ function setupEventListeners() {
         }
     });
     
-    // Generate study plan
-    document.getElementById('generate-plan').addEventListener('click', generateStudyPlan);
+    // Generate study plan - pass true to force regeneration
+    const generatePlanBtn = document.getElementById('generate-plan');
+    if (generatePlanBtn) {
+        generatePlanBtn.addEventListener('click', () => generateStudyPlan(true));
+    }
     
     // Priority checkboxes and days input
     document.getElementById('priority-high').addEventListener('change', updateProblemsPerDay);
     document.getElementById('priority-high-medium').addEventListener('change', updateProblemsPerDay);
     document.getElementById('priority-medium').addEventListener('change', updateProblemsPerDay);
     document.getElementById('plan-days').addEventListener('input', updateProblemsPerDay);
+    
+    // Add debug controls for troubleshooting
+    setTimeout(addDebugControls, 1000);
+}
+
+// Debug function to view study plan state
+function debugState() {
+    console.log('Current user:', currentUser ? currentUser.uid : 'No user');
+    console.log('Problems count:', problems.length);
+    console.log('Study plan days:', studyPlan.length);
+    
+    // Check for date issues in study plan
+    if (studyPlan.length > 0) {
+        console.log('Study plan date checks:');
+        studyPlan.forEach((day, index) => {
+            const validDate = day.date instanceof Date && !isNaN(day.date.getTime());
+            console.log(`Day ${index}: date=${day.date}, valid=${validDate}`);
+            
+            if (!validDate) {
+                console.warn('Invalid date found:', day.date);
+            }
+        });
+    }
+    
+    // Add a UI debugger message
+    alert(`Debug info logged to console.\nUser: ${currentUser ? 'Logged in' : 'Not logged in'}\nProblems: ${problems.length}\nStudy Plan Days: ${studyPlan.length}`);
+}
+
+// Function to reset the study plan (for troubleshooting)
+function resetStudyPlan() {
+    if (confirm('Are you sure you want to reset your study plan? This cannot be undone.')) {
+        console.log('Resetting study plan');
+        studyPlan = [];
+        
+        // Update UI
+        renderTodayProblems();
+        renderPendingProblems();
+        renderRevisionProblems();
+        
+        // Save to Firebase
+        saveUserData()
+            .then(() => {
+                alert('Study plan has been reset successfully.');
+            })
+            .catch(error => {
+                console.error('Failed to save reset study plan:', error);
+                alert('There was an error resetting your study plan. Please try again.');
+            });
+    }
+}
+
+// Function to add debug controls to the UI
+function addDebugControls() {
+    const plannerTab = document.getElementById('planner-tab');
+    if (!plannerTab) return;
+    
+    // Check if debug controls already exist
+    if (document.getElementById('debug-controls')) return;
+    
+    const debugDiv = document.createElement('div');
+    debugDiv.id = 'debug-controls';
+    debugDiv.style.marginTop = '20px';
+    debugDiv.style.padding = '10px';
+    debugDiv.style.border = '1px dashed var(--border)';
+    debugDiv.style.borderRadius = '4px';
+    debugDiv.style.backgroundColor = 'var(--bg-tertiary)';
+    
+    debugDiv.innerHTML = `
+        <div style="font-size: 0.8rem; margin-bottom: 10px; color: var(--text-muted);">Troubleshooting Tools</div>
+        <div style="display: flex; gap: 10px;">
+            <button id="debug-state-btn" class="btn btn-secondary">Log Debug Info</button>
+            <button id="reset-plan-btn" class="btn btn-secondary">Reset Study Plan</button>
+        </div>
+    `;
+    
+    plannerTab.appendChild(debugDiv);
+    
+    // Add event listeners
+    document.getElementById('debug-state-btn').addEventListener('click', debugState);
+    document.getElementById('reset-plan-btn').addEventListener('click', resetStudyPlan);
 }
 
 // Update problems per day based on priority selection and days
@@ -1719,7 +1812,6 @@ function parseProblems(text) {
     return parsedProblems;
 }
 
-// Initialize the app with data
 function initializeApp() {
     // Extract unique categories, difficulties, priorities
     updateFilters();
@@ -1736,11 +1828,13 @@ function initializeApp() {
     // Render analytics
     renderAnalytics();
     
-    // Generate initial study plan
+    // Just update the problems per day calculation, but don't generate new plan
     updateProblemsPerDay();
-    if (document.getElementById('generate-plan')) {
-        generateStudyPlan();
-    }
+    
+    // Render the existing study plan instead of generating a new one
+    renderTodayProblems();
+    renderPendingProblems();
+    renderRevisionProblems();
 }
 
 // Update filter dropdowns
@@ -2032,7 +2126,16 @@ function updateProblemStatus(id, status) {
     saveUserData();
 }
 
-function generateStudyPlan() {
+function generateStudyPlan(forceRegenerate = false) {
+    // Check if the plan already exists and user didn't explicitly request regeneration
+    if (studyPlan.length > 0 && !forceRegenerate) {
+        console.log('Study plan already exists. Rendering existing plan.');
+        renderTodayProblems();
+        renderPendingProblems();
+        renderRevisionProblems();
+        return;
+    }
+    
     const planDaysEl = document.getElementById('plan-days');
     const problemsPerDayEl = document.getElementById('problems-per-day');
     
@@ -2078,6 +2181,11 @@ function generateStudyPlan() {
     
     console.log(`Found ${availableProblems.length} available problems matching criteria`);
     
+    if (availableProblems.length === 0) {
+        alert('No problems found matching the selected priorities.');
+        return;
+    }
+    
     // Sort by priority (High first, then High-Medium, then Medium)
     // Within each priority, sort by difficulty (Easy first)
     const sortedProblems = [...availableProblems].sort((a, b) => {
@@ -2096,10 +2204,13 @@ function generateStudyPlan() {
         return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
     });
     
+    // Create a safety copy of the sorted problems to avoid reference issues
+    const problemsCopy = JSON.parse(JSON.stringify(sortedProblems));
+    
     // Assign problems to days
     let problemIndex = 0;
     
-    for (let i = 0; i < numDays; i++) {
+    for (let i = 0; i < numDays && problemIndex < problemsCopy.length; i++) {
         const planDate = new Date(today);
         planDate.setDate(today.getDate() + i);
         planDate.setHours(0, 0, 0, 0);
@@ -2107,11 +2218,9 @@ function generateStudyPlan() {
         const dayProblems = [];
         
         // Add problems for this day
-        for (let j = 0; j < problemsPerDay; j++) {
-            if (problemIndex < sortedProblems.length) {
-                dayProblems.push(sortedProblems[problemIndex]);
-                problemIndex++;
-            }
+        for (let j = 0; j < problemsPerDay && problemIndex < problemsCopy.length; j++) {
+            dayProblems.push(problemsCopy[problemIndex]);
+            problemIndex++;
         }
         
         // Skip days with no problems
@@ -2120,10 +2229,10 @@ function generateStudyPlan() {
         // Determine categories for this day
         const dayCategories = [...new Set(dayProblems.map(p => p.category))];
         
-        // Add to study plan
+        // Add to study plan with clean date object
         studyPlan.push({
             day: i,
-            date: planDate,
+            date: new Date(planDate.getTime()), // Create a fresh date object
             problems: dayProblems,
             categories: dayCategories,
             focus: dayCategories.join(', ')
@@ -2132,17 +2241,19 @@ function generateStudyPlan() {
     
     console.log(`Generated ${studyPlan.length} study days`);
     
+    // Immediately update UI before save (so it works even if save fails)
+    renderTodayProblems();
+    renderPendingProblems();
+    renderRevisionProblems();
+    
     // Save to Firebase with error handling
     saveUserData()
         .then(() => {
-            // Only update UI after successful save
-            renderTodayProblems();
-            renderPendingProblems();
-            renderRevisionProblems();
             alert('Study plan generated and saved successfully!');
         })
         .catch(error => {
             console.error('Failed to save study plan:', error);
+            alert('Study plan generated but there was an error saving to the database. Your changes may not persist after refreshing the page.');
         });
 }
 
