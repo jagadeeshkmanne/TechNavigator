@@ -941,6 +941,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Load initial problem data
         loadProblems();
+        
+        // Add these two function calls
+        setupTabs();
+        setupEventListeners();
 
         addStyles();
         
@@ -957,12 +961,15 @@ function setupAuth() {
         console.log('Auth state changed:', user ? user.uid : 'no user');
         
         if (user) {
+            // Add this line to set the currentUser
+            currentUser = user;
+            
             // User is signed in
             updateUIForUser(user);
             
             try {
                 // Load user data
-                await loadUserData(db, user);
+                await loadUserData(db);
                 
                 // Initialize app with user data
                 initializeApp();
@@ -1087,7 +1094,7 @@ function loadUserData(db) {
                     studyPlan = data.studyPlan.map(day => {
                         return {
                             ...day,
-                            date: day.date.toDate()
+                            date: day.date && day.date.toDate ? day.date.toDate() : new Date(day.date)
                         };
                     });
                 }
