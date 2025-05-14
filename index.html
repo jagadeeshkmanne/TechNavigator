@@ -1935,11 +1935,6 @@ function filterProblems(view) {
             break;
     }
     
-    // Sort filtered problems - unified sorting for all views
-    // First by priority (High > High-Medium > Medium)
-    // Then by category (following NeetCode roadmap order)
-    // Finally by difficulty (Easy > Medium > Hard)
-    
     // Define category ordering for NeetCode roadmap
     const categoryOrder = [
         "Arrays & Hashing",
@@ -1961,11 +1956,11 @@ function filterProblems(view) {
         "Design"
     ];
     
-    // Define priority and difficulty weights
+    // Define priority and difficulty weights with CORRECT mapping
     const priorityWeight = {
-        "High": 3,
-        "High-Medium": 2,
-        "Medium": 1
+        "High": 3,          // Highest priority (displayed as "High")
+        "High-Medium": 2,   // Medium priority (displayed as "Medium")
+        "Medium": 1         // Lowest priority (displayed as "Low")
     };
     
     const difficultyWeight = {
@@ -2015,24 +2010,11 @@ function showProblems(view) {
     // Filter problems for the current view
     problemsToShow = filterProblems(view);
     
-    // Update pagination
-    const totalPages = Math.ceil(problemsToShow.length / itemsPerPage);
-    if (currentPage > totalPages) {
-        currentPage = Math.max(1, totalPages);
-    }
-    
-    renderPagination(totalPages);
-    
-    // Get current page of problems
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const currentPageProblems = problemsToShow.slice(start, end);
-    
     // Clear table
     problemsTableBody.innerHTML = '';
     
-    // Populate table
-    currentPageProblems.forEach(problem => {
+    // Populate table with all problems (no pagination)
+    problemsToShow.forEach(problem => {
         const row = document.createElement('tr');
         
         // Add problem status checkbox
@@ -2178,8 +2160,11 @@ function showProblems(view) {
         problemsTableBody.appendChild(row);
     });
     
-    // Update table info
-    tableInfo.textContent = `Showing ${currentPageProblems.length} of ${problemsToShow.length} problems`;
+    // Update table info - show all problems now
+    tableInfo.textContent = `Showing all ${problemsToShow.length} problems`;
+    
+    // Hide pagination since we're showing all problems
+    pagination.style.display = 'none';
 }
         
 function getPriorityDisplayName(dataPriority) {
@@ -2525,37 +2510,11 @@ function setupEventListeners() {
             tab.classList.add('active');
             
             const view = tab.dataset.view;
-            currentPage = 1;
             showProblems(view);
         });
     });
     
-    // Pagination
-    prevPageBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            showProblems(currentView);
-        }
-    });
-    
-    nextPageBtn.addEventListener('click', () => {
-        const totalPages = Math.ceil(problemsToShow.length / itemsPerPage);
-        if (currentPage < totalPages) {
-            currentPage++;
-            showProblems(currentView);
-        }
-    });
-    
-    pagination.addEventListener('click', (e) => {
-        const pageBtn = e.target.closest('.pagination-btn:not(#prevPageBtn):not(#nextPageBtn)');
-        if (pageBtn) {
-            const page = parseInt(pageBtn.dataset.page);
-            if (page !== currentPage) {
-                currentPage = page;
-                showProblems(currentView);
-            }
-        }
-    });
+    // Remove pagination event listeners since we're displaying all problems
 }
 
 function initApp() {
