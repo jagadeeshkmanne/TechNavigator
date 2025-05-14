@@ -1730,7 +1730,7 @@ function parseProblems(text) {
     
     let currentCategory = '';
     let currentPriority = 'High';
-    let inNumberedList = false;
+    let inNumberedSection = false;
     let currentSection = '';
     
     for (let i = 0; i < lines.length; i++) {
@@ -1742,38 +1742,45 @@ function parseProblems(text) {
         // Check for priority headers
         if (line.includes('High Priority List')) {
             currentPriority = 'High';
-            inNumberedList = false;
+            inNumberedSection = false;
             continue;
         } else if (line.includes('Medium Priority List')) {
             currentPriority = 'Medium';
-            inNumberedList = false;
+            inNumberedSection = true; // Medium Priority List uses numbered sections
             continue;
         } else if (line.includes('High-Medium Priority')) {
             currentPriority = 'High-Medium';
-            inNumberedList = false;
+            inNumberedSection = true; // High-Medium Priority also uses numbered sections
             continue;
         }
         
-        // Check for numbered sections (like "1. Additional Arrays & Hashing")
-        const numberedSectionMatch = line.match(/^\d+\.\s+(.*?)(?:\s+\(\d+\))?$/);
-        if (numberedSectionMatch) {
-            currentSection = numberedSectionMatch[1].trim();
-            inNumberedList = true;
-            continue;
-        }
-        
-        // Check explicitly for category headers with pattern like "Category Name (Number)"
-        const categoryMatch = line.match(/^([^(]+?)\s+\(\d+\)$/);
-        if (categoryMatch && !line.includes('(#') && !line.includes('Priority')) {
-            // This is a category header
-            if (inNumberedList) {
-                // If we're in a numbered list, prepend the section name
-                currentCategory = currentSection + ': ' + categoryMatch[1].trim();
-            } else {
-                currentCategory = categoryMatch[1].trim();
+        if (inNumberedSection) {
+            // Check for numbered sections (like "1. Additional Arrays & Hashing (6)")
+            const numberedSectionMatch = line.match(/^\d+\.\s+(.*?)(?:\s+\(\d+\))?$/);
+            if (numberedSectionMatch) {
+                currentSection = numberedSectionMatch[1].trim();
+                console.log("Found numbered section:", currentSection);
+                continue;
             }
-            console.log("Found category:", currentCategory);
-            continue;
+        }
+        
+        // Check for category headers in non-numbered sections
+        // This handles cases like "Arrays & Hashing (7)"
+        if (!inNumberedSection) {
+            const categoryMatch = line.match(/^([^(]+?)\s+\(\d+\)$/);
+            if (categoryMatch && !line.includes('(#') && !line.includes('Priority')) {
+                currentCategory = categoryMatch[1].trim();
+                console.log("Found category:", currentCategory);
+                continue;
+            }
+        } else if (inNumberedSection && currentSection) {
+            // In numbered sections, we need to check if this line could be a subcategory
+            // This is important for the Medium Priority and High-Medium Priority sections
+            if (!line.match(/^\d+\./) && !line.includes('(#')) {
+                // This might be a category line within a numbered section
+                // For now, set the category to the current section
+                currentCategory = currentSection;
+            }
         }
         
         // Check for problem lines with LeetCode numbers
@@ -1784,6 +1791,22 @@ function parseProblems(text) {
             const problemNumber = problemMatch[2];
             const difficulty = problemMatch[3];
             
+            // Determine the appropriate category
+            let problemCategory;
+            if (inNumberedSection && currentSection) {
+                // For Medium and High-Medium priority sections, use the numbered section as category
+                problemCategory = currentSection;
+            } else {
+                // Otherwise use the regular category
+                problemCategory = currentCategory;
+            }
+            
+            // Skip if we don't have a valid category
+            if (!problemCategory) {
+                console.warn(`Problem ${problemName} has no category assigned, skipping`);
+                continue;
+            }
+            
             // Extract Neetcode tag if present
             const isNeetcode = line.includes('Neetcode');
             
@@ -1792,11 +1815,13 @@ function parseProblems(text) {
                 .replace(/\s+/g, '-')
                 .replace(/[^a-z0-9-]/g, '');
             
+            console.log(`Adding problem: ${problemName}, Category: ${problemCategory}, Priority: ${currentPriority}`);
+            
             parsedProblems.push({
                 id: parsedProblems.length + 1,
                 problem: problemName,
                 number: problemNumber,
-                category: currentCategory,
+                category: problemCategory,
                 difficulty: difficulty,
                 priority: currentPriority,
                 status: 'Not Started',
@@ -1806,10 +1831,16 @@ function parseProblems(text) {
                 completedDate: null,
                 revisionDates: []
             });
-            
-            console.log(`Added problem ${problemName} to category ${currentCategory}`);
         }
     }
+    
+    // Verify and log category counts for debugging
+    const categoryCounts = {};
+    parsedProblems.forEach(p => {
+        categoryCounts[p.category] = (categoryCounts[p.category] || 0) + 1;
+    });
+    
+    console.log("Category counts:", categoryCounts);
     
     return parsedProblems;
 }
