@@ -974,13 +974,40 @@ function setupAuth() {
     });
 }
 
+// Initialize user data in Firestore
+async function initializeUserData(db, user) {
+    const userRef = db.collection('users').doc(user.uid);
+    
+    try {
+        const doc = await userRef.get();
+        
+        if (!doc.exists) {
+            console.log('Creating new user document');
+            await userRef.set({
+                problems: problems, // Your initial problems array
+                studyPlan: [],
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
+                email: user.email,
+                displayName: user.displayName,
+                photoURL: user.photoURL || ''
+            });
+            console.log('User document created successfully');
+        }
+    } catch (error) {
+        console.error('Error initializing user data:', error);
+        throw error;
+    }
+}
+
+// Update UI after authentication
 function updateUIForUser(user) {
     const authContainer = document.getElementById('auth-container');
     authContainer.innerHTML = `
         <div class="user-info">
             <img class="user-avatar" src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName || 'User')}" 
                  alt="${user.displayName || 'User'}">
-            <span class="user-name">${user.displayName || 'User'}</span>
+            <span class="user-name">${user.displayName || user.email || 'User'}</span>
         </div>
         <button class="auth-button signout" id="signout-button">
             Sign Out
@@ -994,6 +1021,7 @@ function updateUIForUser(user) {
     });
 }
 
+// Render sign-in button
 function renderSignInButton() {
     const authContainer = document.getElementById('auth-container');
     authContainer.innerHTML = `
@@ -1009,9 +1037,10 @@ function renderSignInButton() {
 async function signInWithGooglePopup() {
     try {
         const auth = firebase.auth();
+        const db = firebase.firestore();
         const provider = new firebase.auth.GoogleAuthProvider();
         
-        // Add any additional scopes you need
+        // Add additional scopes if needed
         provider.addScope('profile');
         provider.addScope('email');
         
@@ -1019,7 +1048,7 @@ async function signInWithGooglePopup() {
         console.log('Sign-in successful', result.user);
         
         // Initialize user data in Firestore
-        await initializeUserData(firebase.firestore(), result.user);
+        await initializeUserData(db, result.user);
         
         // Update UI
         updateUIForUser(result.user);
@@ -1029,11 +1058,14 @@ async function signInWithGooglePopup() {
         
     } catch (error) {
         console.error('Sign-in error:', error);
-        alert('Sign-in failed: ' + error.message);
         
         // Handle specific errors
         if (error.code === 'auth/account-exists-with-different-credential') {
             alert('An account already exists with this email. Please sign in with the original method.');
+        } else if (error.code === 'auth/popup-closed-by-user') {
+            console.log('Sign-in popup was closed by user');
+        } else {
+            alert('Sign-in failed: ' + error.message);
         }
     }
 }
