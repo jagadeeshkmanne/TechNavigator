@@ -816,6 +816,22 @@
     gap: 0.5rem;
     transition: all 0.2s;
 }
+        .reset-plan-btn {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--high-priority);
+    border: 1px solid var(--high-priority);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: 1rem;
+}
+
+.reset-plan-btn:hover {
+    background-color: rgba(239, 68, 68, 0.3);
+}
     </style>
 </head>
 <body>
@@ -900,6 +916,7 @@
                 <input type="number" class="planner-input" id="plannerDays" value="30" min="1">
                 <span class="planner-days">days</span>
                 <button class="planner-btn" id="generatePlanBtn">Generate</button>
+                <button class="reset-plan-btn" id="resetPlanBtn">Reset Plan</button>
             </div>
         </div>
         
@@ -1411,16 +1428,34 @@ function saveNote(problemId, content) {
         .collection('notes').add(noteData);
 }
 
-// Update all stats
 function updateStats() {
+    const today = new Date();
+    
     const completedCount = userProblems.filter(p => p.status === "Completed").length;
     const reviewCount = userProblems.filter(p => p.forReview).length;
-    const pendingCount = userProblems.filter(p => p.status === "Not Started").length;
+    
+    // Update pending count to include overdue problems
+    const pendingCount = userProblems.filter(p => {
+        // Include not started problems
+        if (p.status === "Not Started") return true;
+        
+        // Include overdue problems
+        if (p.dueDate) {
+            const dueDate = new Date(p.dueDate);
+            return dueDate < today && p.status !== "Completed";
+        }
+        
+        return false;
+    }).length;
+    
     const todayCount = userProblems.filter(p => {
         if (!p.dueDate) return false;
         const dueDate = new Date(p.dueDate);
-        const today = new Date();
-        return dueDate.toDateString() === today.toDateString();
+        
+        // Compare only the date parts
+        return dueDate.getFullYear() === today.getFullYear() && 
+               dueDate.getMonth() === today.getMonth() && 
+               dueDate.getDate() === today.getDate();
     }).length;
     
     // Map data priorities to UI priorities
@@ -1442,11 +1477,55 @@ function updateStats() {
     highPriorityStatsEl.textContent = `${highCompleted}/${highPriority.length}`;
     mediumPriorityStatsEl.textContent = `${mediumCompleted}/${mediumPriority.length}`;
     lowPriorityStatsEl.textContent = `${lowCompleted}/${lowPriority.length}`;
+    
+    // Update tab counts too
+    allCountEl.textContent = userProblems.length;
+    todayCountEl.textContent = todayCount;
+    completedCountEl.textContent = completedCount;
+    reviewCountEl.textContent = reviewCount;
+    pendingCountEl.textContent = pendingCount;
+    
+    // Update notes count too
+    updateNotesCount();
 }
 
-// Update notes count in the tab
 function updateNotesCount() {
-    notesCountEl.textContent = notesData.length;
+    // Count problems with notes (rather than number of note entries)
+    const problemsWithNotes = userProblems.filter(p => p.userNotes && p.userNotes.trim() !== "").length;
+    notesCountEl.textContent = problemsWithNotes;
+}
+
+function savePrioritySelection() {
+    // Save current priority checkbox states
+    const lastPrioritySelection = {
+        high: highPriorityCheck.checked,
+        medium: mediumPriorityCheck.checked,
+        low: lowPriorityCheck.checked
+    };
+    
+    // Save to localStorage if available
+    if (window.localStorage) {
+        localStorage.setItem('techNavigator_prioritySelection', JSON.stringify(lastPrioritySelection));
+    }
+}
+
+function loadPrioritySelection() {
+    // Try to load from localStorage
+    if (window.localStorage) {
+        const saved = localStorage.getItem('techNavigator_prioritySelection');
+        if (saved) {
+            try {
+                const lastPrioritySelection = JSON.parse(saved);
+                
+                // Apply saved selections to checkboxes
+                highPriorityCheck.checked = lastPrioritySelection.high;
+                mediumPriorityCheck.checked = lastPrioritySelection.medium;
+                lowPriorityCheck.checked = lastPrioritySelection.low;
+            } catch (e) {
+                console.error("Error loading saved priority selection:", e);
+            }
+        }
+    }
 }
 
 // Generate a random due date within the specified days
@@ -1455,6 +1534,55 @@ function generateDueDate(days) {
     const randomDays = Math.floor(Math.random() * days) + 1;
     date.setDate(date.getDate() + randomDays);
     return date.toISOString().split('T')[0];
+}
+
+function resetStudyPlan() {
+    // Confirm with the user before proceeding
+    if (!confirm("Are you sure you want to reset the study plan? This will clear all scheduled due dates.")) {
+        return;
+    }
+    
+    // Clear all due dates
+    let updatePromises = [];
+    let changedCount = 0;
+    
+    userProblems.forEach(problem => {
+        if (problem.dueDate) {
+            const index = userProblems.findIndex(p => p.id === problem.id);
+            if (index !== -1) {
+                userProblems[index].dueDate = null;
+                changedCount++;
+                
+                // Save to Firebase if user is signed in
+                if (currentUser) {
+                    const savePromise = saveProblemData(problem.id, { dueDate: null });
+                    updatePromises.push(savePromise);
+                }
+            }
+        }
+    });
+    
+    // Wait for all updates to complete
+    if (updatePromises.length > 0) {
+        Promise.all(updatePromises)
+            .then(() => {
+                showToast(`Study plan reset: cleared ${changedCount} scheduled problems`);
+                updateStats();
+                showProblems(currentView);
+            })
+            .catch(error => {
+                console.error("Error resetting study plan: ", error);
+                showToast("Error resetting study plan", true);
+            });
+    } else {
+        if (changedCount > 0) {
+            showToast(`Study plan reset: cleared ${changedCount} scheduled problems`);
+            updateStats();
+            showProblems(currentView);
+        } else {
+            showToast("No scheduled problems to reset");
+        }
+    }
 }
 
 // Generate study plan
@@ -1475,11 +1603,14 @@ function generateStudyPlan() {
         return;
     }
     
-    // Map UI priority selections to data priorities
+    // Save the current priority selection
+    savePrioritySelection();
+    
+    // Filter eligible problems
     let eligibleProblems = userProblems.filter(p => {
         if (p.status !== "Not Started") return false;
         
-        // Map data priorities to UI priorities
+        // Exact matching for priorities
         if (p.priority === "High" && includeHigh) return true;
         if (p.priority === "High-Medium" && includeMedium) return true;
         if (p.priority === "Medium" && includeLow) return true;
@@ -1487,36 +1618,187 @@ function generateStudyPlan() {
         return false;
     });
     
-    // Rest of the function remains the same
-    if (eligibleProblems.length === 0) {
-        showToast("No eligible problems found for the selected priorities", true);
-        return;
-    }
+    console.log("Priority selection:", { high: includeHigh, medium: includeMedium, low: includeLow });
+    console.log("Found eligible problems:", eligibleProblems.length);
     
     if (eligibleProblems.length === 0) {
         showToast("No eligible problems found for the selected priorities", true);
         return;
     }
     
-    // Shuffle the problems
-    eligibleProblems = shuffleArray(eligibleProblems);
+    // Define category order following NeetCode roadmap
+    const categoryOrder = [
+        "Arrays & Hashing",     // Start with basics
+        "Two Pointers",         // Simple technique
+        "Sliding Window",       // Extension of two pointers
+        "Stack",                // Fundamental data structure
+        "Binary Search",        // Important search algorithm
+        "Linked List",          // Fundamental data structure
+        "Trees",                // Tree traversals and manipulations
+        "Tries",                // Special tree structure
+        "Heap / Priority Queue", // Advanced data structure
+        "Backtracking",         // Recursive technique
+        "Graphs",               // Graph algorithms (moderate complexity)
+        "1D Dynamic Programming", // Start with simpler DP
+        "2D Dynamic Programming", // Advanced DP
+        "Greedy",               // Optimization technique
+        "Intervals",            // Range processing problems
+        "Bit Manipulation",     // Low-level operations
+        "Design"                // System design problems (most complex)
+    ];
+    
+    // Priority weights (for sorting within categories)
+    const priorityWeight = {
+        "High": 3,
+        "High-Medium": 2,
+        "Medium": 1
+    };
+    
+    // Difficulty weights
+    const difficultyWeight = {
+        "Easy": 1,
+        "Medium": 2,
+        "Hard": 3
+    };
+    
+    // Group problems by category
+    const problemsByCategory = {};
+    
+    // Initialize categories
+    categoryOrder.forEach(category => {
+        problemsByCategory[category] = [];
+    });
+    
+    // Group problems by category
+    eligibleProblems.forEach(problem => {
+        if (problemsByCategory[problem.category]) {
+            problemsByCategory[problem.category].push(problem);
+        } else {
+            // Handle any categories not in our predefined order
+            problemsByCategory[problem.category] = [problem];
+            // Add to the end of categoryOrder if it's not already there
+            if (!categoryOrder.includes(problem.category)) {
+                categoryOrder.push(problem.category);
+            }
+        }
+    });
+    
+    // Sort problems within each category by difficulty (Easy -> Medium -> Hard)
+    Object.keys(problemsByCategory).forEach(category => {
+        problemsByCategory[category].sort((a, b) => {
+            // First sort by priority (High > High-Medium > Medium)
+            if (priorityWeight[a.priority] !== priorityWeight[b.priority]) {
+                return priorityWeight[b.priority] - priorityWeight[a.priority];
+            }
+            
+            // Then sort by difficulty (Easy > Medium > Hard)
+            return difficultyWeight[a.difficulty] - difficultyWeight[b.difficulty];
+        });
+    });
+    
+    // Create a roadmap-ordered list of problems
+    let orderedProblems = [];
+    
+    // Calculate how many problems to take from each category
+    // Use a progressive distribution, more from early categories, fewer from later ones
+    const totalCategories = categoryOrder.length;
+    let remainingProblems = eligibleProblems.length;
+    let categoryWeights = {};
+    
+    // Assign weights based on position in the roadmap (earlier categories get higher weights)
+    let totalWeight = 0;
+    for (let i = 0; i < totalCategories; i++) {
+        // Decreasing weight: earlier categories get more problems
+        const weight = (totalCategories - i) / totalCategories;
+        const category = categoryOrder[i];
+        categoryWeights[category] = weight;
+        totalWeight += weight;
+    }
+    
+    // Normalize weights and calculate problems per category
+    let problemsPerCategory = {};
+    for (const category of categoryOrder) {
+        const normalizedWeight = categoryWeights[category] / totalWeight;
+        const numProblems = Math.min(
+            problemsByCategory[category].length,
+            Math.max(1, Math.round(eligibleProblems.length * normalizedWeight))
+        );
+        problemsPerCategory[category] = numProblems;
+        remainingProblems -= numProblems;
+    }
+    
+    // Adjust if we've allocated too many or too few problems
+    while (remainingProblems !== 0) {
+        if (remainingProblems > 0) {
+            // Find category with the most problems and add one
+            let maxCategory = categoryOrder[0];
+            for (const category of categoryOrder) {
+                if (problemsByCategory[category].length > problemsPerCategory[category]) {
+                    maxCategory = category;
+                    break;
+                }
+            }
+            
+            if (problemsByCategory[maxCategory].length > problemsPerCategory[maxCategory]) {
+                problemsPerCategory[maxCategory]++;
+                remainingProblems--;
+            } else {
+                break; // No more problems to allocate
+            }
+        } else {
+            // Find category with the most allocated problems and remove one
+            let maxCategory = categoryOrder[0];
+            let maxAllocated = problemsPerCategory[maxCategory];
+            
+            for (const category of categoryOrder) {
+                if (problemsPerCategory[category] > maxAllocated) {
+                    maxCategory = category;
+                    maxAllocated = problemsPerCategory[category];
+                }
+            }
+            
+            if (problemsPerCategory[maxCategory] > 1) {
+                problemsPerCategory[maxCategory]--;
+                remainingProblems++;
+            } else {
+                break; // Cannot reduce further
+            }
+        }
+    }
+    
+    // Now build the final ordered problem list
+    for (const category of categoryOrder) {
+        const problemsToTake = problemsPerCategory[category] || 0;
+        if (problemsToTake > 0) {
+            orderedProblems = orderedProblems.concat(
+                problemsByCategory[category].slice(0, problemsToTake)
+            );
+        }
+    }
+    
+    console.log("Roadmap ordered problems:", orderedProblems.length);
     
     // Calculate problems per day (at least 1)
-    const problemsPerDay = Math.max(1, Math.ceil(eligibleProblems.length / days));
+    const problemsPerDay = Math.max(1, Math.ceil(orderedProblems.length / days));
     
-    // Assign due dates
+    // Save current plan settings to localStorage
+    if (window.localStorage) {
+        localStorage.setItem('techNavigator_planDays', days.toString());
+    }
+    
+    // Assign due dates following the roadmap order
     let dueDate = new Date();
     let problemsAssigned = 0;
     let updatePromises = [];
     
-    for (let i = 0; i < eligibleProblems.length; i++) {
+    for (let i = 0; i < orderedProblems.length; i++) {
         // Move to next day if we've assigned enough problems for today
         if (problemsAssigned >= problemsPerDay) {
             dueDate.setDate(dueDate.getDate() + 1);
             problemsAssigned = 0;
         }
         
-        const problem = eligibleProblems[i];
+        const problem = orderedProblems[i];
         const dueDateStr = dueDate.toISOString().split('T')[0];
         
         // Update problem due date
@@ -1538,7 +1820,7 @@ function generateStudyPlan() {
     if (updatePromises.length > 0) {
         Promise.all(updatePromises)
             .then(() => {
-                showToast(`Study plan generated for ${days} days with ${eligibleProblems.length} problems`);
+                showToast(`Study plan generated: ${orderedProblems.length} problems over ${days} days following NeetCode roadmap`);
                 updateStats();
                 showProblems(currentView);
             })
@@ -1547,7 +1829,7 @@ function generateStudyPlan() {
                 showToast("Error saving study plan", true);
             });
     } else {
-        showToast(`Study plan generated for ${days} days with ${eligibleProblems.length} problems`);
+        showToast(`Study plan generated: ${orderedProblems.length} problems over ${days} days following NeetCode roadmap`);
         updateStats();
         showProblems(currentView);
     }
@@ -1565,20 +1847,36 @@ function shuffleArray(array) {
 
 // Filter problems based on current view
 function filterProblems(view) {
+    const today = new Date();
+    
     switch (view) {
         case 'today':
             return userProblems.filter(p => {
                 if (!p.dueDate) return false;
                 const dueDate = new Date(p.dueDate);
-                const today = new Date();
-                return dueDate.toDateString() === today.toDateString();
+                
+                // Compare only the date parts (year, month, day)
+                return dueDate.getFullYear() === today.getFullYear() && 
+                       dueDate.getMonth() === today.getMonth() && 
+                       dueDate.getDate() === today.getDate();
             });
         case 'completed':
             return userProblems.filter(p => p.status === "Completed");
         case 'review':
             return userProblems.filter(p => p.forReview);
         case 'pending':
-            return userProblems.filter(p => p.status === "Not Started");
+            return userProblems.filter(p => {
+                // Include not started problems
+                if (p.status === "Not Started") return true;
+                
+                // Include overdue problems (due date is in the past)
+                if (p.dueDate) {
+                    const dueDate = new Date(p.dueDate);
+                    return dueDate < today && p.status !== "Completed";
+                }
+                
+                return false;
+            });
         case 'notes':
             return userProblems.filter(p => p.userNotes && p.userNotes.trim() !== "");
         case 'all':
@@ -1679,12 +1977,20 @@ function showProblems(view) {
         priorityTag.textContent = getPriorityDisplayName(problem.priority);
         priorityTd.appendChild(priorityTag);
         
-        // Add due date
+        // Add due date with fixed date comparison
         const dueDateTd = document.createElement('td');
         if (problem.dueDate) {
             const dueDate = new Date(problem.dueDate);
             const today = new Date();
-            const isExpired = dueDate < today && dueDate.toDateString() !== today.toDateString();
+            
+            // Compare date parts for "expired" check
+            const isExpired = 
+                (dueDate.getFullYear() < today.getFullYear()) ||
+                (dueDate.getFullYear() === today.getFullYear() && 
+                 dueDate.getMonth() < today.getMonth()) ||
+                (dueDate.getFullYear() === today.getFullYear() && 
+                 dueDate.getMonth() === today.getMonth() && 
+                 dueDate.getDate() < today.getDate());
             
             const dueDateSpan = document.createElement('span');
             dueDateSpan.className = `due-date${isExpired ? " expired" : ""}`;
@@ -1771,6 +2077,22 @@ function getPriorityDisplayName(dataPriority) {
         case "Medium": return "Low";
         default: return dataPriority;
     }
+}
+
+function setupPlannerEvents() {
+    // Event listener for the generate plan button
+    generatePlanBtn.addEventListener('click', generateStudyPlan);
+    
+    // Event listener for the reset plan button
+    const resetPlanBtn = document.getElementById('resetPlanBtn');
+    if (resetPlanBtn) {
+        resetPlanBtn.addEventListener('click', resetStudyPlan);
+    }
+    
+    // Event listeners for the priority checkboxes to save preferences on change
+    highPriorityCheck.addEventListener('change', savePrioritySelection);
+    mediumPriorityCheck.addEventListener('change', savePrioritySelection);
+    lowPriorityCheck.addEventListener('change', savePrioritySelection);
 }
 
 // Render pagination controls
@@ -2082,7 +2404,7 @@ function setupEventListeners() {
     saveNotesBtn.addEventListener('click', saveNotes);
     
     // Study plan generator
-    generatePlanBtn.addEventListener('click', generateStudyPlan);
+    setupPlannerEvents();
     
     // View tabs
     viewTabs.forEach(tab => {
@@ -2124,9 +2446,29 @@ function setupEventListeners() {
     });
 }
 
-// Initialize the application
 function initApp() {
     loadProblemsData();
+    
+    // Update priority labels to match the data mapping
+    const highLabel = document.querySelector('.priority-check.high .priority-label');
+    const mediumLabel = document.querySelector('.priority-check.medium .priority-label');
+    const lowLabel = document.querySelector('.priority-check.low .priority-label');
+    
+    if (highLabel) highLabel.textContent = "High";
+    if (mediumLabel) mediumLabel.textContent = "High-Medium"; 
+    if (lowLabel) lowLabel.textContent = "Medium";
+    
+    // Load saved priority selection preferences
+    loadPrioritySelection();
+    
+    // Load saved days setting
+    if (window.localStorage) {
+        const savedDays = localStorage.getItem('techNavigator_planDays');
+        if (savedDays && plannerDays) {
+            plannerDays.value = savedDays;
+        }
+    }
+    
     setupAuth();
     setupEventListeners();
 }
