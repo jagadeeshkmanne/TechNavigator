@@ -725,6 +725,97 @@
         .toast.error {
             background-color: var(--hard-color);
         }
+        /* Updated Stats Section CSS */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.75rem; /* Reduced margin */
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 0.35rem; /* Reduced padding */
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    font-size: 0.875rem; /* Smaller font size */
+}
+
+.stat-value {
+    font-size: 1rem; /* Reduced from 1.125rem */
+    font-weight: 600;
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+
+.stat-label {
+    font-size: 0.7rem; /* Reduced from 0.75rem */
+    color: var(--text-muted);
+}
+        /* Problems Table - increased height */
+.problems-container {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    height: calc(100vh - 215px); /* Increased from 250px */
+    overflow-y: auto;
+}
+
+/* Notes View - match the problems container height */
+.notes-view {
+    display: none;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    height: calc(100vh - 215px); /* Increased from 250px */
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 215px); /* Increased from 250px */
+}
+        /* Study Planner - more compact */
+.planner-row {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem; /* Reduced from 0.75rem */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem; /* Reduced from 1rem */
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+/* View Tabs - more compact */
+.view-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem; /* Reduced from 1rem */
+}
+
+.view-tab {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    padding: 0.35rem 0.75rem; /* Reduced from 0.5rem 1rem */
+    font-size: 0.7rem; /* Reduced from 0.75rem */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
     </style>
 </head>
 <body>
