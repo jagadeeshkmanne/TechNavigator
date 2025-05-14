@@ -1423,10 +1423,10 @@ function updateStats() {
         return dueDate.toDateString() === today.toDateString();
     }).length;
     
-    // Calculate priority stats
+    // Map data priorities to UI priorities
     const highPriority = userProblems.filter(p => p.priority === "High");
-    const mediumPriority = userProblems.filter(p => p.priority === "Medium");
-    const lowPriority = userProblems.filter(p => p.priority === "Low");
+    const mediumPriority = userProblems.filter(p => p.priority === "High-Medium");
+    const lowPriority = userProblems.filter(p => p.priority === "Medium");
     
     const highCompleted = highPriority.filter(p => p.status === "Completed").length;
     const mediumCompleted = mediumPriority.filter(p => p.status === "Completed").length;
@@ -1442,13 +1442,6 @@ function updateStats() {
     highPriorityStatsEl.textContent = `${highCompleted}/${highPriority.length}`;
     mediumPriorityStatsEl.textContent = `${mediumCompleted}/${mediumPriority.length}`;
     lowPriorityStatsEl.textContent = `${lowCompleted}/${lowPriority.length}`;
-    
-    // Update tab counts
-    allCountEl.textContent = userProblems.length;
-    todayCountEl.textContent = todayCount;
-    completedCountEl.textContent = completedCount;
-    reviewCountEl.textContent = reviewCount;
-    pendingCountEl.textContent = pendingCount;
 }
 
 // Update notes count in the tab
@@ -1482,16 +1475,23 @@ function generateStudyPlan() {
         return;
     }
     
-    // Get only not started problems with the selected priorities
+    // Map UI priority selections to data priorities
     let eligibleProblems = userProblems.filter(p => {
         if (p.status !== "Not Started") return false;
         
+        // Map data priorities to UI priorities
         if (p.priority === "High" && includeHigh) return true;
-        if (p.priority === "Medium" && includeMedium) return true;
-        if (p.priority === "Low" && includeLow) return true;
+        if (p.priority === "High-Medium" && includeMedium) return true;
+        if (p.priority === "Medium" && includeLow) return true;
         
         return false;
     });
+    
+    // Rest of the function remains the same
+    if (eligibleProblems.length === 0) {
+        showToast("No eligible problems found for the selected priorities", true);
+        return;
+    }
     
     if (eligibleProblems.length === 0) {
         showToast("No eligible problems found for the selected priorities", true);
@@ -1659,8 +1659,24 @@ function showProblems(view) {
         // Add priority
         const priorityTd = document.createElement('td');
         const priorityTag = document.createElement('span');
-        priorityTag.className = `priority-tag ${problem.priority.toLowerCase()}`;
-        priorityTag.textContent = problem.priority;
+
+        // Map data priorities to UI priorities for styling
+        let priorityClass;
+        switch(problem.priority) {
+            case "High":
+                priorityClass = "high";
+                break;
+            case "High-Medium":
+                priorityClass = "medium";
+                break;
+            case "Medium":
+                priorityClass = "low";
+                break;
+            default:
+                priorityClass = problem.priority.toLowerCase();
+        }
+        priorityTag.className = `priority-tag ${priorityClass}`;
+        priorityTag.textContent = getPriorityDisplayName(problem.priority);
         priorityTd.appendChild(priorityTag);
         
         // Add due date
@@ -1746,6 +1762,15 @@ function showProblems(view) {
     
     // Update table info
     tableInfo.textContent = `Showing ${currentPageProblems.length} of ${problemsToShow.length} problems`;
+}
+        
+function getPriorityDisplayName(dataPriority) {
+    switch(dataPriority) {
+        case "High": return "High";
+        case "High-Medium": return "Medium";
+        case "Medium": return "Low";
+        default: return dataPriority;
+    }
 }
 
 // Render pagination controls
