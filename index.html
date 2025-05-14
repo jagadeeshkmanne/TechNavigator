@@ -1512,7 +1512,7 @@ function saveUserData() {
     const validStudyPlan = studyPlan.map(day => {
         let validDate = day.date;
         
-        if (!validDate || !(validDate instanceof Date) {
+        if (!validDate || !(validDate instanceof Date)) {
             console.warn('Invalid date found in study plan:', day);
             validDate = new Date();
         }
