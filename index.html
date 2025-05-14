@@ -1743,17 +1743,14 @@ function parseProblems(text) {
         if (line.includes('High Priority List')) {
             currentPriority = 'High';
             inNumberedList = false;
-            currentSection = '';
             continue;
         } else if (line.includes('Medium Priority List')) {
             currentPriority = 'Medium';
             inNumberedList = false;
-            currentSection = '';
             continue;
         } else if (line.includes('High-Medium Priority')) {
             currentPriority = 'High-Medium';
             inNumberedList = false;
-            currentSection = '';
             continue;
         }
         
@@ -1765,16 +1762,17 @@ function parseProblems(text) {
             continue;
         }
         
-        // Check for category headers - more strict matching
-        const categoryMatch = line.match(/^([A-Za-z][^#(]*?)(?:\s+\((\d+)\))?$/);
-        if (categoryMatch && !line.includes('#') && !line.includes('Priority') && line.length > 0) {
+        // Check explicitly for category headers with pattern like "Category Name (Number)"
+        const categoryMatch = line.match(/^([^(]+?)\s+\(\d+\)$/);
+        if (categoryMatch && !line.includes('(#') && !line.includes('Priority')) {
             // This is a category header
-            if (inNumberedList && currentSection) {
-                // If we're in a numbered list, use just the current section as category
-                currentCategory = currentSection;
+            if (inNumberedList) {
+                // If we're in a numbered list, prepend the section name
+                currentCategory = currentSection + ': ' + categoryMatch[1].trim();
             } else {
                 currentCategory = categoryMatch[1].trim();
             }
+            console.log("Found category:", currentCategory);
             continue;
         }
         
@@ -1808,6 +1806,8 @@ function parseProblems(text) {
                 completedDate: null,
                 revisionDates: []
             });
+            
+            console.log(`Added problem ${problemName} to category ${currentCategory}`);
         }
     }
     
