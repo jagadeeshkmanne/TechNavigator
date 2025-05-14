@@ -1670,17 +1670,21 @@ function generateStudyPlan() {
     });
     
     // Group problems by category
-    eligibleProblems.forEach(problem => {
-        if (problemsByCategory[problem.category]) {
-            problemsByCategory[problem.category].push(problem);
-        } else {
-            // Handle any categories not in our predefined order
-            problemsByCategory[problem.category] = [problem];
-            // Add to the end of categoryOrder if it's not already there
-            if (!categoryOrder.includes(problem.category)) {
-                categoryOrder.push(problem.category);
-            }
+    eligibleProblems.sort((a, b) => {
+        // Sort by category order first
+        const categoryA = categoryOrder.indexOf(a.category);
+        const categoryB = categoryOrder.indexOf(b.category);
+        if (categoryA !== categoryB) return categoryA - categoryB;
+        
+        // Then by priority
+        const priorityOrder = { "High": 3, "High-Medium": 2, "Medium": 1 };
+        if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
+            return priorityOrder[b.priority] - priorityOrder[a.priority];
         }
+        
+        // Then by difficulty
+        const difficultyOrder = { "Easy": 1, "Medium": 2, "Hard": 3 };
+        return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
     });
     
     // Sort problems within each category by difficulty (Easy -> Medium -> Hard)
@@ -1864,17 +1868,13 @@ function filterProblems(view) {
             return userProblems.filter(p => p.status === "Completed");
         case 'review':
             return userProblems.filter(p => p.forReview);
-        case 'pending':
+         case 'pending':
             return userProblems.filter(p => {
-                // Include not started problems
-                if (p.status === "Not Started") return true;
-                
-                // Include overdue problems (due date is in the past)
+                // Only show problems that have a due date in the past and aren't completed
                 if (p.dueDate) {
                     const dueDate = new Date(p.dueDate);
                     return dueDate < today && p.status !== "Completed";
                 }
-                
                 return false;
             });
         case 'notes':
