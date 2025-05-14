@@ -953,33 +953,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// Update your setupAuth function to include the Google logo
 function setupAuth(auth, db) {
+    console.log("Initializing authentication..."); // Debug
+    
     const authContainer = document.getElementById('auth-container');
     
-    auth.onAuthStateChanged(user => {
+    // Handle any pending redirect
+    auth.getRedirectResult().then((result) => {
+        console.log("Redirect result:", result); // Debug
+        if (result.user) {
+            console.log("User from redirect:", result.user.uid); // Debug
+            currentUser = result.user;
+            updateUIForUser(currentUser);
+            initializeUserData(db, currentUser);
+        }
+    }).catch((error) => {
+        console.error("Redirect error:", error); // Debug
+        alert("Sign-in error: " + error.message);
+    });
+    
+    // Listen for auth state changes
+    auth.onAuthStateChanged(async (user) => {
+        console.log("Auth state changed:", user ? user.uid : "no user"); // Debug
+        
         currentUser = user;
         
         if (user) {
-            // User is signed in
-            authContainer.innerHTML = `
-                <div class="user-info">
-                    <img class="user-avatar" src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName)}" alt="${user.displayName}">
-                    <span class="user-name">${user.displayName}</span>
-                </div>
-                <button class="auth-button signout" id="signout-button">
-                    Sign Out
-                </button>
-            `;
+            console.log("User signed in:", user.email); // Debug
+            updateUIForUser(user);
             
-            document.getElementById('signout-button').addEventListener('click', () => {
-                auth.signOut();
-            });
-            
-            // Load user data from Firestore
-            loadUserData(db);
+            try {
+                console.log("Loading user data..."); // Debug
+                await loadUserData(db, user);
+                console.log("User data loaded successfully"); // Debug
+            } catch (error) {
+                console.error("Error loading user data:", error); // Debug
+            }
         } else {
-            // User is signed out - now with Google logo
+            console.log("No user signed in"); // Debug
+            // Render sign-in button
             authContainer.innerHTML = `
                 <button class="auth-button google" id="signin-button">
                     <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-logo">
@@ -988,19 +1000,15 @@ function setupAuth(auth, db) {
             `;
             
             document.getElementById('signin-button').addEventListener('click', () => {
+                console.log("Sign-in button clicked"); // Debug
                 const provider = new firebase.auth.GoogleAuthProvider();
-                
-                // For local testing, consider using redirect instead of popup
                 auth.signInWithRedirect(provider).catch(error => {
-                    console.error('Sign in error:', error);
-                    // Show error message to user
-                    alert('Sign in failed: ' + error.message);
+                    console.error("Sign-in error:", error); // Debug
                 });
             });
         }
     });
 }
-
 // Load user data from Firestore
 function loadUserData(db) {
     if (!currentUser) return;
