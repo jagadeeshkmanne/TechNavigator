@@ -1518,12 +1518,21 @@ function loadPrioritySelection() {
                 const lastPrioritySelection = JSON.parse(saved);
                 
                 // Apply saved selections to checkboxes
-                highPriorityCheck.checked = lastPrioritySelection.high;
-                mediumPriorityCheck.checked = lastPrioritySelection.medium;
-                lowPriorityCheck.checked = lastPrioritySelection.low;
+                highPriorityCheck.checked = lastPrioritySelection.high !== false; // default to true if undefined
+                mediumPriorityCheck.checked = lastPrioritySelection.medium !== false; // default to true if undefined
+                lowPriorityCheck.checked = lastPrioritySelection.low !== false; // default to true if undefined
             } catch (e) {
                 console.error("Error loading saved priority selection:", e);
+                // Set default values if there's an error
+                highPriorityCheck.checked = true;
+                mediumPriorityCheck.checked = true;
+                lowPriorityCheck.checked = true;
             }
+        } else {
+            // Set default values if nothing saved
+            highPriorityCheck.checked = true;
+            mediumPriorityCheck.checked = true;
+            lowPriorityCheck.checked = true;
         }
     }
 }
@@ -1585,7 +1594,6 @@ function resetStudyPlan() {
     }
 }
 
-// Generate study plan
 function generateStudyPlan() {
     const days = parseInt(plannerDays.value) || 30;
     if (days < 1) {
@@ -1606,11 +1614,11 @@ function generateStudyPlan() {
     // Save the current priority selection
     savePrioritySelection();
     
-    // Filter eligible problems
+    // Filter eligible problems - Fixed priority filtering logic
     let eligibleProblems = userProblems.filter(p => {
         if (p.status !== "Not Started") return false;
         
-        // Exact matching for priorities
+        // Check priorities with exact matching
         if (p.priority === "High" && includeHigh) return true;
         if (p.priority === "High-Medium" && includeMedium) return true;
         if (p.priority === "Medium" && includeLow) return true;
@@ -1647,7 +1655,7 @@ function generateStudyPlan() {
         "Design"                // System design problems (most complex)
     ];
     
-    // Priority weights (for sorting within categories)
+    // Priority weights (higher is more important)
     const priorityWeight = {
         "High": 3,
         "High-Medium": 2,
@@ -1661,7 +1669,26 @@ function generateStudyPlan() {
         "Hard": 3
     };
     
-    // Group problems by category
+    // IMPROVED: Sort all eligible problems first by priority, then by category, then by difficulty
+    // This ensures consistent ordering with the sorting in the main view
+    eligibleProblems.sort((a, b) => {
+        // First sort by priority (High > High-Medium > Medium)
+        if (priorityWeight[a.priority] !== priorityWeight[b.priority]) {
+            return priorityWeight[b.priority] - priorityWeight[a.priority];
+        }
+        
+        // Then by category (following NeetCode roadmap order)
+        const categoryA = categoryOrder.indexOf(a.category);
+        const categoryB = categoryOrder.indexOf(b.category);
+        if (categoryA !== categoryB) {
+            return categoryA - categoryB;
+        }
+        
+        // Finally by difficulty (Easy > Medium > Hard)
+        return difficultyWeight[a.difficulty] - difficultyWeight[b.difficulty];
+    });
+    
+    // Now group problems by category while maintaining their sorted order
     const problemsByCategory = {};
     
     // Initialize categories
@@ -1669,42 +1696,17 @@ function generateStudyPlan() {
         problemsByCategory[category] = [];
     });
     
-    // Group problems by category
-    eligibleProblems.sort((a, b) => {
-        // Sort by category order first
-        const categoryA = categoryOrder.indexOf(a.category);
-        const categoryB = categoryOrder.indexOf(b.category);
-        if (categoryA !== categoryB) return categoryA - categoryB;
-        
-        // Then by priority
-        const priorityOrder = { "High": 3, "High-Medium": 2, "Medium": 1 };
-        if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
-            return priorityOrder[b.priority] - priorityOrder[a.priority];
+    // Group problems by category - they are already pre-sorted by priority and difficulty
+    eligibleProblems.forEach(problem => {
+        if (problemsByCategory[problem.category]) {
+            problemsByCategory[problem.category].push(problem);
         }
-        
-        // Then by difficulty
-        const difficultyOrder = { "Easy": 1, "Medium": 2, "Hard": 3 };
-        return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
-    });
-    
-    // Sort problems within each category by difficulty (Easy -> Medium -> Hard)
-    Object.keys(problemsByCategory).forEach(category => {
-        problemsByCategory[category].sort((a, b) => {
-            // First sort by priority (High > High-Medium > Medium)
-            if (priorityWeight[a.priority] !== priorityWeight[b.priority]) {
-                return priorityWeight[b.priority] - priorityWeight[a.priority];
-            }
-            
-            // Then sort by difficulty (Easy > Medium > Hard)
-            return difficultyWeight[a.difficulty] - difficultyWeight[b.difficulty];
-        });
     });
     
     // Create a roadmap-ordered list of problems
     let orderedProblems = [];
     
-    // Calculate how many problems to take from each category
-    // Use a progressive distribution, more from early categories, fewer from later ones
+    // Calculate distribution of problems across categories
     const totalCategories = categoryOrder.length;
     let remainingProblems = eligibleProblems.length;
     let categoryWeights = {};
@@ -1719,7 +1721,7 @@ function generateStudyPlan() {
         totalWeight += weight;
     }
     
-    // Normalize weights and calculate problems per category
+    // Calculate problems per category based on normalized weights
     let problemsPerCategory = {};
     for (const category of categoryOrder) {
         const normalizedWeight = categoryWeights[category] / totalWeight;
@@ -1770,17 +1772,59 @@ function generateStudyPlan() {
         }
     }
     
-    // Now build the final ordered problem list
+    // Build the final ordered problem list
+    // IMPROVED: Use internal sorting to ensure priority ordering is preserved
+    // This approach maintains priority consistency while respecting the roadmap progression
+    
+    // First, get the allocated problems from each category
+    let categoryOrderedProblems = [];
     for (const category of categoryOrder) {
         const problemsToTake = problemsPerCategory[category] || 0;
-        if (problemsToTake > 0) {
-            orderedProblems = orderedProblems.concat(
-                problemsByCategory[category].slice(0, problemsToTake)
-            );
+        if (problemsToTake > 0 && problemsByCategory[category]) {
+            // Take the pre-sorted problems from this category
+            categoryOrderedProblems.push({
+                category: category,
+                problems: problemsByCategory[category].slice(0, problemsToTake)
+            });
         }
     }
     
-    console.log("Roadmap ordered problems:", orderedProblems.length);
+    // Now assign problems to days, prioritizing higher priority problems first across all categories
+    // This ensures high priority problems are scheduled earlier regardless of their category
+    while (categoryOrderedProblems.length > 0) {
+        // Find the highest priority problem across all categories
+        let highestPriorityIdx = 0;
+        let highestPriorityValue = 0;
+        let highestPriorityCategory = 0;
+        
+        for (let i = 0; i < categoryOrderedProblems.length; i++) {
+            if (categoryOrderedProblems[i].problems.length > 0) {
+                const topProblem = categoryOrderedProblems[i].problems[0];
+                const priorityValue = priorityWeight[topProblem.priority];
+                
+                // If this is a higher priority or same priority but earlier category
+                if (priorityValue > highestPriorityValue || 
+                    (priorityValue === highestPriorityValue && 
+                     categoryOrder.indexOf(categoryOrderedProblems[i].category) < highestPriorityCategory)) {
+                    highestPriorityIdx = i;
+                    highestPriorityValue = priorityValue;
+                    highestPriorityCategory = categoryOrder.indexOf(categoryOrderedProblems[i].category);
+                }
+            }
+        }
+        
+        // Add the highest priority problem to our ordered list
+        if (categoryOrderedProblems[highestPriorityIdx].problems.length > 0) {
+            orderedProblems.push(categoryOrderedProblems[highestPriorityIdx].problems.shift());
+            
+            // Remove this category if it's now empty
+            if (categoryOrderedProblems[highestPriorityIdx].problems.length === 0) {
+                categoryOrderedProblems.splice(highestPriorityIdx, 1);
+            }
+        }
+    }
+    
+    console.log("Priority-ordered problems:", orderedProblems.length);
     
     // Calculate problems per day (at least 1)
     const problemsPerDay = Math.max(1, Math.ceil(orderedProblems.length / days));
@@ -1790,7 +1834,7 @@ function generateStudyPlan() {
         localStorage.setItem('techNavigator_planDays', days.toString());
     }
     
-    // Assign due dates following the roadmap order
+    // Assign due dates following the priority-based order
     let dueDate = new Date();
     let problemsAssigned = 0;
     let updatePromises = [];
@@ -1824,7 +1868,7 @@ function generateStudyPlan() {
     if (updatePromises.length > 0) {
         Promise.all(updatePromises)
             .then(() => {
-                showToast(`Study plan generated: ${orderedProblems.length} problems over ${days} days following NeetCode roadmap`);
+                showToast(`Study plan generated: ${orderedProblems.length} problems over ${days} days prioritized by importance`);
                 updateStats();
                 showProblems(currentView);
             })
@@ -1833,7 +1877,7 @@ function generateStudyPlan() {
                 showToast("Error saving study plan", true);
             });
     } else {
-        showToast(`Study plan generated: ${orderedProblems.length} problems over ${days} days following NeetCode roadmap`);
+        showToast(`Study plan generated: ${orderedProblems.length} problems over ${days} days prioritized by importance`);
         updateStats();
         showProblems(currentView);
     }
@@ -1852,10 +1896,11 @@ function shuffleArray(array) {
 // Filter problems based on current view
 function filterProblems(view) {
     const today = new Date();
+    let filteredProblems = [];
     
     switch (view) {
         case 'today':
-            return userProblems.filter(p => {
+            filteredProblems = userProblems.filter(p => {
                 if (!p.dueDate) return false;
                 const dueDate = new Date(p.dueDate);
                 
@@ -1864,12 +1909,15 @@ function filterProblems(view) {
                        dueDate.getMonth() === today.getMonth() && 
                        dueDate.getDate() === today.getDate();
             });
+            break;
         case 'completed':
-            return userProblems.filter(p => p.status === "Completed");
+            filteredProblems = userProblems.filter(p => p.status === "Completed");
+            break;
         case 'review':
-            return userProblems.filter(p => p.forReview);
-         case 'pending':
-            return userProblems.filter(p => {
+            filteredProblems = userProblems.filter(p => p.forReview);
+            break;
+        case 'pending':
+            filteredProblems = userProblems.filter(p => {
                 // Only show problems that have a due date in the past and aren't completed
                 if (p.dueDate) {
                     const dueDate = new Date(p.dueDate);
@@ -1877,12 +1925,76 @@ function filterProblems(view) {
                 }
                 return false;
             });
+            break;
         case 'notes':
-            return userProblems.filter(p => p.userNotes && p.userNotes.trim() !== "");
+            filteredProblems = userProblems.filter(p => p.userNotes && p.userNotes.trim() !== "");
+            break;
         case 'all':
         default:
-            return [...userProblems];
+            filteredProblems = [...userProblems];
+            break;
     }
+    
+    // Sort filtered problems - unified sorting for all views
+    // First by priority (High > High-Medium > Medium)
+    // Then by category (following NeetCode roadmap order)
+    // Finally by difficulty (Easy > Medium > Hard)
+    
+    // Define category ordering for NeetCode roadmap
+    const categoryOrder = [
+        "Arrays & Hashing",
+        "Two Pointers",
+        "Sliding Window",
+        "Stack",
+        "Binary Search", 
+        "Linked List",
+        "Trees",
+        "Tries",
+        "Heap / Priority Queue",
+        "Backtracking",
+        "Graphs",
+        "1D Dynamic Programming",
+        "2D Dynamic Programming",
+        "Greedy",
+        "Intervals",
+        "Bit Manipulation",
+        "Design"
+    ];
+    
+    // Define priority and difficulty weights
+    const priorityWeight = {
+        "High": 3,
+        "High-Medium": 2,
+        "Medium": 1
+    };
+    
+    const difficultyWeight = {
+        "Easy": 1,
+        "Medium": 2,
+        "Hard": 3
+    };
+    
+    // Sort problems by priority, then category, then difficulty
+    filteredProblems.sort((a, b) => {
+        // First by priority (high to low)
+        if (priorityWeight[a.priority] !== priorityWeight[b.priority]) {
+            return priorityWeight[b.priority] - priorityWeight[a.priority];
+        }
+        
+        // Then by category (following NeetCode roadmap order)
+        const categoryA = categoryOrder.indexOf(a.category);
+        const categoryB = categoryOrder.indexOf(b.category);
+        if (categoryA !== categoryB) {
+            return categoryA - categoryB;
+        }
+        
+        // Finally by difficulty (easy to hard)
+        const diffA = difficultyWeight[a.difficulty];
+        const diffB = difficultyWeight[b.difficulty];
+        return diffA - diffB;
+    });
+    
+    return filteredProblems;
 }
 
 // Update the problems table
