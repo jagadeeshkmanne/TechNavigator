@@ -854,6 +854,78 @@ let stats = {
     notStarted: 0
 };
 
+function addStyles() {
+  const styleElement = document.createElement('style');
+  styleElement.textContent = `
+    /* Improved Auth Buttons */
+    .auth-button {
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s, box-shadow 0.2s;
+    }
+    
+    .auth-button.google {
+      background-color: white;
+      color: #757575;
+      border: 1px solid #ddd;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .auth-button.google:hover {
+      background-color: #f8f8f8;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    
+    .auth-button.signout {
+      background-color: #f44336;
+      color: white;
+    }
+    
+    .auth-button.signout:hover {
+      background-color: #e53935;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    
+    .google-logo {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: 12px;
+    }
+    
+    .user-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .user-name {
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+    
+    .auth-container {
+      display: flex;
+      align-items: center;
+    }
+  `;
+  document.head.appendChild(styleElement);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Firebase
     if (typeof firebase !== 'undefined') {
@@ -875,9 +947,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Set up event listeners
     setupEventListeners();
+
+    addStyles();
+
 });
 
-// Set up authentication
+// Update your setupAuth function to include the Google logo
 function setupAuth(auth, db) {
     const authContainer = document.getElementById('auth-container');
     
@@ -888,7 +963,7 @@ function setupAuth(auth, db) {
             // User is signed in
             authContainer.innerHTML = `
                 <div class="user-info">
-                    <img class="user-avatar" src="${user.photoURL}" alt="${user.displayName}">
+                    <img class="user-avatar" src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName)}" alt="${user.displayName}">
                     <span class="user-name">${user.displayName}</span>
                 </div>
                 <button class="auth-button signout" id="signout-button">
@@ -903,17 +978,22 @@ function setupAuth(auth, db) {
             // Load user data from Firestore
             loadUserData(db);
         } else {
-            // User is signed out
+            // User is signed out - now with Google logo
             authContainer.innerHTML = `
                 <button class="auth-button google" id="signin-button">
+                    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-logo">
                     Sign in with Google
                 </button>
             `;
             
             document.getElementById('signin-button').addEventListener('click', () => {
                 const provider = new firebase.auth.GoogleAuthProvider();
-                auth.signInWithPopup(provider).catch(error => {
+                
+                // For local testing, consider using redirect instead of popup
+                auth.signInWithRedirect(provider).catch(error => {
                     console.error('Sign in error:', error);
+                    // Show error message to user
+                    alert('Sign in failed: ' + error.message);
                 });
             });
         }
