@@ -1750,14 +1750,25 @@ function updateStats() {
     stats.needsRevision = problems.filter(p => p.status === 'Needs Revision').length;
     stats.notStarted = stats.total - stats.completed - stats.needsRevision;
     
-    document.getElementById('stat-total').textContent = stats.total;
-    document.getElementById('stat-completed').textContent = stats.completed;
-    document.getElementById('stat-needs-revision').textContent = stats.needsRevision;
-    document.getElementById('stat-not-started').textContent = stats.notStarted;
+    // Add null checks before setting textContent
+    const statTotal = document.getElementById('stat-total');
+    if (statTotal) statTotal.textContent = stats.total;
     
-    // Update total progress
-    const progressPercentage = Math.round((stats.completed / stats.total) * 100);
-    document.getElementById('total-progress').textContent = `${stats.completed}/${stats.total} (${progressPercentage}%)`;
+    const statCompleted = document.getElementById('stat-completed');
+    if (statCompleted) statCompleted.textContent = stats.completed;
+    
+    const statNeedsRevision = document.getElementById('stat-needs-revision');
+    if (statNeedsRevision) statNeedsRevision.textContent = stats.needsRevision;
+    
+    const statNotStarted = document.getElementById('stat-not-started');
+    if (statNotStarted) statNotStarted.textContent = stats.notStarted;
+    
+    // Update total progress with null check
+    const totalProgressElement = document.getElementById('total-progress');
+    if (totalProgressElement) {
+        const progressPercentage = Math.round((stats.completed / stats.total) * 100);
+        totalProgressElement.textContent = `${stats.completed}/${stats.total} (${progressPercentage}%)`;
+    }
 }
 
 function updateStatusCounts() {
