@@ -1,1093 +1,931 @@
-<!-- Modified HTML with new tab structure -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeetCode Tracker - 175 Google Interview Problems</title>
-    <!-- Add Firebase and Google Auth SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <title>Tech Navigator - Problem Tracker</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    
+    <!-- AG Grid CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@30.0.3/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@30.0.3/styles/ag-theme-alpine-dark.css">
+    
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-tertiary: #334155;
-            --bg-highlight: #475569;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
+            --accent-color: #ffffff; /* White */
+            --accent-hover: #e2e8f0; /* Light gray on hover */
+            --secondary-color: #f9fafb;
+            --border-color: #334155;
+            --header-bg: #1e293b;
+            --sidebar-bg: #0f172a;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+            --easy-color: #10b981; /* Changed to more subtle teal-green */
+            --easy-color-dark: #0d9488; /* Darker variant for hover states */
+            --medium-color: #f59e0b;
+            --hard-color: #ef4444;
+            --expired-color: #ef4444;
             --text-muted: #94a3b8;
-            --blue: #3b82f6;
-            --blue-dark: #2563eb;
-            --green: #10b981;
-            --yellow: #f59e0b;
-            --orange: #f97316;
-            --red: #ef4444;
-            --border: #475569;
+            --text-color: #f1f5f9;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-text: #10b981; /* Matching accent text color */
+            --primary-color: var(--accent-color);
+            --primary-hover: var(--accent-hover);
+            --high-priority: #ef4444;
+            --medium-priority: #f59e0b;
+            --low-priority: #3b82f6;
         }
-
+        
+        /* Base Reset & Typography */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.5;
-            font-size: 14px;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
+        
+        /* Rotation Animation */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
+        
+        @keyframes colorChange {
+            0% { stroke: #ffffff; }    /* White */
+            25% { stroke: #22c55e; }   /* Green */
+            50% { stroke: #3b82f6; }   /* Blue */
+            75% { stroke: #facc15; }   /* Yellow */
+            100% { stroke: #ffffff; }  /* Back to White */
         }
-
-        h1 {
-            font-size: 1.25rem;
-            color: var(--blue);
-        }
-
-        .header-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* New status tabs style */
-        .status-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .status-tab {
-            flex: 1;
-            min-width: 120px;
-            padding: 0.75rem;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 0.25rem;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .status-tab:hover {
-            background-color: var(--bg-tertiary);
-        }
-
-        .status-tab.active {
-            border-color: var(--blue);
-            background-color: var(--bg-tertiary);
-        }
-
-        .status-tab-title {
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-
-        .status-tab-count {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        .status-tab.completed .status-tab-count {
-            color: var(--green);
-        }
-
-        .status-tab.review .status-tab-count {
-            color: var(--orange);
-        }
-
-        .status-tab.today .status-tab-count {
-            color: var(--blue);
-        }
-
-        .status-tab.pending .status-tab-count {
-            color: var(--red);
-        }
-
-        /* Total progress indicator */
-        .total-progress {
+        
+        /* Header */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background-color: var(--header-bg);
+            color: white;
             display: flex;
             align-items: center;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 0.25rem;
-            padding: 0.5rem 0.75rem;
-            margin-bottom: 1rem;
-            font-size: 0.8rem;
+            padding: 0 1.5rem;
+            z-index: 50;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-
-        .total-progress-label {
-            color: var(--text-muted);
+        
+        .compass-icon {
+            display: inline-block;
+            margin: 0 8px;
+            animation: rotate 4s linear infinite;
+            transform-origin: center;
         }
-
-        .total-progress-value {
-            margin-left: 0.5rem;
-            font-weight: 500;
-        }
-
-        .tab-navigation {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 1rem;
-        }
-
-        .tab-button {
-            padding: 0.5rem 1rem;
-            background: none;
-            border: none;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .tab-button.active {
-            color: var(--blue);
-            border-bottom: 2px solid var(--blue);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
+        
+        .compass-icon svg {
+            stroke: var(--accent-color);
+            animation: colorChange 4s linear infinite;
             display: block;
         }
-
-        /* Table styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-        }
-
-        th {
-            text-align: left;
-            padding: 0.5rem;
-            background-color: var(--bg-tertiary);
-            color: var(--text-secondary);
+        
+        .app-logo h1 {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+            margin: 0;
+            font-size: 1.2rem;
+            font-family: 'Roboto Mono', monospace;
             font-weight: 500;
-            border-bottom: 1px solid var(--border);
-        }
-
-        td {
-            padding: 0.5rem;
-            border-bottom: 1px solid var(--border);
-            color: var(--text-secondary);
-        }
-
-        tr:nth-child(even) {
-            background-color: var(--bg-secondary);
-        }
-
-        tr:nth-child(odd) {
-            background-color: #263149;
-        }
-
-        .table-container {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 0.25rem;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem;
-            background-color: var(--bg-tertiary);
-            font-size: 0.75rem;
-        }
-
-        .pagination-info {
-            color: var(--text-muted);
-        }
-
-        .pagination-controls {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background-color: var(--blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             color: white;
         }
-
-        .btn-primary:hover {
-            background-color: var(--blue-dark);
-        }
-
-        .btn-secondary {
-            background-color: var(--bg-tertiary);
-            color: var(--text-secondary);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--bg-highlight);
-        }
-
-        .btn-disabled {
-            background-color: var(--bg-tertiary);
-            color: var(--text-muted);
-            cursor: not-allowed;
-        }
-
-        /* Filter styles */
-        .filters {
+        
+        /* Auth Container */
+        .auth-container {
+            margin-left: auto;
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .auth-btn {
+            background-color: #333;
+            color: #ddd;
+            border: 1px solid #555;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .auth-btn:hover {
+            background-color: #444;
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            margin-top: 64px;
+            padding: 1.5rem;
+        }
+        
+        .content-header {
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
-            gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
-
-        .filter-group {
+        
+        /* Stats Section */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .total-value { color: white; }
+        .completed-value { color: var(--easy-color); }
+        .review-value { color: var(--accent-text); }
+        .pending-value { color: var(--medium-color); }
+        .today-value { color: var(--hard-color); }
+        .priority-value { color: var(--accent-text); }
+        
+        /* Study Planner */
+        .planner-row {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
             display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
         }
-
-        .search-container {
+        
+        .planner-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent-text);
+        }
+        
+        .planner-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .planner-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            width: 4rem;
+            font-size: 0.875rem;
+        }
+        
+        .planner-days {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .planner-btn {
+            background-color: var(--easy-color);
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .planner-btn:hover {
+            background-color: var(--easy-color-dark);
+        }
+        
+        /* Priority Checkboxes */
+        .priority-filters {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-right: 1rem;
+        }
+        
+        .priority-check {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .priority-check input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 3px;
+            border: 2px solid var(--border-color);
+            outline: none;
+            cursor: pointer;
             position: relative;
         }
-
-        .search-icon {
-            position: absolute;
-            left: 0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.75rem;
+        
+        .priority-check input[type="checkbox"]:checked {
+            background-color: var(--easy-color);
+            border-color: var(--easy-color);
         }
-
-        select, input {
+        
+        .priority-check input[type="checkbox"]:checked::after {
+            content: "✓";
+            position: absolute;
+            top: -3px;
+            left: 1px;
+            color: white;
+            font-size: 11px;
+        }
+        
+        .priority-check.high input[type="checkbox"]:checked {
+            background-color: var(--high-priority);
+            border-color: var(--high-priority);
+        }
+        
+        .priority-check.medium input[type="checkbox"]:checked {
+            background-color: var(--medium-priority);
+            border-color: var(--medium-priority);
+        }
+        
+        .priority-check.low input[type="checkbox"]:checked {
+            background-color: var(--low-priority);
+            border-color: var(--low-priority);
+        }
+        
+        .priority-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .priority-label.high {
+            color: var(--high-priority);
+        }
+        
+        .priority-label.medium {
+            color: var(--medium-priority);
+        }
+        
+        .priority-label.low {
+            color: var(--low-priority);
+        }
+        
+        /* View Tabs */
+        .view-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .view-tab {
+            background-color: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .view-tab:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .view-tab.active {
+            background-color: var(--easy-color);
+            color: white;
+            border-color: var(--easy-color);
+            font-weight: 500;
+        }
+        
+        .revision-count {
+            background-color: var(--easy-color);
+            color: white;
+            border-radius: 9999px;
+            padding: 0.125rem 0.375rem;
+            font-size: 0.625rem;
+            font-weight: 500;
+        }
+        
+        /* Problems Table */
+        .problems-container {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            height: calc(100vh - 250px);
+            overflow-y: auto;
+        }
+        
+        .problems-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        
+        .problems-table th {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: var(--text-muted);
+            font-weight: 500;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .problems-table td {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+        
+        .problems-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        
+        /* Problem Status */
+        .status-checkbox {
+            width: 1.125rem;
+            height: 1.125rem;
+            border-radius: 0.25rem;
+            border: 2px solid var(--border-color);
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .status-checkbox.completed {
+            background-color: var(--easy-color);
+            border-color: var(--easy-color);
+        }
+        
+        .status-checkbox.completed:after {
+            content: "✓";
+            position: absolute;
+            top: -3px;
+            left: 2px;
+            color: white;
+            font-size: 11px;
+            font-weight: normal;
+        }
+        
+        /* Problem Link */
+        .problem-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .problem-link:hover {
+            color: var(--accent-text);
+        }
+        
+        /* Difficulty Tags */
+        .difficulty-tag {
+            display: inline-block;
             padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
             font-size: 0.75rem;
-            background-color: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
+            font-weight: 600;
         }
-
-        input[type="search"] {
-            padding-left: 1.5rem;
-            width: 200px;
+        
+        .difficulty-tag.easy {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: var(--easy-color);
         }
-
-        /* Card styles */
-        .card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
+        
+        .difficulty-tag.medium {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--medium-color);
+        }
+        
+        .difficulty-tag.hard {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--hard-color);
+        }
+        
+        /* Priority Tag */
+        .priority-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-title {
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .problem-list {
-            list-style: none;
-        }
-
-        .problem-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem;
-            background-color: #263149;
-            border-radius: 0.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .problem-info {
-            flex: 1;
-        }
-
-        .problem-title {
             font-size: 0.75rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
+            font-weight: 600;
         }
-
-        .problem-meta {
-            font-size: 0.7rem;
+        
+        .priority-tag.high {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--high-priority);
+        }
+        
+        .priority-tag.medium {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--medium-priority);
+        }
+        
+        .priority-tag.low {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--low-priority);
+        }
+        
+        /* Due Date */
+        .due-date {
+            font-size: 0.875rem;
             color: var(--text-muted);
         }
-
-        .problem-actions {
-            display: flex;
-            gap: 0.25rem;
+        
+        .due-date.expired {
+            color: var(--expired-color);
+            font-weight: 500;
         }
-
-        .icon-button {
-            background: none;
+        
+        /* Action Buttons */
+        .action-btn {
+            background: transparent;
             border: none;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 0.25rem;
             border-radius: 0.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .icon-button:hover {
-            background-color: var(--bg-tertiary);
-        }
-
-        /* Progress bars */
-        .progress-container {
-            margin-bottom: 0.75rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .progress-bar {
-            height: 0.375rem;
-            background-color: var(--bg-tertiary);
-            border-radius: 0.25rem;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: var(--blue);
-        }
-
-        .easy {
-            color: var(--green);
-        }
-
-        .medium {
-            color: var(--yellow);
-        }
-
-        .hard {
-            color: var(--red);
-        }
-
-        .status-dot {
-            display: inline-block;
-            width: 0.5rem;
-            height: 0.5rem;
-            border-radius: 50%;
-            margin-right: 0.25rem;
-        }
-
-        .status-complete {
-            background-color: var(--green);
-        }
-
-        .status-in-progress {
-            background-color: var(--yellow);
-        }
-
-        .status-needs-revision {
-            background-color: var(--orange);
-        }
-
-        .status-not-started {
-            background-color: var(--text-muted);
-        }
-
-        a {
-            color: var(--blue);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .status-tabs {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Small status badges */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            font-size: 0.7rem;
-        }
-
-        .planner-day {
-            margin-bottom: 1rem;
-            border-left: 3px solid var(--blue);
-            padding-left: 0.5rem;
-        }
-
-        .planner-day-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .planner-day-title {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .planner-day-meta {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* Form controls for planner */
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.25rem;
-            font-size: 0.8rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 0.25rem;
-            background-color: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
+            transition: all 0.2s;
         }
         
-        .form-actions {
+        .action-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-text);
+        }
+        
+        .action-btn.marked {
+            color: var(--accent-text);
+        }
+        
+        .action-cell {
             display: flex;
-            justify-content: flex-end;
             gap: 0.5rem;
+            justify-content: center;
         }
-
-        /* Compact cards */
-        .compact-card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
+        
+        /* Category Style */
+        .category-tag {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .compact-card-title {
-            font-size: 0.8rem;
             font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+        }
+        
+        /* AG Grid Custom Styles */
+        .ag-theme-alpine-dark {
+            --ag-background-color: var(--card-bg);
+            --ag-foreground-color: var(--text-color);
+            --ag-border-color: var(--border-color);
+            --ag-header-background-color: rgba(0, 0, 0, 0.2);
+            --ag-row-hover-color: rgba(255, 255, 255, 0.03);
+            --ag-header-foreground-color: var(--text-muted);
+            --ag-font-size: 0.875rem;
+            --ag-font-family: 'Inter', sans-serif;
         }
 
-        /* Revision settings */
-        .revision-settings {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .revision-setting {
-            flex: 1;
-        }
-
-        /* Priority checkboxes */
-        .priority-checkboxes {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .priority-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .priority-checkbox input[type="checkbox"] {
-            appearance: none;
-            width: 1rem;
-            height: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 0.25rem;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .priority-checkbox input[type="checkbox"]:checked {
-            background-color: var(--blue);
-        }
-
-        .priority-checkbox input[type="checkbox"]:checked::after {
-            content: "✓";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 0.75rem;
-        }
-
-        /* Auth styles */
-        .auth-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 1rem;
-        }
-
-        .auth-button {
+        /* Table footer */
+        .table-footer {
+            background-color: rgba(0, 0, 0, 0.2);
             padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
             font-size: 0.75rem;
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .auth-button.google {
-            background-color: #4285F4;
-            color: white;
-        }
-
-        .auth-button.signout {
-            background-color: var(--red);
-            color: white;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .user-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-        }
-
-        .user-name {
-            font-size: 0.75rem;
-        }
-
-        /* Calculation results */
-        .calculation-results {
-            background-color: var(--bg-tertiary);
-            padding: 0.75rem;
-            border-radius: 0.25rem;
-            margin-bottom: 1rem;
-            font-size: 0.75rem;
-        }
-
-        .calculation-row {
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.25rem;
+            align-items: center;
         }
-
-        .calculation-total {
-            font-weight: bold;
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid var(--border);
-        }
-
-        /* Content tabs for filtered problems view */
-        .content-tabs {
-            margin-bottom: 1rem;
-        }
-
-        .content-tab-buttons {
+        
+        .pagination {
             display: flex;
-            border-bottom: 1px solid var(--border);
+            gap: 0.25rem;
         }
-
-        .content-tab-button {
-            padding: 0.5rem 1rem;
-            background: none;
-            border: none;
-            border-bottom: 2px solid transparent;
-            font-size: 0.8rem;
+        
+        .pagination-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
             color: var(--text-muted);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .pagination-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .pagination-btn.active {
+            background-color: var(--easy-color);
+            color: white;
+            border-color: var(--easy-color);
+            font-weight: 500;
+        }
+        
+        /* Notes Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 10% auto;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            width: 60%;
+            max-width: 700px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            font-size: 1.25rem;
             cursor: pointer;
         }
-
-        .content-tab-button.active {
-            color: var(--blue);
-            border-bottom-color: var(--blue);
+        
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
         }
-
-        .content-tab-panel {
+        
+        .notes-textarea {
+            width: 100%;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: white;
+            padding: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            margin-bottom: 1rem;
+        }
+        
+        .save-notes {
+            background-color: var(--easy-color);
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .save-notes:hover {
+            background-color: var(--easy-color-dark);
+        }
+        
+        /* Notes View */
+        .notes-view {
             display: none;
-            padding-top: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            height: calc(100vh - 250px);
         }
-
-        .content-tab-panel.active {
-            display: block;
+        
+        .note-card {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
         }
-
-        .badge {
-            display: inline-block;
-            padding: 0.15rem 0.5rem;
-            border-radius: 1rem;
-            font-size: 0.7rem;
-            font-weight: 500;
-            background-color: var(--bg-tertiary);
+        
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .note-title {
+            font-weight: 600;
+        }
+        
+        .note-meta {
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-left: 0.5rem;
+        }
+        
+        .note-content {
+            padding: 0.5rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 0.5rem;
+            white-space: pre-wrap;
+        }
+        
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 250px);
+        }
+        
+        /* Firebase Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--easy-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .toast.error {
+            background-color: var(--hard-color);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <h1>LeetCode Tracker</h1>
-                <div class="header-subtitle">175 Google Interview Problems</div>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="app-logo">
+            <h1>
+                <span>Tech</span>
+                <div class="compass-icon">
+                    <svg fill="none" height="28" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"></path>
+                    </svg>
+                </div>
+                <span>Navigator</span>
+            </h1>
+        </div>
+        <div class="auth-container">
+            <button class="auth-btn" id="authBtn">
+                <img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width: 18px; margin-right: 8px;"/>
+                Sign in
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Stats Section -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value total-value" id="totalProblems">175</div>
+                <div class="stat-label">Total</div>
             </div>
-            <div class="auth-container" id="auth-container">
-                <!-- Auth buttons will be loaded here -->
+            <div class="stat-card">
+                <div class="stat-value completed-value" id="completedProblems">0</div>
+                <div class="stat-label">Completed</div>
             </div>
-        </header>
-        
-        <!-- Status Tabs (Replacing stat cards) -->
-        <div class="status-tabs">
-            <div class="status-tab completed" data-status="completed">
-                <div class="status-tab-title">Completed</div>
-                <div class="status-tab-count" id="completed-count">0</div>
+            <div class="stat-card">
+                <div class="stat-value review-value" id="reviewProblems">0</div>
+                <div class="stat-label">Review</div>
             </div>
-            <div class="status-tab review" data-status="review">
-                <div class="status-tab-title">Review</div>
-                <div class="status-tab-count" id="review-count">0</div>
+            <div class="stat-card">
+                <div class="stat-value pending-value" id="pendingProblems">175</div>
+                <div class="stat-label">Pending</div>
             </div>
-            <div class="status-tab today" data-status="today">
-                <div class="status-tab-title">Today's</div>
-                <div class="status-tab-count" id="today-count">0</div>
+            <div class="stat-card">
+                <div class="stat-value today-value" id="todayProblems">0</div>
+                <div class="stat-label">Today</div>
             </div>
-            <div class="status-tab pending" data-status="pending">
-                <div class="status-tab-title">Pending</div>
-                <div class="status-tab-count" id="pending-count">0</div>
+            <div class="stat-card">
+                <div class="stat-value priority-value" id="highPriorityStats">0/95</div>
+                <div class="stat-label">High</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value priority-value" id="mediumPriorityStats">0/60</div>
+                <div class="stat-label">Medium</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value priority-value" id="lowPriorityStats">0/20</div>
+                <div class="stat-label">Low</div>
             </div>
         </div>
         
-        <!-- Total Progress Indicator -->
-        <div class="total-progress">
-            <span class="total-progress-label">Total Progress:</span>
-            <span class="total-progress-value" id="total-progress">0/175 (0%)</span>
-        </div>
-        
-        <!-- Compact Stats Cards -->
-        <div class="card-grid">
-            <div class="compact-card">
-                <div class="compact-card-title">Problem Priorities</div>
-                <div id="priority-progress">
-                    <!-- Priority progress will be loaded here -->
-                </div>
-            </div>
-            <div class="compact-card">
-                <div class="compact-card-title">Progress by Difficulty</div>
-                <div id="difficulty-progress">
-                    <!-- Difficulty progress will be loaded here -->
-                </div>
-            </div>
-        </div>
-        
-        <!-- Tab Navigation -->
-        <div class="tab-navigation">
-            <button class="tab-button active" data-tab="tracker">Problem Tracker</button>
-            <button class="tab-button" data-tab="planner">Study Planner</button>
-            <button class="tab-button" data-tab="analytics">Analytics</button>
-        </div>
-        
-        <!-- Content tabs for problems view -->
-        <div id="content-tabs" class="content-tabs">
-            <div class="content-tab-buttons">
-                <button class="content-tab-button active" data-content-tab="all">All Problems</button>
-                <button class="content-tab-button" data-content-tab="completed">Completed <span class="badge" id="completed-badge">0</span></button>
-                <button class="content-tab-button" data-content-tab="review">Review <span class="badge" id="review-badge">0</span></button>
-                <button class="content-tab-button" data-content-tab="today">Today's <span class="badge" id="today-badge">0</span></button>
-                <button class="content-tab-button" data-content-tab="pending">Pending <span class="badge" id="pending-badge">0</span></button>
-            </div>
-            
-            <!-- All Problems Tab Panel (default) -->
-            <div class="content-tab-panel active" id="all-tab-panel">
-                <!-- Tracker Tab -->
-                <div id="tracker-tab" class="tab-content active">
-                    <div class="filters">
-                        <div class="filter-group">
-                            <select id="category-filter">
-                                <option value="All">All Categories</option>
-                            </select>
-                            <select id="difficulty-filter">
-                                <option value="All">All Difficulties</option>
-                            </select>
-                            <select id="priority-filter">
-                                <option value="All">All Priorities</option>
-                            </select>
-                        </div>
-                        <div class="search-container">
-                            <span class="search-icon">🔍</span>
-                            <input type="search" id="search-input" placeholder="Search problems...">
-                        </div>
-                    </div>
-                    <div class="table-container">
-                        <table id="problems-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 50px">#</th>
-                                    <th>Problem</th>
-                                    <th style="width: 150px">Category</th>
-                                    <th style="width: 80px">Difficulty</th>
-                                    <th style="width: 80px">Priority</th>
-                                    <th style="width: 100px">Last Attempt</th>
-                                    <th style="width: 130px">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="problems-table-body">
-                                <!-- Problems will be loaded here -->
-                            </tbody>
-                        </table>
-                        <div class="pagination">
-                            <div class="pagination-info" id="pagination-info">Showing 0-0 of 0</div>
-                            <div class="pagination-controls">
-                                <button class="btn btn-disabled" id="prev-page">Prev</button>
-                                <span id="page-info">0 / 0</span>
-                                <button class="btn btn-disabled" id="next-page">Next</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Completed Tab Panel -->
-            <div class="content-tab-panel" id="completed-tab-panel">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="width: 50px">#</th>
-                                <th>Problem</th>
-                                <th style="width: 150px">Category</th>
-                                <th style="width: 80px">Difficulty</th>
-                                <th style="width: 100px">Last Attempt</th>
-                                <th style="width: 130px">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="completed-problems-body">
-                            <!-- Completed problems will be loaded here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <!-- Review Tab Panel -->
-            <div class="content-tab-panel" id="review-tab-panel">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="width: 50px">#</th>
-                                <th>Problem</th>
-                                <th style="width: 150px">Category</th>
-                                <th style="width: 80px">Difficulty</th>
-                                <th style="width: 100px">Last Attempt</th>
-                                <th style="width: 130px">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="review-problems-body">
-                            <!-- Review problems will be loaded here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <!-- Today's Tab Panel -->
-            <div class="content-tab-panel" id="today-tab-panel">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="width: 50px">#</th>
-                                <th>Problem</th>
-                                <th style="width: 150px">Category</th>
-                                <th style="width: 80px">Difficulty</th>
-                                <th style="width: 100px">Status</th>
-                                <th style="width: 130px">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="today-problems-body">
-                            <!-- Today's problems will be loaded here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <!-- Pending Tab Panel -->
-            <div class="content-tab-panel" id="pending-tab-panel">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="width: 50px">#</th>
-                                <th>Problem</th>
-                                <th style="width: 150px">Category</th>
-                                <th style="width: 80px">Difficulty</th>
-                                <th style="width: 100px">Scheduled</th>
-                                <th style="width: 130px">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="pending-problems-body">
-                            <!-- Pending problems will be loaded here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Planner Tab -->
-        <div id="planner-tab" class="tab-content">
-            <div class="card">
-                <div class="card-title">Study Plan Configuration</div>
-                
-                <div class="priority-checkboxes">
-                    <label class="priority-checkbox">
-                        <input type="checkbox" id="priority-high" checked>
-                        <span>High Priority</span>
+        <!-- Study Planner -->
+        <div class="planner-row">
+            <div class="planner-title">Study Planner</div>
+            <div class="planner-controls">
+                <div class="priority-filters">
+                    <label class="priority-check high">
+                        <input type="checkbox" checked id="highPriorityCheck">
+                        <span class="priority-label high">High</span>
                     </label>
-                    <label class="priority-checkbox">
-                        <input type="checkbox" id="priority-high-medium" checked>
-                        <span>High-Medium Priority</span>
+                    <label class="priority-check medium">
+                        <input type="checkbox" checked id="mediumPriorityCheck">
+                        <span class="priority-label medium">Medium</span>
                     </label>
-                    <label class="priority-checkbox">
-                        <input type="checkbox" id="priority-medium">
-                        <span>Medium Priority</span>
+                    <label class="priority-check low">
+                        <input type="checkbox" checked id="lowPriorityCheck">
+                        <span class="priority-label low">Low</span>
                     </label>
                 </div>
-                
-                <div class="form-group">
-                    <label class="form-label" for="plan-days">Number of Study Days</label>
-                    <input type="number" id="plan-days" class="form-control" min="1" value="30">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label" for="problems-per-day">Problems Per Day</label>
-                    <input type="number" id="problems-per-day" class="form-control" min="1" value="3" readonly>
-                </div>
-                
-                <div id="calculation-results" class="calculation-results">
-                    <div class="calculation-row">
-                        <span>High Priority Problems:</span>
-                        <span id="high-count">0</span>
-                    </div>
-                    <div class="calculation-row">
-                        <span>High-Medium Priority Problems:</span>
-                        <span id="high-medium-count">0</span>
-                    </div>
-                    <div class="calculation-row">
-                        <span>Medium Priority Problems:</span>
-                        <span id="medium-count">0</span>
-                    </div>
-                    <div class="calculation-row calculation-total">
-                        <span>Total Selected Problems:</span>
-                        <span id="total-selected">0</span>
-                    </div>
-                </div>
-                
-                <div class="revision-settings">
-                    <div class="form-group revision-setting">
-                        <label class="form-label" for="first-revision">First Revision (days)</label>
-                        <input type="number" id="first-revision" class="form-control" min="1" value="5">
-                    </div>
-                    <div class="form-group revision-setting">
-                        <label class="form-label" for="second-revision">Second Revision (days)</label>
-                        <input type="number" id="second-revision" class="form-control" min="1" value="14">
-                    </div>
-                </div>
-                
-                <div class="form-actions">
-                    <button id="generate-plan" class="btn btn-primary">Generate Plan</button>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Today's Problems</div>
-                <div id="today-problems" class="problem-list">
-                    <!-- Today's problems will be loaded here -->
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Pending Problems</div>
-                <div id="pending-problems" class="problem-list">
-                    <!-- Pending problems will be loaded here -->
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Problems Needing Revision</div>
-                <div id="revision-problems" class="problem-list">
-                    <!-- Revision problems will be loaded here -->
-                </div>
+                <input type="number" class="planner-input" id="plannerDays" value="30" min="1">
+                <span class="planner-days">days</span>
+                <button class="planner-btn" id="generatePlanBtn">Generate</button>
             </div>
         </div>
         
-        <!-- Analytics Tab -->
-        <div id="analytics-tab" class="tab-content">
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-title">Progress by Category</div>
-                    <div id="category-progress">
-                        <!-- Category progress will be loaded here -->
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Estimated Completion</div>
-                    <div class="progress-container">
-                        <div class="progress-header">
-                            <span>Overall Progress</span>
-                            <span id="overall-progress-percentage">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="overall-progress-bar" style="width: 0%"></div>
-                        </div>
-                        <div class="progress-meta" id="estimated-days" style="margin-top: 0.25rem; font-size: 0.75rem; color: var(--text-muted);">
-                            Est. 0 days remaining (3 problems/day)
-                        </div>
-                    </div>
-                    <div>
-                        <div style="font-size: 0.75rem; margin-bottom: 0.5rem;">Status Breakdown</div>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-                            <div style="padding: 0.5rem; background-color: #263149; border-radius: 0.25rem; text-align: center;">
-                                <div style="font-size: 0.75rem; color: var(--green);" id="status-complete-percentage">0%</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">Complete</div>
-                            </div>
-                            <div style="padding: 0.5rem; background-color: #263149; border-radius: 0.25rem; text-align: center;">
-                                <div style="font-size: 0.75rem; color: var(--orange);" id="status-needs-revision-percentage">0%</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">Review</div>
-                            </div>
-                            <div style="padding: 0.5rem; background-color: #263149; border-radius: 0.25rem; text-align: center;">
-                                <div style="font-size: 0.75rem; color: var(--text-muted);" id="status-not-started-percentage">0%</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">Not Started</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- View Tabs -->
+        <div class="view-tabs">
+            <button class="view-tab active" data-view="all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 6h13"></path>
+                    <path d="M8 12h13"></path>
+                    <path d="M8 18h13"></path>
+                    <path d="M3 6h.01"></path>
+                    <path d="M3 12h.01"></path>
+                    <path d="M3 18h.01"></path>
+                </svg>
+                All Problems (<span id="allCount">175</span>)
+            </button>
+            <button class="view-tab" data-view="today">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                Today (<span id="todayCount">0</span>)
+            </button>
+            <button class="view-tab" data-view="completed">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                Completed (<span id="completedCount">0</span>)
+            </button>
+            <button class="view-tab" data-view="review">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 11 12 14 22 4"></polyline>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                For Review (<span id="reviewCount">0</span>)
+            </button>
+            <button class="view-tab" data-view="pending">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                    <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+                Pending (<span id="pendingCount">175</span>)
+            </button>
+            <button class="view-tab" data-view="notes">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <path d="M14 2v6h6"></path>
+                    <path d="M16 13H8"></path>
+                    <path d="M16 17H8"></path>
+                    <path d="M10 9H8"></path>
+                </svg>
+                Notes (<span id="notesCount">0</span>)
+            </button>
+        </div>
+        
+        <!-- Problems Table -->
+        <div class="problems-container" id="problemsContainer">
+            <table class="problems-table" id="problemsTable">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Problem</th>
+                        <th>Category</th>
+                        <th>Difficulty</th>
+                        <th>Priority</th>
+                        <th>Due Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="problemsTableBody">
+                    <!-- Table rows will be added here dynamically -->
+                </tbody>
+            </table>
+            
+            <!-- Table Footer with Pagination -->
+            <div class="table-footer">
+                <div id="tableInfo">Showing 0 of 175 problems</div>
+                <div class="pagination" id="pagination">
+                <button class="pagination-btn" id="prevPageBtn">Prev</button>
+                <!-- Page buttons will be generated dynamically -->
+                <button class="pagination-btn" id="nextPageBtn">Next</button>
+            </div>
+            </div>
+        </div>
+        
+        <!-- Notes View -->
+        <div class="notes-view" id="notesView">
+            <div class="notes-grid" id="notesGrid">
+                <!-- Notes will be populated here dynamically -->
             </div>
         </div>
     </div>
+    
+    <!-- Notes Modal -->
+    <div class="modal" id="notesModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h3 class="modal-title" id="problemTitle">Problem Notes</h3>
+            <textarea class="notes-textarea" id="notesTextarea" placeholder="Add your notes here..."></textarea>
+            <button class="save-notes" id="saveNotesBtn">Save Notes</button>
+        </div>
+    </div>
+    
+    <!-- Toast Message -->
+    <div class="toast" id="toast"></div>
+
+    <!-- AG Grid JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@30.0.3/dist/ag-grid-community.min.js"></script>
+    
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
+    
     <script>
-        // Initialize Firebase with your configuration
-
-// Main data store - initializing these variables at the top level
-const problems = [
-{ id: 1, problem: "Contains Duplicate", number: 217, category: "Arrays & Hashing", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/contains-duplicate/", codeUrl: "https://leetcode.com/problems/contains-duplicate/description/" },
-{ id: 2, problem: "Two Sum", number: 1, category: "Arrays & Hashing", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/two-sum/", codeUrl: "https://leetcode.com/problems/two-sum/description/" },
-{ id: 3, problem: "Valid Anagram", number: 242, category: "Arrays & Hashing", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/valid-anagram/", codeUrl: "https://leetcode.com/problems/valid-anagram/description/" },
-{ id: 4, problem: "Group Anagrams", number: 49, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/group-anagrams/", codeUrl: "https://leetcode.com/problems/group-anagrams/description/" },
-{ id: 5, problem: "Top K Frequent Elements", number: 347, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/top-k-frequent-elements/", codeUrl: "https://leetcode.com/problems/top-k-frequent-elements/description/" },
-{ id: 6, problem: "Product of Array Except Self", number: 238, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/product-of-array-except-self/", codeUrl: "https://leetcode.com/problems/product-of-array-except-self/description/" },
-{ id: 7, problem: "Longest Consecutive Sequence", number: 128, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/longest-consecutive-sequence/", codeUrl: "https://leetcode.com/problems/longest-consecutive-sequence/description/" },
-{ id: 8, problem: "Valid Palindrome", number: 125, category: "Two Pointers", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/valid-palindrome/", codeUrl: "https://leetcode.com/problems/valid-palindrome/description/" },
-{ id: 9, problem: "3Sum", number: 15, category: "Two Pointers", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/3sum/", codeUrl: "https://leetcode.com/problems/3sum/description/" },
-{ id: 10, problem: "Container With Most Water", number: 11, category: "Two Pointers", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/container-with-most-water/", codeUrl: "https://leetcode.com/problems/container-with-most-water/description/" },
-{ id: 11, problem: "Trapping Rain Water", number: 42, category: "Two Pointers", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/trapping-rain-water/", codeUrl: "https://leetcode.com/problems/trapping-rain-water/description/" },
-{ id: 12, problem: "Two Sum II - Input Array Is Sorted", number: 167, category: "Two Pointers", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/", codeUrl: "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/" },
-{ id: 13, problem: "Best Time to Buy and Sell Stock", number: 121, category: "Sliding Window", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/", codeUrl: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/" },
-{ id: 14, problem: "Longest Substring Without Repeating Characters", number: 3, category: "Sliding Window", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/longest-substring-without-repeating-characters/", codeUrl: "https://leetcode.com/problems/longest-substring-without-repeating-characters/description/" },
-{ id: 15, problem: "Longest Repeating Character Replacement", number: 424, category: "Sliding Window", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/longest-repeating-character-replacement/", codeUrl: "https://leetcode.com/problems/longest-repeating-character-replacement/description/" },
-{ id: 16, problem: "Permutation in String", number: 567, category: "Sliding Window", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/permutation-in-string/", codeUrl: "https://leetcode.com/problems/permutation-in-string/description/" },
-{ id: 17, problem: "Minimum Window Substring", number: 76, category: "Sliding Window", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/minimum-window-substring/", codeUrl: "https://leetcode.com/problems/minimum-window-substring/description/" },
-{ id: 18, problem: "Valid Parentheses", number: 20, category: "Stack", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/valid-parentheses/", codeUrl: "https://leetcode.com/problems/valid-parentheses/description/" },
-{ id: 19, problem: "Min Stack", number: 155, category: "Stack", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/min-stack/", codeUrl: "https://leetcode.com/problems/min-stack/description/" },
-{ id: 20, problem: "Generate Parentheses", number: 22, category: "Stack", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/generate-parentheses/", codeUrl: "https://leetcode.com/problems/generate-parentheses/description/" },
-{ id: 21, problem: "Daily Temperatures", number: 739, category: "Stack", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/daily-temperatures/", codeUrl: "https://leetcode.com/problems/daily-temperatures/description/" },
-{ id: 22, problem: "Largest Rectangle in Histogram", number: 84, category: "Stack", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/largest-rectangle-in-histogram/", codeUrl: "https://leetcode.com/problems/largest-rectangle-in-histogram/description/" },
-{ id: 23, problem: "Binary Search", number: 704, category: "Binary Search", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/binary-search/", codeUrl: "https://leetcode.com/problems/binary-search/description/" },
-{ id: 24, problem: "Search a 2D Matrix", number: 74, category: "Binary Search", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/search-a-2d-matrix/", codeUrl: "https://leetcode.com/problems/search-a-2d-matrix/description/" },
-{ id: 25, problem: "Find Minimum in Rotated Sorted Array", number: 153, category: "Binary Search", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "Neetcode", leetCodeUrl: "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/", codeUrl: "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/" },
-// truncated to 25 problems for brevity, but you should include all 175 problems in your actual implementation
-];
-
-// Initialize variables for data management
-let userProblems = [...problems]; // Copy of problems that will be modified by user
-let categories = [];
-let studyPlan = [];
-let currentPage = 0;
-let rowsPerPage = 15;
-let filteredProblems = [];
-let currentUser = null;
-
-// State for filters
-let filters = {
-    search: '',
-    category: 'All',
-    difficulty: 'All',
-    priority: 'All'
-};
-
-// Stats
-let stats = {
-    total: 0,
-    completed: 0,
-    needsRevision: 0,
-    notStarted: 0
-};
-
-// Status tabs
-let statusCounts = {
-    completed: 0,
-    review: 0,
-    today: 0,
-    pending: 0
-};
-
-// Initialize Firebase with your configuration
+        // JavaScript code will go here
+        // Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBnbrX52t_Y2QgJv5nNA4xeb0ZX94_kKeY",
   authDomain: "technavigator-8ecd1.firebaseapp.com",
@@ -1098,1536 +936,926 @@ const firebaseConfig = {
   measurementId: "G-WE013C9L92"
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof firebase !== 'undefined') {
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        
-        // Set up authentication
-        setupAuth();
-        
-        // Set up tabs
-        setupTabs();
-        
-        // Initialize the app
-        initializeApp();
-        
-        // Set up event listeners
-        setupEventListeners();
-    } else {
-        console.error("Firebase SDK not loaded");
-        // Continue with local functionality even if Firebase isn't available
-        setupTabs();
-        initializeApp();
-        setupEventListeners();
-    }
-});
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
 
+// Main data store and application state
+let problems = []; // Will be populated from paste.txt data
+let userProblems = []; // Will store user-specific problem data from Firebase
+let currentUser = null;
+let currentView = 'all';
+let currentPage = 1;
+const itemsPerPage = 20;
+let problemsToShow = [];
+let notesData = []; // Stores user notes
+
+// DOM Elements
+const authBtn = document.getElementById('authBtn');
+const problemsContainer = document.getElementById('problemsContainer');
+const notesView = document.getElementById('notesView');
+const problemsTableBody = document.getElementById('problemsTableBody');
+const tableInfo = document.getElementById('tableInfo');
+const pagination = document.getElementById('pagination');
+const prevPageBtn = document.getElementById('prevPageBtn');
+const nextPageBtn = document.getElementById('nextPageBtn');
+const notesModal = document.getElementById('notesModal');
+const closeModal = document.getElementById('closeModal');
+const problemTitle = document.getElementById('problemTitle');
+const notesTextarea = document.getElementById('notesTextarea');
+const saveNotesBtn = document.getElementById('saveNotesBtn');
+const notesGrid = document.getElementById('notesGrid');
+const generatePlanBtn = document.getElementById('generatePlanBtn');
+const plannerDays = document.getElementById('plannerDays');
+const highPriorityCheck = document.getElementById('highPriorityCheck');
+const mediumPriorityCheck = document.getElementById('mediumPriorityCheck');
+const lowPriorityCheck = document.getElementById('lowPriorityCheck');
+const viewTabs = document.querySelectorAll('.view-tab');
+const toast = document.getElementById('toast');
+
+// Counter elements
+const totalProblemsEl = document.getElementById('totalProblems');
+const completedProblemsEl = document.getElementById('completedProblems');
+const reviewProblemsEl = document.getElementById('reviewProblems');
+const pendingProblemsEl = document.getElementById('pendingProblems');
+const todayProblemsEl = document.getElementById('todayProblems');
+const highPriorityStatsEl = document.getElementById('highPriorityStats');
+const mediumPriorityStatsEl = document.getElementById('mediumPriorityStats');
+const lowPriorityStatsEl = document.getElementById('lowPriorityStats');
+
+// Tab count elements
+const allCountEl = document.getElementById('allCount');
+const todayCountEl = document.getElementById('todayCount');
+const completedCountEl = document.getElementById('completedCount');
+const reviewCountEl = document.getElementById('reviewCount');
+const pendingCountEl = document.getElementById('pendingCount');
+const notesCountEl = document.getElementById('notesCount');
+
+// Load problems data from the variable in paste.txt
+function loadProblemsData() {
+    // This is the data from paste.txt
+    // Include the full problems data from paste.txt
+    problems = [
+        { id: 1, problem: "Contains Duplicate", number: 217, category: "Arrays & Hashing", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/contains-duplicate/", codeUrl: "https://leetcode.com/problems/contains-duplicate/description/" },
+        { id: 2, problem: "Two Sum", number: 1, category: "Arrays & Hashing", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/two-sum/", codeUrl: "https://leetcode.com/problems/two-sum/description/" },
+        { id: 3, problem: "Valid Anagram", number: 242, category: "Arrays & Hashing", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/valid-anagram/", codeUrl: "https://leetcode.com/problems/valid-anagram/description/" },
+        { id: 4, problem: "Group Anagrams", number: 49, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/group-anagrams/", codeUrl: "https://leetcode.com/problems/group-anagrams/description/" },
+        { id: 5, problem: "Top K Frequent Elements", number: 347, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/top-k-frequent-elements/", codeUrl: "https://leetcode.com/problems/top-k-frequent-elements/description/" },
+        { id: 6, problem: "Product of Array Except Self", number: 238, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/product-of-array-except-self/", codeUrl: "https://leetcode.com/problems/product-of-array-except-self/description/" },
+        { id: 7, problem: "Longest Consecutive Sequence", number: 128, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/longest-consecutive-sequence/", codeUrl: "https://leetcode.com/problems/longest-consecutive-sequence/description/" },
+        { id: 8, problem: "Valid Palindrome", number: 125, category: "Two Pointers", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/valid-palindrome/", codeUrl: "https://leetcode.com/problems/valid-palindrome/description/" },
+        { id: 9, problem: "3Sum", number: 15, category: "Two Pointers", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/3sum/", codeUrl: "https://leetcode.com/problems/3sum/description/" },
+        { id: 10, problem: "Container With Most Water", number: 11, category: "Two Pointers", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/container-with-most-water/", codeUrl: "https://leetcode.com/problems/container-with-most-water/description/" },
+        // Adding more problems with varying priorities
+        { id: 96, problem: "Insert Delete GetRandom O(1)", number: 380, category: "Arrays & Hashing", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/insert-delete-getrandom-o1/", codeUrl: "https://leetcode.com/problems/insert-delete-getrandom-o1/description/" },
+        { id: 97, problem: "Find All Duplicates in an Array", number: 442, category: "Arrays & Hashing", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/find-all-duplicates-in-an-array/", codeUrl: "https://leetcode.com/problems/find-all-duplicates-in-an-array/description/" },
+        { id: 98, problem: "First Missing Positive", number: 41, category: "Arrays & Hashing", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/first-missing-positive/", codeUrl: "https://leetcode.com/problems/first-missing-positive/description/" },
+        { id: 142, problem: "Candy", number: 135, category: "Greedy", difficulty: "Hard", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/candy/", codeUrl: "https://leetcode.com/problems/candy/description/" },
+        { id: 143, problem: "Partition Labels", number: 763, category: "Greedy", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/partition-labels/", codeUrl: "https://leetcode.com/problems/partition-labels/description/" },
+    ];
+
+    // Set up initial user problems based on master data
+    userProblems = problems.map(problem => ({
+        ...problem,
+        status: "Not Started",
+        forReview: false,
+        dueDate: null,
+        userNotes: ""
+    }));
+
+    // Initialize the view with the data
+    updateStats();
+    showProblems(currentView);
+}
+
+// Authentication functions
 function setupAuth() {
-    const auth = firebase.auth();
-    
-    auth.onAuthStateChanged(async (user) => {
-        console.log('Auth state changed:', user ? user.uid : 'no user');
-        
+    authBtn.addEventListener('click', () => {
+        if (currentUser) {
+            // User is signed in, sign out
+            auth.signOut()
+                .then(() => {
+                    showToast('Successfully signed out');
+                })
+                .catch(error => {
+                    showToast('Error signing out: ' + error.message, true);
+                });
+        } else {
+            // User is not signed in, sign in
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .catch(error => {
+                    showToast('Error signing in: ' + error.message, true);
+                });
+        }
+    });
+
+    // Listen for auth state changes
+    auth.onAuthStateChanged(user => {
+        currentUser = user;
         if (user) {
-            currentUser = user;
-            updateUIForUser(user);
-            
-            try {
-                await loadUserData();
-                initializeApp();
-            } catch (error) {
-                console.error('Error loading user data:', error);
-                alert('There was an error loading your data. Proceeding with default data.');
-                initializeApp();
-            }
+            authBtn.innerHTML = `
+                <img src="${user.photoURL || ''}" alt="${user.displayName || 'User'}" style="width: 18px; height: 18px; border-radius: 50%; margin-right: 8px;">
+                Sign Out
+            `;
+            loadUserData();
         } else {
-            renderSignInButton();
-            initializeApp(); // Proceed with default data for non-logged in users
+            authBtn.innerHTML = `
+                <img alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width: 18px; margin-right: 8px;"/>
+                Sign in
+            `;
+            // Reset to default data when signed out
+            userProblems = problems.map(problem => ({
+                ...problem,
+                status: "Not Started",
+                forReview: false,
+                dueDate: null,
+                userNotes: ""
+            }));
+            notesData = [];
+            updateStats();
+            showProblems(currentView);
         }
     });
 }
 
-function updateUIForUser(user) {
-    const authContainer = document.getElementById('auth-container');
-    if (!authContainer) return;
-    
-    authContainer.innerHTML = `
-        <div class="user-info">
-            <img class="user-avatar" src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName || 'User')}" 
-                 alt="${user.displayName || 'User'}">
-            <span class="user-name">${user.displayName || user.email || 'User'}</span>
-        </div>
-        <button class="auth-button signout compact" id="signout-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                <polyline points="16 17 21 12 16 7"></polyline>
-                <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-            <span>Sign out</span>
-        </button>
-    `;
-    
-    document.getElementById('signout-button').addEventListener('click', () => {
-        firebase.auth().signOut().then(() => {
-            window.location.reload();
-        });
-    });
-}
+// Firebase data functions
+function loadUserData() {
+    if (!currentUser) return;
 
-function renderSignInButton() {
-    const authContainer = document.getElementById('auth-container');
-    if (!authContainer) return;
+    const userRef = db.collection('users').doc(currentUser.uid);
     
-    authContainer.innerHTML = `
-        <button class="auth-button google compact" id="signin-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48">
-                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-                <path fill="none" d="M0 0h48v48H0z"/>
-            </svg>
-            <span>Sign in</span>
-        </button>
-    `;
-    
-    document.getElementById('signin-button').addEventListener('click', signInWithGooglePopup);
-}
-
-async function signInWithGooglePopup() {
-    try {
-        const auth = firebase.auth();
-        const provider = new firebase.auth.GoogleAuthProvider();
-        
-        provider.addScope('profile');
-        provider.addScope('email');
-        
-        const result = await auth.signInWithPopup(provider);
-        console.log('Sign-in successful', result.user);
-        
-        await initializeUserData(result.user);
-        updateUIForUser(result.user);
-        
-    } catch (error) {
-        console.error('Sign-in error:', error);
-        
-        if (error.code === 'auth/account-exists-with-different-credential') {
-            alert('An account already exists with this email. Please sign in with the original method.');
-        } else if (error.code === 'auth/popup-closed-by-user') {
-            console.log('Sign-in popup was closed by user');
-        } else {
-            alert('Sign-in failed: ' + error.message);
-        }
-    }
-}
-
-async function initializeUserData(user) {
-    if (!user || typeof firebase === 'undefined') return false;
-    
-    try {
-        const db = firebase.firestore();
-        const userRef = db.collection('users').doc(user.uid);
-        
-        const doc = await userRef.get();
-        
-        if (!doc.exists) {
-            console.log('Creating new user document');
-            await userRef.set({
-                problems: userProblems,
-                studyPlan: [],
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
-                email: user.email,
-                displayName: user.displayName,
-                photoURL: user.photoURL || ''
-            });
-            console.log('User document created successfully');
-            return true;
-        } else {
-            console.log('User document already exists');
-            return true;
-        }
-    } catch (error) {
-        console.error('Error initializing user data:', error);
-        return false;
-    }
-}
-
-async function loadUserData() {
-    if (!currentUser || typeof firebase === 'undefined') {
-        console.log('No current user or Firebase not initialized, using default data');
-        return false;
-    }
-    
-    try {
-        console.log('Loading user data for:', currentUser.uid);
-        const db = firebase.firestore();
-        const userRef = db.collection('users').doc(currentUser.uid);
-        
-        const doc = await userRef.get();
-        
-        if (doc.exists) {
-            const data = doc.data();
-            console.log('User data loaded');
-            
-            if (data.problems && Array.isArray(data.problems)) {
-                userProblems = data.problems;
-                console.log(`Loaded ${userProblems.length} problems`);
-            }
-            
-            if (data.studyPlan && Array.isArray(data.studyPlan)) {
-                studyPlan = data.studyPlan.map(day => {
-                    let validDate = day.date;
-                    
-                    if (day.date && typeof day.date.toDate === 'function') {
-                        validDate = day.date.toDate();
-                    } else if (typeof day.date === 'string' || typeof day.date === 'number') {
-                        validDate = new Date(day.date);
-                    } else {
-                        console.warn('Invalid date found in study plan, using today');
-                        validDate = new Date();
-                    }
-                    
+    // Get user problems data
+    userRef.collection('problems').get()
+        .then(snapshot => {
+            if (!snapshot.empty) {
+                const data = {};
+                snapshot.forEach(doc => {
+                    data[doc.id] = doc.data();
+                });
+                
+                // Update userProblems with user-specific data
+                userProblems = problems.map(problem => {
+                    const userData = data[problem.id.toString()] || {};
                     return {
-                        ...day,
-                        date: validDate
+                        ...problem,
+                        status: userData.status || "Not Started",
+                        forReview: userData.forReview || false,
+                        dueDate: userData.dueDate || null,
+                        userNotes: userData.userNotes || ""
                     };
                 });
                 
-                console.log(`Loaded ${studyPlan.length} study plan days`);
+                updateStats();
+                showProblems(currentView);
             }
-            
-            return true;
-        } else {
-            console.log('No user document found, initializing');
-            await initializeUserData(currentUser);
-            return false;
-        }
-    } catch (error) {
-        console.error('Error loading user data:', error);
-        return false;
-    }
-}
-
-async function saveUserData() {
-    if (!currentUser || typeof firebase === 'undefined') {
-        console.log('Cannot save: No current user or Firebase not initialized');
-        return false;
-    }
-    
-    try {
-        console.log('Saving user data for:', currentUser.uid);
-        
-        const db = firebase.firestore();
-        const userRef = db.collection('users').doc(currentUser.uid);
-        
-        // Convert dates to Firestore timestamps
-        const processedStudyPlan = studyPlan.map(day => {
-            let validDate = day.date;
-            
-            if (!(validDate instanceof Date)) {
-                console.warn('Invalid date found in study plan before save:', day.date);
-                validDate = new Date();
-            }
-            
-            return {
-                ...day,
-                date: firebase.firestore.Timestamp.fromDate(validDate)
-            };
-        });
-        
-        await userRef.set({
-            problems: userProblems,
-            studyPlan: processedStudyPlan,
-            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-        
-        console.log('User data saved successfully');
-        return true;
-    } catch (error) {
-        console.error('Error saving user data:', error);
-        return false;
-    }
-}
-
-function setupTabs() {
-    // Main tabs (Tracker, Planner, Analytics)
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabName = button.getAttribute('data-tab');
-            
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            
-            button.classList.add('active');
-            document.getElementById(`${tabName}-tab`).classList.add('active');
-            
-            // Special case for planner tab
-            if (tabName === 'planner') {
-                updateProblemsPerDay();
-                renderTodayProblems();
-                renderPendingProblems();
-                renderRevisionProblems();
-            }
-        });
-    });
-    
-    // Content tabs (All, Completed, Review, Today's, Pending)
-    const contentTabButtons = document.querySelectorAll('.content-tab-button');
-    const contentTabPanels = document.querySelectorAll('.content-tab-panel');
-    
-    contentTabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabName = button.getAttribute('data-content-tab');
-            
-            contentTabButtons.forEach(btn => btn.classList.remove('active'));
-            contentTabPanels.forEach(panel => panel.classList.remove('active'));
-            
-            button.classList.add('active');
-            document.getElementById(`${tabName}-tab-panel`).classList.add('active');
-            
-            // Render the appropriate table
-            if (tabName === 'all') {
-                renderProblemsTable();
-            } else if (tabName === 'completed') {
-                renderCompletedProblems();
-            } else if (tabName === 'review') {
-                renderReviewProblems();
-            } else if (tabName === 'today') {
-                renderTodaysProblems();
-            } else if (tabName === 'pending') {
-                renderPendingProblemsTable();
-            }
-        });
-    });
-}
-
-function setupEventListeners() {
-    // Filter changes
-    const searchInput = document.getElementById('search-input');
-    const categoryFilter = document.getElementById('category-filter');
-    const difficultyFilter = document.getElementById('difficulty-filter');
-    const priorityFilter = document.getElementById('priority-filter');
-    
-    if (searchInput) searchInput.addEventListener('input', handleFilterChange);
-    if (categoryFilter) categoryFilter.addEventListener('change', handleFilterChange);
-    if (difficultyFilter) difficultyFilter.addEventListener('change', handleFilterChange);
-    if (priorityFilter) priorityFilter.addEventListener('change', handleFilterChange);
-    
-    // Pagination
-    const prevPageBtn = document.getElementById('prev-page');
-    const nextPageBtn = document.getElementById('next-page');
-    
-    if (prevPageBtn) {
-        prevPageBtn.addEventListener('click', () => {
-            if (currentPage > 0) {
-                currentPage--;
-                renderProblemsTable();
-            }
-        });
-    }
-    
-    if (nextPageBtn) {
-        nextPageBtn.addEventListener('click', () => {
-            const totalPages = Math.ceil(filteredProblems.length / rowsPerPage);
-            if (currentPage < totalPages - 1) {
-                currentPage++;
-                renderProblemsTable();
-            }
-        });
-    }
-    
-    // Generate study plan
-    const generatePlanBtn = document.getElementById('generate-plan');
-    if (generatePlanBtn) {
-        generatePlanBtn.addEventListener('click', () => generateStudyPlan(true));
-    }
-    
-    // Priority checkboxes and days input for study planner
-    const priorityHigh = document.getElementById('priority-high');
-    const priorityHighMedium = document.getElementById('priority-high-medium');
-    const priorityMedium = document.getElementById('priority-medium');
-    const planDays = document.getElementById('plan-days');
-    
-    if (priorityHigh) priorityHigh.addEventListener('change', updateProblemsPerDay);
-    if (priorityHighMedium) priorityHighMedium.addEventListener('change', updateProblemsPerDay);
-    if (priorityMedium) priorityMedium.addEventListener('change', updateProblemsPerDay);
-    if (planDays) planDays.addEventListener('input', updateProblemsPerDay);
-    
-    // Status tabs
-    const statusTabs = document.querySelectorAll('.status-tab');
-    statusTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const status = tab.getAttribute('data-status');
-            filterByStatus(status);
-        });
-    });
-    
-    // Add debug controls for testing
-    setTimeout(addDebugControls, 1000);
-}
-
-function initializeApp() {
-    // Extract categories from problems for filtering
-    updateFilters();
-    
-    // Apply initial filters
-    applyFilters();
-    
-    // Calculate and update statistics
-    updateStats();
-    updateStatusCounts();
-    
-    // Render initial tables
-    renderProblemsTable();
-    
-    // Initialize the study planner
-    updateProblemsPerDay();
-    renderTodayProblems();
-    renderPendingProblems();
-    renderRevisionProblems();
-}
-
-function updateFilters() {
-    // Get unique categories for filtering
-    const uniqueCategories = [...new Set(userProblems.map(p => p.category))];
-    const categoryFilter = document.getElementById('category-filter');
-    
-    if (categoryFilter) {
-        // Clear existing options except the first one
-        while (categoryFilter.options.length > 1) {
-            categoryFilter.remove(1);
-        }
-        
-        // Add new options
-        uniqueCategories.forEach(category => {
-            const option = document.createElement('option');
-            option.value = category;
-            option.textContent = category;
-            categoryFilter.appendChild(option);
-        });
-    }
-    
-    // Get unique difficulties
-    const uniqueDifficulties = [...new Set(userProblems.map(p => p.difficulty))];
-    const difficultyFilter = document.getElementById('difficulty-filter');
-    
-    if (difficultyFilter) {
-        while (difficultyFilter.options.length > 1) {
-            difficultyFilter.remove(1);
-        }
-        
-        uniqueDifficulties.forEach(difficulty => {
-            const option = document.createElement('option');
-            option.value = difficulty;
-            option.textContent = difficulty;
-            difficultyFilter.appendChild(option);
-        });
-    }
-    
-    // Get unique priorities
-    const uniquePriorities = [...new Set(userProblems.map(p => p.priority))];
-    const priorityFilter = document.getElementById('priority-filter');
-    
-    if (priorityFilter) {
-        while (priorityFilter.options.length > 1) {
-            priorityFilter.remove(1);
-        }
-        
-        uniquePriorities.forEach(priority => {
-            const option = document.createElement('option');
-            option.value = priority;
-            option.textContent = priority;
-            priorityFilter.appendChild(option);
-        });
-    }
-    
-    // Store categories for later use
-    categories = uniqueCategories;
-}
-
-function handleFilterChange() {
-    const searchInput = document.getElementById('search-input');
-    const categoryFilter = document.getElementById('category-filter');
-    const difficultyFilter = document.getElementById('difficulty-filter');
-    const priorityFilter = document.getElementById('priority-filter');
-    
-    filters.search = searchInput ? searchInput.value.toLowerCase() : '';
-    filters.category = categoryFilter ? categoryFilter.value : 'All';
-    filters.difficulty = difficultyFilter ? difficultyFilter.value : 'All';
-    filters.priority = priorityFilter ? priorityFilter.value : 'All';
-    
-    applyFilters();
-    currentPage = 0;
-    renderProblemsTable();
-}
-
-function applyFilters() {
-    // Start with a copy of all problems
-    filteredProblems = [...userProblems];
-    
-    // Apply search filter if any
-    if (filters.search) {
-        filteredProblems = filteredProblems.filter(item => 
-            item.problem.toLowerCase().includes(filters.search) ||
-            item.number.toString().includes(filters.search) ||
-            item.category.toLowerCase().includes(filters.search)
-        );
-    }
-    
-    // Apply category filter if not "All"
-    if (filters.category !== 'All') {
-        filteredProblems = filteredProblems.filter(item => item.category === filters.category);
-    }
-    
-    // Apply difficulty filter if not "All"
-    if (filters.difficulty !== 'All') {
-        filteredProblems = filteredProblems.filter(item => item.difficulty === filters.difficulty);
-    }
-    
-    // Apply priority filter if not "All"
-    if (filters.priority !== 'All') {
-        filteredProblems = filteredProblems.filter(item => item.priority === filters.priority);
-    }
-}
-
-function updateStats() {
-    // Calculate statistics from problems data
-    stats.total = userProblems.length;
-    stats.completed = userProblems.filter(p => p.status === 'Complete').length;
-    stats.needsRevision = userProblems.filter(p => p.status === 'Needs Revision').length;
-    stats.notStarted = stats.total - stats.completed - stats.needsRevision;
-    
-    // Update the total progress display
-    const totalProgressElement = document.getElementById('total-progress');
-    if (totalProgressElement) {
-        const progressPercentage = Math.round((stats.completed / stats.total) * 100) || 0;
-        totalProgressElement.textContent = `${stats.completed}/${stats.total} (${progressPercentage}%)`;
-    }
-}
-
-function updateStatusCounts() {
-    // Count completed and review problems
-    statusCounts.completed = userProblems.filter(p => p.status === 'Complete').length;
-    statusCounts.review = userProblems.filter(p => p.status === 'Needs Revision').length;
-    
-    // Count today's problems
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const todayPlan = studyPlan.find(day => {
-        const planDate = new Date(day.date);
-        planDate.setHours(0, 0, 0, 0);
-        return planDate.getTime() === today.getTime();
-    });
-    statusCounts.today = todayPlan ? todayPlan.problems.length : 0;
-    
-    // Count pending problems (problems from past days that are not completed)
-    statusCounts.pending = studyPlan.reduce((count, day) => {
-        const planDate = new Date(day.date);
-        planDate.setHours(0, 0, 0, 0);
-        
-        if (planDate.getTime() < today.getTime()) {
-            return count + day.problems.filter(p => p.status !== 'Complete').length;
-        }
-        return count;
-    }, 0);
-    
-    // Update status tab counts
-    const completedCount = document.getElementById('completed-count');
-    const reviewCount = document.getElementById('review-count');
-    const todayCount = document.getElementById('today-count');
-    const pendingCount = document.getElementById('pending-count');
-    
-    if (completedCount) completedCount.textContent = statusCounts.completed;
-    if (reviewCount) reviewCount.textContent = statusCounts.review;
-    if (todayCount) todayCount.textContent = statusCounts.today;
-    if (pendingCount) pendingCount.textContent = statusCounts.pending;
-    
-    // Update content tab badges
-    const completedBadge = document.getElementById('completed-badge');
-    const reviewBadge = document.getElementById('review-badge');
-    const todayBadge = document.getElementById('today-badge');
-    const pendingBadge = document.getElementById('pending-badge');
-    
-    if (completedBadge) completedBadge.textContent = statusCounts.completed;
-    if (reviewBadge) reviewBadge.textContent = statusCounts.review;
-    if (todayBadge) todayBadge.textContent = statusCounts.today;
-    if (pendingBadge) pendingBadge.textContent = statusCounts.pending;
-}
-
-function filterByStatus(status) {
-    // Update active tab
-    const statusTabs = document.querySelectorAll('.status-tab');
-    statusTabs.forEach(tab => tab.classList.remove('active'));
-    
-    const activeTab = document.querySelector(`.status-tab[data-status="${status}"]`);
-    if (activeTab) activeTab.classList.add('active');
-    
-    // Filter problems based on status
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    switch(status) {
-        case 'completed':
-            filteredProblems = userProblems.filter(p => p.status === 'Complete');
-            break;
-        case 'review':
-            filteredProblems = userProblems.filter(p => p.status === 'Needs Revision');
-            break;
-        case 'today':
-            const todayPlan = studyPlan.find(day => {
-                const planDate = new Date(day.date);
-                planDate.setHours(0, 0, 0, 0);
-                return planDate.getTime() === today.getTime();
-            });
-            
-            if (todayPlan) {
-                // Create a new deep copy of the problems to avoid reference issues
-                filteredProblems = todayPlan.problems.map(p => {
-                    // Find the latest version of this problem in userProblems
-                    const latest = userProblems.find(up => up.id === p.id) || p;
-                    return { ...latest };
-                });
-            } else {
-                filteredProblems = [];
-            }
-            break;
-        case 'pending':
-            // Get all problems from past days that aren't complete
-            filteredProblems = [];
-            
-            studyPlan.forEach(day => {
-                const planDate = new Date(day.date);
-                planDate.setHours(0, 0, 0, 0);
-                
-                if (planDate.getTime() < today.getTime()) {
-                    day.problems.forEach(p => {
-                        // Find current status of the problem
-                        const currentVersion = userProblems.find(up => up.id === p.id);
-                        
-                        if (currentVersion && currentVersion.status !== 'Complete') {
-                            // Add the current version to filtered problems
-                            filteredProblems.push({...currentVersion});
-                        }
-                    });
-                }
-            });
-            
-            // Remove duplicates (a problem might appear in multiple days)
-            filteredProblems = Array.from(new Map(
-                filteredProblems.map(p => [p.id, p])
-            ).values());
-            break;
-        default:
-            filteredProblems = [...userProblems];
-    }
-    
-    currentPage = 0;
-    renderProblemsTable();
-}
-
-function renderProblemsTable() {
-    const tableBody = document.getElementById('problems-table-body');
-    if (!tableBody) return;
-    
-    tableBody.innerHTML = '';
-    
-    const totalPages = Math.ceil(filteredProblems.length / rowsPerPage);
-    const startIndex = currentPage * rowsPerPage;
-    const endIndex = Math.min(startIndex + rowsPerPage, filteredProblems.length);
-    const paginatedProblems = filteredProblems.slice(startIndex, endIndex);
-    
-    paginatedProblems.forEach((problem) => {
-        const row = document.createElement('tr');
-        
-        // ID column
-        const idCell = document.createElement('td');
-        idCell.textContent = problem.id;
-        row.appendChild(idCell);
-        
-        // Problem column
-        const problemCell = document.createElement('td');
-        const problemLink = document.createElement('a');
-        problemLink.href = problem.leetCodeUrl;
-        problemLink.target = '_blank';
-        problemLink.rel = 'noopener noreferrer';
-        problemLink.textContent = problem.problem;
-        problemCell.appendChild(problemLink);
-        row.appendChild(problemCell);
-        
-        // Category column
-        const categoryCell = document.createElement('td');
-        categoryCell.textContent = problem.category;
-        row.appendChild(categoryCell);
-        
-        // Difficulty column
-        const difficultyCell = document.createElement('td');
-        difficultyCell.classList.add(problem.difficulty.toLowerCase());
-        difficultyCell.textContent = problem.difficulty;
-        row.appendChild(difficultyCell);
-        
-        // Priority column
-        const priorityCell = document.createElement('td');
-        priorityCell.textContent = problem.priority;
-        row.appendChild(priorityCell);
-        
-        // Last Attempt column
-        const lastAttemptCell = document.createElement('td');
-        lastAttemptCell.textContent = problem.lastAttempt || '-';
-        row.appendChild(lastAttemptCell);
-        
-        // Actions column
-        const actionsCell = document.createElement('td');
-        const actionsDiv = document.createElement('div');
-        actionsDiv.style.display = 'flex';
-        actionsDiv.style.gap = '4px';
-        
-        // Complete button
-        const completeBtn = document.createElement('button');
-        completeBtn.classList.add('icon-button');
-        completeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green);"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-        completeBtn.title = 'Mark Complete';
-        completeBtn.addEventListener('click', () => updateProblemStatus(problem.id, 'Complete'));
-        actionsDiv.appendChild(completeBtn);
-        
-        // Needs Revision button
-        const needsRevisionBtn = document.createElement('button');
-        needsRevisionBtn.classList.add('icon-button');
-        needsRevisionBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--orange);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>';
-        needsRevisionBtn.title = 'Mark Needs Revision';
-        needsRevisionBtn.addEventListener('click', () => updateProblemStatus(problem.id, 'Needs Revision'));
-        actionsDiv.appendChild(needsRevisionBtn);
-        
-        // Code button
-        const codeBtn = document.createElement('a');
-        codeBtn.classList.add('icon-button');
-        codeBtn.href = problem.codeUrl || problem.leetCodeUrl;
-        codeBtn.target = '_blank';
-        codeBtn.rel = 'noopener noreferrer';
-        codeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue);"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
-        codeBtn.title = 'View Problem Code';
-        actionsDiv.appendChild(codeBtn);
-        
-        actionsCell.appendChild(actionsDiv);
-        row.appendChild(actionsCell);
-        
-        tableBody.appendChild(row);
-    });
-    
-    // Update pagination info
-    const paginationInfo = document.getElementById('pagination-info');
-    const pageInfo = document.getElementById('page-info');
-    const prevPageBtn = document.getElementById('prev-page');
-    const nextPageBtn = document.getElementById('next-page');
-    
-    if (paginationInfo) {
-        paginationInfo.textContent = `Showing ${startIndex + 1}-${endIndex} of ${filteredProblems.length}`;
-    }
-    
-    if (pageInfo) {
-        pageInfo.textContent = `${currentPage + 1} / ${Math.max(1, totalPages)}`;
-    }
-    
-    if (prevPageBtn) {
-        prevPageBtn.classList.toggle('btn-disabled', currentPage === 0);
-        prevPageBtn.classList.toggle('btn-primary', currentPage > 0);
-    }
-    
-    if (nextPageBtn) {
-        nextPageBtn.classList.toggle('btn-disabled', currentPage >= totalPages - 1);
-        nextPageBtn.classList.toggle('btn-primary', currentPage < totalPages - 1);
-    }
-}
-
-function renderCompletedProblems() {
-    const tableBody = document.getElementById('completed-problems-body');
-    if (!tableBody) return;
-    
-    tableBody.innerHTML = '';
-    
-    const completedProblems = userProblems.filter(p => p.status === 'Complete');
-    
-    completedProblems.forEach(problem => {
-        const row = createProblemTableRow(problem, false);
-        tableBody.appendChild(row);
-    });
-}
-
-function renderReviewProblems() {
-    const tableBody = document.getElementById('review-problems-body');
-    if (!tableBody) return;
-    
-    tableBody.innerHTML = '';
-    
-    const reviewProblems = userProblems.filter(p => p.status === 'Needs Revision');
-    
-    reviewProblems.forEach(problem => {
-        const row = createProblemTableRow(problem, false);
-        tableBody.appendChild(row);
-    });
-}
-
-function renderTodaysProblems() {
-    const tableBody = document.getElementById('today-problems-body');
-    if (!tableBody) return;
-    
-    tableBody.innerHTML = '';
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const todayPlan = studyPlan.find(day => {
-        const planDate = new Date(day.date);
-        planDate.setHours(0, 0, 0, 0);
-        return planDate.getTime() === today.getTime();
-    });
-    
-    if (todayPlan && todayPlan.problems.length > 0) {
-        todayPlan.problems.forEach(p => {
-            // Find the latest status for this problem
-            const currentProblem = userProblems.find(up => up.id === p.id) || p;
-            const row = createProblemTableRow(currentProblem, true);
-            tableBody.appendChild(row);
-        });
-    } else {
-        const row = document.createElement('tr');
-        const cell = document.createElement('td');
-        cell.colSpan = 6;
-        cell.textContent = 'No problems scheduled for today.';
-        cell.style.textAlign = 'center';
-        cell.style.padding = '1rem';
-        row.appendChild(cell);
-        tableBody.appendChild(row);
-    }
-}
-
-function renderPendingProblemsTable() {
-    const tableBody = document.getElementById('pending-problems-body');
-    if (!tableBody) return;
-    
-    tableBody.innerHTML = '';
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    // Collect all problems from past days that aren't complete
-    const pendingProblems = [];
-    const processedIds = new Set(); // To prevent duplicates
-    
-    studyPlan.forEach(day => {
-        const planDate = new Date(day.date);
-        planDate.setHours(0, 0, 0, 0);
-        
-        if (planDate.getTime() < today.getTime()) {
-            day.problems.forEach(p => {
-                // Only process each problem once
-                if (!processedIds.has(p.id)) {
-                    processedIds.add(p.id);
-                    
-                    // Get current status of the problem
-                    const currentProblem = userProblems.find(up => up.id === p.id);
-                    
-                    if (currentProblem && currentProblem.status !== 'Complete') {
-                        // Store the original planned date with the problem
-                        pendingProblems.push({
-                            ...currentProblem,
-                            plannedDate: planDate
-                        });
-                    }
-                }
-            });
-        }
-    });
-    
-    if (pendingProblems.length > 0) {
-        pendingProblems.forEach(problem => {
-            const row = document.createElement('tr');
-            
-            // ID column
-            const idCell = document.createElement('td');
-            idCell.textContent = problem.id;
-            row.appendChild(idCell);
-            
-            // Problem column
-            const problemCell = document.createElement('td');
-            const problemLink = document.createElement('a');
-            problemLink.href = problem.leetCodeUrl;
-            problemLink.target = '_blank';
-            problemLink.rel = 'noopener noreferrer';
-            problemLink.textContent = problem.problem;
-            problemCell.appendChild(problemLink);
-            row.appendChild(problemCell);
-            
-            // Category column
-            const categoryCell = document.createElement('td');
-            categoryCell.textContent = problem.category;
-            row.appendChild(categoryCell);
-            
-            // Difficulty column
-            const difficultyCell = document.createElement('td');
-            difficultyCell.classList.add(problem.difficulty.toLowerCase());
-            difficultyCell.textContent = problem.difficulty;
-            row.appendChild(difficultyCell);
-            
-            // Scheduled column
-            const scheduledCell = document.createElement('td');
-            scheduledCell.textContent = problem.plannedDate ? problem.plannedDate.toLocaleDateString() : '-';
-            row.appendChild(scheduledCell);
-            
-            // Actions column
-            const actionsCell = document.createElement('td');
-            const actionsDiv = document.createElement('div');
-            actionsDiv.style.display = 'flex';
-            actionsDiv.style.gap = '4px';
-            
-            // Complete button
-            const completeBtn = document.createElement('button');
-            completeBtn.classList.add('icon-button');
-            completeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green);"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-            completeBtn.title = 'Mark Complete';
-            completeBtn.addEventListener('click', () => updateProblemStatus(problem.id, 'Complete'));
-            actionsDiv.appendChild(completeBtn);
-            
-            // Needs Revision button
-            const needsRevisionBtn = document.createElement('button');
-            needsRevisionBtn.classList.add('icon-button');
-            needsRevisionBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--orange);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>';
-            needsRevisionBtn.title = 'Mark Needs Revision';
-            needsRevisionBtn.addEventListener('click', () => updateProblemStatus(problem.id, 'Needs Revision'));
-            actionsDiv.appendChild(needsRevisionBtn);
-            
-            // Code button
-            const codeBtn = document.createElement('a');
-            codeBtn.classList.add('icon-button');
-            codeBtn.href = problem.codeUrl || problem.leetCodeUrl;
-            codeBtn.target = '_blank';
-            codeBtn.rel = 'noopener noreferrer';
-            codeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue);"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
-            codeBtn.title = 'View Problem Code';
-            actionsDiv.appendChild(codeBtn);
-            
-            actionsCell.appendChild(actionsDiv);
-            row.appendChild(actionsCell);
-            
-            tableBody.appendChild(row);
-        });
-    } else {
-        const row = document.createElement('tr');
-        const cell = document.createElement('td');
-        cell.colSpan = 6;
-        cell.textContent = 'No pending problems. You\'re all caught up!';
-        cell.style.textAlign = 'center';
-        cell.style.padding = '1rem';
-        row.appendChild(cell);
-        tableBody.appendChild(row);
-    }
-}
-
-function createProblemTableRow(problem, includeStatus = false) {
-    const row = document.createElement('tr');
-    
-    // ID column
-    const idCell = document.createElement('td');
-    idCell.textContent = problem.id;
-    row.appendChild(idCell);
-    
-    // Problem column
-    const problemCell = document.createElement('td');
-    const problemLink = document.createElement('a');
-    problemLink.href = problem.leetCodeUrl;
-    problemLink.target = '_blank';
-    problemLink.rel = 'noopener noreferrer';
-    problemLink.textContent = problem.problem;
-    problemCell.appendChild(problemLink);
-    row.appendChild(problemCell);
-    
-    // Category column
-    const categoryCell = document.createElement('td');
-    categoryCell.textContent = problem.category;
-    row.appendChild(categoryCell);
-    
-    // Difficulty column
-    const difficultyCell = document.createElement('td');
-    difficultyCell.classList.add(problem.difficulty.toLowerCase());
-    difficultyCell.textContent = problem.difficulty;
-    row.appendChild(difficultyCell);
-    
-    // Status/Last Attempt column
-    if (includeStatus) {
-        const statusCell = document.createElement('td');
-        const statusBadge = document.createElement('span');
-        statusBadge.className = 'status-badge';
-        
-        const statusDot = document.createElement('span');
-        const statusClass = problem.status.toLowerCase().replace(' ', '-');
-        statusDot.className = `status-dot status-${statusClass}`;
-        statusBadge.appendChild(statusDot);
-        
-        statusBadge.appendChild(document.createTextNode(problem.status));
-        statusCell.appendChild(statusBadge);
-        row.appendChild(statusCell);
-    } else {
-        const lastAttemptCell = document.createElement('td');
-        lastAttemptCell.textContent = problem.lastAttempt || '-';
-        row.appendChild(lastAttemptCell);
-    }
-    
-    // Actions column
-    const actionsCell = document.createElement('td');
-    const actionsDiv = document.createElement('div');
-    actionsDiv.style.display = 'flex';
-    actionsDiv.style.gap = '4px';
-    
-    // Complete button
-    const completeBtn = document.createElement('button');
-    completeBtn.classList.add('icon-button');
-    completeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green);"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-    completeBtn.title = 'Mark Complete';
-    completeBtn.addEventListener('click', () => updateProblemStatus(problem.id, 'Complete'));
-    actionsDiv.appendChild(completeBtn);
-    
-    // Needs Revision button
-    const needsRevisionBtn = document.createElement('button');
-    needsRevisionBtn.classList.add('icon-button');
-    needsRevisionBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--orange);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>';
-    needsRevisionBtn.title = 'Mark Needs Revision';
-    needsRevisionBtn.addEventListener('click', () => updateProblemStatus(problem.id, 'Needs Revision'));
-    actionsDiv.appendChild(needsRevisionBtn);
-    
-    // Code button
-    const codeBtn = document.createElement('a');
-    codeBtn.classList.add('icon-button');
-    codeBtn.href = problem.codeUrl || problem.leetCodeUrl;
-    codeBtn.target = '_blank';
-    codeBtn.rel = 'noopener noreferrer';
-    codeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue);"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
-    codeBtn.title = 'View Problem Code';
-    actionsDiv.appendChild(codeBtn);
-    
-    actionsCell.appendChild(actionsDiv);
-    row.appendChild(actionsCell);
-    
-    return row;
-}
-
-function updateProblemStatus(id, status) {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    
-    // Update the problem status in the main problems array
-    userProblems = userProblems.map(problem => {
-        if (problem.id === id) {
-            const updatedProblem = {
-                ...problem, 
-                status, 
-                lastAttempt: status !== 'Not Started' ? today.toLocaleDateString() : ''
-            };
-            
-            // If completing a problem, set up revision dates
-            if (status === 'Complete') {
-                updatedProblem.completedDate = today;
-                
-                // Set up revision schedules
-                const firstRevisionDays = parseInt(document.getElementById('first-revision')?.value) || 5;
-                const secondRevisionDays = parseInt(document.getElementById('second-revision')?.value) || 14;
-                
-                updatedProblem.revisionDates = [
-                    new Date(today.getTime() + firstRevisionDays * 24 * 60 * 60 * 1000),
-                    new Date(today.getTime() + secondRevisionDays * 24 * 60 * 60 * 1000)
-                ];
-            }
-            
-            return updatedProblem;
-        }
-        return problem;
-    });
-    
-    // Also update the problem in study plan if it exists
-    studyPlan = studyPlan.map(day => {
-        const updatedProblems = day.problems.map(problem => {
-            if (problem.id === id) {
-                return {
-                    ...problem,
-                    status,
-                    lastAttempt: status !== 'Not Started' ? today.toLocaleDateString() : ''
-                };
-            }
-            return problem;
-        });
-        
-        return {
-            ...day,
-            problems: updatedProblems
-        };
-    });
-    
-    // Update the UI
-    updateStats();
-    updateStatusCounts();
-    applyFilters();
-    renderProblemsTable();
-    
-    // Also update specific views
-    renderTodayProblems();
-    renderPendingProblems();
-    renderRevisionProblems();
-    
-    // Save changes to Firebase if user is logged in
-    saveUserData();
-}
-
-function updateProblemsPerDay() {
-    const highChecked = document.getElementById('priority-high')?.checked || false;
-    const highMediumChecked = document.getElementById('priority-high-medium')?.checked || false;
-    const mediumChecked = document.getElementById('priority-medium')?.checked || false;
-    
-    let highCount = 0;
-    let highMediumCount = 0;
-    let mediumCount = 0;
-    
-    if (highChecked) {
-        highCount = userProblems.filter(p => 
-            p.priority === 'High' && (p.status === 'Not Started' || p.status === 'In Progress')
-        ).length;
-    }
-    
-    if (highMediumChecked) {
-        highMediumCount = userProblems.filter(p => 
-            p.priority === 'High-Medium' && (p.status === 'Not Started' || p.status === 'In Progress')
-        ).length;
-    }
-    
-    if (mediumChecked) {
-        mediumCount = userProblems.filter(p => 
-            p.priority === 'Medium' && (p.status === 'Not Started' || p.status === 'In Progress')
-        ).length;
-    }
-    
-    const totalSelected = highCount + highMediumCount + mediumCount;
-    const days = parseInt(document.getElementById('plan-days')?.value) || 30;
-    
-    // Update calculation results
-    const highCountEl = document.getElementById('high-count');
-    const highMediumCountEl = document.getElementById('high-medium-count');
-    const mediumCountEl = document.getElementById('medium-count');
-    const totalSelectedEl = document.getElementById('total-selected');
-    
-    if (highCountEl) highCountEl.textContent = highChecked ? highCount : 'Not selected';
-    if (highMediumCountEl) highMediumCountEl.textContent = highMediumChecked ? highMediumCount : 'Not selected';
-    if (mediumCountEl) mediumCountEl.textContent = mediumChecked ? mediumCount : 'Not selected';
-    if (totalSelectedEl) totalSelectedEl.textContent = totalSelected;
-    
-    // Calculate problems per day
-    const problemsPerDay = Math.ceil(totalSelected / days) || 0;
-    const problemsPerDayInput = document.getElementById('problems-per-day');
-    if (problemsPerDayInput) problemsPerDayInput.value = problemsPerDay;
-}
-
-// This contains the missing functions for your LeetCode Tracker implementation
-
-// Complete the generateStudyPlan function
-function generateStudyPlan(forceRegenerate = false) {
-    if (studyPlan.length > 0 && !forceRegenerate) {
-        console.log('Study plan already exists. Rendering existing plan.');
-        renderTodayProblems();
-        renderPendingProblems();
-        renderRevisionProblems();
-        return;
-    }
-    
-    const planDaysEl = document.getElementById('plan-days');
-    const problemsPerDayEl = document.getElementById('problems-per-day');
-    
-    if (!planDaysEl || !problemsPerDayEl) {
-        console.error('Required elements not found');
-        return;
-    }
-    
-    const numDays = parseInt(planDaysEl.value) || 30;
-    const problemsPerDay = parseInt(problemsPerDayEl.value) || 3;
-    
-    // Get selected priorities
-    const selectedPriorities = [];
-    const highEl = document.getElementById('priority-high');
-    const highMediumEl = document.getElementById('priority-high-medium');
-    const mediumEl = document.getElementById('priority-medium');
-    
-    if (highEl && highEl.checked) selectedPriorities.push('High');
-    if (highMediumEl && highMediumEl.checked) selectedPriorities.push('High-Medium');
-    if (mediumEl && mediumEl.checked) selectedPriorities.push('Medium');
-    
-    if (selectedPriorities.length === 0) {
-        alert('Please select at least one priority level');
-        return;
-    }
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    console.log('Generating study plan from:', today);
-    console.log('Days:', numDays, 'Problems per day:', problemsPerDay);
-    console.log('Selected priorities:', selectedPriorities);
-    
-    // Clear the existing study plan
-    studyPlan = [];
-    
-    // Filter available problems
-    const availableProblems = userProblems.filter(p => 
-        (p.status === 'Not Started' || p.status === 'In Progress') &&
-        selectedPriorities.includes(p.priority)
-    );
-    
-    console.log(`Found ${availableProblems.length} available problems matching criteria`);
-    
-    if (availableProblems.length === 0) {
-        alert('No problems found matching the selected priorities.');
-        return;
-    }
-    
-    // Sort problems by priority and difficulty
-    const sortedProblems = [...availableProblems].sort((a, b) => {
-        const priorityOrder = { 'High': 0, 'High-Medium': 1, 'Medium': 2 };
-        const priorityDiff = priorityOrder[a.priority] - priorityOrder[b.priority];
-        
-        if (priorityDiff !== 0) return priorityDiff;
-        
-        if (a.status === 'In Progress' && b.status !== 'In Progress') return -1;
-        if (a.status !== 'In Progress' && b.status === 'In Progress') return 1;
-        
-        const difficultyOrder = { 'Easy': 0, 'Medium': 1, 'Hard': 2 };
-        return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
-    });
-    
-    // Create a deep copy of the sorted problems to avoid reference issues
-    const problemsCopy = JSON.parse(JSON.stringify(sortedProblems));
-    let problemIndex = 0;
-    
-    // Generate a plan for each day
-    for (let i = 0; i < numDays && problemIndex < problemsCopy.length; i++) {
-        const planDate = new Date(today);
-        planDate.setDate(today.getDate() + i);
-        planDate.setHours(0, 0, 0, 0);
-        
-        const dayProblems = [];
-        
-        // Add problems for this day
-        for (let j = 0; j < problemsPerDay && problemIndex < problemsCopy.length; j++) {
-            dayProblems.push(problemsCopy[problemIndex]);
-            problemIndex++;
-        }
-        
-        if (dayProblems.length === 0) continue;
-        
-        // Determine categories covered in this day
-        const dayCategories = [...new Set(dayProblems.map(p => p.category))];
-        
-        studyPlan.push({
-            day: i,
-            date: new Date(planDate.getTime()),
-            problems: dayProblems,
-            categories: dayCategories,
-            focus: dayCategories.join(', ')
-        });
-    }
-    
-    console.log(`Generated ${studyPlan.length} study days`);
-    
-    // Update UI
-    renderTodayProblems();
-    renderPendingProblems();
-    renderRevisionProblems();
-    updateStatusCounts();
-    
-    // Save the study plan
-    saveUserData()
-        .then(() => {
-            alert('Study plan generated and saved successfully!');
         })
         .catch(error => {
-            console.error('Failed to save study plan:', error);
-            alert('Study plan generated but there was an error saving to the database. Your changes may not persist after refreshing the page.');
+            console.error("Error loading user data: ", error);
+            showToast('Error loading your data: ' + error.message, true);
+        });
+    
+    // Get user notes
+    userRef.collection('notes').get()
+        .then(snapshot => {
+            notesData = [];
+            snapshot.forEach(doc => {
+                notesData.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
+            });
+            
+            updateNotesCount();
+        })
+        .catch(error => {
+            console.error("Error loading notes: ", error);
         });
 }
 
-function createProblemItem(problem) {
-    const item = document.createElement('li');
-    item.className = 'problem-item';
+// Save problem data to Firebase
+function saveProblemData(problemId, data) {
+    if (!currentUser) return Promise.reject(new Error("User not signed in"));
     
-    const problemInfo = document.createElement('div');
-    problemInfo.className = 'problem-info';
-    
-    const problemTitle = document.createElement('div');
-    problemTitle.className = 'problem-title';
-    const problemLink = document.createElement('a');
-    problemLink.href = problem.leetCodeUrl;
-    problemLink.target = '_blank';
-    problemLink.rel = 'noopener noreferrer';
-    problemLink.textContent = problem.problem;
-    problemTitle.appendChild(problemLink);
-    problemInfo.appendChild(problemTitle);
-    
-    const problemMeta = document.createElement('div');
-    problemMeta.className = 'problem-meta';
-    problemMeta.innerHTML = `
-        ${problem.category} - 
-        <span class="${problem.difficulty.toLowerCase()}">${problem.difficulty}</span>
-        ${problem.status !== 'Not Started' ? 
-            `<span class="status-badge">
-            <span class="status-dot status-${problem.status.toLowerCase().replace(' ', '-')}"></span>
-            ${problem.status}
-            </span>` : ''}
-    `;
-    problemInfo.appendChild(problemMeta);
-    
-    item.appendChild(problemInfo);
-    
-    const problemActions = document.createElement('div');
-    problemActions.className = 'problem-actions';
-    
-    const completeBtn = document.createElement('button');
-    completeBtn.className = 'icon-button';
-    completeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green);"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-    completeBtn.title = 'Mark Complete';
-    completeBtn.addEventListener('click', () => updateProblemStatus(problem.id, 'Complete'));
-    problemActions.appendChild(completeBtn);
-    
-    const needsRevisionBtn = document.createElement('button');
-    needsRevisionBtn.className = 'icon-button';
-    needsRevisionBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--orange);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>';
-    needsRevisionBtn.title = 'Mark Needs Revision';
-    needsRevisionBtn.addEventListener('click', () => updateProblemStatus(problem.id, 'Needs Revision'));
-    problemActions.appendChild(needsRevisionBtn);
-    
-    const codeBtn = document.createElement('a');
-    codeBtn.className = 'icon-button';
-    codeBtn.href = problem.codeUrl || problem.leetCodeUrl;
-    codeBtn.target = '_blank';
-    codeBtn.rel = 'noopener noreferrer';
-    codeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue);"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
-    codeBtn.title = 'View Problem Code';
-    problemActions.appendChild(codeBtn);
-    
-    item.appendChild(problemActions);
-    
-    return item;
+    return db.collection('users').doc(currentUser.uid)
+        .collection('problems').doc(problemId.toString())
+        .set(data, { merge: true });
 }
 
-function renderTodayProblems() {
-    const todayContainer = document.getElementById('today-problems');
-    if (!todayContainer) return;
+// Save a note to Firebase
+function saveNote(problemId, content) {
+    if (!currentUser) return Promise.reject(new Error("User not signed in"));
     
-    todayContainer.innerHTML = '';
+    const noteData = {
+        problemId: problemId,
+        problemName: userProblems.find(p => p.id === problemId)?.problem || "",
+        content: content,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
     
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    return db.collection('users').doc(currentUser.uid)
+        .collection('notes').add(noteData);
+}
+
+// Update all stats
+function updateStats() {
+    const completedCount = userProblems.filter(p => p.status === "Completed").length;
+    const reviewCount = userProblems.filter(p => p.forReview).length;
+    const pendingCount = userProblems.filter(p => p.status === "Not Started").length;
+    const todayCount = userProblems.filter(p => {
+        if (!p.dueDate) return false;
+        const dueDate = new Date(p.dueDate);
+        const today = new Date();
+        return dueDate.toDateString() === today.toDateString();
+    }).length;
     
-    // Find today's problems from study plan
-    let todayProblems = [];
-    const todayPlan = studyPlan.find(day => {
-        const planDate = new Date(day.date);
-        planDate.setHours(0, 0, 0, 0);
-        return planDate.getTime() === today.getTime();
-    });
+    // Calculate priority stats
+    const highPriority = userProblems.filter(p => p.priority === "High");
+    const mediumPriority = userProblems.filter(p => p.priority === "Medium");
+    const lowPriority = userProblems.filter(p => p.priority === "Low");
     
-    if (todayPlan) {
-        // Get the latest version of each problem
-        todayProblems = todayPlan.problems.map(p => {
-            const currentVersion = userProblems.find(up => up.id === p.id);
-            return currentVersion || p;
-        });
+    const highCompleted = highPriority.filter(p => p.status === "Completed").length;
+    const mediumCompleted = mediumPriority.filter(p => p.status === "Completed").length;
+    const lowCompleted = lowPriority.filter(p => p.status === "Completed").length;
+    
+    // Update stats display
+    totalProblemsEl.textContent = userProblems.length;
+    completedProblemsEl.textContent = completedCount;
+    reviewProblemsEl.textContent = reviewCount;
+    pendingProblemsEl.textContent = pendingCount;
+    todayProblemsEl.textContent = todayCount;
+    
+    highPriorityStatsEl.textContent = `${highCompleted}/${highPriority.length}`;
+    mediumPriorityStatsEl.textContent = `${mediumCompleted}/${mediumPriority.length}`;
+    lowPriorityStatsEl.textContent = `${lowCompleted}/${lowPriority.length}`;
+    
+    // Update tab counts
+    allCountEl.textContent = userProblems.length;
+    todayCountEl.textContent = todayCount;
+    completedCountEl.textContent = completedCount;
+    reviewCountEl.textContent = reviewCount;
+    pendingCountEl.textContent = pendingCount;
+}
+
+// Update notes count in the tab
+function updateNotesCount() {
+    notesCountEl.textContent = notesData.length;
+}
+
+// Generate a random due date within the specified days
+function generateDueDate(days) {
+    const date = new Date();
+    const randomDays = Math.floor(Math.random() * days) + 1;
+    date.setDate(date.getDate() + randomDays);
+    return date.toISOString().split('T')[0];
+}
+
+// Generate study plan
+function generateStudyPlan() {
+    const days = parseInt(plannerDays.value) || 30;
+    if (days < 1) {
+        showToast("Please enter a valid number of days (minimum 1)", true);
+        return;
+    }
+
+    // Filter problems based on priority checkboxes
+    const includeHigh = highPriorityCheck.checked;
+    const includeMedium = mediumPriorityCheck.checked;
+    const includeLow = lowPriorityCheck.checked;
+    
+    if (!includeHigh && !includeMedium && !includeLow) {
+        showToast("Please select at least one priority level", true);
+        return;
     }
     
-    // Also add problems that need revision today
-    const revisionProblems = userProblems.filter(problem => {
-        if (problem.status === 'Complete' && problem.revisionDates) {
-            return problem.revisionDates.some(date => {
-                if (!date) return false;
-                const revisionDate = new Date(date);
-                revisionDate.setHours(0, 0, 0, 0);
-                return revisionDate.getTime() === today.getTime();
-            });
-        }
+    // Get only not started problems with the selected priorities
+    let eligibleProblems = userProblems.filter(p => {
+        if (p.status !== "Not Started") return false;
+        
+        if (p.priority === "High" && includeHigh) return true;
+        if (p.priority === "Medium" && includeMedium) return true;
+        if (p.priority === "Low" && includeLow) return true;
+        
         return false;
     });
     
-    // Combine regular and revision problems
-    const allTodayProblems = [...todayProblems, ...revisionProblems.map(p => ({
-        ...p,
-        status: 'Needs Revision' // Override the status for display
-    }))];
-    
-    if (allTodayProblems.length > 0) {
-        allTodayProblems.forEach(problem => {
-            const problemItem = createProblemItem(problem);
-            todayContainer.appendChild(problemItem);
-        });
-    } else {
-        todayContainer.innerHTML = '<div class="problem-item">No problems scheduled for today.</div>';
+    if (eligibleProblems.length === 0) {
+        showToast("No eligible problems found for the selected priorities", true);
+        return;
     }
-}
-
-function renderPendingProblems() {
-    const pendingContainer = document.getElementById('pending-problems');
-    if (!pendingContainer) return;
     
-    pendingContainer.innerHTML = '';
+    // Shuffle the problems
+    eligibleProblems = shuffleArray(eligibleProblems);
     
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    // Calculate problems per day (at least 1)
+    const problemsPerDay = Math.max(1, Math.ceil(eligibleProblems.length / days));
     
-    // Track processed problem IDs to avoid duplicates
-    const processedIds = new Set();
-    const pendingProblems = [];
+    // Assign due dates
+    let dueDate = new Date();
+    let problemsAssigned = 0;
+    let updatePromises = [];
     
-    // Go through study plan to find pending problems
-    studyPlan.forEach(day => {
-        const planDate = new Date(day.date);
-        planDate.setHours(0, 0, 0, 0);
-        
-        if (planDate.getTime() < today.getTime()) {
-            day.problems.forEach(problem => {
-                // Check if we've already processed this problem
-                if (!processedIds.has(problem.id)) {
-                    processedIds.add(problem.id);
-                    
-                    // Find the current status of this problem
-                    const currentProblem = userProblems.find(p => p.id === problem.id);
-                    
-                    // Only add if it's not completed
-                    if (currentProblem && currentProblem.status !== 'Complete') {
-                        pendingProblems.push({
-                            ...currentProblem,
-                            originalDate: planDate
-                        });
-                    }
-                }
-            });
+    for (let i = 0; i < eligibleProblems.length; i++) {
+        // Move to next day if we've assigned enough problems for today
+        if (problemsAssigned >= problemsPerDay) {
+            dueDate.setDate(dueDate.getDate() + 1);
+            problemsAssigned = 0;
         }
-    });
-    
-    if (pendingProblems.length > 0) {
-        // Sort by original scheduled date (oldest first)
-        pendingProblems.sort((a, b) => a.originalDate - b.originalDate);
         
-        pendingProblems.forEach(problem => {
-            const problemItem = createProblemItem(problem);
-            pendingContainer.appendChild(problemItem);
-        });
-    } else {
-        pendingContainer.innerHTML = '<div class="problem-item">No pending problems. You\'re all caught up!</div>';
-    }
-}
-
-function renderRevisionProblems() {
-    const revisionContainer = document.getElementById('revision-problems');
-    if (!revisionContainer) return;
-    
-    revisionContainer.innerHTML = '';
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    // Find problems that need revision today
-    const revisionProblems = userProblems.filter(problem => {
-        if (problem.status === 'Complete' && problem.revisionDates) {
-            return problem.revisionDates.some(date => {
-                if (!date) return false;
-                const revisionDate = new Date(date);
-                revisionDate.setHours(0, 0, 0, 0);
-                return revisionDate.getTime() === today.getTime();
-            });
-        }
-        return false;
-    });
-    
-    if (revisionProblems.length > 0) {
-        revisionProblems.forEach(problem => {
-            // Create a copy with revision status for display
-            const revisedProblem = {
-                ...problem,
-                status: 'Needs Revision'
-            };
+        const problem = eligibleProblems[i];
+        const dueDateStr = dueDate.toISOString().split('T')[0];
+        
+        // Update problem due date
+        const index = userProblems.findIndex(p => p.id === problem.id);
+        if (index !== -1) {
+            userProblems[index].dueDate = dueDateStr;
             
-            const problemItem = createProblemItem(revisedProblem);
-            revisionContainer.appendChild(problemItem);
-        });
-    } else {
-        revisionContainer.innerHTML = '<div class="problem-item">No problems need revision today.</div>';
-    }
-}
-
-function addDebugControls() {
-    const plannerTab = document.getElementById('planner-tab');
-    if (!plannerTab || document.getElementById('debug-controls')) return;
-    
-    const debugDiv = document.createElement('div');
-    debugDiv.id = 'debug-controls';
-    debugDiv.style.marginTop = '20px';
-    debugDiv.style.padding = '10px';
-    debugDiv.style.border = '1px dashed var(--border)';
-    debugDiv.style.borderRadius = '4px';
-    debugDiv.style.backgroundColor = 'var(--bg-tertiary)';
-    
-    debugDiv.innerHTML = `
-        <div style="font-size: 0.8rem; margin-bottom: 10px; color: var(--text-muted);">Troubleshooting Tools</div>
-        <div style="display: flex; gap: 10px;">
-            <button id="debug-state-btn" class="btn btn-secondary">Log Debug Info</button>
-            <button id="reset-plan-btn" class="btn btn-secondary">Reset Study Plan</button>
-        </div>
-    `;
-    
-    plannerTab.appendChild(debugDiv);
-    
-    document.getElementById('debug-state-btn').addEventListener('click', debugState);
-    document.getElementById('reset-plan-btn').addEventListener('click', resetStudyPlan);
-}
-
-function debugState() {
-    console.log('Current user:', currentUser ? currentUser.uid : 'No user');
-    console.log('Problems count:', userProblems.length);
-    console.log('Study plan days:', studyPlan.length);
-    
-    if (studyPlan.length > 0) {
-        console.log('Study plan date checks:');
-        studyPlan.forEach((day, index) => {
-            const validDate = day.date instanceof Date && !isNaN(day.date.getTime());
-            console.log(`Day ${index}: date=${day.date}, valid=${validDate}`);
-            
-            if (!validDate) {
-                console.warn('Invalid date found:', day.date);
+            // Save to Firebase if user is signed in
+            if (currentUser) {
+                const savePromise = saveProblemData(problem.id, { dueDate: dueDateStr });
+                updatePromises.push(savePromise);
             }
-        });
+        }
+        
+        problemsAssigned++;
     }
     
-    alert(`Debug info logged to console.\nUser: ${currentUser ? 'Logged in' : 'Not logged in'}\nProblems: ${userProblems.length}\nStudy Plan Days: ${studyPlan.length}`);
-}
-
-function resetStudyPlan() {
-    if (confirm('Are you sure you want to reset your study plan? This cannot be undone.')) {
-        console.log('Resetting study plan');
-        studyPlan = [];
-        
-        renderTodayProblems();
-        renderPendingProblems();
-        renderRevisionProblems();
-        updateStatusCounts();
-        
-        saveUserData()
+    // Wait for all updates to complete
+    if (updatePromises.length > 0) {
+        Promise.all(updatePromises)
             .then(() => {
-                alert('Study plan has been reset successfully.');
+                showToast(`Study plan generated for ${days} days with ${eligibleProblems.length} problems`);
+                updateStats();
+                showProblems(currentView);
             })
             .catch(error => {
-                console.error('Failed to save reset study plan:', error);
-                alert('There was an error resetting your study plan. Please try again.');
+                console.error("Error saving study plan: ", error);
+                showToast("Error saving study plan", true);
             });
+    } else {
+        showToast(`Study plan generated for ${days} days with ${eligibleProblems.length} problems`);
+        updateStats();
+        showProblems(currentView);
     }
 }
 
-// End of LeetCode Tracker Script
+// Helper function to shuffle an array
+function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+}
+
+// Filter problems based on current view
+function filterProblems(view) {
+    switch (view) {
+        case 'today':
+            return userProblems.filter(p => {
+                if (!p.dueDate) return false;
+                const dueDate = new Date(p.dueDate);
+                const today = new Date();
+                return dueDate.toDateString() === today.toDateString();
+            });
+        case 'completed':
+            return userProblems.filter(p => p.status === "Completed");
+        case 'review':
+            return userProblems.filter(p => p.forReview);
+        case 'pending':
+            return userProblems.filter(p => p.status === "Not Started");
+        case 'notes':
+            return userProblems.filter(p => p.userNotes && p.userNotes.trim() !== "");
+        case 'all':
+        default:
+            return [...userProblems];
+    }
+}
+
+// Update the problems table
+function showProblems(view) {
+    currentView = view;
+    
+    // Show problems container or notes view based on the selected view
+    if (view === 'notes') {
+        problemsContainer.style.display = 'none';
+        notesView.style.display = 'block';
+        renderNotes();
+        return;
+    } else {
+        problemsContainer.style.display = 'block';
+        notesView.style.display = 'none';
+    }
+    
+    // Filter problems for the current view
+    problemsToShow = filterProblems(view);
+    
+    // Update pagination
+    const totalPages = Math.ceil(problemsToShow.length / itemsPerPage);
+    if (currentPage > totalPages) {
+        currentPage = Math.max(1, totalPages);
+    }
+    
+    renderPagination(totalPages);
+    
+    // Get current page of problems
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const currentPageProblems = problemsToShow.slice(start, end);
+    
+    // Clear table
+    problemsTableBody.innerHTML = '';
+    
+    // Populate table
+    currentPageProblems.forEach(problem => {
+        const row = document.createElement('tr');
+        
+        // Add problem status checkbox
+        const statusTd = document.createElement('td');
+        statusTd.style.textAlign = 'center';
+        const statusCheckbox = document.createElement('span');
+        statusCheckbox.className = `status-checkbox${problem.status === "Completed" ? " completed" : ""}`;
+        statusCheckbox.dataset.id = problem.id;
+        statusTd.appendChild(statusCheckbox);
+        
+        // Add problem name with link
+        const problemTd = document.createElement('td');
+        const problemLink = document.createElement('a');
+        problemLink.href = problem.leetCodeUrl;
+        problemLink.className = 'problem-link';
+        problemLink.textContent = problem.problem;
+        problemLink.target = '_blank';
+        problemTd.appendChild(problemLink);
+        
+        // Add category
+        const categoryTd = document.createElement('td');
+        const categoryTag = document.createElement('span');
+        categoryTag.className = 'category-tag';
+        categoryTag.textContent = problem.category;
+        categoryTd.appendChild(categoryTag);
+        
+        // Add difficulty
+        const difficultyTd = document.createElement('td');
+        const difficultyTag = document.createElement('span');
+        difficultyTag.className = `difficulty-tag ${problem.difficulty.toLowerCase()}`;
+        difficultyTag.textContent = problem.difficulty;
+        difficultyTd.appendChild(difficultyTag);
+        
+        // Add priority
+        const priorityTd = document.createElement('td');
+        const priorityTag = document.createElement('span');
+        priorityTag.className = `priority-tag ${problem.priority.toLowerCase()}`;
+        priorityTag.textContent = problem.priority;
+        priorityTd.appendChild(priorityTag);
+        
+        // Add due date
+        const dueDateTd = document.createElement('td');
+        if (problem.dueDate) {
+            const dueDate = new Date(problem.dueDate);
+            const today = new Date();
+            const isExpired = dueDate < today && dueDate.toDateString() !== today.toDateString();
+            
+            const dueDateSpan = document.createElement('span');
+            dueDateSpan.className = `due-date${isExpired ? " expired" : ""}`;
+            
+            // Format date as Month Day, Year
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            dueDateSpan.textContent = dueDate.toLocaleDateString('en-US', options);
+            
+            dueDateTd.appendChild(dueDateSpan);
+        }
+        
+        // Add action buttons
+        const actionsTd = document.createElement('td');
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'action-cell';
+        
+        // Review button
+        const reviewBtn = document.createElement('button');
+        reviewBtn.className = `action-btn${problem.forReview ? " marked" : ""}`;
+        reviewBtn.title = "Mark for revision";
+        reviewBtn.dataset.id = problem.id;
+        reviewBtn.dataset.action = "review";
+        reviewBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${problem.forReview ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+        `;
+        
+        // Notes button
+        const notesBtn = document.createElement('button');
+        notesBtn.className = `action-btn${problem.userNotes && problem.userNotes.trim() !== "" ? " marked" : ""}`;
+        notesBtn.title = "Add notes";
+        notesBtn.dataset.id = problem.id;
+        notesBtn.dataset.action = "notes";
+        notesBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <path d="M14 2v6h6"></path>
+                <path d="M16 13H8"></path>
+                <path d="M16 17H8"></path>
+                <path d="M10 9H8"></path>
+            </svg>
+        `;
+        
+        // Code solution button
+        const codeBtn = document.createElement('button');
+        codeBtn.className = 'action-btn';
+        codeBtn.title = "View code solution";
+        codeBtn.dataset.url = problem.codeUrl;
+        codeBtn.dataset.action = "code";
+        codeBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+        `;
+        
+        actionsDiv.appendChild(reviewBtn);
+        actionsDiv.appendChild(notesBtn);
+        actionsDiv.appendChild(codeBtn);
+        actionsTd.appendChild(actionsDiv);
+        
+        // Add all cells to the row
+        row.appendChild(statusTd);
+        row.appendChild(problemTd);
+        row.appendChild(categoryTd);
+        row.appendChild(difficultyTd);
+        row.appendChild(priorityTd);
+        row.appendChild(dueDateTd);
+        row.appendChild(actionsTd);
+        
+        // Add row to table
+        problemsTableBody.appendChild(row);
+    });
+    
+    // Update table info
+    tableInfo.textContent = `Showing ${currentPageProblems.length} of ${problemsToShow.length} problems`;
+}
+
+// Render pagination controls
+function renderPagination(totalPages) {
+    // Clear existing page buttons except prev and next
+    const pageButtons = pagination.querySelectorAll('.pagination-btn:not(#prevPageBtn):not(#nextPageBtn)');
+    pageButtons.forEach(btn => btn.remove());
+    
+    // Add page buttons
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    
+    // Adjust if we're near the end
+    if (endPage - startPage < maxVisiblePages - 1) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+    
+    // Add first page button if not visible
+    if (startPage > 1) {
+        const firstBtn = document.createElement('button');
+        firstBtn.className = 'pagination-btn';
+        firstBtn.textContent = '1';
+        firstBtn.dataset.page = 1;
+        pagination.insertBefore(firstBtn, nextPageBtn);
+        
+        // Add ellipsis if needed
+        if (startPage > 2) {
+            const ellipsis = document.createElement('span');
+            ellipsis.textContent = '...';
+            ellipsis.style.margin = '0 0.25rem';
+            pagination.insertBefore(ellipsis, nextPageBtn);
+        }
+    }
+    
+    // Add visible page buttons
+    for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = `pagination-btn${i === currentPage ? " active" : ""}`;
+        pageBtn.textContent = i;
+        pageBtn.dataset.page = i;
+        pagination.insertBefore(pageBtn, nextPageBtn);
+    }
+    
+    // Add last page button if not visible
+    if (endPage < totalPages) {
+        // Add ellipsis if needed
+        if (endPage < totalPages - 1) {
+            const ellipsis = document.createElement('span');
+            ellipsis.textContent = '...';
+            ellipsis.style.margin = '0 0.25rem';
+            pagination.insertBefore(ellipsis, nextPageBtn);
+        }
+        
+        const lastBtn = document.createElement('button');
+        lastBtn.className = 'pagination-btn';
+        lastBtn.textContent = totalPages;
+        lastBtn.dataset.page = totalPages;
+        pagination.insertBefore(lastBtn, nextPageBtn);
+    }
+    
+    // Update prev/next button states
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+}
+
+// Render notes in the notes view
+function renderNotes() {
+    notesGrid.innerHTML = '';
+    
+    if (notesData.length === 0) {
+        const emptyMessage = document.createElement('div');
+        emptyMessage.className = 'note-card';
+        emptyMessage.innerHTML = `
+            <div class="note-header">
+                <div class="note-title">No Notes Yet</div>
+            </div>
+            <div class="note-content">
+                Add notes to problems by clicking the notes button in the actions column.
+            </div>
+        `;
+        notesGrid.appendChild(emptyMessage);
+        return;
+    }
+    
+    // Sort notes by updated time, newest first
+    const sortedNotes = [...notesData].sort((a, b) => {
+        const dateA = a.updatedAt?.toDate() || new Date(0);
+        const dateB = b.updatedAt?.toDate() || new Date(0);
+        return dateB - dateA;
+    });
+    
+    sortedNotes.forEach(note => {
+        const noteCard = document.createElement('div');
+        noteCard.className = 'note-card';
+        
+        const updatedDate = note.updatedAt?.toDate() || new Date();
+        const formattedDate = updatedDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+        
+        noteCard.innerHTML = `
+            <div class="note-header">
+                <div class="note-title">${note.problemName}</div>
+                <div class="note-meta">Updated: ${formattedDate}</div>
+            </div>
+            <div class="note-content">${note.content}</div>
+        `;
+        
+        notesGrid.appendChild(noteCard);
+    });
+}
+
+// Show toast message
+function showToast(message, isError = false) {
+    toast.textContent = message;
+    toast.className = `toast${isError ? " error" : ""}`;
+    
+    // Show the toast
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+    
+    // Hide the toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// Handle problem status toggle
+function toggleProblemStatus(problemId) {
+    const index = userProblems.findIndex(p => p.id === problemId);
+    if (index === -1) return;
+    
+    const newStatus = userProblems[index].status === "Completed" ? "Not Started" : "Completed";
+    userProblems[index].status = newStatus;
+    
+    // Save to Firebase if user is signed in
+    if (currentUser) {
+        saveProblemData(problemId, { status: newStatus })
+            .then(() => {
+                updateStats();
+                showProblems(currentView);
+            })
+            .catch(error => {
+                console.error("Error saving problem status: ", error);
+                showToast("Error saving problem status", true);
+                // Revert the change
+                userProblems[index].status = userProblems[index].status === "Completed" ? "Not Started" : "Completed";
+                showProblems(currentView);
+            });
+    } else {
+        updateStats();
+        showProblems(currentView);
+    }
+}
+
+// Handle review toggle
+function toggleReview(problemId) {
+    const index = userProblems.findIndex(p => p.id === problemId);
+    if (index === -1) return;
+    
+    const newReviewStatus = !userProblems[index].forReview;
+    userProblems[index].forReview = newReviewStatus;
+    
+    // Save to Firebase if user is signed in
+    if (currentUser) {
+        saveProblemData(problemId, { forReview: newReviewStatus })
+            .then(() => {
+                updateStats();
+                showProblems(currentView);
+            })
+            .catch(error => {
+                console.error("Error saving review status: ", error);
+                showToast("Error saving review status", true);
+                // Revert the change
+                userProblems[index].forReview = !newReviewStatus;
+                showProblems(currentView);
+            });
+    } else {
+        updateStats();
+        showProblems(currentView);
+    }
+}
+
+// Open notes modal
+function openNotesModal(problemId) {
+    const problem = userProblems.find(p => p.id === problemId);
+    if (!problem) return;
+    
+    problemTitle.textContent = problem.problem;
+    notesTextarea.value = problem.userNotes || "";
+    notesTextarea.dataset.problemId = problemId;
+    
+    notesModal.style.display = 'block';
+}
+
+// Close notes modal
+function closeNotesModal() {
+    notesModal.style.display = 'none';
+}
+
+// Save notes
+function saveNotes() {
+    const problemId = parseInt(notesTextarea.dataset.problemId);
+    const content = notesTextarea.value.trim();
+    
+    if (!problemId) return;
+    
+    const index = userProblems.findIndex(p => p.id === problemId);
+    if (index === -1) return;
+    
+    userProblems[index].userNotes = content;
+    
+    // Save to Firebase if user is signed in
+    if (currentUser) {
+        // Update problem user notes
+        saveProblemData(problemId, { userNotes: content })
+            .then(() => {
+                // Add to notes collection if there's content
+                if (content) {
+                    return saveNote(problemId, content);
+                }
+                return Promise.resolve();
+            })
+            .then(() => {
+                showToast("Notes saved successfully");
+                closeNotesModal();
+                
+                // Reload notes data
+                if (currentUser) {
+                    db.collection('users').doc(currentUser.uid).collection('notes').get()
+                        .then(snapshot => {
+                            notesData = [];
+                            snapshot.forEach(doc => {
+                                notesData.push({
+                                    id: doc.id,
+                                    ...doc.data()
+                                });
+                            });
+                            
+                            updateNotesCount();
+                            if (currentView === 'notes') {
+                                renderNotes();
+                            }
+                        });
+                }
+                
+                updateStats();
+                showProblems(currentView);
+            })
+            .catch(error => {
+                console.error("Error saving notes: ", error);
+                showToast("Error saving notes", true);
+            });
+    } else {
+        showToast("Notes saved locally. Sign in to save permanently");
+        closeNotesModal();
+        updateStats();
+        showProblems(currentView);
+    }
+}
+
+// Set up event listeners
+function setupEventListeners() {
+    // Status checkbox toggle
+    problemsTableBody.addEventListener('click', (e) => {
+        const statusCheckbox = e.target.closest('.status-checkbox');
+        if (statusCheckbox) {
+            const problemId = parseInt(statusCheckbox.dataset.id);
+            toggleProblemStatus(problemId);
+        }
+    });
+    
+    // Action buttons
+    problemsTableBody.addEventListener('click', (e) => {
+        const actionBtn = e.target.closest('.action-btn');
+        if (!actionBtn) return;
+        
+        const action = actionBtn.dataset.action;
+        const problemId = parseInt(actionBtn.dataset.id);
+        
+        switch (action) {
+            case 'review':
+                toggleReview(problemId);
+                break;
+            case 'notes':
+                openNotesModal(problemId);
+                break;
+            case 'code':
+                if (actionBtn.dataset.url) {
+                    window.open(actionBtn.dataset.url, '_blank');
+                }
+                break;
+        }
+    });
+    
+    // Notes modal
+    closeModal.addEventListener('click', closeNotesModal);
+    window.addEventListener('click', (e) => {
+        if (e.target === notesModal) {
+            closeNotesModal();
+        }
+    });
+    
+    // Save notes button
+    saveNotesBtn.addEventListener('click', saveNotes);
+    
+    // Study plan generator
+    generatePlanBtn.addEventListener('click', generateStudyPlan);
+    
+    // View tabs
+    viewTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            viewTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            const view = tab.dataset.view;
+            currentPage = 1;
+            showProblems(view);
+        });
+    });
+    
+    // Pagination
+    prevPageBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            showProblems(currentView);
+        }
+    });
+    
+    nextPageBtn.addEventListener('click', () => {
+        const totalPages = Math.ceil(problemsToShow.length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            showProblems(currentView);
+        }
+    });
+    
+    pagination.addEventListener('click', (e) => {
+        const pageBtn = e.target.closest('.pagination-btn:not(#prevPageBtn):not(#nextPageBtn)');
+        if (pageBtn) {
+            const page = parseInt(pageBtn.dataset.page);
+            if (page !== currentPage) {
+                currentPage = page;
+                showProblems(currentView);
+            }
+        }
+    });
+}
+
+// Initialize the application
+function initApp() {
+    loadProblemsData();
+    setupAuth();
+    setupEventListeners();
+}
+
+// Start the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
