@@ -1409,9 +1409,10 @@ function updateStats() {
     }).length;
     
     // Map data priorities to UI priorities
+    // Map data priorities to UI priorities
     const highPriority = userProblems.filter(p => p.priority === "High");
-    const mediumPriority = userProblems.filter(p => p.priority === "High-Medium");
-    const lowPriority = userProblems.filter(p => p.priority === "Medium");
+    const mediumPriority = userProblems.filter(p => p.priority === "Medium");
+    const lowPriority = userProblems.filter(p => p.priority === "Low");
     
     const highCompleted = highPriority.filter(p => p.status === "Completed").length;
     const mediumCompleted = mediumPriority.filter(p => p.status === "Completed").length;
@@ -1570,8 +1571,8 @@ function generateStudyPlan() {
         
         // Check priorities with exact matching
         if (p.priority === "High" && includeHigh) return true;
-        if (p.priority === "High-Medium" && includeMedium) return true;
-        if (p.priority === "Medium" && includeLow) return true;
+        if (p.priority === "Medium" && includeMedium) return true;
+        if (p.priority === "Low" && includeLow) return true;
         
         return false;
     });
@@ -1608,8 +1609,8 @@ function generateStudyPlan() {
     // Priority weights (higher is more important)
     const priorityWeight = {
         "High": 3,
-        "High-Medium": 2,
-        "Medium": 1
+        "Medium": 2,
+        "Low": 1
     };
     
     // Difficulty weights
@@ -1906,11 +1907,10 @@ function filterProblems(view) {
         "Design"
     ];
     
-    // Define priority and difficulty weights with CORRECT mapping
     const priorityWeight = {
-        "High": 3,          // Highest priority (displayed as "High")
-        "High-Medium": 2,   // Medium priority (displayed as "Medium")
-        "Medium": 1         // Lowest priority (displayed as "Low")
+        "High": 3,
+        "Medium": 2,
+        "Low": 1
     };
     
     const difficultyWeight = {
@@ -2018,7 +2018,7 @@ function showProblems(view) {
                 priorityClass = problem.priority.toLowerCase();
         }
         priorityTag.className = `priority-tag ${priorityClass}`;
-        priorityTag.textContent = getPriorityDisplayName(problem.priority);
+        priorityTag.textContent = problem.priority;
         priorityTd.appendChild(priorityTag);
         
         // Add due date with fixed date comparison
@@ -2469,15 +2469,6 @@ function setupEventListeners() {
 
 function initApp() {
     loadProblemsData();
-    
-    // Update priority labels to match the data mapping
-    const highLabel = document.querySelector('.priority-check.high .priority-label');
-    const mediumLabel = document.querySelector('.priority-check.medium .priority-label');
-    const lowLabel = document.querySelector('.priority-check.low .priority-label');
-    
-    if (highLabel) highLabel.textContent = "High";
-    if (mediumLabel) mediumLabel.textContent = "High-Medium"; 
-    if (lowLabel) lowLabel.textContent = "Medium";
     
     // Load saved priority selection preferences
     loadPrioritySelection();
