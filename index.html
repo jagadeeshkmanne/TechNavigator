@@ -1577,8 +1577,15 @@ function generateStudyPlan() {
         return false;
     });
     
+    // Debug logging
     console.log("Priority selection:", { high: includeHigh, medium: includeMedium, low: includeLow });
     console.log("Found eligible problems:", eligibleProblems.length);
+    console.log("Sample eligible problems:", eligibleProblems.slice(0, 5).map(p => ({
+        id: p.id,
+        name: p.problem,
+        priority: p.priority,
+        status: p.status
+    })));
     
     if (eligibleProblems.length === 0) {
         showToast("No eligible problems found for the selected priorities", true);
@@ -1587,23 +1594,23 @@ function generateStudyPlan() {
     
     // Define category order following NeetCode roadmap
     const categoryOrder = [
-        "Arrays & Hashing",     // Start with basics
-        "Two Pointers",         // Simple technique
-        "Sliding Window",       // Extension of two pointers
-        "Stack",                // Fundamental data structure
-        "Binary Search",        // Important search algorithm
-        "Linked List",          // Fundamental data structure
-        "Trees",                // Tree traversals and manipulations
-        "Tries",                // Special tree structure
-        "Heap / Priority Queue", // Advanced data structure
-        "Backtracking",         // Recursive technique
-        "Graphs",               // Graph algorithms (moderate complexity)
-        "1D Dynamic Programming", // Start with simpler DP
-        "2D Dynamic Programming", // Advanced DP
-        "Greedy",               // Optimization technique
-        "Intervals",            // Range processing problems
-        "Bit Manipulation",     // Low-level operations
-        "Design"                // System design problems (most complex)
+        "Arrays & Hashing",
+        "Two Pointers",
+        "Sliding Window",
+        "Stack",
+        "Binary Search",
+        "Linked List",
+        "Trees",
+        "Tries",
+        "Heap / Priority Queue",
+        "Backtracking",
+        "Graphs",
+        "1D Dynamic Programming",
+        "2D Dynamic Programming",
+        "Greedy",
+        "Intervals",
+        "Bit Manipulation",
+        "Design"
     ];
     
     // Priority weights (higher is more important)
@@ -1620,10 +1627,9 @@ function generateStudyPlan() {
         "Hard": 3
     };
     
-    // IMPROVED: Sort all eligible problems first by priority, then by category, then by difficulty
-    // This ensures consistent ordering with the sorting in the main view
+    // Sort all eligible problems first by priority, then by category, then by difficulty
     eligibleProblems.sort((a, b) => {
-        // First sort by priority (High > High-Medium > Medium)
+        // First sort by priority (High > Medium > Low)
         if (priorityWeight[a.priority] !== priorityWeight[b.priority]) {
             return priorityWeight[b.priority] - priorityWeight[a.priority];
         }
@@ -1639,165 +1645,27 @@ function generateStudyPlan() {
         return difficultyWeight[a.difficulty] - difficultyWeight[b.difficulty];
     });
     
-    // Now group problems by category while maintaining their sorted order
-    const problemsByCategory = {};
-    
-    // Initialize categories
-    categoryOrder.forEach(category => {
-        problemsByCategory[category] = [];
-    });
-    
-    // Group problems by category - they are already pre-sorted by priority and difficulty
-    eligibleProblems.forEach(problem => {
-        if (problemsByCategory[problem.category]) {
-            problemsByCategory[problem.category].push(problem);
-        }
-    });
-    
-    // Create a roadmap-ordered list of problems
-    let orderedProblems = [];
-    
-    // Calculate distribution of problems across categories
-    const totalCategories = categoryOrder.length;
-    let remainingProblems = eligibleProblems.length;
-    let categoryWeights = {};
-    
-    // Assign weights based on position in the roadmap (earlier categories get higher weights)
-    let totalWeight = 0;
-    for (let i = 0; i < totalCategories; i++) {
-        // Decreasing weight: earlier categories get more problems
-        const weight = (totalCategories - i) / totalCategories;
-        const category = categoryOrder[i];
-        categoryWeights[category] = weight;
-        totalWeight += weight;
-    }
-    
-    // Calculate problems per category based on normalized weights
-    let problemsPerCategory = {};
-    for (const category of categoryOrder) {
-        const normalizedWeight = categoryWeights[category] / totalWeight;
-        const numProblems = Math.min(
-            problemsByCategory[category].length,
-            Math.max(1, Math.round(eligibleProblems.length * normalizedWeight))
-        );
-        problemsPerCategory[category] = numProblems;
-        remainingProblems -= numProblems;
-    }
-    
-    // Adjust if we've allocated too many or too few problems
-    while (remainingProblems !== 0) {
-        if (remainingProblems > 0) {
-            // Find category with the most problems and add one
-            let maxCategory = categoryOrder[0];
-            for (const category of categoryOrder) {
-                if (problemsByCategory[category].length > problemsPerCategory[category]) {
-                    maxCategory = category;
-                    break;
-                }
-            }
-            
-            if (problemsByCategory[maxCategory].length > problemsPerCategory[maxCategory]) {
-                problemsPerCategory[maxCategory]++;
-                remainingProblems--;
-            } else {
-                break; // No more problems to allocate
-            }
-        } else {
-            // Find category with the most allocated problems and remove one
-            let maxCategory = categoryOrder[0];
-            let maxAllocated = problemsPerCategory[maxCategory];
-            
-            for (const category of categoryOrder) {
-                if (problemsPerCategory[category] > maxAllocated) {
-                    maxCategory = category;
-                    maxAllocated = problemsPerCategory[category];
-                }
-            }
-            
-            if (problemsPerCategory[maxCategory] > 1) {
-                problemsPerCategory[maxCategory]--;
-                remainingProblems++;
-            } else {
-                break; // Cannot reduce further
-            }
-        }
-    }
-    
-    // Build the final ordered problem list
-    // IMPROVED: Use internal sorting to ensure priority ordering is preserved
-    // This approach maintains priority consistency while respecting the roadmap progression
-    
-    // First, get the allocated problems from each category
-    let categoryOrderedProblems = [];
-    for (const category of categoryOrder) {
-        const problemsToTake = problemsPerCategory[category] || 0;
-        if (problemsToTake > 0 && problemsByCategory[category]) {
-            // Take the pre-sorted problems from this category
-            categoryOrderedProblems.push({
-                category: category,
-                problems: problemsByCategory[category].slice(0, problemsToTake)
-            });
-        }
-    }
-    
-    // Now assign problems to days, prioritizing higher priority problems first across all categories
-    // This ensures high priority problems are scheduled earlier regardless of their category
-    while (categoryOrderedProblems.length > 0) {
-        // Find the highest priority problem across all categories
-        let highestPriorityIdx = 0;
-        let highestPriorityValue = 0;
-        let highestPriorityCategory = 0;
-        
-        for (let i = 0; i < categoryOrderedProblems.length; i++) {
-            if (categoryOrderedProblems[i].problems.length > 0) {
-                const topProblem = categoryOrderedProblems[i].problems[0];
-                const priorityValue = priorityWeight[topProblem.priority];
-                
-                // If this is a higher priority or same priority but earlier category
-                if (priorityValue > highestPriorityValue || 
-                    (priorityValue === highestPriorityValue && 
-                     categoryOrder.indexOf(categoryOrderedProblems[i].category) < highestPriorityCategory)) {
-                    highestPriorityIdx = i;
-                    highestPriorityValue = priorityValue;
-                    highestPriorityCategory = categoryOrder.indexOf(categoryOrderedProblems[i].category);
-                }
-            }
-        }
-        
-        // Add the highest priority problem to our ordered list
-        if (categoryOrderedProblems[highestPriorityIdx].problems.length > 0) {
-            orderedProblems.push(categoryOrderedProblems[highestPriorityIdx].problems.shift());
-            
-            // Remove this category if it's now empty
-            if (categoryOrderedProblems[highestPriorityIdx].problems.length === 0) {
-                categoryOrderedProblems.splice(highestPriorityIdx, 1);
-            }
-        }
-    }
-    
-    console.log("Priority-ordered problems:", orderedProblems.length);
-    
-    // Calculate problems per day (at least 1)
-    const problemsPerDay = Math.max(1, Math.ceil(orderedProblems.length / days));
+    // Calculate problems per day
+    const problemsPerDay = Math.max(1, Math.ceil(eligibleProblems.length / days));
     
     // Save current plan settings to localStorage
     if (window.localStorage) {
         localStorage.setItem('techNavigator_planDays', days.toString());
     }
     
-    // Assign due dates following the priority-based order
+    // Assign due dates to the sorted problems
     let dueDate = new Date();
     let problemsAssigned = 0;
     let updatePromises = [];
     
-    for (let i = 0; i < orderedProblems.length; i++) {
+    for (let i = 0; i < eligibleProblems.length; i++) {
         // Move to next day if we've assigned enough problems for today
-        if (problemsAssigned >= problemsPerDay) {
+        if (problemsAssigned >= problemsPerDay && problemsAssigned > 0) {
             dueDate.setDate(dueDate.getDate() + 1);
             problemsAssigned = 0;
         }
         
-        const problem = orderedProblems[i];
+        const problem = eligibleProblems[i];
         const dueDateStr = dueDate.toISOString().split('T')[0];
         
         // Update problem due date
@@ -1819,7 +1687,7 @@ function generateStudyPlan() {
     if (updatePromises.length > 0) {
         Promise.all(updatePromises)
             .then(() => {
-                showToast(`Study plan generated: ${orderedProblems.length} problems over ${days} days prioritized by importance`);
+                showToast(`Study plan generated: ${eligibleProblems.length} problems over ${days} days`);
                 updateStats();
                 showProblems(currentView);
             })
@@ -1828,7 +1696,7 @@ function generateStudyPlan() {
                 showToast("Error saving study plan", true);
             });
     } else {
-        showToast(`Study plan generated: ${orderedProblems.length} problems over ${days} days prioritized by importance`);
+        showToast(`Study plan generated: ${eligibleProblems.length} problems over ${days} days`);
         updateStats();
         showProblems(currentView);
     }
