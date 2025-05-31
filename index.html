@@ -1107,247 +1107,153 @@ function loadProblemsData() {
     
 // Main data store - initializing these variables at the top level
 const problems = [
-  // ==================== HIGH PRIORITY PROBLEMS (63 total) ====================
-  // Arrays & Hashing - HIGH
-  { id: 1, problem: "Group Anagrams", number: 49, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/group-anagrams/" },
-  { id: 2, problem: "Product of Array Except Self", number: 238, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/product-of-array-except-self/" },
-  { id: 3, problem: "Valid Sudoku", number: 36, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/valid-sudoku/" },
-  { id: 4, problem: "Longest Consecutive Sequence", number: 128, category: "Arrays & Hashing", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/longest-consecutive-sequence/" },
-
-  // Two Pointers - HIGH
-  { id: 5, problem: "3Sum", number: 15, category: "Two Pointers", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/3sum/" },
-  { id: 6, problem: "Container With Most Water", number: 11, category: "Two Pointers", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/container-with-most-water/" },
-  { id: 7, problem: "Trapping Rain Water", number: 42, category: "Two Pointers", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/trapping-rain-water/" },
-
-  // Sliding Window - HIGH
-  { id: 8, problem: "Longest Substring Without Repeating Characters", number: 3, category: "Sliding Window", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/longest-substring-without-repeating-characters/" },
-  { id: 9, problem: "Longest Repeating Character Replacement", number: 424, category: "Sliding Window", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/longest-repeating-character-replacement/" },
-  { id: 10, problem: "Minimum Window Substring", number: 76, category: "Sliding Window", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/minimum-window-substring/" },
-  { id: 11, problem: "Sliding Window Maximum", number: 239, category: "Sliding Window", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/sliding-window-maximum/" },
-
-  // Stack - HIGH
-  { id: 12, problem: "Min Stack", number: 155, category: "Stack", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/min-stack/" },
-  { id: 13, problem: "Generate Parentheses", number: 22, category: "Stack", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/generate-parentheses/" },
-  { id: 14, problem: "Daily Temperatures", number: 739, category: "Stack", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/daily-temperatures/" },
-  { id: 15, problem: "Largest Rectangle in Histogram", number: 84, category: "Stack", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/largest-rectangle-in-histogram/" },
-
-  // Binary Search - HIGH
-  { id: 16, problem: "Koko Eating Bananas", number: 875, category: "Binary Search", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/koko-eating-bananas/" },
-  { id: 17, problem: "Search in Rotated Sorted Array", number: 33, category: "Binary Search", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/search-in-rotated-sorted-array/" },
-  { id: 18, problem: "Find Minimum in Rotated Sorted Array", number: 153, category: "Binary Search", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" },
-  { id: 19, problem: "Median of Two Sorted Arrays", number: 4, category: "Binary Search", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/median-of-two-sorted-arrays/" },
-
-  // Linked List - HIGH
-  { id: 20, problem: "Reorder List", number: 143, category: "Linked List", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/reorder-list/" },
-  { id: 21, problem: "Remove Nth Node From End of List", number: 19, category: "Linked List", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/remove-nth-node-from-end-of-list/" },
-  { id: 22, problem: "Add Two Numbers", number: 2, category: "Linked List", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/add-two-numbers/" },
-  { id: 23, problem: "Merge k Sorted Lists", number: 23, category: "Linked List", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/merge-k-sorted-lists/" },
-  { id: 24, problem: "Reverse Nodes in k-Group", number: 25, category: "Linked List", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/reverse-nodes-in-k-group/" },
-
-  // Trees - HIGH
-  { id: 25, problem: "Binary Tree Right Side View", number: 199, category: "Trees", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/binary-tree-right-side-view/" },
-  { id: 26, problem: "Binary Tree Maximum Path Sum", number: 124, category: "Trees", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/binary-tree-maximum-path-sum/" },
-
-  // Heap / Priority Queue - HIGH
-  { id: 27, problem: "Kth Largest Element in an Array", number: 215, category: "Heap / Priority Queue", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/kth-largest-element-in-an-array/" },
-  { id: 28, problem: "Task Scheduler", number: 621, category: "Heap / Priority Queue", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/task-scheduler/" },
-
-  // Backtracking - HIGH
-  { id: 29, problem: "Letter Combinations of a Phone Number", number: 17, category: "Backtracking", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/letter-combinations-of-a-phone-number/" },
-  { id: 30, problem: "N-Queens", number: 51, category: "Backtracking", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/n-queens/" },
-  { id: 31, problem: "Subsets", number: 78, category: "Backtracking", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/subsets/" },
-  { id: 32, problem: "Subsets II", number: 90, category: "Backtracking", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/subsets-ii/" },
-
-  // Graphs - HIGH
-  { id: 33, problem: "Number of Islands", number: 200, category: "Graphs", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/number-of-islands/" },
-  { id: 34, problem: "Pacific Atlantic Water Flow", number: 417, category: "Graphs", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/pacific-atlantic-water-flow/" },
-  { id: 35, problem: "Course Schedule", number: 207, category: "Graphs", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/course-schedule/" },
-
-  // Advanced Graphs - HIGH
-  { id: 36, problem: "Network Delay Time", number: 743, category: "Advanced Graphs", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/network-delay-time/" },
-  { id: 37, problem: "Cheapest Flights Within K Stops", number: 787, category: "Advanced Graphs", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/cheapest-flights-within-k-stops/" },
-
-  // 1D Dynamic Programming - HIGH
-  { id: 38, problem: "Maximum Subarray", number: 53, category: "1D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/maximum-subarray/" },
-  { id: 39, problem: "Jump Game", number: 55, category: "1D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/jump-game/" },
-  { id: 40, problem: "House Robber", number: 198, category: "1D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/house-robber/" },
-  { id: 41, problem: "Longest Palindromic Substring", number: 5, category: "1D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/longest-palindromic-substring/" },
-  { id: 42, problem: "Maximum Product Subarray", number: 152, category: "1D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/maximum-product-subarray/" },
-  { id: 43, problem: "Word Break", number: 139, category: "1D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/word-break/" },
-  { id: 44, problem: "Longest Increasing Subsequence", number: 300, category: "1D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/longest-increasing-subsequence/" },
-
-  // 2D Dynamic Programming - HIGH
-  { id: 45, problem: "Unique Paths", number: 62, category: "2D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/unique-paths/" },
-  { id: 46, problem: "Target Sum", number: 494, category: "2D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/target-sum/" },
-  { id: 47, problem: "Edit Distance", number: 72, category: "2D Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/edit-distance/" },
-
-  // Intervals - HIGH
-  { id: 48, problem: "Merge Intervals", number: 56, category: "Intervals", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/merge-intervals/" },
-  { id: 49, problem: "Meeting Rooms II", number: 253, category: "Intervals", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/meeting-rooms-ii/" },
-
-  // Math & Geometry - HIGH
-  { id: 50, problem: "Rotate Image", number: 48, category: "Math & Geometry", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/rotate-image/" },
-  { id: 51, problem: "Spiral Matrix", number: 54, category: "Math & Geometry", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/spiral-matrix/" },
-  { id: 52, problem: "Set Matrix Zeroes", number: 73, category: "Math & Geometry", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/set-matrix-zeroes/" },
-  { id: 53, problem: "Pow(x, n)", number: 50, category: "Math & Geometry", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/powx-n/" },
-
-  // Design - HIGH (All L6 critical design problems)
-  { id: 54, problem: "LRU Cache", number: 146, category: "Design", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/lru-cache/" },
-  { id: 55, problem: "Time Based Key-Value Store", number: 981, category: "Design", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/time-based-key-value-store/" },
-  { id: 56, problem: "Design Search Autocomplete System", number: 642, category: "Design", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/design-search-autocomplete-system/" },
-  { id: 57, problem: "Logger Rate Limiter", number: 359, category: "Design", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/logger-rate-limiter/" },
-  { id: 58, problem: "Finding MK Average", number: 1825, category: "Design", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/finding-mk-average/" },
-  { id: 59, problem: "Range Sum Query - Immutable", number: 303, category: "Design", difficulty: "Easy", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/range-sum-query-immutable/" },
-  { id: 60, problem: "Design Hit Counter", number: 362, category: "Design", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/design-hit-counter/" },
-  { id: 61, problem: "Design In-Memory File System", number: 588, category: "Design", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/design-in-memory-file-system/" },
-  { id: 62, problem: "Detect Squares", number: 2013, category: "Design", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/detect-squares/" },
-  { id: 63, problem: "Find Median from Data Stream", number: 295, category: "Design", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/find-median-from-data-stream/" },
-
-  // ==================== MEDIUM PRIORITY PROBLEMS (41 total) ====================
-  // Arrays & Hashing - MEDIUM
-  { id: 64, problem: "4Sum", number: 18, category: "Arrays & Hashing", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/4sum/" },
-  { id: 65, problem: "First Missing Positive", number: 41, category: "Arrays & Hashing", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/first-missing-positive/" },
-  { id: 66, problem: "Rotate Array", number: 189, category: "Arrays & Hashing", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/rotate-array/" },
-  { id: 67, problem: "Text Justification", number: 68, category: "Arrays & Hashing", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/text-justification/" },
-  { id: 68, problem: "String Compression", number: 443, category: "Arrays & Hashing", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/string-compression/" },
-  { id: 69, problem: "Maximum Swap", number: 670, category: "Arrays & Hashing", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/maximum-swap/" },
-  { id: 70, problem: "Insert Delete GetRandom O(1)", number: 380, category: "Arrays & Hashing", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/insert-delete-getrandom-o1/" },
-
-  // Two Pointers - MEDIUM
-  { id: 71, problem: "Sort Colors", number: 75, category: "Two Pointers", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/sort-colors/" },
-  { id: 72, problem: "Next Permutation", number: 31, category: "Two Pointers", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/next-permutation/" },
-
-  // Sliding Window - MEDIUM
-  { id: 73, problem: "Subarray Sum Equals K", number: 560, category: "Sliding Window", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/subarray-sum-equals-k/" },
-  { id: 74, problem: "Max Consecutive Ones III", number: 1004, category: "Sliding Window", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/max-consecutive-ones-iii/" },
-
-  // Stack - MEDIUM
-  { id: 75, problem: "Decode String", number: 394, category: "Stack", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/decode-string/" },
-  { id: 76, problem: "Basic Calculator", number: 224, category: "Stack", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/basic-calculator/" },
-  { id: 77, problem: "Number of Visible People in a Queue", number: 1944, category: "Stack", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/number-of-visible-people-in-a-queue/" },
-
-  // Binary Search - MEDIUM
-  { id: 78, problem: "Find First and Last Position of Element in Sorted Array", number: 34, category: "Binary Search", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" },
-  { id: 79, problem: "Find Peak Element", number: 162, category: "Binary Search", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/find-peak-element/" },
-  { id: 80, problem: "Single Element in a Sorted Array", number: 540, category: "Binary Search", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/single-element-in-a-sorted-array/" },
-  { id: 81, problem: "Split Array Largest Sum", number: 410, category: "Binary Search", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/split-array-largest-sum/" },
-  { id: 82, problem: "Peak Index in a Mountain Array", number: 852, category: "Binary Search", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/peak-index-in-a-mountain-array/" },
-  { id: 83, problem: "Find K Closest Elements", number: 658, category: "Binary Search", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/find-k-closest-elements/" },
-
-  // Linked List - MEDIUM
-  { id: 84, problem: "Linked List Cycle II", number: 142, category: "Linked List", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/linked-list-cycle-ii/" },
-  { id: 85, problem: "Odd Even Linked List", number: 328, category: "Linked List", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/odd-even-linked-list/" },
-
-  // Trees - MEDIUM
-  { id: 86, problem: "Lowest Common Ancestor of a Binary Tree", number: 236, category: "Trees", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/" },
-
-  // Tries - MEDIUM
-  { id: 87, problem: "Search Suggestions System", number: 1268, category: "Tries", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/search-suggestions-system/" },
-
-  // Heap / Priority Queue - MEDIUM
-  { id: 88, problem: "Top K Frequent Words", number: 692, category: "Heap / Priority Queue", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/top-k-frequent-words/" },
-
-  // Graphs - MEDIUM
-  { id: 89, problem: "Number of Provinces", number: 547, category: "Graphs", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/number-of-provinces/" },
-  { id: 90, problem: "Accounts Merge", number: 721, category: "Graphs", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/accounts-merge/" },
-
-  // 1D Dynamic Programming - MEDIUM
-  { id: 91, problem: "Best Time to Buy and Sell Stock II", number: 122, category: "1D Dynamic Programming", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" },
-
-  // 2D Dynamic Programming - MEDIUM
-  { id: 92, problem: "Maximal Square", number: 221, category: "2D Dynamic Programming", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/maximal-square/" },
-  { id: 93, problem: "Maximal Rectangle", number: 85, category: "2D Dynamic Programming", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/maximal-rectangle/" },
-  { id: 94, problem: "Russian Doll Envelopes", number: 354, category: "2D Dynamic Programming", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/russian-doll-envelopes/" },
-
-  // Intervals - MEDIUM
-  { id: 95, problem: "Interval List Intersections", number: 986, category: "Intervals", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/interval-list-intersections/" },
-
-  // Design - MEDIUM (Additional L6 critical design problems)
-  { id: 96, problem: "LFU Cache", number: 460, category: "Design", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/lfu-cache/" },
-  { id: 97, problem: "Design Circular Queue", number: 622, category: "Design", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/design-circular-queue/" },
-  { id: 98, problem: "Design Underground System", number: 1396, category: "Design", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/design-underground-system/" },
-  { id: 99, problem: "Meeting Rooms III", number: 2402, category: "Design", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/meeting-rooms-iii/" },
-  { id: 100, problem: "Snapshot Array", number: 1146, category: "Design", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/snapshot-array/" },
-  { id: 101, problem: "Range Module", number: 715, category: "Design", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/range-module/" },
-  { id: 102, problem: "Insert Delete GetRandom O(1) - Duplicates allowed", number: 381, category: "Design", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/" },
-  { id: 103, problem: "Prefix and Suffix Search", number: 745, category: "Design", difficulty: "Hard", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/prefix-and-suffix-search/" },
-  { id: 104, problem: "Flatten Nested List Iterator", number: 341, category: "Design", difficulty: "Medium", priority: "Medium", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/flatten-nested-list-iterator/" },
-
-  // ==================== LOW PRIORITY PROBLEMS (37 total) ====================
-  // Arrays & Hashing - LOW
-  { id: 105, problem: "Two Sum", number: 1, category: "Arrays & Hashing", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/two-sum/" },
-  { id: 106, problem: "Contains Duplicate", number: 217, category: "Arrays & Hashing", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/contains-duplicate/" },
-  { id: 107, problem: "Valid Anagram", number: 242, category: "Arrays & Hashing", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/valid-anagram/" },
-  { id: 108, problem: "Top K Frequent Elements", number: 347, category: "Arrays & Hashing", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/top-k-frequent-elements/" },
-
-  // Two Pointers - LOW
-  { id: 109, problem: "Valid Palindrome", number: 125, category: "Two Pointers", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/valid-palindrome/" },
-  { id: 110, problem: "Two Sum II - Input Array Is Sorted", number: 167, category: "Two Pointers", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/" },
-
-  // Sliding Window - LOW
-  { id: 111, problem: "Best Time to Buy and Sell Stock", number: 121, category: "Sliding Window", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" },
-
-  // Stack - LOW
-  { id: 112, problem: "Valid Parentheses", number: 20, category: "Stack", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/valid-parentheses/" },
-
-  // Binary Search - LOW
-  { id: 113, problem: "Binary Search", number: 704, category: "Binary Search", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/binary-search/" },
-
-  // Linked List - LOW
-  { id: 114, problem: "Reverse Linked List", number: 206, category: "Linked List", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/reverse-linked-list/" },
-  { id: 115, problem: "Merge Two Sorted Lists", number: 21, category: "Linked List", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/merge-two-sorted-lists/" },
-  { id: 116, problem: "Copy List with Random Pointer", number: 138, category: "Linked List", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/copy-list-with-random-pointer/" },
-
-  // Trees - LOW
-  { id: 117, problem: "Invert Binary Tree", number: 226, category: "Trees", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/invert-binary-tree/" },
-  { id: 118, problem: "Maximum Depth of Binary Tree", number: 104, category: "Trees", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/maximum-depth-of-binary-tree/" },
-  { id: 119, problem: "Binary Tree Level Order Traversal", number: 102, category: "Trees", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/binary-tree-level-order-traversal/" },
-  { id: 120, problem: "Validate Binary Search Tree", number: 98, category: "Trees", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/validate-binary-search-tree/" },
-  { id: 121, problem: "Kth Smallest Element in a BST", number: 230, category: "Trees", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/kth-smallest-element-in-a-bst/" },
-  { id: 122, problem: "Serialize and Deserialize Binary Tree", number: 297, category: "Trees", difficulty: "Hard", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/" },
-
-  // Tries - LOW
-  { id: 123, problem: "Implement Trie (Prefix Tree)", number: 208, category: "Tries", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/implement-trie-prefix-tree/" },
-  { id: 124, problem: "Word Search II", number: 212, category: "Tries", difficulty: "Hard", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/word-search-ii/" },
-
-  // Heap / Priority Queue - LOW
-  { id: 125, problem: "K Closest Points to Origin", number: 973, category: "Heap / Priority Queue", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/k-closest-points-to-origin/" },
-
-  // Backtracking - LOW
-  { id: 126, problem: "Combination Sum", number: 39, category: "Backtracking", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/combination-sum/" },
-  { id: 127, problem: "Permutations", number: 46, category: "Backtracking", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/permutations/" },
-  { id: 128, problem: "Word Search", number: 79, category: "Backtracking", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/word-search/" },
-  { id: 129, problem: "Palindrome Partitioning", number: 131, category: "Backtracking", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/palindrome-partitioning/" },
-
-  // Graphs - LOW
-  { id: 130, problem: "Clone Graph", number: 133, category: "Graphs", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/clone-graph/" },
-  { id: 131, problem: "Rotting Oranges", number: 994, category: "Graphs", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/rotting-oranges/" },
-  { id: 132, problem: "Course Schedule II", number: 210, category: "Graphs", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/course-schedule-ii/" },
-  { id: 133, problem: "Alien Dictionary", number: 269, category: "Graphs", difficulty: "Hard", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/alien-dictionary/" },
-
-  // Advanced Graphs - LOW
-  { id: 134, problem: "Min Cost to Connect All Points", number: 1584, category: "Advanced Graphs", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/min-cost-to-connect-all-points/" },
-
-  // 1D Dynamic Programming - LOW
-  { id: 135, problem: "Climbing Stairs", number: 70, category: "1D Dynamic Programming", difficulty: "Easy", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/climbing-stairs/" },
-  { id: 136, problem: "Decode Ways", number: 91, category: "1D Dynamic Programming", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/decode-ways/" },
-  { id: 137, problem: "Coin Change", number: 322, category: "1D Dynamic Programming", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/coin-change/" },
-
-  // 2D Dynamic Programming - LOW
-  { id: 138, problem: "Regular Expression Matching", number: 10, category: "2D Dynamic Programming", difficulty: "Hard", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/regular-expression-matching/" },
-
-  // Intervals - LOW
-  { id: 139, problem: "Insert Interval", number: 57, category: "Intervals", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/insert-interval/" },
-  { id: 140, problem: "Non-overlapping Intervals", number: 435, category: "Intervals", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/non-overlapping-intervals/" },
-
-  // Bit Manipulation - LOW
-  { id: 141, problem: "Reverse Integer", number: 7, category: "Bit Manipulation", difficulty: "Medium", priority: "Low", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/reverse-integer/" },
-{ id: 142, problem: "Path With Maximum Minimum Value", number: 1102, category: "Graphs", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/path-with-maximum-minimum-value/" },
-{ id: 143, problem: "Open the Lock", number: 752, category: "Graphs", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/open-the-lock/" },
-{ id: 144, problem: "Bus Routes", number: 815, category: "Graphs", difficulty: "Hard", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/bus-routes/" },
-{ id: 145, problem: "Can I Win", number: 464, category: "Dynamic Programming", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/can-i-win/" },
-{ id: 146, problem: "Detonate the Maximum Bombs", number: 2101, category: "Graphs", difficulty: "Medium", priority: "High", status: "Not Started", lastAttempt: "", notes: "", leetCodeUrl: "https://leetcode.com/problems/detonate-the-maximum-bombs/" },
-];
+{"id":1,"problem":"Group Anagrams","number":49,"category":"Arrays & Hashing","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/group-anagrams/"},
+{"id":2,"problem":"Product of Array Except Self","number":238,"category":"Arrays & Hashing","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/product-of-array-except-self/"},
+{"id":3,"problem":"Valid Sudoku","number":36,"category":"Arrays & Hashing","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/valid-sudoku/"},
+{"id":4,"problem":"Longest Consecutive Sequence","number":128,"category":"Arrays & Hashing","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/longest-consecutive-sequence/"},
+{"id":5,"problem":"3Sum","number":15,"category":"Two Pointers","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/3sum/"},
+{"id":6,"problem":"Container With Most Water","number":11,"category":"Two Pointers","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/container-with-most-water/"},
+{"id":7,"problem":"Trapping Rain Water","number":42,"category":"Two Pointers","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/trapping-rain-water/"},
+{"id":8,"problem":"Longest Substring Without Repeating Characters","number":3,"category":"Sliding Window","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/longest-substring-without-repeating-characters/"},
+{"id":9,"problem":"Longest Repeating Character Replacement","number":424,"category":"Sliding Window","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/longest-repeating-character-replacement/"},
+{"id":10,"problem":"Minimum Window Substring","number":76,"category":"Sliding Window","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/minimum-window-substring/"},
+{"id":11,"problem":"Sliding Window Maximum","number":239,"category":"Sliding Window","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/sliding-window-maximum/"},
+{"id":12,"problem":"Min Stack","number":155,"category":"Stack","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/min-stack/"},
+{"id":13,"problem":"Generate Parentheses","number":22,"category":"Stack","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/generate-parentheses/"},
+{"id":14,"problem":"Daily Temperatures","number":739,"category":"Stack","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/daily-temperatures/"},
+{"id":15,"problem":"Largest Rectangle in Histogram","number":84,"category":"Stack","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/largest-rectangle-in-histogram/"},
+{"id":16,"problem":"Koko Eating Bananas","number":875,"category":"Binary Search","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/koko-eating-bananas/"},
+{"id":17,"problem":"Search in Rotated Sorted Array","number":33,"category":"Binary Search","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/search-in-rotated-sorted-array/"},
+{"id":18,"problem":"Find Minimum in Rotated Sorted Array","number":153,"category":"Binary Search","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"},
+{"id":19,"problem":"Median of Two Sorted Arrays","number":4,"category":"Binary Search","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/median-of-two-sorted-arrays/"},
+{"id":20,"problem":"Reorder List","number":143,"category":"Linked List","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/reorder-list/"},
+{"id":21,"problem":"Remove Nth Node From End of List","number":19,"category":"Linked List","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/remove-nth-node-from-end-of-list/"},
+{"id":22,"problem":"Add Two Numbers","number":2,"category":"Linked List","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/add-two-numbers/"},
+{"id":23,"problem":"Merge k Sorted Lists","number":23,"category":"Linked List","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/merge-k-sorted-lists/"},
+{"id":24,"problem":"Reverse Nodes in k-Group","number":25,"category":"Linked List","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/reverse-nodes-in-k-group/"},
+{"id":25,"problem":"Binary Tree Right Side View","number":199,"category":"Trees","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/binary-tree-right-side-view/"},
+{"id":26,"problem":"Binary Tree Maximum Path Sum","number":124,"category":"Trees","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/binary-tree-maximum-path-sum/"},
+{"id":27,"problem":"Kth Largest Element in an Array","number":215,"category":"Heap / Priority Queue","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/kth-largest-element-in-an-array/"},
+{"id":28,"problem":"Task Scheduler","number":621,"category":"Heap / Priority Queue","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/task-scheduler/"},
+{"id":29,"problem":"Letter Combinations of a Phone Number","number":17,"category":"Backtracking","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/letter-combinations-of-a-phone-number/"},
+{"id":30,"problem":"N-Queens","number":51,"category":"Backtracking","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/n-queens/"},
+{"id":31,"problem":"Subsets","number":78,"category":"Backtracking","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/subsets/"},
+{"id":32,"problem":"Subsets II","number":90,"category":"Backtracking","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/subsets-ii/"},
+{"id":33,"problem":"Number of Islands","number":200,"category":"Graphs","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/number-of-islands/"},
+{"id":34,"problem":"Pacific Atlantic Water Flow","number":417,"category":"Graphs","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/pacific-atlantic-water-flow/"},
+{"id":35,"problem":"Course Schedule","number":207,"category":"Graphs","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/course-schedule/"},
+{"id":36,"problem":"Network Delay Time","number":743,"category":"Advanced Graphs","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/network-delay-time/"},
+{"id":37,"problem":"Cheapest Flights Within K Stops","number":787,"category":"Advanced Graphs","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/cheapest-flights-within-k-stops/"},
+{"id":38,"problem":"Maximum Subarray","number":53,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/maximum-subarray/"},
+{"id":39,"problem":"Jump Game","number":55,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/jump-game/"},
+{"id":40,"problem":"House Robber","number":198,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/house-robber/"},
+{"id":41,"problem":"Longest Palindromic Substring","number":5,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/longest-palindromic-substring/"},
+{"id":42,"problem":"Maximum Product Subarray","number":152,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/maximum-product-subarray/"},
+{"id":43,"problem":"Word Break","number":139,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/word-break/"},
+{"id":44,"problem":"Longest Increasing Subsequence","number":300,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/longest-increasing-subsequence/"},
+{"id":45,"problem":"Unique Paths","number":62,"category":"2D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/unique-paths/"},
+{"id":46,"problem":"Target Sum","number":494,"category":"2D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/target-sum/"},
+{"id":47,"problem":"Edit Distance","number":72,"category":"2D Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/edit-distance/"},
+{"id":48,"problem":"Merge Intervals","number":56,"category":"Intervals","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/merge-intervals/"},
+{"id":49,"problem":"Meeting Rooms II","number":253,"category":"Intervals","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/meeting-rooms-ii/"},
+{"id":50,"problem":"Rotate Image","number":48,"category":"Math & Geometry","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/rotate-image/"},
+{"id":51,"problem":"Spiral Matrix","number":54,"category":"Math & Geometry","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/spiral-matrix/"},
+{"id":52,"problem":"Set Matrix Zeroes","number":73,"category":"Math & Geometry","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/set-matrix-zeroes/"},
+{"id":53,"problem":"Pow(x, n)","number":50,"category":"Math & Geometry","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/powx-n/"},
+{"id":54,"problem":"LRU Cache","number":146,"category":"Design","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/lru-cache/"},
+{"id":55,"problem":"Time Based Key-Value Store","number":981,"category":"Design","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/time-based-key-value-store/"},
+{"id":56,"problem":"Design Search Autocomplete System","number":642,"category":"Design","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/design-search-autocomplete-system/"},
+{"id":57,"problem":"Logger Rate Limiter","number":359,"category":"Design","difficulty":"Easy","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/logger-rate-limiter/"},
+{"id":58,"problem":"Finding MK Average","number":1825,"category":"Design","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/finding-mk-average/"},
+{"id":59,"problem":"Range Sum Query - Immutable","number":303,"category":"Design","difficulty":"Easy","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/range-sum-query-immutable/"},
+{"id":60,"problem":"Design Hit Counter","number":362,"category":"Design","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/design-hit-counter/"},
+{"id":61,"problem":"Design In-Memory File System","number":588,"category":"Design","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/design-in-memory-file-system/"},
+{"id":62,"problem":"Detect Squares","number":2013,"category":"Design","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/detect-squares/"},
+{"id":63,"problem":"Find Median from Data Stream","number":295,"category":"Design","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/find-median-from-data-stream/"},
+{"id":64,"problem":"4Sum","number":18,"category":"Arrays & Hashing","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/4sum/"},
+{"id":65,"problem":"First Missing Positive","number":41,"category":"Arrays & Hashing","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/first-missing-positive/"},
+{"id":66,"problem":"Rotate Array","number":189,"category":"Arrays & Hashing","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/rotate-array/"},
+{"id":67,"problem":"Text Justification","number":68,"category":"Arrays & Hashing","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/text-justification/"},
+{"id":68,"problem":"String Compression","number":443,"category":"Arrays & Hashing","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/string-compression/"},
+{"id":69,"problem":"Maximum Swap","number":670,"category":"Arrays & Hashing","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/maximum-swap/"},
+{"id":70,"problem":"Insert Delete GetRandom O(1)","number":380,"category":"Arrays & Hashing","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/insert-delete-getrandom-o1/"},
+{"id":71,"problem":"Sort Colors","number":75,"category":"Two Pointers","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/sort-colors/"},
+{"id":72,"problem":"Next Permutation","number":31,"category":"Two Pointers","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/next-permutation/"},
+{"id":73,"problem":"Subarray Sum Equals K","number":560,"category":"Sliding Window","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/subarray-sum-equals-k/"},
+{"id":74,"problem":"Max Consecutive Ones III","number":1004,"category":"Sliding Window","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/max-consecutive-ones-iii/"},
+{"id":75,"problem":"Decode String","number":394,"category":"Stack","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/decode-string/"},
+{"id":76,"problem":"Basic Calculator","number":224,"category":"Stack","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/basic-calculator/"},
+{"id":77,"problem":"Number of Visible People in a Queue","number":1944,"category":"Stack","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/number-of-visible-people-in-a-queue/"},
+{"id":78,"problem":"Find First and Last Position of Element in Sorted Array","number":34,"category":"Binary Search","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"},
+{"id":79,"problem":"Find Peak Element","number":162,"category":"Binary Search","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/find-peak-element/"},
+{"id":80,"problem":"Single Element in a Sorted Array","number":540,"category":"Binary Search","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/single-element-in-a-sorted-array/"},
+{"id":81,"problem":"Split Array Largest Sum","number":410,"category":"Binary Search","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/split-array-largest-sum/"},
+{"id":82,"problem":"Peak Index in a Mountain Array","number":852,"category":"Binary Search","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/peak-index-in-a-mountain-array/"},
+{"id":83,"problem":"Find K Closest Elements","number":658,"category":"Binary Search","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/find-k-closest-elements/"},
+{"id":84,"problem":"Linked List Cycle II","number":142,"category":"Linked List","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/linked-list-cycle-ii/"},
+{"id":85,"problem":"Odd Even Linked List","number":328,"category":"Linked List","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/odd-even-linked-list/"},
+{"id":86,"problem":"Lowest Common Ancestor of a Binary Tree","number":236,"category":"Trees","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/"},
+{"id":87,"problem":"Search Suggestions System","number":1268,"category":"Tries","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/search-suggestions-system/"},
+{"id":88,"problem":"Top K Frequent Words","number":692,"category":"Heap / Priority Queue","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/top-k-frequent-words/"},
+{"id":89,"problem":"Number of Provinces","number":547,"category":"Graphs","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/number-of-provinces/"},
+{"id":90,"problem":"Accounts Merge","number":721,"category":"Graphs","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/accounts-merge/"},
+{"id":91,"problem":"Best Time to Buy and Sell Stock II","number":122,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/"},
+{"id":92,"problem":"Maximal Square","number":221,"category":"2D Dynamic Programming","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/maximal-square/"},
+{"id":93,"problem":"Maximal Rectangle","number":85,"category":"2D Dynamic Programming","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/maximal-rectangle/"},
+{"id":94,"problem":"Russian Doll Envelopes","number":354,"category":"2D Dynamic Programming","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/russian-doll-envelopes/"},
+{"id":95,"problem":"Interval List Intersections","number":986,"category":"Intervals","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/interval-list-intersections/"},
+{"id":96,"problem":"LFU Cache","number":460,"category":"Design","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/lfu-cache/"},
+{"id":97,"problem":"Design Circular Queue","number":622,"category":"Design","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/design-circular-queue/"},
+{"id":98,"problem":"Design Underground System","number":1396,"category":"Design","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/design-underground-system/"},
+{"id":99,"problem":"Meeting Rooms III","number":2402,"category":"Design","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/meeting-rooms-iii/"},
+{"id":100,"problem":"Snapshot Array","number":1146,"category":"Design","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/snapshot-array/"},
+{"id":101,"problem":"Range Module","number":715,"category":"Design","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/range-module/"},
+{"id":102,"problem":"Insert Delete GetRandom O(1) - Duplicates allowed","number":381,"category":"Design","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/"},
+{"id":103,"problem":"Prefix and Suffix Search","number":745,"category":"Design","difficulty":"Hard","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/prefix-and-suffix-search/"},
+{"id":104,"problem":"Flatten Nested List Iterator","number":341,"category":"Design","difficulty":"Medium","priority":"Medium","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/flatten-nested-list-iterator/"},
+{"id":105,"problem":"Two Sum","number":1,"category":"Arrays & Hashing","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/two-sum/"},
+{"id":106,"problem":"Contains Duplicate","number":217,"category":"Arrays & Hashing","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/contains-duplicate/"},
+{"id":107,"problem":"Valid Anagram","number":242,"category":"Arrays & Hashing","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/valid-anagram/"},
+{"id":108,"problem":"Top K Frequent Elements","number":347,"category":"Arrays & Hashing","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/top-k-frequent-elements/"},
+{"id":109,"problem":"Valid Palindrome","number":125,"category":"Two Pointers","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/valid-palindrome/"},
+{"id":110,"problem":"Two Sum II - Input Array Is Sorted","number":167,"category":"Two Pointers","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/"},
+{"id":111,"problem":"Best Time to Buy and Sell Stock","number":121,"category":"Sliding Window","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"},
+{"id":112,"problem":"Valid Parentheses","number":20,"category":"Stack","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/valid-parentheses/"},
+{"id":113,"problem":"Binary Search","number":704,"category":"Binary Search","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/binary-search/"},
+{"id":114,"problem":"Reverse Linked List","number":206,"category":"Linked List","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/reverse-linked-list/"},
+{"id":115,"problem":"Merge Two Sorted Lists","number":21,"category":"Linked List","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/merge-two-sorted-lists/"},
+{"id":116,"problem":"Copy List with Random Pointer","number":138,"category":"Linked List","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/copy-list-with-random-pointer/"},
+{"id":117,"problem":"Invert Binary Tree","number":226,"category":"Trees","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/invert-binary-tree/"},
+{"id":118,"problem":"Maximum Depth of Binary Tree","number":104,"category":"Trees","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/maximum-depth-of-binary-tree/"},
+{"id":119,"problem":"Binary Tree Level Order Traversal","number":102,"category":"Trees","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/binary-tree-level-order-traversal/"},
+{"id":120,"problem":"Validate Binary Search Tree","number":98,"category":"Trees","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/validate-binary-search-tree/"},
+{"id":121,"problem":"Kth Smallest Element in a BST","number":230,"category":"Trees","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/kth-smallest-element-in-a-bst/"},
+{"id":122,"problem":"Serialize and Deserialize Binary Tree","number":297,"category":"Trees","difficulty":"Hard","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/serialize-and-deserialize-binary-tree/"},
+{"id":123,"problem":"Implement Trie (Prefix Tree)","number":208,"category":"Tries","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/implement-trie-prefix-tree/"},
+{"id":124,"problem":"Word Search II","number":212,"category":"Tries","difficulty":"Hard","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/word-search-ii/"},
+{"id":125,"problem":"K Closest Points to Origin","number":973,"category":"Heap / Priority Queue","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/k-closest-points-to-origin/"},
+{"id":126,"problem":"Combination Sum","number":39,"category":"Backtracking","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/combination-sum/"},
+{"id":127,"problem":"Permutations","number":46,"category":"Backtracking","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/permutations/"},
+{"id":128,"problem":"Word Search","number":79,"category":"Backtracking","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/word-search/"},
+{"id":129,"problem":"Palindrome Partitioning","number":131,"category":"Backtracking","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/palindrome-partitioning/"},
+{"id":130,"problem":"Clone Graph","number":133,"category":"Graphs","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/clone-graph/"},
+{"id":131,"problem":"Rotting Oranges","number":994,"category":"Graphs","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/rotting-oranges/"},
+{"id":132,"problem":"Course Schedule II","number":210,"category":"Graphs","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/course-schedule-ii/"},
+{"id":133,"problem":"Alien Dictionary","number":269,"category":"Graphs","difficulty":"Hard","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/alien-dictionary/"},
+{"id":134,"problem":"Min Cost to Connect All Points","number":1584,"category":"Advanced Graphs","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/min-cost-to-connect-all-points/"},
+{"id":135,"problem":"Climbing Stairs","number":70,"category":"1D Dynamic Programming","difficulty":"Easy","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/climbing-stairs/"},
+{"id":136,"problem":"Decode Ways","number":91,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/decode-ways/"},
+{"id":137,"problem":"Coin Change","number":322,"category":"1D Dynamic Programming","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/coin-change/"},
+{"id":138,"problem":"Regular Expression Matching","number":10,"category":"2D Dynamic Programming","difficulty":"Hard","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/regular-expression-matching/"},
+{"id":139,"problem":"Insert Interval","number":57,"category":"Intervals","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/insert-interval/"},
+{"id":140,"problem":"Non-overlapping Intervals","number":435,"category":"Intervals","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/non-overlapping-intervals/"},
+{"id":141,"problem":"Reverse Integer","number":7,"category":"Bit Manipulation","difficulty":"Medium","priority":"Low","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/reverse-integer/"},
+{"id":142,"problem":"Path With Maximum Minimum Value","number":1102,"category":"Graphs","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/path-with-maximum-minimum-value/"},
+{"id":143,"problem":"Open the Lock","number":752,"category":"Graphs","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/open-the-lock/"},
+{"id":144,"problem":"Bus Routes","number":815,"category":"Graphs","difficulty":"Hard","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/bus-routes/"},
+{"id":145,"problem":"Can I Win","number":464,"category":"Dynamic Programming","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/can-i-win/"},
+{"id":146,"problem":"Detonate the Maximum Bombs","number":2101,"category":"Graphs","difficulty":"Medium","priority":"High","status":"Not Started","lastAttempt":"","notes":"","leetCodeUrl":"https://leetcode.com/problems/detonate-the-maximum-bombs/"}
+]
 
     // Set up initial user problems based on master data
     userProblems = problems.map(problem => ({
